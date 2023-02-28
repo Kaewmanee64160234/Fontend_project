@@ -47,5 +47,5 @@ export const useUserStore = defineStore('User', () => {3
     editedUser.value = JSON.parse(JSON.stringify(user));
     dialog.value = true;
   }
-  return { users, getUsers, dialog, saveUser, deleteUser, editUser }
+  return { users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser }
 })

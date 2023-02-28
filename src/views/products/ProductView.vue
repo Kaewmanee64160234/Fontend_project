@@ -4,7 +4,7 @@ import { onMounted } from 'vue';
 import ProductDialog from '../../components/product/ProductDialog.vue';
 
 const productStore = useProductStore();
-
+const url = import.meta.env.VITE_URL_PORT
 onMounted(async () => {
     await productStore.getProducts();
 });
@@ -48,7 +48,8 @@ onMounted(async () => {
         <tbody>
             <tr style="text-align:center" v-for="item of productStore.products" :key="item.id">
                 <td>{{ item.id }}</td>
-                <td>{{ item.img }}</td>
+                <td><v-avatar><v-img :src="`${url}/products/image/${item.image}`"></v-img
+                ></v-avatar></td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.type }}</td>
                 <td>{{ item.price }}</td>
