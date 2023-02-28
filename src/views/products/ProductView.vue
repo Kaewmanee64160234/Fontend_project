@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useProductStore } from '@/store/product.store';
 import { onMounted } from 'vue';
-import ProductDialog from './ProductDialog.vue';
+import ProductDialog from '../../components/product/ProductDialog.vue';
 
 const productStore = useProductStore();
 
