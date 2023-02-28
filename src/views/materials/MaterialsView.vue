@@ -34,13 +34,14 @@ const materialStore = useMaterialStore();
         </thead>
         <tbody>
             <tr v-for="item of materialStore.materials" :key="item.id">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.minquantity }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.unit }}</td>
+                <td>{{ item.price_per_unit }}</td>
+                <td><v-btn>Edit</v-btn>
+                <v-btn>Delete</v-btn></td>
             </tr>
         </tbody>
     </v-table>
