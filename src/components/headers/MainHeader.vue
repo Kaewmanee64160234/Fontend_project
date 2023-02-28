@@ -1,11 +1,5 @@
 <template>
-  <v-app-bar
-    image="https://i.pinimg.com/736x/61/e6/17/61e617e490d1cb3da9217f4e106bad15.jpg"
-  >
-    <v-app-bar-title
-      icon="mdi-star-box-multiple-outline"
-      class="font-weight-bold"
-      >MainHeader</v-app-bar-title
-    >
-  </v-app-bar>
+  <v-app-bar image="https://i.pinimg.com/564x/34/8b/80/348b80a9c71040eee6d5df0c60f8b3f8.jpg">
+      <v-app-bar-title icon="mdi-star-box-multiple-outline" class="font-weight-bold">MainHeader</v-app-bar-title>
+    </v-app-bar>
 </template>
