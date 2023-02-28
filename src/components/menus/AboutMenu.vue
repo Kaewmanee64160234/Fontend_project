@@ -1,33 +1,19 @@
 <script setup lang="ts">
-import MainMenu from '@/components/menus/MainMenu.vue';
-import LoginView from './LoginView.vue';
-import { ref } from 'vue';
+import { ref } from "vue";
 const drawer = ref(true);
 const rail = ref(true);
 </script>
 
 <template>
-  
-  <v-layout>
-    <v-app-bar
-    image="https://i.pinimg.com/736x/61/e6/17/61e617e490d1cb3da9217f4e106bad15.jpg"
-  >
-    <v-app-bar-title
-      icon="mdi-star-box-multiple-outline"
-      class="font-weight-bold"
-      >MainHeader</v-app-bar-title
-    >
-  </v-app-bar>
-    <v-navigation-drawer
+  <v-navigation-drawer
     v-model="drawer"
     :rail="rail"
     permanent
     @click="rail = false"
-    image="https://i.pinimg.com/564x/09/9f/9b/099f9b33dea19ceb4fe16625578f6efb.jpg"
   >
     <v-list-item
       prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-      title="John Leider"
+      title="About Menu"
       nav
     >
       <template v-slot:append>
@@ -46,29 +32,17 @@ const rail = ref(true);
         prepend-icon="mdi-home-city"
         title="Home"
         value="home"
-        to="/"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-account"
-        title="Product"
-        value="product"
-        to="/product"
-      ></v-list-item>
-      <v-list-item
-        prepend-icon="mdi-account"
-        title="Product Full Screen"
-        value="product_full"
-        to="/product/full"
+        title="My Account"
+        value="account"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-account-group-outline"
-        title="User"
-        value="user"
-        to="/user"
+        title="Users"
+        value="users"
       ></v-list-item>
     </v-list>
   </v-navigation-drawer>
-  </v-layout>
-  <main>
-</main>
 </template>
