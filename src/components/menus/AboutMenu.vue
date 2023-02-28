@@ -10,11 +10,10 @@ const rail = ref(true);
     :rail="rail"
     permanent
     @click="rail = false"
-    image="https://i.pinimg.com/564x/09/9f/9b/099f9b33dea19ceb4fe16625578f6efb.jpg"
   >
     <v-list-item
       prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-      title="John Leider"
+      title="About Menu"
       nav
     >
       <template v-slot:append>
@@ -33,32 +32,17 @@ const rail = ref(true);
         prepend-icon="mdi-home-city"
         title="Home"
         value="home"
-        to="/"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-account"
-        title="Product"
-        value="product"
-        to="/product"
-      ></v-list-item>
-      <v-list-item
-        prepend-icon="mdi-account"
-        title="Product Full Screen"
-        value="product_full"
-        to="/product/full"
+        title="My Account"
+        value="account"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-account-group-outline"
-        title="User"
-        value="user"
-        to="/user"
+        title="Users"
+        value="users"
       ></v-list-item>
-      <v-list-item
-      prepend-icon="mdi-account-group-outline"
-      title="Customer"
-      value="customer"
-      to="/customer"
-    ></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
