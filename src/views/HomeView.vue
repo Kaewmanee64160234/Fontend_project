@@ -35,5 +35,8 @@ const rail = ref(true);
   </v-layout>
 
   <main>
+    <v-container>
+    <CustomerView></CustomerView>
+    </v-container>
   </main>
 </template>
