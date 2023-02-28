@@ -4,16 +4,21 @@ import { useMaterialStore } from '@/store/material.store.js';
 import MaterialsDialog from './MaterialsDialog.vue';
 const search = ref("");
 const materialStore = useMaterialStore();
+const confirmDlg = ref();
 
 onMounted(async() => {
     await materialStore.getMaterials();
 });
-
+const deleteMaterial = async (id:number) => {
+  await confirmDlg.value.openDialog("ยืนยันการลบ", `คุณต้องการลบลูกค้าคนนี้ใช่หรือไม่?`,'Accept','Cancel');
+  materialStore.deleteMaterial(id);
+}
 </script>
 <template>
     <v-card>
      <v-card-title>
       Material
+      <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
       <MaterialsDialog></MaterialsDialog>
       <v-btn style="float: right;" color="primary" @click="materialStore.dialog = true">Add New</v-btn>
       <v-container></v-container>
@@ -48,7 +53,7 @@ onMounted(async() => {
                 <td>{{ item.unit }}</td>
                 <td>{{ item.price_per_unit }}</td>
                 <td><v-btn class="mr-5" color="secondary" @click="materialStore.editMaterial(item)">Edit</v-btn>
-                <v-btn color="error" @click="materialStore.deleteMaterial(item.id!)">Delete</v-btn></td>
+                <v-btn color="error" @click="deleteMaterial(item.id!)">Delete</v-btn></td>
             </tr>
         </tbody>
     </v-table>
