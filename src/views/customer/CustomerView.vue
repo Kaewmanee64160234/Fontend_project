@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CustomerDialog from '@/components/customer/CustomerDialog.vue';
 import { useCustomerStore } from '@/store/customer.store';
 import { onMounted, ref } from 'vue';
 const customerStore = useCustomerStore();
@@ -9,11 +10,17 @@ onMounted(() => {
 });
 </script>
 <template>
-  
-   <v-table>
+    <customer-dialog></customer-dialog>
+
+  <v-container>
+   
+    <v-btn color="secondary" @click="customerStore.dialog = !customerStore.dialog">Add new customer</v-btn>
+
+      
+      <v-table  class="text-center">
     <thead>
       <tr>
-        <th>Img</th>
+        <th></th>
         <th>ID</th>
         <th>Name</th>
         <th>tel</th>
@@ -30,11 +37,14 @@ onMounted(() => {
         <td>{{ item.point }}</td>
         <td>
           <v-btn class="mr-5" 
-            >Edit</v-btn
+            @click="customerStore.saveCustomer()" >Save</v-btn
           ><v-btn >Delete</v-btn>
         </td>
       </tr>
     </tbody>
   </v-table>
+    
+  </v-container>
+   
 
 </template>

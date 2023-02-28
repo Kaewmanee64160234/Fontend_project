@@ -3,9 +3,10 @@ export default interface  Customer{
    name:string;
    tel:string;
    point:number;
-   image:string;
+   image?:string;
    createdAt?:Date;
    updateAt?:Date;
    deleteAt?:Date;
+   
 
 }
