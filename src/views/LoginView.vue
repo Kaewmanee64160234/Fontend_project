@@ -5,14 +5,14 @@ const loginName = ref("");
 const password = ref("");
 const valid = ref(true);
 const form = ref<InstanceType<typeof VForm> | null>(null);
-    const login = async () => {
-  const { valid } = await form.value!.validate();
-  if (valid) {
-    console.log("success");
-  }
+const login = async () => {
+    const { valid } = await form.value!.validate();
+    if (valid) {
+        console.log("success");
+    }
 };
 const reset = () => {
-  form.value?.reset();
+    form.value?.reset();
 };
 </script>
 
@@ -20,7 +20,8 @@ const reset = () => {
     <v-app>
         <v-main class="bg-blue-grey pa-5">
             <v-card width="400px" class="mx-auto">
-                <v-card-title primary-title class="max-auto">
+                <v-img src="https://i.pinimg.com/564x/e2/90/49/e290496e2521d29d3ac34af6e5d18c42.jpg" height="200px" cover></v-img>
+                <v-card-title primary-title class="text-center">
                     Login
                 </v-card-title>
                 <v-card-text>
