@@ -7,5 +7,9 @@ import {  RouterView } from 'vue-router'
   <RouterView></RouterView>
 </template>
 
-<style scoped>
+<style >
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+*{
+  font-family: 'Kanit', sans-serif;
+}
 </style>

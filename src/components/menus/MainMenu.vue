@@ -53,6 +53,12 @@ const rail = ref(true);
         value="user"
         to="/user"
       ></v-list-item>
+      <v-list-item
+      prepend-icon="mdi-account-group-outline"
+      title="Customer"
+      value="customer"
+      to="/customer"
+    ></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
