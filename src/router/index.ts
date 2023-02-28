@@ -24,7 +24,7 @@ const router = createRouter({
         default: LoginView,
       },
       meta: {
-        layout: "FullLayout",
+        // layout: "FullLayout",
       },
     },
     {
