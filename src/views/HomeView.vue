@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import CustomerView from './CustomerView.vue';
+import CustomerView from './customer/CustomerView.vue';
 import LoginView from './LoginView.vue';
 </script>
 
 <template>
   <main>
-  <CustomerView></CustomerView>
+    <v-container>
+      <CustomerView></CustomerView>
+    </v-container>
+ 
   </main>
 </template>

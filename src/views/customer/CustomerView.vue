@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { useCustomerStore } from '@/store/customer.store';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 const customerStore = useCustomerStore();
+const url = import.meta.env.VITE_URL_PORT
 onMounted(() => {
+  console.log(url)
     customerStore.getCustomers();
 });
 </script>
 <template>
+  
    <v-table>
     <thead>
       <tr>
+        <th>Img</th>
         <th>ID</th>
         <th>Name</th>
         <th>tel</th>
@@ -17,8 +21,9 @@ onMounted(() => {
         <th>Operations</th>
       </tr>
     </thead>
-    <tbody>
-      <tr v-for="item of customerStore.customers" :key="item.id">
+    <tbody >
+      <tr v-for="item of customerStore.customers" :key="item.id" class="text-center">
+        <td> <v-avatar ><v-img   :src="`${url}/customers/${item.id}/image`"></v-img></v-avatar></td>
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.tel }}</td>
