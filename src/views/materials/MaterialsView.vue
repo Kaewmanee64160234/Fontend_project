@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useMaterialStore } from '@/store/material.store.js';
+import MaterialsDialog from './MaterialsDialog.vue';
 const search = ref("");
 const materialStore = useMaterialStore();
 
@@ -13,6 +14,9 @@ onMounted(async() => {
     <v-card>
      <v-card-title>
       Material
+      <MaterialsDialog></MaterialsDialog>
+      <v-btn style="float: right;" color="primary" @click="materialStore.dialog=true">Add New</v-btn>
+      <v-container></v-container>
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -42,8 +46,8 @@ onMounted(async() => {
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.unit }}</td>
                 <td>{{ item.price_per_unit }}</td>
-                <td><v-btn class="mr-5">Edit</v-btn>
-                <v-btn>Delete</v-btn></td>
+                <td><v-btn class="mr-5" color="secondary">Edit</v-btn>
+                <v-btn color="error">Delete</v-btn></td>
             </tr>
         </tbody>
     </v-table>
