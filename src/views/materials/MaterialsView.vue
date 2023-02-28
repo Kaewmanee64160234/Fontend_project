@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useMaterialStore } from '@/store/material.store.js';
 const search = ref("");
-const headers = ref("");
-const desserts = ref("");
 const materialStore = useMaterialStore();
+
+onMounted(async() => {
+    await materialStore.getMaterials();
+});
 
 </script>
 <template>
@@ -33,14 +35,14 @@ const materialStore = useMaterialStore();
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item of materialStore.materials" :key="item.id">
+            <tr v-for="item of materialStore.materials" :key="item.id" style="text-align: center;">
                 <td>{{ item.id }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.minquantity }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.unit }}</td>
                 <td>{{ item.price_per_unit }}</td>
-                <td><v-btn>Edit</v-btn>
+                <td><v-btn class="mr-5">Edit</v-btn>
                 <v-btn>Delete</v-btn></td>
             </tr>
         </tbody>
