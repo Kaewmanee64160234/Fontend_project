@@ -2,12 +2,17 @@
 import CustomerDialog from '@/components/customer/CustomerDialog.vue';
 import { useCustomerStore } from '@/store/customer.store';
 import { onMounted, ref } from 'vue';
+import type Customer from '@/store/types/customer.type'
+
 const customerStore = useCustomerStore();
 const url = import.meta.env.VITE_URL_PORT
 onMounted(() => {
   console.log(url)
     customerStore.getCustomers();
 });
+const deleteCustomer = (id:string) => {
+  customerStore.deleteCustomer(id);
+}
 </script>
 <template>
     <customer-dialog></customer-dialog>
@@ -15,8 +20,6 @@ onMounted(() => {
   <v-container>
    
     <v-btn color="secondary" @click="customerStore.dialog = !customerStore.dialog">Add new customer</v-btn>
-
-      
       <v-table  class="text-center">
     <thead>
       <tr>
@@ -30,15 +33,15 @@ onMounted(() => {
     </thead>
     <tbody >
       <tr v-for="item of customerStore.customers" :key="item.id" class="text-center">
-        <td> <v-avatar ><v-img   :src="`${url}/customers/${item.id}/image`"></v-img></v-avatar></td>
+        <td> <v-avatar ><v-img   :src="`${url}/customers/image/${item.image}`"></v-img></v-avatar></td>
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.tel }}</td>
         <td>{{ item.point }}</td>
         <td>
           <v-btn class="mr-5" 
-            @click="customerStore.saveCustomer()" >Save</v-btn
-          ><v-btn >Delete</v-btn>
+           color="yellow" @click="customerStore.editedCustomer(item)">Edit</v-btn
+          ><v-btn color="red" @click="deleteCustomer(item.id+'')">Delete</v-btn>
         </td>
       </tr>
     </tbody>
