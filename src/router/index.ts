@@ -85,6 +85,21 @@ const router = createRouter({
       }
       
     },
+    {
+      path: "/employee",
+      name: "employee",
+
+      components: {
+        default: () => import("../views/employees/EmployeeView.vue"),
+        menu: () => import("@/components/menus/MainMenu.vue"),
+        header: () => import("@/components/headers/MainHeader.vue"),
+      },
+      meta: {
+        layout: "MainLayout",
+        requiresAuth: true,
+      },
+    }
+
   ]
 })
 function isLogin() {
