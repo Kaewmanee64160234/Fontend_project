@@ -1,0 +1,11 @@
+<template>
+  <v-app-bar
+    image="https://i.pinimg.com/736x/61/e6/17/61e617e490d1cb3da9217f4e106bad15.jpg"
+  >
+    <v-app-bar-title
+      icon="mdi-star-box-multiple-outline"
+      class="font-weight-bold"
+      >MainHeader</v-app-bar-title
+    >
+  </v-app-bar>
+</template>
