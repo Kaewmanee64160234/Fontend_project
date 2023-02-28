@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import UserDialog from '@/components/user/UserDialog.vue';
 import { useUserStore } from '@/store/user.store';
 import { onMounted } from 'vue';
 
@@ -9,12 +10,12 @@ onMounted(async () => {
 });
 </script>
 <template>
-    <ProductDialog></ProductDialog>
+    <UserDialog></UserDialog>
     <v-row>
     <v-col cols="12" md="11">
       <v-btn
         class="mt-5 mb-2 mdi mdi-plus"
-        style="float: right; background-color: #8ad879; color: white" @click="userStore.dialog = true"
+        style="float: right; background-color: #1976D2; color: white" @click="userStore.dialog = true"
         >Add User</v-btn>
     </v-col>
     </v-row>
