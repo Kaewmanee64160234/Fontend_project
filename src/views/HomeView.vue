@@ -10,7 +10,7 @@ const rail = ref(true);
   
   <v-layout>
     <v-app-bar
-    image="https://i.pinimg.com/736x/61/e6/17/61e617e490d1cb3da9217f4e106bad15.jpg"
+    image="https://i.pinimg.com/564x/34/8b/80/348b80a9c71040eee6d5df0c60f8b3f8.jpg"
   >
     <v-app-bar-title
       icon="mdi-star-box-multiple-outline"
@@ -23,7 +23,7 @@ const rail = ref(true);
     :rail="rail"
     permanent
     @click="rail = false"
-    image="https://i.pinimg.com/564x/09/9f/9b/099f9b33dea19ceb4fe16625578f6efb.jpg"
+    image="https://polycolors.ca/wp-content/uploads/2018/05/410604.jpg"
   >
     <v-list-item
       prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
