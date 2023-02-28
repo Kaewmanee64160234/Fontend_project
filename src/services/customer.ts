@@ -13,5 +13,16 @@ const createCustomer = (data:Customer & {files:File[]})=>{
     return http.post("/customers",formData,{headers:{'Content-Type':'multipart/form-data'}});
 
 }
+const updateCustomer = async (id:string,data:Customer & {files:File[]})=>{
+    const formData = new FormData();
+    formData.append("name",data.name);
+    formData.append("point",data.point+'');
+    formData.append("tel",data.tel);
+    if(data.files){
+        formData.append("file",data.files[0]);
 
-export default {getCustomers,createCustomer}
+    }
+    return await http.patch(`/customers/${id}`,formData,{headers:{'Content-Type':'multipart/form-data'}});
+}
+
+export default {getCustomers,createCustomer,updateCustomer}
