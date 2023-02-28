@@ -1,6 +1,6 @@
-export default interface Material {
-    id?:number;
-    name:string;
+export interface  Material{
+    id?: number;
+    name: string;
     minquantity: number;
     quantity: number;
     unit: number;
