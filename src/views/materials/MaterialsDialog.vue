@@ -2,16 +2,20 @@
 import { useMaterialStore } from '@/store/material.store';
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components';
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
 const form = ref<VForm | null>(null);
 const materialStore = useMaterialStore();
+const confirmDlg = ref();
 async function save() {
     const { valid } = await form.value!.validate();
     if (valid) {
+        await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลลูกค้าคนนี้ใช่หรือไม่?`,'Accept','Cancel');
         await materialStore.saveMaterial();
     }
 }
 </script>
 <template>
+     <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
      <v-dialog persistent width="1024" v-model="materialStore.dialog">
     <v-card>
       <v-card-title>

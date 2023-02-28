@@ -15,7 +15,7 @@ onMounted(async() => {
      <v-card-title>
       Material
       <MaterialsDialog></MaterialsDialog>
-      <v-btn style="float: right;" color="primary" @click="materialStore.dialog=true">Add New</v-btn>
+      <v-btn style="float: right;" color="primary" @click="materialStore.dialog = true">Add New</v-btn>
       <v-container></v-container>
       <v-spacer></v-spacer>
       <v-text-field
