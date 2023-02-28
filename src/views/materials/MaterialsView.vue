@@ -46,8 +46,8 @@ onMounted(async() => {
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.unit }}</td>
                 <td>{{ item.price_per_unit }}</td>
-                <td><v-btn class="mr-5" color="secondary">Edit</v-btn>
-                <v-btn color="error">Delete</v-btn></td>
+                <td><v-btn class="mr-5" color="secondary" @click="materialStore.editMaterial(item)">Edit</v-btn>
+                <v-btn color="error" @click="materialStore.deleteMaterial(item.id!)">Delete</v-btn></td>
             </tr>
         </tbody>
     </v-table>

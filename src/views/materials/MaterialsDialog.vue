@@ -6,7 +6,7 @@ const form = ref<VForm | null>(null);
 const materialStore = useMaterialStore();
 async function save() {
     const { valid } = await form.value!.validate();
-    if(valid) {
+    if (valid) {
         await materialStore.saveMaterial();
     }
 }

@@ -39,5 +39,13 @@ export const useMaterialStore = defineStore('material', () => {
       console.log(e);
     }
   }
-  return { materials,getMaterials,dialog,editMaterial,editedMaterial,saveMaterial}
+  async function deleteMaterial(id: number) {
+    try {
+      const res = await materialService.deleteMaterial(id);
+      await getMaterials();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  return { materials,getMaterials,dialog,editMaterial,editedMaterial,saveMaterial,deleteMaterial}
 })
