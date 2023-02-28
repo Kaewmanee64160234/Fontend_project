@@ -1,8 +1,9 @@
 <script lang="ts" setup>
+import ConfirmDialog from '@/components/ConfirmDialog.vue';
 import UserDialog from '@/components/user/UserDialog.vue';
 import { useUserStore } from '@/store/user.store';
-import { onMounted } from 'vue';
-
+import { onMounted, ref } from 'vue';
+const confirmDlg = ref();
 const userStore = useUserStore();
 
 onMounted(async () => {
@@ -10,13 +11,14 @@ onMounted(async () => {
 });
 </script>
 <template>
+    <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
     <UserDialog></UserDialog>
     <v-row>
     <v-col cols="12" md="11">
       <v-btn
         class="mt-5 mb-2 mdi mdi-plus"
         style="float: right; background-color: #1976D2; color: white" @click="userStore.dialog = true"
-        >Add User</v-btn>
+        >Add New User</v-btn>
     </v-col>
     </v-row>
     <v-container>
@@ -51,11 +53,9 @@ onMounted(async () => {
                 <td>{{ item.login }}</td>
                 <td>{{ item.password }}</td>
                 <td>{{ item.role }}</td>
-                <td>
-          <v-btn class="mr-5" @click="userStore.dialog = true"
-            >Edit </v-btn
-          ><v-btn>Delete</v-btn>
-        </td>
+                <td><v-btn class="mr-5" color="secondary" @click="userStore.editUser(item)"><v-icon icon="mdi-pencil" class="mr-1" size="25"></v-icon>Edit</v-btn>
+            <v-btn color="error" @click="userStore.deleteUser(item.id!)"><v-icon icon="mdi-delete" class="mr-1" size="25"></v-icon>Delete</v-btn>
+          </td>
 
             </tr>
         </tbody>
