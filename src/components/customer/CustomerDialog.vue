@@ -1,19 +1,22 @@
 <script lang="ts" setup>
 import { useCustomerStore } from '@/store/customer.store'
 import { ref } from 'vue'
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
 import type { VForm } from 'vuetify/components'
 const form = ref<VForm | null>(null)
 const url = import.meta.env.VITE_URL_PORT
-
+const confirmDlg = ref();
 const customerStore = useCustomerStore()
 async function save() {
   const { valid } = await form.value!.validate()
   if (valid) {
+  await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลลูกค้าคนนี้ใช่หรือไม่?`,'Accept','Cancel');
     await customerStore.saveCustomer()
   }
 }
 </script>
 <template>
+    <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-dialog v-model="customerStore.dialog" persistent width="1024">
     <v-card>
       <v-container>
