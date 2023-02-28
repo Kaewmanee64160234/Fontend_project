@@ -13,6 +13,11 @@ const productStore = useProductStore();
       <v-card-text>
         <v-form ref="form">
           <v-container>
+            <v-row justify="center">
+                <v-avatar size="80"
+                  ><v-img>img</v-img
+                ></v-avatar>
+              </v-row>
             <v-row>
                 <v-col
                 cols="12"
