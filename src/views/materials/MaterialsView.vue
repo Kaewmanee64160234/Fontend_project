@@ -42,7 +42,8 @@ onMounted(async() => {
             <tr v-for="item of materialStore.materials" :key="item.id" style="text-align: center;">
                 <td>{{ item.id }}</td>
                 <td>{{ item.name }}</td>
-                <td>{{ item.minquantity }}</td>
+                <td v-if="item.minquantity <= 5" style="color: red;">{{ item.minquantity }}</td>
+                <td v-if="item.minquantity > 5">{{ item.minquantity }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.unit }}</td>
                 <td>{{ item.price_per_unit }}</td>
