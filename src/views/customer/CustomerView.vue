@@ -2,16 +2,24 @@
 import CustomerDialog from '@/components/customer/CustomerDialog.vue';
 import { useCustomerStore } from '@/store/customer.store';
 import { onMounted, ref } from 'vue';
-import type Customer from '@/store/types/customer.type'
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
 
+// import type Customer from '@/store/types/customer.type'
+const confirmDlg = ref();
 const customerStore = useCustomerStore();
 const url = import.meta.env.VITE_URL_PORT
 onMounted(() => {
   console.log(url)
     customerStore.getCustomers();
 });
+const deleteCustomer = async (id:string) => {
+  await confirmDlg.value.openDialog("ยืนยันการลบ", `คุณต้องการลบลูกค้าคนนี้ใช่หรือไม่?`,'Accept','Cancel');
+  customerStore.deleteCustomer(id);
+}
 </script>
 <template>
+    <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
+
     <customer-dialog></customer-dialog>
 
   <v-container>
@@ -38,7 +46,7 @@ onMounted(() => {
         <td>
           <v-btn class="mr-5" 
            color="yellow" @click="customerStore.editedCustomer(item)">Edit</v-btn
-          ><v-btn color="red">Delete</v-btn>
+          ><v-btn color="red" @click="deleteCustomer(item.id+'')">Delete</v-btn>
         </td>
       </tr>
     </tbody>

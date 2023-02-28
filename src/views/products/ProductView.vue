@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useProductStore } from '@/store/product.store';
 import { onMounted } from 'vue';
+import ProductDialog from '../../components/product/ProductDialog.vue';
 
 const productStore = useProductStore();
 
@@ -9,6 +10,15 @@ onMounted(async () => {
 });
 </script>
 <template>
+    <ProductDialog></ProductDialog>
+    <v-row>
+    <v-col cols="12" md="11">
+      <v-btn
+        class="mt-5 mb-2 mdi mdi-plus"
+        style="float: right; background-color: #8ad879; color: white" @click="productStore.dialog = true"
+        >Add New</v-btn>
+    </v-col>
+    </v-row>
     <v-container>
   <v-card>
     <v-card-title>
@@ -31,6 +41,8 @@ onMounted(async () => {
                 <th>Type</th>
                 <th>Price</th>
                 <th>Size</th>
+                <th>Operations</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -41,6 +53,12 @@ onMounted(async () => {
                 <td>{{ item.type }}</td>
                 <td>{{ item.price }}</td>
                 <td>{{ item.size }}</td>
+                <td>
+          <v-btn class="mr-5" @click="productStore.dialog = true"
+            >Edit </v-btn
+          ><v-btn>Delete</v-btn>
+        </td>
+
             </tr>
         </tbody>
     </v-table>

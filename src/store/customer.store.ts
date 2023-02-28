@@ -40,6 +40,10 @@ export const useCustomerStore = defineStore('customer', () => {
     editCustomer.value = JSON.parse(JSON.stringify(item))
     dialog.value = true
   }
+  const deleteCustomer = async (id: string) => {
+    await customerService.deleteCustomer(id);
+    await getCustomers()
+  }
 
-  return { getCustomers, editCustomer, dialog, customers, saveCustomer, editedCustomer }
+  return { deleteCustomer,getCustomers, editCustomer, dialog, customers, saveCustomer, editedCustomer }
 })
