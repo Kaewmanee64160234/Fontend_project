@@ -71,23 +71,7 @@ const router = createRouter({
         menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },
-<<<<<<< HEAD
-    },
-    {
-      path: "/user",
-      name: "user",
 
-      components: {
-        default: () => import("../views/users/UserView.vue"),
-        menu: () => import("@/components/menus/MainMenu.vue"),
-        header: () => import("@/components/headers/MainHeader.vue"),
-      },
-      meta: {
-        layout: "MainLayout",
-        requiresAuth: true,
-      },
-    }
-=======
       meta: {
         layout: 'MainLayout'
       }
@@ -101,7 +85,6 @@ const router = createRouter({
       }
       
     },
->>>>>>> 902035dde2853f344adb5d41dad5f90231f4c888
   ]
 })
 function isLogin() {
