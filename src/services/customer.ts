@@ -25,4 +25,8 @@ const updateCustomer = async (id:string,data:Customer & {files:File[]})=>{
     return await http.patch(`/customers/${id}`,formData,{headers:{'Content-Type':'multipart/form-data'}});
 }
 
-export default {getCustomers,createCustomer,updateCustomer}
+const deleteCustomer = (id:string)=>{
+    return http.delete(`/customers/${id}`);
+}
+
+export default {getCustomers,createCustomer,updateCustomer,deleteCustomer}

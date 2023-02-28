@@ -10,6 +10,9 @@ onMounted(() => {
   console.log(url)
     customerStore.getCustomers();
 });
+const deleteCustomer = (id:string) => {
+  customerStore.deleteCustomer(id);
+}
 </script>
 <template>
     <customer-dialog></customer-dialog>
@@ -38,7 +41,7 @@ onMounted(() => {
         <td>
           <v-btn class="mr-5" 
            color="yellow" @click="customerStore.editedCustomer(item)">Edit</v-btn
-          ><v-btn color="red">Delete</v-btn>
+          ><v-btn color="red" @click="deleteCustomer(item.id+'')">Delete</v-btn>
         </td>
       </tr>
     </tbody>
