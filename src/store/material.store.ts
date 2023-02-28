@@ -24,5 +24,20 @@ export const useMaterialStore = defineStore('material', () => {
     editedMaterial.value = JSON.parse(JSON.stringify(material));
     dialog.value = true;
   }
-  return { materials,getMaterials,dialog,editMaterial,editedMaterial}
+  async function saveMaterial() {
+    try {
+      if(editedMaterial.value.id) {
+        const res = await materialService.updateMaterial(
+          editedMaterial.value.id,editedMaterial.value
+        );
+      } else {
+        const res = await materialService.saveMaterial(editedMaterial.value);
+      }
+      dialog.value = false;
+      await getMaterials();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  return { materials,getMaterials,dialog,editMaterial,editedMaterial,saveMaterial}
 })
