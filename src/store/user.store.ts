@@ -22,8 +22,6 @@ export const useUserStore = defineStore('User', () => {
     loadingStore.isLoading = true;
     try {
       const res = await userService.getUsers();
-      users.value = res.data;
-      console.log(res)
     } catch (e) {
       console.log(e);
     }

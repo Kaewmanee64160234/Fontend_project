@@ -1,13 +1,25 @@
 <script setup lang="ts">
 import CustomerDialog from '@/components/customer/CustomerDialog.vue'
 import { useCustomerStore } from '@/store/customer.store'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 
 // import type Customer from '@/store/types/customer.type'
 const confirmDlg = ref()
 const customerStore = useCustomerStore()
 const url = import.meta.env.VITE_URL_PORT
+
+
+const customers = computed(() => {
+  if (!customerStore.search) {
+    return customerStore.customers;
+  } else {
+    return customerStore.customers.filter((customer) => {
+      return customer.name.toLocaleLowerCase().includes( customerStore.search
+      )
+    });
+  }
+});
 onMounted(() => {
   console.log(url)
   customerStore.getCustomers()
@@ -58,6 +70,7 @@ const deleteAllCustomers = async () => {
           label="Search"
           single-line
           hide-details
+          v-model="customerStore.search"
         ></v-text-field>
         <v-table class="text-center mt-5">
           <thead>
@@ -79,7 +92,7 @@ const deleteAllCustomers = async () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item of customerStore.customers" :key="item.id" class="text-center">
+            <tr v-for="item of customers" :key="item.id" class="text-center">
               <td>
                 <v-checkbox
                   class="d-flex pa-4"
@@ -103,7 +116,13 @@ const deleteAllCustomers = async () => {
                 ><v-btn color="red" @click="deleteCustomer(item.id + '')">Delete</v-btn>
               </td>
             </tr>
+           
           </tbody>
+          <tbody v-if="customers.length == 0" >
+          <tr >
+            <td colspan="7" class="text-center">No data</td>
+          </tr>
+        </tbody>
         </v-table>
       </v-card-title>
     </v-card>

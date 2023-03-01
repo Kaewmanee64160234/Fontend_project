@@ -5,7 +5,7 @@ import type Customer from './types/customer.type'
 import { useLoadingStore } from './loading'
 export const useCustomerStore = defineStore('customer', () => {
   const loadingStore = useLoadingStore()
-
+const search = ref('');
   const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
   const allSelected = ref(false)
@@ -26,6 +26,7 @@ export const useCustomerStore = defineStore('customer', () => {
       loadingStore.isLoading = false
     } catch (err) {
       console.log(err)
+      
     }
   }
   const saveCustomer = async () => {
@@ -93,6 +94,7 @@ export const useCustomerStore = defineStore('customer', () => {
     dialog,
     customers,
     saveCustomer,
-    editedCustomer
+    editedCustomer,
+    search
   }
 })
