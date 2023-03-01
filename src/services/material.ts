@@ -5,12 +5,12 @@ import http from "./axios";
 function getMaterials() {
     return http.get("/materials");
   }
-function saveMaterial(material:Material) {
+function saveMaterial(material: Material) {
     return http.post("/materials",material);
 }
   
 function updateMaterial(id: number, material:Material) {
-    return http.patch(`/products/${id}`, material);
+    return http.patch(`/materials/${id}`, material);
   }
   
 function deleteMaterial(id: string) {

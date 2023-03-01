@@ -41,20 +41,24 @@ export const useMaterialStore = defineStore('material', () => {
 }
 async function saveMaterial() {
   loadingStore.isLoading = true;
-  try {
-    if (editedMaterial.value.id) {
-      const res = await materialService.updateMaterial(editedMaterial.value.id, editedMaterial.value);
-    } else {
-      const res = await materialService.saveMaterial(editedMaterial.value);
-      console.log(editedMaterial.value);
+    try {
+      if (editedMaterial.value.id) {
+        const res = await materialService.updateMaterial(
+          editedMaterial.value.id,
+          editedMaterial.value
+        );
+      } else {
+        const res = await materialService.saveMaterial(editedMaterial.value);
+      }
+
+      dialog.value = false;
+      await getMaterials();
+    } catch (e) {
+      console.log(e);
     }
-    dialog.value = false;
-    await getMaterials();
-  } catch (e) {
-    console.log(e);
+    loadingStore.isLoading = false;
   }
-  loadingStore.isLoading = false;
-}
+
   function editMaterial(material: Material) {
     editedMaterial.value = JSON.parse(JSON.stringify(material));
     dialog.value = true;

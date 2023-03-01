@@ -28,19 +28,19 @@ function delay(time: number) {
 //   }
 // );
 
-instance.interceptors.response.use(
-  async function (config) {
-    // await delay(1000);
-    return config;
-  },
-  function (error) {
-    // Do something with request error
-    if (401 === error.response.status) {
-      router.replace("/login");
-    }
-    return Promise.reject(error);
-  }
-);
+// instance.interceptors.response.use(
+//   async function (config) {
+//     // await delay(1000);
+//     return config;
+//   },
+//   function (error) {
+//     // Do something with request error
+//     if (401 === error.response.status) {
+//       router.replace("/login");
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 
 
