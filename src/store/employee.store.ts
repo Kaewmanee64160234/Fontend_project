@@ -3,7 +3,9 @@ import { ref } from 'vue'
 import employeeService from '@/services/employee'
 import type Employee from './types/employee.type'
 export const useEmployeeStore = defineStore('employee', () => {
+  const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
+  const allSelected = ref(false)
   const employees = ref<Employee[]>([])
   const editEmployee = ref<Employee & { files: File[] }>({
     name: '',
@@ -13,8 +15,6 @@ export const useEmployeeStore = defineStore('employee', () => {
     position: '',
     hourly: 0,
 
-
-    
     image: 'no_image.jpg',
     files: []
   })
@@ -31,7 +31,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     try {
       if (!editEmployee.value.id) {
         await employeeService.createEmployee(editEmployee.value)
-        
+        //   console.log(editEmployee.value)
       } else {
         await employeeService.updateEmployee(editEmployee.value.id + '', editEmployee.value)
       }
@@ -47,9 +47,36 @@ export const useEmployeeStore = defineStore('employee', () => {
     dialog.value = true
   }
   const deleteEmployee = async (id: string) => {
-    await employeeService.deleteEmployee(id);
+    await employeeService.deleteEmployee(id)
     await getEmployees()
   }
+  const selectEmployeeAll = async () => {
+    if (!allSelected.value) {
+      selected.value = employees.value.map((employee) => employee.id + '')
+    }
+  }
+  const selectEmployee = () => {
+    allSelected.value = false
+  }
+  const deleteEmployees = async () => {
+    for (let i = 0; i < selected.value.length; i++) {
+      await employeeService.deleteEmployee(selected.value[i])
+      await getEmployees()
+    }
+  }
 
-  return { deleteEmployee,getEmployees, editEmployee, dialog, employees, saveEmployee, editedEmployee}
+  return {
+    deleteEmployees,
+    selectEmployee,
+    allSelected,
+    selectEmployeeAll,
+    selected,
+    deleteEmployee,
+    getEmployees,
+    editEmployee,
+    dialog,
+    employees,
+    saveEmployee,
+    editedEmployee
+  }
 })

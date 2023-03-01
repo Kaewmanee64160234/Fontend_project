@@ -17,7 +17,7 @@ async function save() {
 </script>
 <template>
     <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-    <v-dialog v-model="employeeStore.dialog" persistent width="1024">
+    <v-dialog v-model="employeeStore.dialog" persistent width="1020">
         <v-card>
             <v-container>
                 <v-card-title>
@@ -27,7 +27,7 @@ async function save() {
                     <v-form ref="form">
                         <v-container>
                             <v-row justify="center">
-                                <v-avatar size="80"><v-img
+                                <v-avatar size="50"><v-img
                                         :src="`${url}/employees/image/${employeeStore.editEmployee.image}`"></v-img></v-avatar>
                             </v-row>
                             <v-row>
@@ -78,3 +78,4 @@ async function save() {
         </v-card>
     </v-dialog>
 </template>
+
