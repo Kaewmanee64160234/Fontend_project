@@ -3,7 +3,9 @@ import { ref } from 'vue'
 import customerService from '@/services/customer'
 import type Customer from './types/customer.type'
 export const useCustomerStore = defineStore('customer', () => {
+  const selected = ref<number[]| any[]>([]);
   const dialog = ref(false)
+  const allSelected = ref(false);
   const customers = ref<Customer[]>([])
   const editCustomer = ref<Customer & { files: File[] }>({
     name: '',
@@ -44,6 +46,14 @@ export const useCustomerStore = defineStore('customer', () => {
     await customerService.deleteCustomer(id);
     await getCustomers()
   }
+  const selectCustomerAll = async () => {
+    if(!allSelected.value){
+      selected.value = (customers.value.map(customer => customer.id))
+    }
+  }
+  const selectCustomer = ()=>{
+    allSelected.value = false;
+  }
 
-  return { deleteCustomer,getCustomers, editCustomer, dialog, customers, saveCustomer, editedCustomer }
+  return {selectCustomer,allSelected,selectCustomerAll,selected, deleteCustomer,getCustomers, editCustomer, dialog, customers, saveCustomer, editedCustomer }
 })
