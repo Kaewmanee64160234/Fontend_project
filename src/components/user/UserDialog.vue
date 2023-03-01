@@ -1,13 +1,16 @@
 <script lang="ts" setup>
 import { useUserStore } from '@/store/user.store';
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components';
 const form = ref<VForm | null>(null);
 const userStore = useUserStore();
 const confirmDlg = ref();
+
 async function save(){
   const {valid} = await form.value!.validate();
   if(valid){
+    await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลลูกค้าคนนี้ใช่หรือไม่?`,'Accept','Cancel');
     await userStore.saveUser()
 }
 
@@ -15,6 +18,7 @@ async function save(){
 </script>
 
 <template>
+  <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
    <v-dialog v-model="userStore.dialog" persistent width="1024">
     <v-card>
       <v-card-title>
@@ -88,7 +92,7 @@ async function save(){
         >
           Close
         </v-btn>
-        <v-btn color="blue-darken-1" variant="text" @click ="save()"> Save </v-btn>
+        <v-btn color="blue-darken-1" variant="text" @click ="save"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
