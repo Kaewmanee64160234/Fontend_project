@@ -3,9 +3,9 @@ import { ref } from 'vue'
 import customerService from '@/services/customer'
 import type Customer from './types/customer.type'
 export const useCustomerStore = defineStore('customer', () => {
-  const selected = ref<number[]| any[]>([]);
+  const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
-  const allSelected = ref(false);
+  const allSelected = ref(false)
   const customers = ref<Customer[]>([])
   const editCustomer = ref<Customer & { files: File[] }>({
     name: '',
@@ -43,17 +43,36 @@ export const useCustomerStore = defineStore('customer', () => {
     dialog.value = true
   }
   const deleteCustomer = async (id: string) => {
-    await customerService.deleteCustomer(id);
+    await customerService.deleteCustomer(id)
     await getCustomers()
   }
   const selectCustomerAll = async () => {
-    if(!allSelected.value){
-      selected.value = (customers.value.map(customer => customer.id))
+    if (!allSelected.value) {
+      selected.value = customers.value.map((customer) => customer.id + '')
     }
   }
-  const selectCustomer = ()=>{
-    allSelected.value = false;
+  const selectCustomer = () => {
+    allSelected.value = false
+  }
+  const deleteCustomers = async () => {
+    for (let i = 0; i < selected.value.length; i++) {
+      await customerService.deleteCustomer(selected.value[i])
+      await getCustomers()
+    }
   }
 
-  return {selectCustomer,allSelected,selectCustomerAll,selected, deleteCustomer,getCustomers, editCustomer, dialog, customers, saveCustomer, editedCustomer }
+  return {
+    deleteCustomers,
+    selectCustomer,
+    allSelected,
+    selectCustomerAll,
+    selected,
+    deleteCustomer,
+    getCustomers,
+    editCustomer,
+    dialog,
+    customers,
+    saveCustomer,
+    editedCustomer
+  }
 })

@@ -21,6 +21,16 @@ const deleteCustomer = async (id: string) => {
   )
   customerStore.deleteCustomer(id)
 }
+
+const deleteAllCustomers = async () => {
+  await confirmDlg.value.openDialog(
+    'ยืนยันการลบ',
+    `คุณต้องการลบลูกค้าข้อมูลลูกค้าใช่หรือไม่?`,
+    'Accept',
+    'Cancel'
+  )
+  await customerStore.deleteCustomers()
+}
 </script>
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
@@ -36,6 +46,7 @@ const deleteCustomer = async (id: string) => {
           @click="customerStore.dialog = !customerStore.dialog"
           >Add new customer</v-btn
         >
+        <v-btn class="mdi mr-2" style="float: right; color: white" color="red" @click="deleteAllCustomers">Delete All</v-btn>
         <v-spacer> </v-spacer>
         <v-text-field
           style="width: 20%"
@@ -48,17 +59,17 @@ const deleteCustomer = async (id: string) => {
           single-line
           hide-details
         ></v-text-field>
-        {{ customerStore.selected }}
         <v-table class="text-center mt-5">
           <thead>
             <tr>
-              <th><v-checkbox
+              <th>
+                <v-checkbox
                   class="d-flex pa-4"
                   color="indigo"
                   v-model="customerStore.allSelected"
                   @click="customerStore.selectCustomerAll"
-                
-                ></v-checkbox></th>
+                ></v-checkbox>
+              </th>
               <th></th>
               <th>ID</th>
               <th>Name</th>
@@ -75,7 +86,7 @@ const deleteCustomer = async (id: string) => {
                   color="indigo"
                   v-model="customerStore.selected"
                   @click="customerStore.selectCustomer()"
-                  :value="item.id"
+                  :value="item.id+''"
                 ></v-checkbox>
               </td>
               <td>
