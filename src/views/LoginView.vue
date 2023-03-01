@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components';
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from "@/store/auth";
 const authStore = useAuthStore();
 const loginName = ref("");
 const password = ref("");
