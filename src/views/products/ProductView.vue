@@ -15,6 +15,11 @@ const deleteProduct = async (id:number) => {
   await confirmDlg.value.openDialog("Pleases Confirm", `Do you want delete this product`,'Accept','Cancel');
     productStore.deleteProduct(id);
 };
+
+const deleteAllProducts = async () => {
+  await confirmDlg.value.openDialog("Pleases Confirm", `Do you want delete this product`,'Accept','Cancel');
+    productStore.deleteProducts();
+};
 </script>
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
@@ -25,6 +30,7 @@ const deleteProduct = async (id:number) => {
         Products
         <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="productStore.dialog = true">Add New Product</v-btn>
+          <v-btn class="mdi mdi-delete mr-2" style="float: right; color: white" color="red" @click="deleteAllProducts">Delete All</v-btn>
         <v-spacer>
         </v-spacer>
         <v-text-field  
@@ -42,7 +48,14 @@ const deleteProduct = async (id:number) => {
       <v-table >
         <thead>
           <tr>
-            <th></th>
+            <th>
+              <v-checkbox
+                  class="d-flex pa-4"
+                  color="indigo"
+                  v-model="productStore.allSelected"
+                  @click="productStore.selectProductAll"
+                ></v-checkbox>
+            </th>
             <th>Id</th>
             <th>Image</th>
             <th>Name</th>
@@ -58,6 +71,9 @@ const deleteProduct = async (id:number) => {
             <td><v-checkbox
                   class="d-flex pa-4"
                   color="indigo"
+                  v-model="productStore.selected"
+                  @click="productStore.selectProduct"
+                  :value="item.id+''"
                 ></v-checkbox></td>
             <td>{{ item.id }}</td>
             <td><v-avatar size="80"><v-img :src="`${url}/products/image/${item.image}`"></v-img></v-avatar></td>
