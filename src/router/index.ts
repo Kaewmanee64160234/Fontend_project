@@ -98,6 +98,20 @@ const router = createRouter({
         layout: "MainLayout",
         requiresAuth: true,
       },
+    },
+    {
+      path: "/user",
+      name: "user",
+
+      components: {
+        default: () => import("../views/users/UserView.vue"),
+        menu: () => import("@/components/menus/MainMenu.vue"),
+        header: () => import("@/components/headers/MainHeader.vue"),
+      },
+      meta: {
+        layout: "MainLayout",
+        requiresAuth: true,
+      },
     }
 
   ]
