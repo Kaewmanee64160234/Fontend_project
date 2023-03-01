@@ -19,6 +19,7 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (e) {
       console.log(e)
       messageStore.showError("Username หรือ Password ไม่ถูกต้อง");
+      
     }
     loadingStore.isLoading = false;
     router.push('/')

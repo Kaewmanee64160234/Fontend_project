@@ -1,7 +1,7 @@
 
 import http from "./axios";
-function login(login: string, password: string) {
-  return http.post("/auth/login", { login, password });
+function login(username: string, password: string) {
+  return http.post("/auth/login", { username, password });
 }
 
 export default { login };
