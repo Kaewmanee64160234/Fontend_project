@@ -58,16 +58,8 @@ const router = createRouter({
         requiresAuth: true,
 
       }
-    },{
-      path: "/:pathMatch(.*)*",
-      name: "not-found",
-      components: {
-        default:  () => import("@/views/NotFoundPage.vue"),
-        menu: () => import('@/components/menus/MainMenu.vue'),
-        header: () => import('@/components/headers/MainHeader.vue')
-      }
-      
     },
+    
     {
       path: "/employee",
       name: "employee",
