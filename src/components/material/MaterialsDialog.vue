@@ -7,11 +7,11 @@ const form = ref<VForm | null>(null);
 const materialStore = useMaterialStore();
 const confirmDlg = ref();
 async function save() {
-    const { valid } = await form.value!.validate();
-    if (valid) {
-        await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลลูกค้าคนนี้ใช่หรือไม่?`,'Accept','Cancel');
-        await materialStore.saveMaterial();
-    }
+    const { valid } = await form.value!.validate()
+  if (valid) {
+  await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลลูกค้าคนนี้ใช่หรือไม่?`,'Accept','Cancel');
+    await materialStore.saveMaterial()
+  }
 }
 </script>
 <template>
