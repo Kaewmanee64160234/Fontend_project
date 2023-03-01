@@ -81,7 +81,7 @@ async function save() {
               >
                 <v-text-field
                   label="Price*"
-                  v-model="productStore.editedProduct.price"
+                  v-model.number="productStore.editedProduct.price"
                   :rules="[(v) => !!v || 'Price is required',
                 (v) => v >= 0 || 'Price must more than 0',]"
                 ></v-text-field>
@@ -89,7 +89,18 @@ async function save() {
             </v-row>
             <v-row>
                 <v-col>
-                    <v-file-input label="File input"></v-file-input>
+                    <v-file-input color="deep-purple-accent-4"
+                    counter
+                    multiple
+                    placeholder="Select your files"
+                    prepend-icon="mdi-paperclip"
+                    variant="outlined"
+                    :show-size="1000"
+                    label="Image Input"
+                    accept="image/*"
+                    v-model="productStore.editedProduct.files"
+                    >  
+                    </v-file-input>
                 </v-col>
             </v-row>
           </v-container>

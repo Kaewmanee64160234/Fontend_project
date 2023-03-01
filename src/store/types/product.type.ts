@@ -1,4 +1,5 @@
 export default interface Product {
+    files: any;
     id?: number;
     name: string;
     type?: string;
