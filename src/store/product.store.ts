@@ -6,12 +6,12 @@ import productService from '@/services/product'
 export const useProductStore = defineStore('Product', () => {
   const dialog = ref(false);
   const products = ref<Product[]>([]);
-  const editedProduct = ref<Product>({ name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg'});
+  const editedProduct = ref<Product & {files: File[]}>({ name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg', files:[]});
 
   watch(dialog, (newDialog, oldDialog) => {
     console.log(newDialog);
     if (!newDialog) {
-      editedProduct.value = { name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg'};
+      editedProduct.value = { name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg', files:[]};
     }
   });
 
@@ -32,6 +32,7 @@ export const useProductStore = defineStore('Product', () => {
         const res = await productService.updateProduct(editedProduct.value.id, editedProduct.value);
       } else {
         const res = await productService.saveProduct(editedProduct.value);
+        console.log(editedProduct.value);
       }
       dialog.value = false;
       await getProducts();
@@ -42,7 +43,6 @@ export const useProductStore = defineStore('Product', () => {
 
   async function deleteProduct(id: number) {
   try {
-    
       const res = await productService.deleteProduct(id);
       await getProducts();
   } catch (e) {
