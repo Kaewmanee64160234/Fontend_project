@@ -22,7 +22,7 @@ const deleteMaterial = async (id: string) => {
 const deleteAllMaterials = async () => {
   await confirmDlg.value.openDialog(
     'ยืนยันการลบ',
-    `คุณต้องการลบลูกค้าข้อมูลสินค้าทั้งหมดใช่หรือไม่?`,
+    `คุณต้องการลบข้อมูลสินค้าทั้งหมดใช่หรือไม่?`,
     'Accept',
     'Cancel'
   )
@@ -30,27 +30,39 @@ const deleteAllMaterials = async () => {
 }
 </script>
 <template>
+    <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
+    <MaterialsDialog></MaterialsDialog>
+    <v-container>
     <v-card>
      <v-card-title>
       Material
-      <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-      <MaterialsDialog></MaterialsDialog>
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
           <v-btn class="mdi mdi-delete mr-2" style="float: right; color: white" color="red" @Click="deleteAllMaterials">Delete All</v-btn>
-      <v-container></v-container>
       <v-spacer></v-spacer>
       <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
+      style="width: 20%"
+          variant="solo"
+          color="deep-purple-accent-4"
+          class="mt-7"
+          density="compact"
+          append-inner-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details></v-text-field>
     </v-card-title>
     <v-table>
         <thead>
             <tr>
+                <th>
+              <v-checkbox
+                  class="d-flex pa-4"
+                  style="justify-content: center"
+                  color="indigo"
+                  v-model="materialStore.allSelected"
+                  @click="materialStore.selectMaterialAll"
+                ></v-checkbox>
+            </th>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Min_quantity</th>
@@ -61,7 +73,15 @@ const deleteAllMaterials = async () => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item of materialStore.materials" :key="item.id" style="text-align: center;">
+            <tr v-for="item of materialStore.materials" :key="item.id" style="text-align:center">
+                <v-checkbox
+                style="justify-content: center;"
+                  class="d-flex pa-4"
+                  color="indigo"
+                  v-model="materialStore.selected"
+                  @click="materialStore.selectMaterial"
+                  :value="item.id+''"
+                ></v-checkbox>
                 <td>{{ item.id }}</td>
                 <td v-if="item.minquantity <= 5" style="color: red;">{{ item.name }}</td>
                 <td v-if="item.minquantity > 5">{{ item.name }}</td>
@@ -75,4 +95,5 @@ const deleteAllMaterials = async () => {
         </tbody>
     </v-table>
 </v-card>
+</v-container>
 </template>

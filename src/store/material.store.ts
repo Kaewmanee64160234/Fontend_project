@@ -71,5 +71,5 @@ async function saveMaterial() {
       await getMaterials()
     }
   }
-  return { materials,getMaterials,dialog,editMaterial,editedMaterial,saveMaterial,deleteMaterial,deleteMaterials,selectMaterial,selectMaterialAll}
+  return { materials,getMaterials,dialog,editMaterial,editedMaterial,saveMaterial,deleteMaterial,deleteMaterials,selectMaterial,selectMaterialAll,allSelected,selected}
 })
