@@ -85,7 +85,7 @@ const deleteAllMaterials = async () => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item of materialStore.materials" :key="item.id" style="text-align:center">
+            <tr v-for="item of material" :key="item.id" style="text-align:center">
                 <v-checkbox
                 style="justify-content: center;"
                   class="d-flex pa-4"
@@ -104,6 +104,11 @@ const deleteAllMaterials = async () => {
                 <td><v-btn color="yellow" class="mr-5"  @click="materialStore.editMaterial(item)">Edit</v-btn>
                 <v-btn color="#F55050" @click="deleteMaterial(item.id + '')">Delete</v-btn></td>
             </tr>
+        </tbody>
+        <tbody v-if="material.length == 0" >
+          <tr >
+            <td colspan="7" class="text-center">No data</td>
+          </tr>
         </tbody>
     </v-table>
 </v-card>
