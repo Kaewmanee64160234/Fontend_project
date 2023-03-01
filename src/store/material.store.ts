@@ -7,6 +7,7 @@ import { useMessageStore } from './message';
 
 
 export const useMaterialStore = defineStore('material', () => {
+  const search = ref('');
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
   const selected = ref<string[] | any[]>([])
@@ -76,10 +77,12 @@ async function saveMaterial() {
     allSelected.value = false
   }
   const deleteMaterials = async () => {
+    loadingStore.isLoading = true
     for (let i = 0; i < selected.value.length; i++) {
       await materialService.deleteMaterial(selected.value[i])
       await getMaterials()
     }
+    loadingStore.isLoading = false
   }
-  return { materials,getMaterials,dialog,editMaterial,editedMaterial,saveMaterial,deleteMaterial,deleteMaterials,selectMaterial,selectMaterialAll,allSelected,selected}
+  return { materials,getMaterials,dialog,editMaterial,editedMaterial,saveMaterial,deleteMaterial,deleteMaterials,selectMaterial,selectMaterialAll,allSelected,selected,search}
 })

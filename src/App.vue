@@ -3,6 +3,7 @@ import { RouterView } from 'vue-router'
 import { ref } from 'vue'
 import MainLayout from '@/components/layouts/MainLayout.vue'
 import LoadingDialog from './components/LoadingDialog.vue';
+import MessageDialog from './components/MessageDialog.vue';
 </script>
 
 <template>
@@ -11,8 +12,9 @@ import LoadingDialog from './components/LoadingDialog.vue';
   <!-- <main>
     <RouterView></RouterView>
   </main> -->
-  
   <LoadingDialog></LoadingDialog>
+
+  <MessageDialog></MessageDialog>
 
 </template>
 
