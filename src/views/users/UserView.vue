@@ -69,7 +69,6 @@ const deleteAllUsers = async () => {
               <th>ID</th>
               <th>Username</th>
               <th>Login</th>
-              <th>Passowrd</th>
               <th>Role</th>
               <th>Operations</th>
             </tr>
