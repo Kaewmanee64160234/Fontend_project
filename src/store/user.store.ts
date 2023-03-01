@@ -6,6 +6,8 @@ import userService from '@/services/user'
 export const useUserStore = defineStore('User', () => {
   const dialog = ref(false);
   const users = ref<User[]>([]);
+  const selected = ref<string[] | any[]>([])
+  const allSelected = ref(false)
   const editedUser = ref<User>({username:"", login: "", password: "", role: "" });
 
   watch(dialog, (newDialog, oldDialog) => {
@@ -49,5 +51,22 @@ export const useUserStore = defineStore('User', () => {
     editedUser.value = JSON.parse(JSON.stringify(user));
     dialog.value = true;
   }
-  return { users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser }
+  
+  function selectUserAll() {
+    if (!allSelected.value) {
+      selected.value = users.value.map((user) => user.id + '')
+    }
+  }
+  function selectUser()  {
+    allSelected.value = false
+  }
+  const deleteAllUser = async () => {
+    for (let i = 0; i < selected.value.length; i++) {
+      await userService.deleteUser(selected.value[i])
+      await getUsers()
+    }
+  }
+
+
+  return { users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser, selectUserAll, selectUser, allSelected, selected, deleteAllUser }
 })
