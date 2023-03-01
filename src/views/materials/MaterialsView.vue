@@ -3,7 +3,6 @@ import { onMounted, ref } from 'vue';
 import { useMaterialStore } from '@/store/material.store.js';
 import MaterialsDialog from '@/components/material/MaterialsDialog.vue';
 import ConfirmDialog from '@/components/ConfirmDialog.vue';
-const search = ref("");
 const materialStore = useMaterialStore();
 const confirmDlg = ref();
 

@@ -22,7 +22,11 @@ async function save() {
         <v-form ref="form">
           <v-container>
             <v-row>
-              <v-col cols="12">
+              <v-col
+                cols="12"
+                sm="6"
+                md="6"
+              >
                 <v-text-field
                   label="Name*"
                   required
@@ -33,36 +37,54 @@ async function save() {
                   ]"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col
+                cols="12"
+                sm="6"
+                md="6"
+              >
                 <v-text-field
                   label="Min_quantity*"
                   required
                   v-model="materialStore.editedMaterial.minquantity"
-                  :rules="[(v) => !!v || 'Item is required']"
+                  :rules="[(v) => !!v || 'Item is required',
+                (v) => v >= 0 || 'Min_quantity must more than 0']"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col
+                cols="12"
+                sm="6"
+                md="6"
+              >
                 <v-text-field
                   label="Quantity*"
                   required
                   v-model="materialStore.editedMaterial.quantity"
-                  :rules="[(v) => !!v || 'Item is required']"
+                  :rules="[(v) => !!v || 'Item is required',
+                (v) => v > 0 || 'Quantity must more than 0']"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col
+                cols="12"
+                sm="6"
+                md="6"
+              >
                 <v-text-field
                   label="Unit*"
                   required
                   v-model="materialStore.editedMaterial.unit"
-                  :rules="[(v) => !!v || 'Item is required']"
+                  :rules="[(v) => !!v || 'Item is required',
+                (v) => v > 0 || 'Unit must more than 0']"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col
+                cols="12"
+              >
                 <v-text-field
                   label="Price_per_unit*"
                   required
                   v-model="materialStore.editedMaterial.price_per_unit"
-                  :rules="[(v) => !!v || 'Item is required']"
+                  :rules="[(v) => !!v || 'Item is required',
+                    (v) => v > 0 || 'Price_per_unit must more than 0']"
                 ></v-text-field>
               </v-col>
             </v-row>

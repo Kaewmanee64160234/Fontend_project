@@ -2,8 +2,10 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 import type { Material } from './types/material.type';
 import materialService from '@/services/material';
+import { useLoadingStore } from '@/stores/loading';
 
 export const useMaterialStore = defineStore('material', () => {
+  const loadingStore = useLoadingStore();
   const selected = ref<string[] | any[]>([])
   const allSelected = ref(false)
   const dialog = ref(false);
@@ -28,14 +30,17 @@ export const useMaterialStore = defineStore('material', () => {
   });
 
   async function getMaterials() {
+    loadingStore.isLoading = true;
     try{
       const res = await materialService.getMaterials();
       materials.value = res.data;
     } catch (e) {
       console.log(e);
   }
+  loadingStore.isLoading = false;
 }
 async function saveMaterial() {
+  loadingStore.isLoading = true;
   try {
     if (editedMaterial.value.id) {
       const res = await materialService.updateMaterial(editedMaterial.value.id, editedMaterial.value);
@@ -48,6 +53,7 @@ async function saveMaterial() {
   } catch (e) {
     console.log(e);
   }
+  loadingStore.isLoading = false;
 }
   function editMaterial(material: Material) {
     editedMaterial.value = JSON.parse(JSON.stringify(material));
