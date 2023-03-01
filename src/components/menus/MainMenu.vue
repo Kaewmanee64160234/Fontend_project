@@ -21,18 +21,17 @@ const authStore = useAuthStore();
 
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="/"></v-list-item>
-        <v-list-item prepend-icon="mdi-account" title="Product" value="product" to="/product"></v-list-item>
-        <v-list-item prepend-icon="mdi-account" title="Product Full Screen" value="product_full"
-          to="/product/full"></v-list-item>
-        <v-list-item prepend-icon="mdi-account-group-outline" title="User" value="user" to="/user"></v-list-item>
+        <v-list-item prepend-icon="mdi-inbox-multiple " title="Product" value="product" to="/product"></v-list-item>
+        
+        <v-list-item prepend-icon="mdi-account" title="User" value="user" to="/user"></v-list-item>
       </v-list>
       <v-list-item prepend-icon="mdi-account-group-outline" title="Customer" value="customer"
         to="/customer"></v-list-item>
-      <v-list-item prepend-icon="mdi-account-group-outline" title="Employee" value="employee"
+      <v-list-item prepend-icon="mdi-face-agent" title="Employee" value="employee"
       to="/employee"></v-list-item>
       <v-list-item prepend-icon="mdi-basket-outline" title="Material" value="material"
       to="/material"></v-list-item>
-      <v-list-item prepend-icon="mdi-account-group-outline" title="Logout" value="material"
+      <v-list-item prepend-icon="mdi-logout-variant" title="Logout" value="material"
       @click="authStore.logout"></v-list-item>
     </v-navigation-drawer>
 
