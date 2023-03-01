@@ -24,15 +24,16 @@ const authStore = useAuthStore();
         <v-list-item prepend-icon="mdi-inbox-multiple " title="Product" value="product" to="/product"></v-list-item>
         
         <v-list-item prepend-icon="mdi-account" title="User" value="user" to="/user"></v-list-item>
-      </v-list>
-      <v-list-item prepend-icon="mdi-account-group-outline" title="Customer" value="customer"
+        <v-list-item prepend-icon="mdi-account-group-outline" title="Customer" value="customer"
         to="/customer"></v-list-item>
       <v-list-item prepend-icon="mdi-face-agent" title="Employee" value="employee"
       to="/employee"></v-list-item>
       <v-list-item prepend-icon="mdi-basket-outline" title="Material" value="material"
       to="/material"></v-list-item>
-      <v-list-item prepend-icon="mdi-logout-variant" title="Logout" value="material"
+      <v-list-item prepend-icon="mdi-logout-variant" title="Logout" value="logout"
       @click="authStore.logout"></v-list-item>
+      </v-list>
+      
     </v-navigation-drawer>
 
 </template>
