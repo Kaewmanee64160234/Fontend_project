@@ -56,7 +56,7 @@ const deleteAllProducts = async () => {
               <v-checkbox class="d-flex pa-4" color="indigo" v-model="productStore.allSelected"
                 @click="productStore.selectProductAll"></v-checkbox>
             </th>
-            <th>Id</th>
+            <th>ID</th>
             <th>Image</th>
             <th>Name</th>
             <th>Type</th>
