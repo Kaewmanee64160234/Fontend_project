@@ -5,7 +5,7 @@ import type Customer from './types/customer.type'
 import { useLoadingStore } from './loading'
 export const useCustomerStore = defineStore('customer', () => {
   const loadingStore = useLoadingStore()
-const search = ref('');
+  const search = ref('');
   const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
   const allSelected = ref(false)
