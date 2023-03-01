@@ -26,13 +26,35 @@ export const useProductStore = defineStore('Product', () => {
   }
 
   async function saveProduct() {
+    console.log(editedProduct.value);
     try {
-      const res = await productService.saveProduct(editedProduct.value)
+      if(editedProduct.value.id) {
+        const res = await productService.updateProduct(editedProduct.value.id, editedProduct.value);
+      } else {
+        const res = await productService.saveProduct(editedProduct.value);
+      }
       dialog.value = false;
+      await getProducts();
     } catch (e) {
       console.log(e);
     }
   }
 
-  return { products, getProducts, dialog, editedProduct, saveProduct}
+  async function deleteProduct(id: number) {
+  try {
+    
+      const res = await productService.deleteProduct(id);
+      await getProducts();
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+  function editProduct(product: Product) {
+    editedProduct.value = JSON.parse(JSON.stringify(product));
+    dialog.value = true;
+  }
+
+
+  return { products, getProducts, dialog, editedProduct, saveProduct, editProduct, deleteProduct}
 })
