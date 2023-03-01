@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import type User from './types/user.type';
 import axios from 'axios';
 import userService from '@/services/user'
-import { useLoadingStore } from '@/stores/loading';
+import { useLoadingStore } from '@/store/loading';
 export const useUserStore = defineStore('User', () => {
   const dialog = ref(false);
   const users = ref<User[]>([]);
@@ -22,8 +22,6 @@ export const useUserStore = defineStore('User', () => {
     loadingStore.isLoading = true;
     try {
       const res = await userService.getUsers();
-      users.value = res.data;
-      console.log(res)
     } catch (e) {
       console.log(e);
     }

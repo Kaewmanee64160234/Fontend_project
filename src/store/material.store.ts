@@ -2,10 +2,14 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 import type { Material } from './types/material.type';
 import materialService from '@/services/material';
-import { useLoadingStore } from '@/stores/loading';
+import { useLoadingStore } from '@/store/loading';
+import { useMessageStore } from './message';
+
 
 export const useMaterialStore = defineStore('material', () => {
+  const search = ref('');
   const loadingStore = useLoadingStore();
+  const messageStore = useMessageStore();
   const selected = ref<string[] | any[]>([])
   const allSelected = ref(false)
   const dialog = ref(false);
@@ -18,17 +22,6 @@ export const useMaterialStore = defineStore('material', () => {
     price_per_unit:0}); 
 
 
-  watch(dialog, (newDialog, oldDialog) => {
-      console.log(newDialog);
-      if (!newDialog) {
-        editedMaterial.value = { name: "", 
-        minquantity: 0,
-        quantity: 0,
-        unit: 0,
-        price_per_unit:0};
-      }
-  });
-
   async function getMaterials() {
     loadingStore.isLoading = true;
     try{
@@ -36,6 +29,7 @@ export const useMaterialStore = defineStore('material', () => {
       materials.value = res.data;
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Material ได้");
   }
   loadingStore.isLoading = false;
 }
@@ -43,18 +37,18 @@ async function saveMaterial() {
   loadingStore.isLoading = true;
     try {
       if (editedMaterial.value.id) {
-        const res = await materialService.updateMaterial(
-          editedMaterial.value.id,
-          editedMaterial.value
-        );
+         await materialService.updateMaterial(editedMaterial.value.id,editedMaterial.value);
       } else {
+  
         const res = await materialService.saveMaterial(editedMaterial.value);
+        console.log(res.data);
       }
 
       dialog.value = false;
       await getMaterials();
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถบันทึกข้อมูล Material ได้");
     }
     loadingStore.isLoading = false;
   }
@@ -64,8 +58,15 @@ async function saveMaterial() {
     dialog.value = true;
   }
   async function deleteMaterial(id: string) {
-    await materialService.deleteMaterial(id);
-    await getMaterials()
+    loadingStore.isLoading = true;
+    try {
+      await materialService.deleteMaterial(id);
+      await getMaterials()
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถลบข้อมูล Material ได้");
+    }
+    loadingStore.isLoading = false;
   }
   const selectMaterialAll = async () => {
     if (!allSelected.value) {
@@ -76,10 +77,12 @@ async function saveMaterial() {
     allSelected.value = false
   }
   const deleteMaterials = async () => {
+    loadingStore.isLoading = true
     for (let i = 0; i < selected.value.length; i++) {
       await materialService.deleteMaterial(selected.value[i])
       await getMaterials()
     }
+    loadingStore.isLoading = false
   }
-  return { materials,getMaterials,dialog,editMaterial,editedMaterial,saveMaterial,deleteMaterial,deleteMaterials,selectMaterial,selectMaterialAll,allSelected,selected}
+  return { materials,getMaterials,dialog,editMaterial,editedMaterial,saveMaterial,deleteMaterial,deleteMaterials,selectMaterial,selectMaterialAll,allSelected,selected,search}
 })

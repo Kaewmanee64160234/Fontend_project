@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useLoadingStore } from "@/stores/loading"
+import { useLoadingStore } from "@/store/loading";
 
 const loadingStore = useLoadingStore();
 </script>
