@@ -51,6 +51,7 @@ const deleteAllCustomers = async () => {
   <v-container>
     <v-card>
       <v-card-title>
+        Customers
         <v-btn
           class="mdi mdi-plus"
           style="float: right; color: white"
@@ -103,7 +104,7 @@ const deleteAllCustomers = async () => {
                 ></v-checkbox>
               </td>
               <td>
-                <v-avatar><v-img :src="`${url}/customers/image/${item.image}`"></v-img></v-avatar>
+                <v-avatar size="80"><v-img :src="`${url}/customers/image/${item.image}`"></v-img></v-avatar>
               </td>
               <td>{{ item.id }}</td>
               <td>{{ item.name }}</td>
