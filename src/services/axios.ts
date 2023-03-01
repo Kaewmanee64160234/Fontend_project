@@ -13,20 +13,20 @@ function delay(time: number) {
   });
 }
 
-// instance.interceptors.request.use(
-//   async function (config) {
-//     const token = localStorage.getItem("token");
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-//   },
-//   function (error) {
-//     // Do something with request error
+instance.interceptors.request.use(
+  async function (config) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  function (error) {
+    // Do something with request error
 
-//     return Promise.reject(error);
-//   }
-// );
+    return Promise.reject(error);
+  }
+);
 
 instance.interceptors.response.use(
   async function (config) {
@@ -41,7 +41,5 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-
 
 export default instance;
