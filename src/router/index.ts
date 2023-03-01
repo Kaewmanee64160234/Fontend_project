@@ -112,6 +112,19 @@ const router = createRouter({
         layout: "MainLayout",
         requiresAuth: true,
       },
+    },{
+      path: "/material",
+      name: "material",
+
+      components: {
+        default: () => import("../views/materials/MaterialsView.vue"),
+        menu: () => import("@/components/menus/MainMenu.vue"),
+        header: () => import("@/components/headers/MainHeader.vue"),
+      },
+      meta: {
+        layout: "MainLayout",
+        requiresAuth: true,
+      },
     }
 
   ]

@@ -28,6 +28,8 @@ const rail = ref(true);
         to="/customer"></v-list-item>
       <v-list-item prepend-icon="mdi-account-group-outline" title="Employee" value="employee"
       to="/employee"></v-list-item>
+      <v-list-item prepend-icon="mdi-basket-outline" title="Material" value="material"
+      to="/material"></v-list-item>
     </v-navigation-drawer>
 
 </template>

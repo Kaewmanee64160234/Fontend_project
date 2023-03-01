@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useMaterialStore } from '@/store/material.store.js';
-import MaterialsDialog from './MaterialsDialog.vue';
+import MaterialsDialog from '@/components/material/MaterialsDialog.vue';
 const search = ref("");
 const materialStore = useMaterialStore();
 const confirmDlg = ref();
@@ -20,7 +20,7 @@ const deleteMaterial = async (id:number) => {
       Material
       <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
       <MaterialsDialog></MaterialsDialog>
-      <v-btn style="float: right;" color="primary" @click="materialStore.dialog = true">Add New</v-btn>
+      <v-btn style="float: right;background-color: #8ad879; color: white" @click="materialStore.dialog = true">Add New</v-btn>
       <v-container></v-container>
       <v-spacer></v-spacer>
       <v-text-field
