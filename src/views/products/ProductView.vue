@@ -1,12 +1,23 @@
 <script lang="ts" setup>
 import { useProductStore } from '@/store/product.store';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import ProductDialog from '../../components/product/ProductDialog.vue';
 import ConfirmDialog from '@/components/ConfirmDialog.vue';
 
 const productStore = useProductStore();
 const confirmDlg = ref();
 const url = import.meta.env.VITE_URL_PORT
+
+const products = computed(() => {
+  if (!productStore.search) {
+    return productStore.products;
+  } else {
+    return productStore.products.filter((product) => {
+      return product.name.toLocaleLowerCase().includes( productStore.search
+      )
+    });
+  }
+});
 onMounted(async () => {
 
   await productStore.getProducts();
@@ -35,7 +46,7 @@ const deleteAllProducts = async () => {
         <v-spacer>
         </v-spacer>
             <v-text-field style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
-              append-inner-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
+              append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="productStore.search"></v-text-field>
       </v-card-title>
 
       <v-table>
@@ -56,7 +67,7 @@ const deleteAllProducts = async () => {
           </tr>
         </thead>
         <tbody>
-          <tr style="text-align:center" v-for="item of productStore.products" :key="item.id">
+          <tr style="text-align:center" v-for="item of products" :key="item.id">
             <td><v-checkbox class="d-flex pa-4" color="indigo" v-model="productStore.selected"
                 @click="productStore.selectProduct" :value="item.id + ''"></v-checkbox></td>
             <td>{{ item.id }}</td>
@@ -70,6 +81,11 @@ const deleteAllProducts = async () => {
               <v-btn color="#F55050" @click="deleteProduct(item.id!)">Delete</v-btn>
             </td>
 
+          </tr>
+        </tbody>
+        <tbody v-if="products.length == 0" >
+          <tr >
+            <td colspan="7" class="text-center">No data</td>
           </tr>
         </tbody>
       </v-table>
