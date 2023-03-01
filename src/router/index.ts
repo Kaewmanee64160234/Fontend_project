@@ -101,6 +101,11 @@ const router = createRouter({
         layout: "MainLayout",
         requiresAuth: true,
       },
+    }, {
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      component: () => import("@/views/NotFound.vue")
+,
     }
 
   ]

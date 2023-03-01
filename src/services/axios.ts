@@ -1,5 +1,5 @@
-import router from "@/router";
 import axios from "axios";
+import router from "@/router";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000",
@@ -19,39 +19,26 @@ instance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
   function (error) {
     // Do something with request error
-
     return Promise.reject(error);
   }
 );
 
-// instance.interceptors.response.use(
-//   async function (config) {
-//     // await delay(1000);
-//     return config;
-//   },
-//   function (error) {
-//     // Do something with request error
-//     if (401 === error.response.status) {
-//       router.replace("/login");
-//     }
-//     return Promise.reject(error);
-//   }
-// );
 instance.interceptors.response.use(
-  async function (config) {
+  async function (res) {
     // await delay(1000);
-    return config;
-  // },
-  // function (error) {
-  //   // Do something with request error
-  //   if (401 === error.response.status) {
-  //     router.replace("/login");
-  //   }
-  //   return Promise.reject(error);
+    return res;
+  },
+  function (error) {
+    // Do something with request error
+    if (401 === error.response.status) {
+      router.replace("/login");
+    }
+    return Promise.reject(error);
   }
 );
 
