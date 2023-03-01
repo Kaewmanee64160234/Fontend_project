@@ -62,10 +62,31 @@ export const useProductStore = defineStore('Product', () => {
       selected.value = products.value.map((product) => product.id + '')
     }
   }
-  function selectProduct()  {
+  function selectProduct() {
     allSelected.value = false
   }
 
+  async function deleteProducts() {
+    for (let i = 0; i < selected.value.length; i++) {
+      await productService.deleteProduct(selected.value[i])
+      await getProducts();
+    }
+  }
 
-  return { products, getProducts, dialog, editedProduct, saveProduct, editProduct, deleteProduct, selectProductAll, selectProduct }
-})
+
+    return { 
+      products, 
+      getProducts, 
+      dialog, 
+      editedProduct, 
+      saveProduct, 
+      editProduct, 
+      deleteProduct, 
+      selectProductAll, 
+      selectProduct, 
+      deleteProducts, 
+      selected,
+      allSelected
+     }
+  }
+)

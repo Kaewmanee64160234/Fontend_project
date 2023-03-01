@@ -24,7 +24,6 @@ async function updateProduct(id: number, product: Product & { files: File[] }) {
     formData.append("type", `${product.type}`);
     formData.append("size", `${product.size}`);
     formData.append("price", `${product.price}`);
-    formData.append("file", product.files[0]);
     if(product.files) {
     formData.append("file", product.files[0]);
     }
