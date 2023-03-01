@@ -11,20 +11,18 @@ onMounted(async () => {
 </script>
 <template>
     <ProductDialog></ProductDialog>
-    <v-row>
-    <v-col cols="12" md="11">
-      <v-btn
-        class="mt-5 mb-2 mdi mdi-plus"
-        style="float: right; background-color: #8ad879; color: white" @click="productStore.dialog = true"
-        >Add New</v-btn>
-    </v-col>
-    </v-row>
     <v-container>
   <v-card>
     <v-card-title>
       Products
-      <v-spacer></v-spacer>
+      <v-btn
+        class="mdi mdi-plus"
+        style="float: right; background-color: #8ad879; color: white" @click="productStore.dialog = true"
+        >Add New Product</v-btn>
+      <v-spacer>
+      </v-spacer>
       <v-text-field
+      class="mt-5"
         append-icon="mdi-magnify"
         label="Search"
         single-line
