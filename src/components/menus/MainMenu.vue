@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from "@/store/auth";
 import { ref } from "vue";
 const drawer = ref(true);
 const rail = ref(true);
