@@ -46,7 +46,7 @@ const deleteAllCustomers = async () => {
           @click="customerStore.dialog = !customerStore.dialog"
           >Add new customer</v-btn
         >
-        <v-btn class="mdi mr-2" style="float: right; color: white" color="red" @click="deleteAllCustomers">Delete All</v-btn>
+        <v-btn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red" @click="deleteAllCustomers">Delete All</v-btn>
         <v-spacer> </v-spacer>
         <v-text-field
           style="width: 20%"
