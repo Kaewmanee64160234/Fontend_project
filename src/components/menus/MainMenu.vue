@@ -28,7 +28,7 @@ const authStore = useAuthStore();
       </v-list>
       <v-list-item prepend-icon="mdi-account-group-outline" title="Customer" value="customer"
         to="/customer"></v-list-item>
-      <v-list-item prepend-icon="mdi-account-group-outline" title="Employee" value="employee"
+      <v-list-item prepend-icon="mdi-face-agent" title="Employee" value="employee"
       to="/employee"></v-list-item>
       <v-list-item prepend-icon="mdi-basket-outline" title="Material" value="material"
       to="/material"></v-list-item>
