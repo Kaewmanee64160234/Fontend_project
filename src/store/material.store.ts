@@ -3,10 +3,12 @@ import { ref, watch } from 'vue'
 import type { Material } from './types/material.type';
 import materialService from '@/services/material';
 import { useLoadingStore } from '@/store/loading';
+import { useMessageStore } from './message';
 
 
 export const useMaterialStore = defineStore('material', () => {
   const loadingStore = useLoadingStore();
+  const messageStore = useMessageStore();
   const selected = ref<string[] | any[]>([])
   const allSelected = ref(false)
   const dialog = ref(false);
@@ -26,6 +28,7 @@ export const useMaterialStore = defineStore('material', () => {
       materials.value = res.data;
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Material ได้");
   }
   loadingStore.isLoading = false;
 }
@@ -44,6 +47,7 @@ async function saveMaterial() {
       await getMaterials();
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถบันทึกข้อมูล Material ได้");
     }
     loadingStore.isLoading = false;
   }
@@ -53,8 +57,15 @@ async function saveMaterial() {
     dialog.value = true;
   }
   async function deleteMaterial(id: string) {
-    await materialService.deleteMaterial(id);
-    await getMaterials()
+    loadingStore.isLoading = true;
+    try {
+      await materialService.deleteMaterial(id);
+      await getMaterials()
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถลบข้อมูล Material ได้");
+    }
+    loadingStore.isLoading = false;
   }
   const selectMaterialAll = async () => {
     if (!allSelected.value) {
