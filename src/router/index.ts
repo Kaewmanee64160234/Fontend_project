@@ -18,16 +18,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/login',
-      name: 'login',
-      components: {
-        default: LoginView
-      },
-      meta: {
-        // layout: "FullLayout",
-      }
-    },
-    {
       path: '/about',
       name: 'about',
       // route level code-splitting
@@ -49,17 +39,19 @@ const router = createRouter({
         header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: 'MainLayout'
+        layout: 'MainLayout',
+        requiresAuth: true,
+
       }
     },
-    // {
-    //   path: '/login',
-    //   name: 'login',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/LoginView.vue')
-    // },
+    {
+      path: '/login',
+      name: 'login',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/LoginView.vue')
+    },
     {
       path: '/customer',
       name: 'customer',
@@ -73,7 +65,9 @@ const router = createRouter({
       },
 
       meta: {
-        layout: 'MainLayout'
+        layout: 'MainLayout',
+        requiresAuth: true,
+
       }
     },{
       path: "/:pathMatch(.*)*",
@@ -110,6 +104,8 @@ const router = createRouter({
       },
       meta: {
         layout: "MainLayout",
+        requiresAuth: true,
+
       },
     },{
       path: "/material",
@@ -128,24 +124,22 @@ const router = createRouter({
 
   ]
 })
-function isLogin() {
-  const user = localStorage.getItem('user')
+const isLoggedIn = () => {
+  const user = localStorage.getItem("user");
   if (user) {
-    return true
+    return true;
+  } else {
+    return false;
   }
-  return false
-}
+};
 router.beforeEach((to, from) => {
-  // instead of having to check every route record with
-  // to.matched.some(record => record.meta.requiresAuth)
-  if (to.meta.requiresAuth && !isLogin()) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
+  if (to.meta.requiresAuth && !isLoggedIn()) {
     return {
-      path: '/login',
-      // save the location we were at to come back later
-      query: { redirect: to.fullPath }
-    }
+      path: "/login",
+      query: { redirect: to.fullPath },
+    };
   }
-})
-export default router
+});
+
+export default router;
+
