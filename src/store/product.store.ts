@@ -3,7 +3,10 @@ import { defineStore } from 'pinia'
 import type Product from './types/product.type';
 import axios from 'axios';
 import productService from '@/services/product'
+import { useLoadingStore } from '@/stores/loading';
+
 export const useProductStore = defineStore('Product', () => {
+  const loadingStore = useLoadingStore();
   const selected = ref<string[] | any[]>([])
   const allSelected = ref(false)
   const dialog = ref(false);
@@ -18,6 +21,7 @@ export const useProductStore = defineStore('Product', () => {
   });
 
   async function getProducts() {
+    loadingStore.isLoading = true;
     try {
       const res = await productService.getProducts();
       products.value = res.data;
@@ -25,9 +29,11 @@ export const useProductStore = defineStore('Product', () => {
     } catch (e) {
       console.log(e);
     }
+    loadingStore.isLoading = false;
   }
 
   async function saveProduct() {
+    loadingStore.isLoading = true;
     console.log(editedProduct.value);
     try {
       if (editedProduct.value.id) {
@@ -41,15 +47,18 @@ export const useProductStore = defineStore('Product', () => {
     } catch (e) {
       console.log(e);
     }
+    loadingStore.isLoading = false;
   }
 
   async function deleteProduct(id: number) {
+    loadingStore.isLoading = true;
     try {
       const res = await productService.deleteProduct(id);
       await getProducts();
     } catch (e) {
       console.log(e);
     }
+    loadingStore.isLoading = false;
   }
 
   function editProduct(product: Product) {
