@@ -32,7 +32,7 @@ const authStore = useAuthStore();
       to="/employee"></v-list-item>
       <v-list-item prepend-icon="mdi-basket-outline" title="Material" value="material"
       to="/material"></v-list-item>
-      <v-list-item prepend-icon="mdi-account-group-outline" title="Logout" value="material"
+      <v-list-item prepend-icon="mdi-logout-variant" title="Logout" value="material"
       @click="authStore.logout"></v-list-item>
     </v-navigation-drawer>
 
