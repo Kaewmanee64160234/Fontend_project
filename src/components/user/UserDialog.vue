@@ -6,11 +6,9 @@ const form = ref<VForm | null>(null);
 const userStore = useUserStore();
 const confirmDlg = ref();
 async function save(){
-
-const {valid} = await form.value!.validate();
-if(valid){
-await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลผู้ใช้คนนี้ใช่หรือไม่?`,'Accept','Cancel');
-  await userStore.saveUser()
+  const {valid} = await form.value!.validate();
+  if(valid){
+    await userStore.saveUser()
 }
 
 }
@@ -60,6 +58,7 @@ await confirmDlg.value.openDialog("ยืนยันการแก้ไข", 
                 <v-text-field
                   label="Password*"
                   required
+                  v-model="userStore.editedUser.password"
                   :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 6 || 'Length must more than 6']"
                 ></v-text-field>
               </v-col>
