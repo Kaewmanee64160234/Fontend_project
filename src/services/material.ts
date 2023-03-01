@@ -2,18 +2,18 @@
 import type { Material } from "@/store/types/material.type";
 import http from "./axios";
 
-function getMaterial() {
+function getMaterials() {
     return http.get("/materials");
   }
-function saveMaterial(material: Material) {
-    return http.post("/materials", material);
+function saveMaterial(material:Material) {
+    return http.post("/materials",material);
 }
   
-function updateMaterial(id: number,material: Material) {
-    return http.patch(`/materials/${id}`, material);
-}
+function updateMaterial(id: number, material:Material) {
+    return http.patch(`/products/${id}`, material);
+  }
   
-function deleteMaterial(id: number) {
+function deleteMaterial(id: string) {
     return http.delete(`/materials/${id}`);
 }
-export default {getMaterial, saveMaterial , updateMaterial , deleteMaterial}
+export default {getMaterials, saveMaterial , updateMaterial , deleteMaterial}
