@@ -21,7 +21,7 @@ const authStore = useAuthStore();
 
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="/"></v-list-item>
-        <v-list-item prepend-icon="mdi-account" title="Product" value="product" to="/product"></v-list-item>
+        <v-list-item prepend-icon="mdi-inbox-multiple " title="Product" value="product" to="/product"></v-list-item>
         <v-list-item prepend-icon="mdi-account" title="Product Full Screen" value="product_full"
           to="/product/full"></v-list-item>
         <v-list-item prepend-icon="mdi-account-group-outline" title="User" value="user" to="/user"></v-list-item>
