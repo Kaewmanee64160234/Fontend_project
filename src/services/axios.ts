@@ -41,5 +41,18 @@ instance.interceptors.request.use(
 //     return Promise.reject(error);
 //   }
 // );
+instance.interceptors.response.use(
+  async function (config) {
+    // await delay(1000);
+    return config;
+  // },
+  // function (error) {
+  //   // Do something with request error
+  //   if (401 === error.response.status) {
+  //     router.replace("/login");
+  //   }
+  //   return Promise.reject(error);
+  }
+);
 
 export default instance;

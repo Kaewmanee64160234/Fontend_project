@@ -2,19 +2,23 @@
 import { useProductStore } from '@/store/product.store';
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components'
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
 const form = ref<VForm | null>(null)
 const url = import.meta.env.VITE_URL_PORT
+const confirmDlg = ref();
 const productStore = useProductStore();
 
 async function save() {
   const { valid } = await form.value!.validate();
   if (valid) {
+    await confirmDlg.value.openDialog("Pleases Confirm", `Do you want save this product ?`,'Accept','Cancel');
     await productStore.saveProduct();
   }
 }
 </script>
 
 <template>
+  <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
    <v-dialog v-model="productStore.dialog" persistent width="1024">
     <v-card>
       <v-card-title>
