@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import { ref } from 'vue'
 import MainLayout from '@/components/layouts/MainLayout.vue'
+import LoadingDialog from './components/LoadingDialog.vue';
 </script>
 
 <template>
@@ -10,6 +11,8 @@ import MainLayout from '@/components/layouts/MainLayout.vue'
   <!-- <main>
     <RouterView></RouterView>
   </main> -->
+  
+  <LoadingDialog></LoadingDialog>
 </template>
 
 <style>
