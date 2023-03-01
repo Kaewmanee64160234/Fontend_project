@@ -17,18 +17,7 @@ const router = createRouter({
         layout: 'MainLayout'
       }
     },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      components: {
-        default: () => import('../views/AboutView.vue'),
-        menu: () => import('@/components/menus/MainMenu.vue'),
-        header: () => import('@/components/headers/MainHeader.vue')
-      }
-    },
+    
     {
       path: '/product',
       name: 'product',
