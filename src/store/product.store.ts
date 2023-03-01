@@ -4,8 +4,11 @@ import type Product from './types/product.type';
 import axios from 'axios';
 import productService from '@/services/product'
 import { useLoadingStore } from '@/store/loading';
+import { useMessageStore } from './message';
 
 export const useProductStore = defineStore('Product', () => {
+  const search = ref('');
+  const messageStore = useMessageStore();
   const loadingStore = useLoadingStore();
   const selected = ref<string[] | any[]>([])
   const allSelected = ref(false)
@@ -14,7 +17,6 @@ export const useProductStore = defineStore('Product', () => {
   const editedProduct = ref<Product & { files: File[] }>({ name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg', files: [] });
 
   watch(dialog, (newDialog, oldDialog) => {
-    console.log(newDialog);
     if (!newDialog) {
       editedProduct.value = { name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg', files: [] };
     }
@@ -25,27 +27,26 @@ export const useProductStore = defineStore('Product', () => {
     try {
       const res = await productService.getProducts();
       products.value = res.data;
-      console.log(res)
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Product ได้");
     }
     loadingStore.isLoading = false;
   }
 
   async function saveProduct() {
     loadingStore.isLoading = true;
-    console.log(editedProduct.value);
     try {
       if (editedProduct.value.id) {
         const res = await productService.updateProduct(editedProduct.value.id, editedProduct.value);
       } else {
         const res = await productService.saveProduct(editedProduct.value);
-        console.log(editedProduct.value);
       }
       dialog.value = false;
       await getProducts();
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถบันทึกข้อมูล Product ได้");
     }
     loadingStore.isLoading = false;
   }
@@ -57,6 +58,7 @@ export const useProductStore = defineStore('Product', () => {
       await getProducts();
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถลบ Product ได้");
     }
     loadingStore.isLoading = false;
   }
@@ -95,7 +97,8 @@ export const useProductStore = defineStore('Product', () => {
       selectProduct, 
       deleteProducts, 
       selected,
-      allSelected
+      allSelected,
+      search
      }
   }
 )
