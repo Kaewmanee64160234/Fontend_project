@@ -26,10 +26,10 @@ export const useAuthStore = defineStore("auth", () => {
       console.log(e);
       messageStore.showError("Username หรือ Password ไม่ถูกต้อง");
     }
-    // localStorage.setItem("token", userName);
+
   };
   const logout = () => {
-    // authName.value = "";
+    authName.value = "";
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     router.replace("/login");

@@ -3,11 +3,13 @@ import { defineStore } from 'pinia'
 import type User from './types/user.type';
 import axios from 'axios';
 import userService from '@/services/user'
+import { useLoadingStore } from '@/stores/loading';
 export const useUserStore = defineStore('User', () => {
   const dialog = ref(false);
   const users = ref<User[]>([]);
   const selected = ref<string[] | any[]>([])
   const allSelected = ref(false)
+  const loadingStore = useLoadingStore();
   const editedUser = ref<User>({username:"", login: "", password: "", role: "" });
 
   watch(dialog, (newDialog, oldDialog) => {
@@ -17,6 +19,7 @@ export const useUserStore = defineStore('User', () => {
     }
   })
   async function getUsers() {
+    loadingStore.isLoading = true;
     try {
       const res = await userService.getUsers();
       users.value = res.data;
@@ -24,8 +27,10 @@ export const useUserStore = defineStore('User', () => {
     } catch (e) {
       console.log(e);
     }
+    loadingStore.isLoading = false;
   }
   const saveUser = async ()=>{
+    loadingStore.isLoading = true;
     try{
       if(editedUser.value.id){
         const res = await userService.updateUser(editedUser.value.id, editedUser.value);
@@ -38,14 +43,17 @@ export const useUserStore = defineStore('User', () => {
     }catch(e){
       console.log(e);
     }
+    loadingStore.isLoading = false;
   }
   async function deleteUser(id:number){
+    loadingStore.isLoading = true;
     try{ 
         const res = await userService.deleteUser(id);
         await getUsers();
     }catch(e){
       console.log(e);
     }
+    loadingStore.isLoading = false;
   }
   function editUser(user:User){
     editedUser.value = JSON.parse(JSON.stringify(user));
