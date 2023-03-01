@@ -1,7 +1,17 @@
 <script lang="ts" setup>
 import { useProductStore } from '@/store/product.store';
-
+import { ref } from 'vue';
+import type { VForm } from 'vuetify/components'
+const form = ref<VForm | null>(null)
+const url = import.meta.env.VITE_URL_PORT
 const productStore = useProductStore();
+
+async function save() {
+  const { valid } = await form.value!.validate();
+  if (valid) {
+    await productStore.saveProduct();
+  }
+}
 </script>
 
 <template>
@@ -15,7 +25,7 @@ const productStore = useProductStore();
           <v-container>
             <v-row justify="center">
                 <v-avatar size="80"
-                  ><v-img>img</v-img
+                  ><v-img :src="`${url}/products/image/${productStore.editedProduct.image}`"></v-img
                 ></v-avatar>
               </v-row>
             <v-row>
@@ -27,6 +37,11 @@ const productStore = useProductStore();
                 <v-text-field
                   label="Name*"
                   required
+                  v-model="productStore.editedProduct.name"
+                  :rules="[
+                    (v) => !!v || 'Name is required',
+                    (v) => v.length >= 3 || 'Length must more than 3',
+                  ]"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -36,6 +51,11 @@ const productStore = useProductStore();
               >
                 <v-text-field
                   label="Type"
+                  required
+                  v-model="productStore.editedProduct.type"
+                  :rules="[
+                    (v) => !!v || 'Type is required',
+                  ]"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -48,6 +68,10 @@ const productStore = useProductStore();
                 <v-text-field
                   label="Size"
                   required
+                  v-model="productStore.editedProduct.size"
+                  :rules="[
+                    (v) => !!v || 'Size is required',
+                  ]"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -57,12 +81,26 @@ const productStore = useProductStore();
               >
                 <v-text-field
                   label="Price*"
+                  v-model.number="productStore.editedProduct.price"
+                  :rules="[(v) => !!v || 'Price is required',
+                (v) => v >= 0 || 'Price must more than 0',]"
                 ></v-text-field>
               </v-col>
             </v-row>
             <v-row>
                 <v-col>
-                    <v-file-input label="File input"></v-file-input>
+                    <v-file-input color="deep-purple-accent-4"
+                    counter
+                    multiple
+                    placeholder="Select your files"
+                    prepend-icon="mdi-paperclip"
+                    variant="outlined"
+                    :show-size="1000"
+                    label="Image Input"
+                    accept="image/*"
+                    v-model="productStore.editedProduct.files"
+                    >  
+                    </v-file-input>
                 </v-col>
             </v-row>
           </v-container>
@@ -78,7 +116,7 @@ const productStore = useProductStore();
         >
           Close
         </v-btn>
-        <v-btn color="blue-darken-1" variant="text" @click ="productStore.dialog = false"> Save </v-btn>
+        <v-btn color="blue-darken-1" variant="text" @click ="save"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

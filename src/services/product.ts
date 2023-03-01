@@ -4,12 +4,32 @@ function getProducts() {
   return http.get("/products");
 }
 
-function saveProduct(product: Product) {
-  return http.post("/products", product);
+function saveProduct(product: Product & { files: File[] }) {
+    const formData = new FormData();
+    formData.append("name", product.name);
+    formData.append("type", `${product.type}`);
+    formData.append("size", `${product.size}`);
+    formData.append("price", `${product.price}`);
+    formData.append("file", product.files[0]);
+    return http.post("/products", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
 }
 
-function updateProduct(id: number, product: Product) {
-  return http.patch(`/products/${id}`, product);
+async function updateProduct(id: number, product: Product & { files: File[] }) {
+  const formData = new FormData();
+  formData.append("name", product.name);
+    formData.append("type", `${product.type}`);
+    formData.append("size", `${product.size}`);
+    formData.append("price", `${product.price}`);
+    formData.append("file", product.files[0]);
+    if(product.files) {
+    formData.append("file", product.files[0]);
+    }
+  return await http.patch(`/products/${id}`, formData, {headers: {'Content-Type': 'multipart/form-data'}
+  });
 }
 
 function deleteProduct(id: number) {
