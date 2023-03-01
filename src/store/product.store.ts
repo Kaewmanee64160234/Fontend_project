@@ -4,14 +4,16 @@ import type Product from './types/product.type';
 import axios from 'axios';
 import productService from '@/services/product'
 export const useProductStore = defineStore('Product', () => {
+  const selected = ref<string[] | any[]>([])
+  const allSelected = ref(false)
   const dialog = ref(false);
   const products = ref<Product[]>([]);
-  const editedProduct = ref<Product & {files: File[]}>({ name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg', files:[]});
+  const editedProduct = ref<Product & { files: File[] }>({ name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg', files: [] });
 
   watch(dialog, (newDialog, oldDialog) => {
     console.log(newDialog);
     if (!newDialog) {
-      editedProduct.value = { name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg', files:[]};
+      editedProduct.value = { name: "", type: "-", size: "-", price: 0, image: 'no_image.jpg', files: [] };
     }
   });
 
@@ -28,7 +30,7 @@ export const useProductStore = defineStore('Product', () => {
   async function saveProduct() {
     console.log(editedProduct.value);
     try {
-      if(editedProduct.value.id) {
+      if (editedProduct.value.id) {
         const res = await productService.updateProduct(editedProduct.value.id, editedProduct.value);
       } else {
         const res = await productService.saveProduct(editedProduct.value);
@@ -42,19 +44,28 @@ export const useProductStore = defineStore('Product', () => {
   }
 
   async function deleteProduct(id: number) {
-  try {
+    try {
       const res = await productService.deleteProduct(id);
       await getProducts();
-  } catch (e) {
-    console.log(e);
+    } catch (e) {
+      console.log(e);
+    }
   }
-}
 
   function editProduct(product: Product) {
     editedProduct.value = JSON.parse(JSON.stringify(product));
     dialog.value = true;
   }
 
+  function selectProductAll() {
+    if (!allSelected.value) {
+      selected.value = products.value.map((product) => product.id + '')
+    }
+  }
+  function selectProduct()  {
+    allSelected.value = false
+  }
 
-  return { products, getProducts, dialog, editedProduct, saveProduct, editProduct, deleteProduct}
+
+  return { products, getProducts, dialog, editedProduct, saveProduct, editProduct, deleteProduct, selectProductAll, selectProduct }
 })
