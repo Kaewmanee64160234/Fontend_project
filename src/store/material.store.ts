@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import type { Material } from './types/material.type';
 import materialService from '@/services/material';
 import { useLoadingStore } from '@/stores/loading';
+import axios from 'axios';
 
 export const useMaterialStore = defineStore('material', () => {
   const loadingStore = useLoadingStore();
@@ -18,17 +19,6 @@ export const useMaterialStore = defineStore('material', () => {
     price_per_unit:0}); 
 
 
-  watch(dialog, (newDialog, oldDialog) => {
-      console.log(newDialog);
-      if (!newDialog) {
-        editedMaterial.value = { name: "", 
-        minquantity: 0,
-        quantity: 0,
-        unit: 0,
-        price_per_unit:0};
-      }
-  });
-
   async function getMaterials() {
     loadingStore.isLoading = true;
     try{
@@ -43,12 +33,11 @@ async function saveMaterial() {
   loadingStore.isLoading = true;
     try {
       if (editedMaterial.value.id) {
-        const res = await materialService.updateMaterial(
-          editedMaterial.value.id,
-          editedMaterial.value
-        );
+         await materialService.updateMaterial(editedMaterial.value.id,editedMaterial.value);
       } else {
+  
         const res = await materialService.saveMaterial(editedMaterial.value);
+        console.log(res.data);
       }
 
       dialog.value = false;
