@@ -1,10 +1,22 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useMaterialStore } from '@/store/material.store.js';
 import MaterialsDialog from '@/components/material/MaterialsDialog.vue';
 import ConfirmDialog from '@/components/ConfirmDialog.vue';
 const materialStore = useMaterialStore();
 const confirmDlg = ref();
+
+const material = computed(() => {
+  if (!materialStore.search) {
+    return materialStore.materials;
+  } else {
+    return materialStore.materials.filter((material) => {
+      return material.name.toLocaleLowerCase().includes( materialStore.search
+      )
+    });
+  }
+});
+
 
 onMounted(async() => {
     await materialStore.getMaterials();
@@ -48,7 +60,8 @@ const deleteAllMaterials = async () => {
           append-inner-icon="mdi-magnify"
           label="Search"
           single-line
-          hide-details></v-text-field>
+          hide-details
+          v-model="materialStore.search"></v-text-field>
     </v-card-title>
     <v-table>
         <thead>
