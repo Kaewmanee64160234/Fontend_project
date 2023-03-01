@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import type Product from './types/product.type';
 import axios from 'axios';
 import productService from '@/services/product'
-import { useLoadingStore } from '@/stores/loading';
+import { useLoadingStore } from '@/store/loading';
 
 export const useProductStore = defineStore('Product', () => {
   const loadingStore = useLoadingStore();

@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 import type { Material } from './types/material.type';
 import materialService from '@/services/material';
-import { useLoadingStore } from '@/stores/loading';
-import axios from 'axios';
+import { useLoadingStore } from '@/store/loading';
+
 
 export const useMaterialStore = defineStore('material', () => {
   const loadingStore = useLoadingStore();
