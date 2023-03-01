@@ -13,7 +13,9 @@ import MessageDialog from './components/MessageDialog.vue';
     <RouterView></RouterView>
   </main> -->
   <LoadingDialog></LoadingDialog>
+
   <MessageDialog></MessageDialog>
+
 </template>
 
 <style>

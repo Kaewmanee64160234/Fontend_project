@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import customerService from '@/services/customer'
 import type Customer from './types/customer.type'
 import { useLoadingStore } from './loading'
+import { useMessageStore } from './message'
 export const useCustomerStore = defineStore('customer', () => {
   const loadingStore = useLoadingStore()
   const search = ref('');
@@ -10,6 +11,7 @@ export const useCustomerStore = defineStore('customer', () => {
   const dialog = ref(false)
   const allSelected = ref(false)
   const customers = ref<Customer[]>([])
+  const messageStore = useMessageStore()
   const editCustomer = ref<Customer & { files: File[] }>({
     name: '',
     tel: '',
@@ -19,19 +21,23 @@ export const useCustomerStore = defineStore('customer', () => {
   })
 
   const getCustomers = async () => {
+    loadingStore.isLoading = true
+
     try {
-      loadingStore.isLoading = true
       const res = await customerService.getCustomers()
       customers.value = res.data
-      loadingStore.isLoading = false
     } catch (err) {
       console.log(err)
+      messageStore.showError("ไม่สามารถดึงข้อมูลลูกค้าได้");
       
     }
+    loadingStore.isLoading = false
+
   }
   const saveCustomer = async () => {
+    loadingStore.isLoading = true
+
     try {
-      loadingStore.isLoading = true
 
       if (!editCustomer.value.id) {
         await customerService.createCustomer(editCustomer.value)
@@ -42,10 +48,13 @@ export const useCustomerStore = defineStore('customer', () => {
       dialog.value = false
 
       await getCustomers()
-      loadingStore.isLoading = false
     } catch (err) {
       console.log(err)
+      messageStore.showError("ไม่สามารถsaveข้อมูลลูกค้าได้");
+
     }
+    loadingStore.isLoading = false
+
   }
   const editedCustomer = async (item: Customer) => {
     loadingStore.isLoading = true
@@ -57,11 +66,18 @@ export const useCustomerStore = defineStore('customer', () => {
   const deleteCustomer = async (id: string) => {
     loadingStore.isLoading = true
 
-    await customerService.deleteCustomer(id)
-    await getCustomers()
+    try{
+
+      await customerService.deleteCustomer(id)
+      await getCustomers()
+    }catch (err) {
+      messageStore.showError("ไม่สามารถdeleteข้อมูลลูกค้าได้");
+    }
     loadingStore.isLoading = false
+   
   }
   const selectCustomerAll = async () => {
+    
     loadingStore.isLoading = true
 
     if (!allSelected.value) {
@@ -73,13 +89,19 @@ export const useCustomerStore = defineStore('customer', () => {
     allSelected.value = false
   }
   const deleteCustomers = async () => {
-    loadingStore.isLoading = true
+    try{
+      loadingStore.isLoading = true
 
-    for (let i = 0; i < selected.value.length; i++) {
-      await customerService.deleteCustomer(selected.value[i])
-      await getCustomers()
+      for (let i = 0; i < selected.value.length; i++) {
+        await customerService.deleteCustomer(selected.value[i])
+        await getCustomers()
+      }
+      loadingStore.isLoading = false
+    }catch(err){
+      messageStore.showError("ไม่สามารถdeleteข้อมูลลูกค้าได้");
+
     }
-    loadingStore.isLoading = false
+  
   }
 
   return {
