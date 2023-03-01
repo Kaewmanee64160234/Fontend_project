@@ -110,7 +110,6 @@ const router = createRouter({
       },
       meta: {
         layout: "MainLayout",
-        requiresAuth: true,
       },
     },{
       path: "/material",

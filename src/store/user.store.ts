@@ -3,10 +3,11 @@ import { defineStore } from 'pinia'
 import type User from './types/user.type';
 import axios from 'axios';
 import userService from '@/services/user'
-export const useUserStore = defineStore('User', () => {3
-  const editedUser = ref<User>({username:"", login: "", password: "", role: "" });
+export const useUserStore = defineStore('User', () => {
   const dialog = ref(false);
   const users = ref<User[]>([]);
+  const editedUser = ref<User>({username:"", login: "", password: "", role: "" });
+
   watch(dialog, (newDialog, oldDialog) => {
     console.log(newDialog);
     if(!newDialog){
@@ -26,9 +27,10 @@ export const useUserStore = defineStore('User', () => {3
     try{
       if(editedUser.value.id){
         const res = await userService.updateUser(editedUser.value.id, editedUser.value);
-    }else{
+
+      }else{
         const res = await userService.saveUser(editedUser.value);
-    }
+      }
       dialog.value = false;
       await getUsers();
     }catch(e){
