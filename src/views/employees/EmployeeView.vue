@@ -36,7 +36,9 @@ const deleteAllEmployees = async () => {
     <employee-dialog></employee-dialog>
     <v-container>
         <v-card> 
+            
             <v-card-title>
+                Employee
                 <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
                     @click="employeeStore.dialog = !employeeStore.dialog">Add New Employee</v-btn>
                 <v-btn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red"
