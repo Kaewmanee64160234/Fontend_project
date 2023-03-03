@@ -1,4 +1,5 @@
 export default interface  Employee{
+    files: any;
     id?:number;
     name:string;
     address:string;
