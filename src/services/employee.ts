@@ -4,7 +4,7 @@ import http from "./axios";
 const getEmployees = ()=>{
     return http.get("/employees");
 }
-const saveEmployee = (data:Employee & {files:File[]})=>{
+const createEmployee = (data:Employee & {files:File[]})=>{
     const formData = new FormData();
     formData.append("name",data.name);
     formData.append("address",data.address);
@@ -12,8 +12,9 @@ const saveEmployee = (data:Employee & {files:File[]})=>{
     formData.append("email",data.email);
     formData.append("position",data.position);
     formData.append("hourly",data.hourly+'');
-    
     formData.append("file",data.files[0]);
+    console.log(formData);
+    
     return http.post("/employees",formData,{headers:{'Content-Type':'multipart/form-data'}});
 
 }
@@ -37,4 +38,4 @@ const deleteEmployee = (id:string)=>{
     return http.delete(`/employees/${id}`);
 }
 
-export default {getEmployees,saveEmployee,updateEmployee,deleteEmployee}
+export default {getEmployees,createEmployee,updateEmployee,deleteEmployee}
