@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import customerService from '@/services/customer'
 import type Customer from './types/customer.type'
 import { useLoadingStore } from './loading'
@@ -19,11 +19,7 @@ const search = ref('');
     image: 'no_image.jpg',
     files: []
   })
-  watch(dialog, (newDialog, oldDialog) => {
-    if(!newDialog){
-      editCustomer.value = {name:'',tel:'',point:0,image:'no_image.jpg',files:[]};
-    }
-  })
+
   const getCustomers = async () => {
     loadingStore.isLoading = true
 
@@ -81,6 +77,7 @@ const search = ref('');
    
   }
   const selectCustomerAll = async () => {
+    
     
     loadingStore.isLoading = true
 
