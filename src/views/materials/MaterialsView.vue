@@ -95,9 +95,9 @@ const deleteAllMaterials = async () => {
                   :value="item.id+''"
                 ></v-checkbox>
                 <td>{{ item.id }}</td>
-                <td v-if="item.minquantity <= 5" style="color: red;">{{ item.name }}</td>
-                <td v-if="item.minquantity > 5">{{ item.name }}</td>
-                <td>{{ item.minquantity }}</td>
+                <td v-if="item.min_quantity <= 5" style="color: red;">{{ item.name }}</td>
+                <td v-if="item.min_quantity > 5">{{ item.name }}</td>
+                <td>{{ item.min_quantity }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.unit }}</td>
                 <td>{{ item.price_per_unit }}</td>

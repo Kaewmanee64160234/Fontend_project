@@ -1,17 +1,19 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import employeeService from '@/services/employee'
 import type Employee from './types/employee.type'
-import { useLoadingStore } from '@/store/loading'
-import { useMessageStore } from './message';
-export const useEmployeeStore = defineStore('employee', () => {
-  const messageStore = useMessageStore();
-  const loadingStore = useLoadingStore();
+import { useLoadingStore } from './loading'
+import { useMessageStore } from './message'
+
+export const useEmployeeStore = defineStore('Employee', () => {
+  const loadingStore = useLoadingStore()
+const search = ref('');
   const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
   const allSelected = ref(false)
   const employees = ref<Employee[]>([])
-  const editEmployee = ref<Employee & { files: File[] }>({
+  const messageStore = useMessageStore()
+  const editEmployee = ref<Employee& { files: File[] }>({
     name: '',
     address: '',
     tel: '',
@@ -23,23 +25,47 @@ export const useEmployeeStore = defineStore('employee', () => {
     files: []
   })
 
+  watch(dialog, (newDialog, oldDialog) => {
+    if (!newDialog) {
+      editEmployee.value = {
+        name: '',
+        address: '',
+        tel: '',
+        email: '',
+        position: '',
+        hourly: 0,
+    
+        image: 'no_image.jpg',
+        files: []
+      };
+    }
+  });
+
+
   const getEmployees = async () => {
-    loadingStore.isLoading = true;
+    loadingStore.isLoading = true
+
     try {
       const res = await employeeService.getEmployees()
       employees.value = res.data
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถดึงข้อมูล Employee ได้");
+      messageStore.showError("ไม่สามารถดึงข้อมูลพนักงานได้");
+      
     }
-    loadingStore.isLoading = false;
+    loadingStore.isLoading = false
+
   }
-  const saveEmployee = async () => {
-    loadingStore.isLoading = true;
+  async function saveEmployee()  {
+    loadingStore.isLoading = true
+
     try {
-      if (!editEmployee.value.id) {
+
+      if (editEmployee.value.id) {
+        console.log(editEmployee.value);
         await employeeService.createEmployee(editEmployee.value)
-        //   console.log(editEmployee.value)
+        console.log(editEmployee.value);
+        
       } else {
         await employeeService.updateEmployee(editEmployee.value.id + '', editEmployee.value)
       }
@@ -48,11 +74,13 @@ export const useEmployeeStore = defineStore('employee', () => {
       await getEmployees()
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถบันทึกข้อมูล Employee ได้");
+      messageStore.showError("ไม่สามารถsaveข้อมูลพนักงานได้");
+
     }
-    loadingStore.isLoading = false;
+    loadingStore.isLoading = false
+
+
   }
-  
   const editedEmployee = async (item: Employee) => {
     loadingStore.isLoading = true
 
@@ -60,7 +88,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     dialog.value = true
     loadingStore.isLoading = false
   }
-  const deleteEmployee = async (id: string) => {
+  const deleteEmployee= async (id: string) => {
     loadingStore.isLoading = true
 
     try{
@@ -74,6 +102,7 @@ export const useEmployeeStore = defineStore('employee', () => {
    
   }
   const selectEmployeeAll = async () => {
+    
     
     loadingStore.isLoading = true
 
@@ -113,7 +142,8 @@ export const useEmployeeStore = defineStore('employee', () => {
     dialog,
     employees,
     saveEmployee,
-    editedEmployee
+    editedEmployee,
+    search
   }
 })
 

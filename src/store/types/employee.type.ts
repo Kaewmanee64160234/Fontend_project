@@ -10,8 +10,5 @@ export default interface  Employee{
     createdAt?:Date;
     updateAt?:Date;
     deleteAt?:Date;
-    
- 
- 
  }
  

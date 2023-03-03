@@ -52,7 +52,7 @@ async function save() {
                                         :rules="[(v) => !!v || 'position is required']"></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-text-field label="hourly*" required v-model="employeeStore.editEmployee.hourly"
+                                    <v-text-field label="hourly*" required v-model.number="employeeStore.editEmployee.hourly"
                                         :rules="[(v) => !!v || 'Hourly is required']"></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
@@ -61,7 +61,6 @@ async function save() {
                                         :show-size="1000" label="File input" accept="image/png, image/jpeg, image/bmp"
                                         v-model="employeeStore.editEmployee.files"></v-file-input>
                                 </v-col>
-
                             </v-row>
                         </v-container>
                     </v-form>
@@ -78,4 +77,5 @@ async function save() {
         </v-card>
     </v-dialog>
 </template>
+
 

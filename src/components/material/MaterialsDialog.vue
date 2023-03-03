@@ -50,7 +50,7 @@ async function save() {
                 <v-text-field
                   label="Min_quantity*"
                   required
-                  v-model="materialStore.editedMaterial.minquantity"
+                  v-model.number="materialStore.editedMaterial.min_quantity"
                   :rules="[(v) => !!v || 'Item is required',
                 (v) => v >= 0 || 'Min_quantity must more than 0']"
                 ></v-text-field>
@@ -63,7 +63,7 @@ async function save() {
                 <v-text-field
                   label="Quantity*"
                   required
-                  v-model="materialStore.editedMaterial.quantity"
+                  v-model.number="materialStore.editedMaterial.quantity"
                   :rules="[(v) => !!v || 'Item is required',
                 (v) => v > 0 || 'Quantity must more than 0']"
                 ></v-text-field>
@@ -76,7 +76,7 @@ async function save() {
                 <v-text-field
                   label="Unit*"
                   required
-                  v-model="materialStore.editedMaterial.unit"
+                  v-model.number="materialStore.editedMaterial.unit"
                   :rules="[(v) => !!v || 'Item is required',
                 (v) => v > 0 || 'Unit must more than 0']"
                 ></v-text-field>
@@ -87,7 +87,7 @@ async function save() {
                 <v-text-field
                   label="Price_per_unit*"
                   required
-                  v-model="materialStore.editedMaterial.price_per_unit"
+                  v-model.number="materialStore.editedMaterial.price_per_unit"
                   :rules="[(v) => !!v || 'Item is required',
                     (v) => v > 0 || 'Price_per_unit must more than 0']"
                 ></v-text-field>

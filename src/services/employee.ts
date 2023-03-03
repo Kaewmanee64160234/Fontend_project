@@ -9,14 +9,16 @@ const createEmployee = (data:Employee & {files:File[]})=>{
     formData.append("name",data.name);
     formData.append("address",data.address);
     formData.append("tel",data.tel);
-    formData.append("eamil",data.email);
+    formData.append("email",data.email);
     formData.append("position",data.position);
     formData.append("hourly",data.hourly+'');
-    
     formData.append("file",data.files[0]);
+    console.log(formData);
+    
     return http.post("/employees",formData,{headers:{'Content-Type':'multipart/form-data'}});
 
 }
+
 const updateEmployee = async (id:string,data:Employee & {files:File[]})=>{
     const formData = new FormData();
     formData.append("name",data.name);
