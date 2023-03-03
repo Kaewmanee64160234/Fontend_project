@@ -9,7 +9,7 @@ const createEmployee = (data:Employee & {files:File[]})=>{
     formData.append("name",data.name);
     formData.append("address",data.address);
     formData.append("tel",data.tel);
-    formData.append("eamil",data.email);
+    formData.append("email",data.email);
     formData.append("position",data.position);
     formData.append("hourly",data.hourly+'');
     
