@@ -14,8 +14,8 @@ export const useMaterialStore = defineStore('material', () => {
   const dialog = ref(false)
   const materials = ref<Material[]>([])
   const editedMaterial = ref<Material>({
-    name: '',
-    minquantity: 0,
+    name: "",
+    min_quantity: 0,
     quantity: 0,
     unit: 0,
     price_per_unit: 0

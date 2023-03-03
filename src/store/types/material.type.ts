@@ -1,7 +1,7 @@
 export interface  Material{
     id?: number;
     name: string;
-    minquantity: number;
+    min_quantity: number;
     quantity: number;
     unit: number;
     price_per_unit: number;

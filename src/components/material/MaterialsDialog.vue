@@ -50,7 +50,7 @@ async function save() {
                 <v-text-field
                   label="Min_quantity*"
                   required
-                  v-model.number="materialStore.editedMaterial.minquantity"
+                  v-model.number="materialStore.editedMaterial.min_quantity"
                   :rules="[(v) => !!v || 'Item is required',
                 (v) => v >= 0 || 'Min_quantity must more than 0']"
                 ></v-text-field>
