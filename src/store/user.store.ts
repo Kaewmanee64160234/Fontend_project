@@ -4,12 +4,16 @@ import type User from './types/user.type';
 import axios from 'axios';
 import userService from '@/services/user'
 import { useLoadingStore } from '@/store/loading';
+import { useMessageStore } from './message';
+
 export const useUserStore = defineStore('User', () => {
+  const messageStore = useMessageStore();
   const dialog = ref(false);
   const users = ref<User[]>([]);
   const selected = ref<string[] | any[]>([])
   const allSelected = ref(false)
   const loadingStore = useLoadingStore();
+  const search = ref('');
   const editedUser = ref<User>({username:"", login: "", password: "", role: "" });
 
   watch(dialog, (newDialog, oldDialog) => {
@@ -22,8 +26,10 @@ export const useUserStore = defineStore('User', () => {
     loadingStore.isLoading = true;
     try {
       const res = await userService.getUsers();
+      users.value = res.data;
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Users ได้");
     }
     loadingStore.isLoading = false;
   }
@@ -40,6 +46,7 @@ export const useUserStore = defineStore('User', () => {
       await getUsers();
     }catch(e){
       console.log(e);
+      messageStore.showError("ไม่สามารถบันทึกข้อมูล Users ได้");
     }
     loadingStore.isLoading = false;
   }
@@ -50,6 +57,7 @@ export const useUserStore = defineStore('User', () => {
         await getUsers();
     }catch(e){
       console.log(e);
+      messageStore.showError("ไม่สามารถลบข้อมูล Users ได้");
     }
     loadingStore.isLoading = false;
   }
@@ -69,10 +77,10 @@ export const useUserStore = defineStore('User', () => {
   const deleteAllUser = async () => {
     for (let i = 0; i < selected.value.length; i++) {
       await userService.deleteUser(selected.value[i])
-      await getUsers()
     }
+    await getUsers()
   }
 
 
-  return { users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser, selectUserAll, selectUser, allSelected, selected, deleteAllUser }
+  return { users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser, selectUserAll, selectUser, allSelected, selected, deleteAllUser, search }
 })
