@@ -63,7 +63,8 @@ const search = ref('');
 
       if (editEmployee.value.id) {
         console.log(editEmployee.value);
-        await employeeService.saveEmployee(editEmployee.value)
+        await employeeService.createEmployee(editEmployee.value)
+        console.log(editEmployee.value);
         
       } else {
         await employeeService.updateEmployee(editEmployee.value.id + '', editEmployee.value)
