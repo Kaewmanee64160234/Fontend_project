@@ -112,9 +112,9 @@ const deleteAllCustomers = async () => {
               <td>{{ item.point }}</td>
 
               <td>
-                <v-btn class="mr-5" color="yellow" @click="customerStore.editedCustomer(item)"
+                <v-btn color="yellow" class="mr-5 mdi mdi-pencil" @click="customerStore.editedCustomer(item)"
                   >Edit</v-btn
-                ><v-btn color="red" @click="deleteCustomer(item.id + '')">Delete</v-btn>
+                ><v-btn color="#F55050" class="mdi mdi-delete" @click="deleteCustomer(item.id + '')">Delete</v-btn>
               </td>
             </tr>
            
