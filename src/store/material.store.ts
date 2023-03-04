@@ -20,6 +20,17 @@ export const useMaterialStore = defineStore('material', () => {
     unit: 0,
     price_per_unit: 0
   })
+  watch(dialog, (newDialog, oldDialog) => {
+    if (!newDialog) {
+      editedMaterial.value = {
+        name: "",
+        min_quantity: 0,
+        quantity: 0,
+        unit: 0,
+        price_per_unit: 0
+      };
+    }
+  });
 
   async function getMaterials() {
     loadingStore.isLoading = true
