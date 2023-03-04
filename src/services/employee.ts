@@ -1,5 +1,6 @@
-import type Employee from "@/store/types/employee.type";
+import type Customer from "@/store/types/employee.type";
 import http from "./axios";
+import type Employee from "@/store/types/employee.type";
 
 const getEmployees = ()=>{
     return http.get("/employees");
@@ -12,13 +13,11 @@ const createEmployee = (data:Employee & {files:File[]})=>{
     formData.append("email",data.email);
     formData.append("position",data.position);
     formData.append("hourly",data.hourly+'');
+   
     formData.append("file",data.files[0]);
-    console.log(formData);
-    
     return http.post("/employees",formData,{headers:{'Content-Type':'multipart/form-data'}});
 
 }
-
 const updateEmployee = async (id:string,data:Employee & {files:File[]})=>{
     const formData = new FormData();
     formData.append("name",data.name);

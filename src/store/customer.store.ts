@@ -20,10 +20,16 @@ export const useCustomerStore = defineStore('customer', () => {
     files: []
   })
   watch(dialog, (newDialog, oldDialog) => {
-    if(!newDialog){
-      editCustomer.value = {name:'',tel:'',point:0,image:'no_image.jpg',files:[]};
+    if (!newDialog) {
+      editCustomer.value = {
+        name: '',
+        tel: '',
+        point: 0,
+        image: 'no_image.jpg',
+        files: []
+      };
     }
-  })
+  });
   const getCustomers = async () => {
     loadingStore.isLoading = true
 
@@ -81,6 +87,7 @@ export const useCustomerStore = defineStore('customer', () => {
    
   }
   const selectCustomerAll = async () => {
+    
     
     loadingStore.isLoading = true
 

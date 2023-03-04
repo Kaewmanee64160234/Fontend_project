@@ -4,8 +4,7 @@ import employeeService from '@/services/employee'
 import type Employee from './types/employee.type'
 import { useLoadingStore } from './loading'
 import { useMessageStore } from './message'
-
-export const useEmployeeStore = defineStore('Employee', () => {
+export const useEmployeeStore = defineStore('employee', () => {
   const loadingStore = useLoadingStore()
 const search = ref('');
   const selected = ref<string[] | any[]>([])
@@ -13,34 +12,32 @@ const search = ref('');
   const allSelected = ref(false)
   const employees = ref<Employee[]>([])
   const messageStore = useMessageStore()
-  const editEmployee = ref<Employee& { files: File[] }>({
+  const editEmployee = ref<Employee & { files: File[] }>({
     name: '',
     address: '',
     tel: '',
-    email: '',
+    email:'',
     position: '',
     hourly: 0,
-
     image: 'no_image.jpg',
     files: []
   })
 
   watch(dialog, (newDialog, oldDialog) => {
     if (!newDialog) {
-      editEmployee.value = {
-        name: '',
-        address: '',
-        tel: '',
-        email: '',
-        position: '',
-        hourly: 0,
-    
-        image: 'no_image.jpg',
-        files: []
-      };
+      editEmployee.value = { name: '',
+      address: '',
+      tel: '',
+      email:'',
+      position: '',
+      hourly: 0,
+      image: 'no_image.jpg',
+      files: []};
     }
   });
 
+
+  
 
   const getEmployees = async () => {
     loadingStore.isLoading = true
@@ -56,16 +53,14 @@ const search = ref('');
     loadingStore.isLoading = false
 
   }
-  async function saveEmployee()  {
+  const saveEmployee = async () => {
     loadingStore.isLoading = true
 
     try {
 
-      if (editEmployee.value.id) {
-        console.log(editEmployee.value);
+      if (!editEmployee.value.id) {
         await employeeService.createEmployee(editEmployee.value)
-        console.log(editEmployee.value);
-        
+          console.log(editEmployee.value)
       } else {
         await employeeService.updateEmployee(editEmployee.value.id + '', editEmployee.value)
       }
@@ -79,7 +74,6 @@ const search = ref('');
     }
     loadingStore.isLoading = false
 
-
   }
   const editedEmployee = async (item: Employee) => {
     loadingStore.isLoading = true
@@ -88,7 +82,7 @@ const search = ref('');
     dialog.value = true
     loadingStore.isLoading = false
   }
-  const deleteEmployee= async (id: string) => {
+  const deleteEmployee = async (id: string) => {
     loadingStore.isLoading = true
 
     try{
@@ -111,7 +105,7 @@ const search = ref('');
     }
     loadingStore.isLoading = false
   }
-  const selectEmployee = () => {
+  const selectEmployee= () => {
     allSelected.value = false
   }
   const deleteEmployees = async () => {
