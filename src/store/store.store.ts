@@ -47,7 +47,7 @@ export const useStoreStore = defineStore('Store', () => {
       await getStores();
     }catch(e){
       console.log(e);
-      messageStore.showError("ไม่สามารถบันทึกข้อมูล Users ได้");
+      messageStore.showError("ไม่สามารถบันทึกข้อมูล Stores ได้");
     }
     loadingStore.isLoading = false;
   }
