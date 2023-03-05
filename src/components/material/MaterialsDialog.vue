@@ -73,17 +73,14 @@ async function save() {
                 sm="6"
                 md="6"
               >
-                <v-text-field
+              <v-autocomplete
                   label="Unit*"
-                  required
-                  v-model.number="materialStore.editedMaterial.unit"
-                  :rules="[(v) => !!v || 'Item is required',
-                (v) => v > 0 || 'Unit must more than 0']"
-                ></v-text-field>
-              </v-col>
-              <v-col
-                cols="12"
+                v-model.number="materialStore.editedMaterial.unit"
+                :items="['Bag','Box','Gallon','Kilogram','Liter','Pack']"
               >
+              </v-autocomplete>
+              </v-col>
+              <v-col cols="12">
                 <v-text-field
                   label="Price_per_unit*"
                   required
