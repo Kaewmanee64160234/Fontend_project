@@ -16,6 +16,12 @@ export const useStoreStore = defineStore('Store', () => {
   const search = ref('');
   const editedStore = ref<Store>({name:"", address: "", tel: ""});
 
+  watch(dialog, (newDialog, oldDialog) => {
+    console.log(newDialog);
+    if(!newDialog){
+      editedStore.value = {name:"", address: "", tel: ""};
+    }
+  })
   
   async function getStores() {
     loadingStore.isLoading = true;
