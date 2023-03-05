@@ -7,19 +7,19 @@ const form = ref<VForm | null>(null);
 const userStore = useUserStore();
 const confirmDlg = ref();
 
-async function save(){
-  const {valid} = await form.value!.validate();
-  if(valid){
-    await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลผู้ใช้งานคนนี้ใช่หรือไม่?`,'Accept','Cancel');
+async function save() {
+  const { valid } = await form.value!.validate();
+  if (valid) {
+    await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลผู้ใช้งานคนนี้ใช่หรือไม่?`, 'Accept', 'Cancel');
     await userStore.saveUser()
-}
+  }
 
 }
 </script>
 
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-   <v-dialog v-model="userStore.dialog" persistent width="1024">
+  <v-dialog v-model="userStore.dialog" persistent width="1024">
     <v-card>
       <v-card-title>
         <span class="text-h5">User</span>
@@ -28,55 +28,22 @@ async function save(){
         <v-form ref="form">
           <v-container>
             <v-row>
-                <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
-                <v-text-field
-                  label="Username*"
-                  required
-                  v-model="userStore.editedUser.username"
-                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 3 || 'Length must more than 3',]"
-                ></v-text-field>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="Username*" required v-model="userStore.editedUser.username"
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
-                <v-text-field
-                  label="Login*"
-                  required
-                  v-model="userStore.editedUser.login"
-                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 3 || 'Length must more than 3',]"
-                ></v-text-field>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="Login*" required v-model="userStore.editedUser.login"
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></v-text-field>
               </v-col>
             </v-row>
             <v-row>
-                <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
-                <v-text-field
-                  label="Password*"
-                  required
-                  v-model="userStore.editedUser.password"
-                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 6 || 'Length must more than 6']"
-                ></v-text-field>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="Password*" required v-model="userStore.editedUser.password"
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 6 || 'Length must more than 6']"></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
-                <v-text-field
-                  label="Role*"
-                  required
-                  v-model="userStore.editedUser.role"
-                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 3 || 'Length must more than 3',]"
-                ></v-text-field>
+              <v-col cols="12" sm="6" md="6">
+                <v-autocomplete label="Autocomplete" v-model="userStore.editedUser.role" :items="['User', 'Admin']"></v-autocomplete>
               </v-col>
             </v-row>
           </v-container>
@@ -85,16 +52,11 @@ async function save(){
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-          color="blue-darken-1"
-          variant="text"
-          @click ="userStore.dialog = false"
-        >
+        <v-btn color="blue-darken-1" variant="text" @click="userStore.dialog = false">
           Close
         </v-btn>
-        <v-btn color="blue-darken-1" variant="text" @click ="save"> Save </v-btn>
+        <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
-
 </template>
