@@ -101,7 +101,6 @@ export const useProductStore = defineStore('Product', () => {
     }
     loadingStore.isLoading = false
   }
-
   async function deleteProduct(id: number) {
     loadingStore.isLoading = true
     try {
