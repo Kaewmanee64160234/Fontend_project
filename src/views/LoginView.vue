@@ -18,17 +18,17 @@ const login = async () => {
 const reset = () => {
   form.value?.reset()
 }
-const forgetPassword = async (e:Event) => {
-  const form = {
-    username: loginName.value,
-    password: '',
-  }
-  try {
-    emailjs.sendForm('service_ch7qo0i', 'service_ch7qo0i', e.target as HTMLFormElement, 'W_VM1101O_HLL3bDQ',form)
-  } catch (error) {
-    console.log({ error })
-  }
-}
+// const forgetPassword = async (e:Event) => {
+//   const form = {
+//     username: loginName.value,
+//     password: '',
+//   }
+//   try {
+//     emailjs.sendForm('service_ch7qo0i', 'service_ch7qo0i', e.target as HTMLFormElement, 'W_VM1101O_HLL3bDQ',form)
+//   } catch (error) {
+//     console.log({ error })
+//   }
+// }
 </script>
 
 <template>
