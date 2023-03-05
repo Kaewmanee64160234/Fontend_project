@@ -75,6 +75,20 @@ const router = createRouter({
       },
     },
     {
+      path: "/store",
+      name: "store",
+
+      components: {
+        default: () => import("../views/stores/StoreView.vue"),
+        menu: () => import("@/components/menus/MainMenu.vue"),
+        header: () => import("@/components/headers/MainHeader.vue"),
+      },
+      meta: {
+        layout: "MainLayout",
+        requiresAuth: true,
+      },
+    },
+    {
       path: "/user",
       name: "user",
 
