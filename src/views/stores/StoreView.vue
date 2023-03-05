@@ -39,7 +39,7 @@ const deleteAllStores = async () => {
 </script>
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-  <UserDialog></UserDialog>
+  <StoreDialog></StoreDialog>
   <VContainer>
     <VCard>
       <VCardTitle>
@@ -58,7 +58,7 @@ const deleteAllStores = async () => {
                   @click="storeStore.selectStoreAll"></VCheckbox>
               </th>
               <th>ID</th>
-              <th>Storename</th>
+              <th>Name</th>
               <th>Address</th>
               <th>Tel</th>
             </tr>
