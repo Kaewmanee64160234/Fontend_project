@@ -28,11 +28,7 @@ async function save(){
         <v-form ref="form">
           <v-container>
             <v-row>
-                <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
+                <v-col cols="12">
                 <v-text-field
                   label="Storename*"
                   required
@@ -40,11 +36,7 @@ async function save(){
                   :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 3 || 'Length must more than 3',]"
                 ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
+              <v-col cols="12">
                 <v-textarea 
                   label="Login*"
                   required
@@ -54,11 +46,7 @@ async function save(){
               </v-col>
             </v-row>
             <v-row>
-                <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
+                <v-col cols="12">
               <v-text-field
               label="tel*"
               required
