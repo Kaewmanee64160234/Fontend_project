@@ -46,7 +46,7 @@ const deleteAllUsers = async () => {
         User
         <VBtn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
           @click="userStore.dialog = true">Add new user</VBtn>
-        <VBtn class="mdi mr-2" style="float: right; color: white" color="red" @click="deleteAllUsers">Delete All</VBtn>
+        <VBtn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red" @click="deleteAllUsers">Delete All</VBtn>
         <VSpacer> </VSpacer>
         <VTextField style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
           append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model = "userStore.search"></VTextField>
@@ -75,8 +75,8 @@ const deleteAllUsers = async () => {
               <td>{{ item.login }}</td>
               <td>{{ item.role }}</td>
               <td>
-                <VBtn class="mr-5" color="yellow" @click="userStore.editUser(item)">Edit</VBtn>
-                <VBtn color="red" @click="deleteUser(item.id!)">Delete</VBtn>
+                <VBtn color="yellow" class="mr-5 mdi mdi-pencil" @click="userStore.editUser(item)">Edit</VBtn>
+                <VBtn color="#F55050" class="mdi mdi-delete" @click="deleteUser(item.id!)">Delete</VBtn>
               </td>
             </tr>
           </tbody>
