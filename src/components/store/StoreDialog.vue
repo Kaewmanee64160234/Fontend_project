@@ -30,7 +30,7 @@ async function save(){
             <v-row>
                 <v-col cols="12">
                 <v-text-field
-                  label="Storename*"
+                  label="StoreName*"
                   required
                   v-model="storeStore.editedStore.name"
                   :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 3 || 'Length must more than 3',]"
@@ -38,10 +38,10 @@ async function save(){
               </v-col>
               <v-col cols="12">
                 <v-textarea 
-                  label="Login*"
+                  label="Address*"
                   required
                   v-model="storeStore.editedStore.address"
-                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 168 || 'Length must more than 168',]"
+                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 168 || 'Length must more than 50',]"
                 ></v-textarea>
               </v-col>
             </v-row>
