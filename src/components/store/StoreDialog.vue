@@ -41,7 +41,7 @@ async function save(){
                   label="Address*"
                   required
                   v-model="storeStore.editedStore.address"
-                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 168 || 'Length must more than 50',]"
+                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 30 || 'Length must more than 30',]"
                 ></v-textarea>
               </v-col>
             </v-row>
