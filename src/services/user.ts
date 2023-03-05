@@ -14,4 +14,7 @@ const updateUser= (id:number, user:User) => {
 const deleteUser  = (id:number) => {
   return http.delete("/users/" + id)
 }
-export default { getUsers ,saveUser, updateUser, deleteUser};
+const getUserByEmail = (email:string) => {
+  return http.get(`/users/${email}`)
+}
+export default { getUsers ,saveUser, updateUser, deleteUser,getUserByEmail};

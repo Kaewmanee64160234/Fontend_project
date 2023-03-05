@@ -80,6 +80,9 @@ export const useUserStore = defineStore('User', () => {
     }
     await getUsers()
   }
+  const getUserBtEmail = async(email:string)=>{
+    const data = await userService.getUserByEmail(email);
+  }
 
 
   return { users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser, selectUserAll, selectUser, allSelected, selected, deleteAllUser, search }
