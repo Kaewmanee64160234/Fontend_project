@@ -1,4 +1,4 @@
-import type Customer from "@/store/types/employee.type";
+
 import http from "./axios";
 import type Employee from "@/store/types/employee.type";
 
