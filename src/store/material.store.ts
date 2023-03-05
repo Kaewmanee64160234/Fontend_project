@@ -17,7 +17,7 @@ export const useMaterialStore = defineStore('material', () => {
     name: "",
     min_quantity: 0,
     quantity: 0,
-    unit: 0,
+    unit: "",
     price_per_unit: 0
   })
   watch(dialog, (newDialog, oldDialog) => {
@@ -26,7 +26,7 @@ export const useMaterialStore = defineStore('material', () => {
         name: "",
         min_quantity: 0,
         quantity: 0,
-        unit: 0,
+        unit: "",
         price_per_unit: 0
       };
     }

@@ -3,7 +3,7 @@ export interface  Material{
     name: string;
     min_quantity: number;
     quantity: number;
-    unit: number;
+    unit: string;
     price_per_unit: number;
     createdAt?: Date;
     updatedAt?: Date;
