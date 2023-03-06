@@ -6,8 +6,8 @@ const drawer = ref(true);
 const rail = ref(true);
 const authStore = useAuthStore();
 
-const user = ref<any | null>(localStorage.getItem("user"));
-const user_ = JSON.parse(user.value);
+// const user = ref<any | null>(localStorage.getItem("user"));
+// const user_ = JSON.parse(user.value);
 
 
 </script>
@@ -16,8 +16,8 @@ const user_ = JSON.parse(user.value);
 
     <v-navigation-drawer v-model="drawer" :rail="rail" permanent @click="rail = false"
       image="https://polycolors.ca/wp-content/uploads/2018/05/410604.jpg">
-      <v-list-item prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg" :title="user_.username" class="mt-2" nav>
-        <p class="text-caption">{{ user_.login }}</p>
+      <v-list-item prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg" title="user_.username" class="mt-2" nav>
+        <!-- <p class="text-caption">{{ user_.login }}</p> -->
         <template v-slot:append>
           <v-btn variant="text" icon="mdi-chevron-left" @click.stop="rail = !rail"></v-btn>
         </template>
