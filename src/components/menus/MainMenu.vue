@@ -1,28 +1,32 @@
 <script setup lang="ts">
 
 import { useAuthStore } from "@/store/auth";
-import { ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 const drawer = ref(true);
 const rail = ref(true);
 const authStore = useAuthStore();
+
+const user = ref<any | null>(localStorage.getItem("user"));
+const user_ = JSON.parse(user.value);
+
+
 </script>
 
 <template>
 
     <v-navigation-drawer v-model="drawer" :rail="rail" permanent @click="rail = false"
       image="https://polycolors.ca/wp-content/uploads/2018/05/410604.jpg">
-      <v-list-item prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg" title="hello" nav>
+      <v-list-item prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg" :title="user_.username" class="mt-2" nav>
+        <p class="text-caption">{{ user_.login }}</p>
         <template v-slot:append>
           <v-btn variant="text" icon="mdi-chevron-left" @click.stop="rail = !rail"></v-btn>
         </template>
       </v-list-item>
-
       <v-divider></v-divider>
-
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="/"></v-list-item>
         <v-list-item prepend-icon="mdi-inbox-multiple " title="Product" value="product" to="/product"></v-list-item>
-        
+      
         <v-list-item prepend-icon="mdi-account" title="User" value="user" to="/user"></v-list-item>
         <v-list-item prepend-icon="mdi-account-group-outline" title="Customer" value="customer"
         to="/customer"></v-list-item>
