@@ -30,15 +30,21 @@ const user_ = JSON.parse(user.value);
         <v-list-item prepend-icon="mdi-account" title="User" value="user" to="/user"></v-list-item>
         <v-list-item prepend-icon="mdi-account-group-outline" title="Customer" value="customer"
         to="/customer"></v-list-item>
+      
       <v-list-item prepend-icon="mdi-face-agent" title="Employee" value="employee"
       to="/employee"></v-list-item>
       <v-list-item prepend-icon="mdi-basket-outline" title="Material" value="material"
       to="/material"></v-list-item>
       <v-list-item prepend-icon="mdi-store-marker" title="Store" value="store"
       to="/store"></v-list-item>
+      <v-list-item prepend-icon="mdi-account-group-outline" title="Login employee" value="Login employee"
+        to="/employee/login"></v-list-item>
       <v-list-item prepend-icon="mdi-logout-variant" title="Logout" value="logout"
       @click="authStore.logout"></v-list-item>
+      
       </v-list>
+      
+      
       
     </v-navigation-drawer>
 

@@ -117,11 +117,25 @@ const router = createRouter({
         requiresAuth: true,
       },
     }, {
+      path: "/employee/login",
+      name: "employee login",
+
+      components: {
+        default: () => import("../views/EmployeeLogin.vue"),
+        menu: () => import("@/components/menus/MainMenu.vue"),
+        header: () => import("@/components/headers/MainHeader.vue"),
+      },
+      meta: {
+        layout: "MainLayout",
+        requiresAuth: true,
+      },
+    },{
       path: "/:pathMatch(.*)*",
       name: "not-found",
       component: () => import("@/views/NotFound.vue")
 ,
-    }
+    },
+   
 
   ]
 })
