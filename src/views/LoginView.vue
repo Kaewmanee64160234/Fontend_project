@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import type { VForm } from 'vuetify/components'
 import { useAuthStore } from '@/store/auth'
-import emailjs from 'emailjs-com'
 
 const authStore = useAuthStore()
 const loginName = ref('')
