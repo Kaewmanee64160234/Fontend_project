@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 
+
 const props = defineProps({
   name: {
     type: String,
@@ -26,41 +27,28 @@ const props = defineProps({
 </script>
 
 <template >
-  <a href="#">
-  <div class="card item-card">
-  <img 
-  class="card-img-top item-img"
-        :src="props.img"
-        alt="Card image cap"
-        width="120px"
-      />
-
-      <div class="card-body text-center" >
-        <h5 class="card-title">{{ props.name }}</h5>
-        <p class="card-text fontsm">{{ props.cost }}</p>
-      </div>
-    </div>
-</a>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-container>
+          <v-row>
+            <v-col cols="4">
+              <v-card width="400">
+                <v-card-item class="text-center">
+                  <v-card-title>{{ props.name }}</v-card-title>
+          
+                  <v-card-subtitle>{{ props.cost }}</v-card-subtitle>
+                </v-card-item>
+          
+                <v-card-text>
+                  <v-img :src="props.img" width="120px"></v-img>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-col>
+    </v-row>
+  </v-container>
+  
 </template>
-
-<style>
-.card-title{
-  font-size: 16px !important;
-  margin-bottom: 0;
-}
-.item-card .item-img{
-  height: 115px !important;
-  object-fit: cover;
-}
-a .item-card{
-  /* width: 120px !important; */
-  cursor:pointer;
-  color: black !important;
-}
-a:hover .item-card{
-  color: #1F3611  !important;;
-}
-a:link { text-decoration: none; }
-
-.fontsm { font-size:small}
-</style>
