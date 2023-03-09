@@ -34,6 +34,21 @@ const router = createRouter({
       }
     },
     {
+      path: '/pos',
+      name: 'pos',
+
+      components: {
+        default: () => import('../views/pos/PosView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true,
+
+      }
+    },
+    {
       path: '/login',
       name: 'login',
       // route level code-splitting
