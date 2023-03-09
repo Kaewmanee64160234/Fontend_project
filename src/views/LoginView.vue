@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import type { VForm } from 'vuetify/components'
 import { useAuthStore } from '@/store/auth'
-import emailjs from 'emailjs-com'
 
 const authStore = useAuthStore()
 const loginName = ref('')
@@ -18,17 +17,7 @@ const login = async () => {
 const reset = () => {
   form.value?.reset()
 }
-// const forgetPassword = async (e:Event) => {
-//   const form = {
-//     username: loginName.value,
-//     password: '',
-//   }
-//   try {
-//     emailjs.sendForm('service_ch7qo0i', 'service_ch7qo0i', e.target as HTMLFormElement, 'W_VM1101O_HLL3bDQ',form)
-//   } catch (error) {
-//     console.log({ error })
-//   }
-// }
+
 </script>
 
 <template>

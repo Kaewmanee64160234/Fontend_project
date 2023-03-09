@@ -14,7 +14,8 @@ const router = createRouter({
         header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: 'MainLayout'
+        layout: 'MainLayout',
+        requiresAuth: true,
       }
     },
     
