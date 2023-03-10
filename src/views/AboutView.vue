@@ -1,5 +1,6 @@
 
 <script lang="ts" setup>
+import TestDialog from './TestDialog.vue';
 import { useProductStore } from '@/store/product.store';
 import { onMounted } from 'vue';
 const productStore = useProductStore();
@@ -9,7 +10,9 @@ onMounted(()=>{
 </script>
 <template>
   <div class="about" >
-  <h1>About</h1>
+    <div  v-for="item of productStore.products" :key="item.id">
+      <TestDialog   :cat="item.catagoryId+''" :name="item.name" :type="item.type"></TestDialog>
+    </div>
   </div>
 </template>
 
