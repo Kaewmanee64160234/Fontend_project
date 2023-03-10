@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { useMenuStore } from '@/store/menu';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import MenuCard from "@/components/MenuCard.vue";
 import FindMemberDialog from '@/components/FindMemberDialog.vue';
 import { usePointOfSale } from '@/store/pointOfSell.store';
 import DialogPayment from '@/components/pos/DialogPayment.vue';
+import { useCustomerStore } from '@/store/customer.store';
 
-
+const customerStore = useCustomerStore();
 const menuStore = useMenuStore();
 const pointOfSaleStore = usePointOfSale();
 onMounted(() => {
@@ -18,6 +19,7 @@ onMounted(() => {
   <div class="content-area">
     <div class="content">
       <DialogPayment></DialogPayment>
+      <FindMemberDialog></FindMemberDialog>
       <div class="row">
         <div class="col-md-6 item-side">
           <div class="row-md-6">
@@ -109,7 +111,7 @@ onMounted(() => {
                 </div>
                 <br>
                 <div class="d-flex justify-content-between">
-                  <v-btn color="#E9A178" class="mt-5">Findmember</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true">Find Member</v-btn>
                   <v-btn color="#E9A178" class="mt-5">Save</v-btn>
                 </div>
               </div>
