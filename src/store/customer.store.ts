@@ -112,7 +112,7 @@ export const useCustomerStore = defineStore('customer', () => {
       messageStore.showError("ไม่สามารถdeleteข้อมูลลูกค้าได้");
 
     }
-  
+
   }
 
   return {
@@ -128,6 +128,6 @@ export const useCustomerStore = defineStore('customer', () => {
     customers,
     saveCustomer,
     editedCustomer,
-    search
+    search,
   }
 })
