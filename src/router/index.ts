@@ -18,6 +18,18 @@ const router = createRouter({
         requiresAuth: true,
       }
     },
+    {
+      path: '/about',
+      name: 'about',
+      components: {
+        default: ()=> import('@/views/AboutView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+      }
+    },
     
     {
       path: '/product',

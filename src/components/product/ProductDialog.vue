@@ -39,23 +39,23 @@ async function save() {
                 ]"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-autocomplete v-model="productStore.editedProduct.catagory" label="Catagory*" required :rules="[(v) => !!v || 'Type is required',]"
+                <v-autocomplete v-model="productStore.editedProduct.category" label="Catagory*" required :rules="[(v) => !!v || 'Type is required',]"
                   :items="['Foods', 'Drinks', 'Desserts']"></v-autocomplete>
               </v-col>
-              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagory === ''">
+              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.category === ''">
                 <v-autocomplete label="Type*"></v-autocomplete>
               </v-col>
-              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagory === 'Foods'">
+              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.category === 'Foods'">
                 <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
                   (v) => !!v || 'Type is required',
                 ]" :items="productStore.typeProduct.food"></v-autocomplete>
               </v-col>
-              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagory === 'Drinks'">
+              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.category === 'Drinks'">
                 <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
                   (v) => !!v || 'Type is required',
                 ]" :items="productStore.typeProduct.drink"></v-autocomplete>
               </v-col>
-              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagory === 'Desserts'">
+              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.category === 'Desserts'">
                 <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
                   (v) => !!v || 'Type is required',
                 ]" :items="productStore.typeProduct.dessert"></v-autocomplete>

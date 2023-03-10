@@ -1,6 +1,18 @@
+
+<script lang="ts" setup>
+import TestDialog from './TestDialog.vue';
+import { useProductStore } from '@/store/product.store';
+import { onMounted } from 'vue';
+const productStore = useProductStore();
+onMounted(()=>{
+  return productStore.getProducts();
+})
+</script>
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="about" >
+    <div  v-for="item of productStore.products" :key="item.id">
+      <TestDialog   :cat="item.catagoryId+''" :name="item.name" :type="item.type"></TestDialog>
+    </div>
   </div>
 </template>
 
