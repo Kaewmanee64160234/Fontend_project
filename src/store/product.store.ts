@@ -48,8 +48,8 @@ export const useProductStore = defineStore('Product', () => {
   //   'etc.'
   // ])
   const typeProduct = ref({
-    food: ['breakfast', 'side dish', 'main dish', 'appetizer', 'etc.'],
-    drink: [
+    Foods: ['breakfast', 'side dish', 'main dish', 'appetizer', 'etc.'],
+    Drinks: [
       'coffee',
       'tea',
       'hot chocolate',
@@ -60,7 +60,7 @@ export const useProductStore = defineStore('Product', () => {
       'alcoholic beverages',
       'etc.'
     ],
-    dessert: ['pastries', 'cookies', 'cake', 'pies', 'brownie', 'macarons', 'cookie', 'etc.']
+    Desserts: ['pastries', 'cookies', 'cake', 'pies', 'brownie', 'macarons', 'cookie', 'etc.']
   })
 
   watch(dialog, (newDialog, oldDialog) => {

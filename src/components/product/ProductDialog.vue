@@ -52,17 +52,17 @@ onMounted( async () => {
                   <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagoryId === 1">
                     <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
                       (v) => !!v || 'Type is required',
-                    ]" :items="productStore.typeProduct.food"></v-autocomplete>
+                    ]" :items="productStore.typeProduct.Foods"></v-autocomplete>
                   </v-col>
                   <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagoryId === 2">
                     <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
                       (v) => !!v || 'Type is required',
-                    ]" :items="productStore.typeProduct.drink"></v-autocomplete>
+                    ]" :items="productStore.typeProduct.Drinks"></v-autocomplete>
                   </v-col>
                   <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagoryId === 3">
                     <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
                       (v) => !!v || 'Type is required',
-                    ]" :items="productStore.typeProduct.dessert"></v-autocomplete>
+                    ]" :items="productStore.typeProduct.Desserts"></v-autocomplete>
                   </v-col>
             </v-row>
             <v-row>
