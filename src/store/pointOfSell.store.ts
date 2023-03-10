@@ -5,6 +5,10 @@ export const usePointOfSale = defineStore('point of sale', () => {
     const dialogPayment = ref(false);
     const dialogPrompypay = ref(false);
 
-    return {dialogPayment,dialogPrompypay}
+
+    const dialogPromotion = ref(false);
+
+    return {dialogPayment, dialogPromotion,dialogPrompypay}
+
 
 });
