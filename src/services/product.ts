@@ -11,6 +11,7 @@ function saveProduct(product: Product & { files: File[] }) {
     formData.append("size", `${product.size}`);
     formData.append("price", `${product.price}`);
     formData.append("file", product.files[0]);
+    formData.append("catagoryId", `${product.catagoryId}`);
     return http.post("/products", formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
