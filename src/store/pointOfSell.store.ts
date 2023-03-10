@@ -1,9 +1,32 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import type { Order } from "./types/Order.type";
+import type { OrderItem } from "./types/orderItem.type";
 
 export const usePointOfSale = defineStore('point of sale', () => {
-    const dialog = ref(false);
+    const dialogPayment = ref(false);
+    const dialogPrompypay = ref(false);
+    const dialogPromotion = ref(false);
+    const orderItemList = ref<OrderItem[]>([]);
+    const order = ref<Order>({
+        customerId:'',
+        discount: 0,
+        total: 0,
+        recieved: 0,
+        change:0,
+        payment:'',
+        orderItems:orderItemList.value
 
-    return {dialog}
+
+    });
+
+    const addToOrder = (orderItem: OrderItem) => {
+        orderItemList.value.push(orderItem);
+    }
+
+
+
+    return {dialogPayment, dialogPromotion,dialogPrompypay,orderItemList,addToOrder,order}
+
 
 });
