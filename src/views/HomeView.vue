@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useMenuStore } from '@/store/menu';
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import MenuCard from "@/components/MenuCard.vue";
 import FindMemberDialog from '@/components/FindMemberDialog.vue';
 import PromotionDialog from '@/components/promotion/PromotionDialog.vue';
@@ -8,7 +8,6 @@ import { usePointOfSale } from '@/store/pointOfSell.store';
 import DialogPayment from '@/components/pos/DialogPayment.vue';
 import { useCustomerStore } from '@/store/customer.store';
 import { useProductStore } from '@/store/product.store';
-
 const customerStore = useCustomerStore();
 const productStore = useProductStore();
 const menuStore = useMenuStore();
@@ -18,9 +17,10 @@ onMounted(async () => {
   menuStore.menuFilter("drink");
 });
 </script>
-
+ 
 <template>
   <div class="content-area">
+    <DialogPayment></DialogPayment>
     <div class="content">
       <DialogPayment></DialogPayment>
       <FindMemberDialog></FindMemberDialog>
@@ -102,7 +102,7 @@ onMounted(async () => {
               <div class="col-md-5">
                 <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
                 <input class="form-control" id="amount" type="text" placeholder="Amount" />
-                <v-btn color="#E9A178" width="inherit" class="mt-5" @click="pointOfSaleStore.dialog = true">Payment</v-btn>
+                <v-btn color="#E9A178" width="inherit" class="mt-5" @click="pointOfSaleStore.dialogPayment = true">Payment</v-btn>
               </div>
             </div>
           </div>
@@ -123,8 +123,9 @@ onMounted(async () => {
           </div>
         </div>
       </div>
+
     </div>
-  </div>
+    </div>
 </template>
 
 <style>
