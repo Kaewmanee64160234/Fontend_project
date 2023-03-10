@@ -39,7 +39,7 @@ const save = ()=>{
         <v-card-text v-if="props.cat === '2'">
           <div class="d-flex align-left flex-column">
             <h5>Size</h5>
-            <v-btn-toggle v-model="toggle" variant="outlined" divided>
+            <v-btn-toggle v-model="pointOfSaleStore.toggle" variant="outlined" divided>
               <v-btn>S</v-btn>
               <v-btn>M</v-btn>
               <v-btn>L</v-btn>
@@ -51,7 +51,7 @@ const save = ()=>{
           >
             <h5>Sweet</h5>
 
-            <v-btn-toggle v-model="toggle2" variant="outlined" divided>
+            <v-btn-toggle v-model="pointOfSaleStore.toggle2" variant="outlined" divided>
               <v-btn>หวานน้อย</v-btn>
               <v-btn>หวานปกติ</v-btn>
               <v-btn>หวานมาก +10</v-btn>
@@ -61,7 +61,7 @@ const save = ()=>{
           <div v-if="props.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate'">
             <h5>Topping</h5>
 
-            <v-chip-group v-model="amenities" column multiple>
+            <v-chip-group v-model="pointOfSaleStore.amenities" column multiple>
               <v-chip filter variant="outlined"> ไข่มุกบราวชูก้า +10 </v-chip>
               <v-chip filter variant="outlined"> ไข่มุกโกโก้ +10 </v-chip>
               <v-chip filter variant="outlined"> บุก +10 </v-chip>
