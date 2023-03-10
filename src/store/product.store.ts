@@ -166,6 +166,6 @@ export const useProductStore = defineStore('Product', () => {
     selected,
     allSelected,
     search,
-    typeProduct
+    typeProduct,
   }
 })
