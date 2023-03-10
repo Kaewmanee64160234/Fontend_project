@@ -1,10 +1,12 @@
 <script setup lang="ts">import { useMenuStore } from '@/store/menu';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import MenuCard from "@/components/MenuCard.vue";
 import { usePointOfSale } from '@/store/pointOfSell.store';
 import DialogPayment from '@/components/pos/DialogPayment.vue';
 import PromotionDialog from '@/components/promotion/PromotionDialog.vue';
 import { useProductStore } from '@/store/product.store';
+import type Product from '@/store/types/product.type';
+import type { OrderItem } from '@/store/types/orderItem.type';
 const productStore = useProductStore();
 const menuStore = useMenuStore();
 const pointOfSaleStore = usePointOfSale();
@@ -12,6 +14,17 @@ onMounted(async () => {
   await productStore.getProducts();
   menuStore.menuFilter("drink");
 });
+
+const addToCart = (item:Product)=>{
+  const orderItem = ref<OrderItem>({
+    name: item.name,
+    amount: 1,
+    productId: item.id!,
+
+  })
+  pointOfSaleStore.addToOrder(orderItem.value);
+
+}
 </script>
  
 <template>
@@ -37,7 +50,7 @@ onMounted(async () => {
           </div>
           <div class="row">
               <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
-                <MenuCard :name="item.name" :cost="item.price" :type="'Hello'" :img="item.image!" :price="item.price"></MenuCard>
+                <MenuCard :name="item.name" :cost="item.price" :type="'Hello'" :img="item.image!" :price="item.price" @click="addToCart(item)"></MenuCard>
               </div>
             </div>
         </div>
@@ -48,7 +61,6 @@ onMounted(async () => {
               <thead>
                 <tr>
                   <th scope="col" class="text-center">รายการ</th>
-                  <th scope="col" class="text-center">ราคา</th>
                   <th scope="col" class="text-center">จำนวน</th>
                   <th scope="col" class="text-center">รวม</th>
                   <th scope="col" class="text-center">เพิ่มเติม</th>
@@ -58,11 +70,15 @@ onMounted(async () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td style="text-align: center;"></td>
-                  <td scope="col" class="text-center"></td>
-                  <td class="text-center"></td>
-                  <td class="text-center"></td>
+                <tr v-if="pointOfSaleStore.orderItemList.length ===0">
+                  <td style="text-align: center;" colspan="4">No data</td>
+                
+                </tr>
+                <tr v-else v-for="(item,index) of pointOfSaleStore.orderItemList" :key="index">
+                  <td style="text-align: center;">{{ index+1 }}</td>
+                  <td scope="col" class="text-center">{{ item.name }}</td>
+                  <td class="text-center">{{ item.amount }}</td>
+                  <td class="text-center"> addOn</td>
                 </tr>
               </tbody>
             </table>
