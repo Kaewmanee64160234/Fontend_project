@@ -4,6 +4,7 @@ import { onMounted } from 'vue';
 import MenuCard from "@/components/MenuCard.vue";
 import { usePointOfSale } from '@/store/pointOfSell.store';
 import DialogPayment from '@/components/pos/DialogPayment.vue';
+import PromotionDialog from '@/components/promotion/PromotionDialog.vue';
 
 
 const menuStore = useMenuStore();
@@ -17,6 +18,7 @@ onMounted(() => {
   <div class="content-area">
     <div class="content">
       <DialogPayment></DialogPayment>
+      <PromotionDialog></PromotionDialog>
       <div class="row">
         <div class="col-md-6 item-side">
           <div class="row-md-6">
@@ -103,7 +105,7 @@ onMounted(() => {
             <div class="row " >
               <div class="col-md-6">
                 <div class="d-flex justify-content-between">
-                  <v-btn color="#E9A178" class="mt-5">Promotion</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.dialogPromotion = true">Promotion</v-btn>
                   <v-btn color="#E9A178" class="mt-5">Clear All</v-btn>
                 </div>
                 <br>

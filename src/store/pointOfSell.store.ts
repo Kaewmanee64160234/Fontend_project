@@ -4,6 +4,8 @@ import { ref } from "vue";
 export const usePointOfSale = defineStore('point of sale', () => {
     const dialog = ref(false);
 
-    return {dialog}
+    const dialogPromotion = ref(false);
+
+    return {dialog, dialogPromotion}
 
 });
