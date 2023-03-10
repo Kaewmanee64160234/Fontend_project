@@ -2,10 +2,12 @@
 import { useMenuStore } from '@/store/menu';
 import { onMounted } from 'vue';
 import MenuCard from "@/components/MenuCard.vue";
+import { usePointOfSale } from '@/store/pointOfSell.store';
+import DialogPayment from '@/components/pos/DialogPayment.vue';
 
 
 const menuStore = useMenuStore();
-
+const pointOfSaleStore = usePointOfSale();
 onMounted(() => {
   menuStore.menuFilter("drink");
 });
@@ -14,6 +16,7 @@ onMounted(() => {
 <template>
   <div class="content-area">
     <div class="content">
+      <DialogPayment></DialogPayment>
       <div class="row">
         <div class="col-md-6 item-side">
           <div class="row-md-6">
@@ -92,7 +95,7 @@ onMounted(() => {
               <div class="col-md-5">
                 <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
                 <input class="form-control" id="amount" type="text" placeholder="Amount" />
-                <v-btn color="#E9A178" width="inherit" class="mt-5">Calculator</v-btn>
+                <v-btn color="#E9A178" width="inherit" class="mt-5" @click="pointOfSaleStore.dialog = true">Payment</v-btn>
               </div>
             </div>
           </div>
