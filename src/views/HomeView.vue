@@ -9,7 +9,7 @@ onMounted(() => {
   menuStore.menuFilter("drink");
 });
 </script>
-
+ 
 <template>
   <div class="content-area">
     <div class="content">
