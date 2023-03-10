@@ -42,6 +42,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
      toggle.value = null
      toggle2.value = null
      amenities.value = []
+    return temProduct.value
   }
 
   return {
