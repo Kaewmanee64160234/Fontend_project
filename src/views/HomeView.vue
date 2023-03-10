@@ -7,7 +7,7 @@ const menuStore =  useMenuStore();
 
 onMounted(async () => {
   await productStore.getProducts();
-  menuStore.menuFilter("drink");
+  menuStore.menuFilter("Drinks");
 });
 </script>
  
@@ -18,13 +18,13 @@ onMounted(async () => {
           <div class="col-md-6 item-side">
             <div class="row-md-6">
               <v-tabs fixed-tabs color="#9F8772" dark >
-                <v-tab @click="menuStore.menuFilter('drink')">
+                <v-tab @click="menuStore.menuFilter('Drinks')">
                   เครื่องดื่ม
                 </v-tab>
-                <v-tab @click="menuStore.menuFilter('food')">
+                <v-tab @click="menuStore.menuFilter('Foods')">
                   อาหาร
                 </v-tab>
-                <v-tab @click="menuStore.menuFilter('snack')">
+                <v-tab @click="menuStore.menuFilter('Desserts')">
                   ของหวาน
                 </v-tab>
               </v-tabs>
