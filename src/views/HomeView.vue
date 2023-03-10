@@ -17,7 +17,7 @@ const menuStore = useMenuStore()
 const pointOfSaleStore = usePointOfSale()
 onMounted(async () => {
   await productStore.getProducts()
-  menuStore.menuFilter('drink')
+  menuStore.menuFilter('Drinks')
 })
 
 const addToCart = (item: Product) => {

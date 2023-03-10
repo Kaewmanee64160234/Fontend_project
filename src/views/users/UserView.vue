@@ -49,7 +49,7 @@ const deleteAllUsers = async () => {
         <VBtn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red" @click="deleteAllUsers">Delete All</VBtn>
         <VSpacer> </VSpacer>
         <VTextField style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
-          append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model = "userStore.search"></VTextField>
+          append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="userStore.search"></VTextField>
         <VTable class="text-center mt-5">
           <thead>
             <tr>
