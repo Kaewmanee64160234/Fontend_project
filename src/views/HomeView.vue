@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useMenuStore } from '@/store/menu'
 import { onMounted, ref } from 'vue'
+import TestDialog from '@/components/TestDialog.vue'
 import MenuCard from '@/components/MenuCard.vue'
 import FindMemberDialog from '@/components/FindMemberDialog.vue'
 import PromotionDialog from '@/components/promotion/PromotionDialog.vue'
@@ -20,20 +21,8 @@ onMounted(async () => {
 })
 
 const addToCart = (item: Product) => {
- const product =   pointOfSaleStore.orderItemList.findIndex((item_) => {
-    if (item_.productId === item.id) {
-      return item_.amount += 1;
-      
-    } 
-  })
-  if(product < 0){
-    const orderItem = ref<OrderItem>({
-        name: item.name,
-        amount: 1,
-        productId: item.id!
-      })
-     pointOfSaleStore.addToOrder(orderItem.value)
-  }
+  pointOfSaleStore.updatetmpProduct(item)
+  pointOfSaleStore.dialogTopping = true
 }
 </script>
 
@@ -41,9 +30,9 @@ const addToCart = (item: Product) => {
   <div class="content-area">
     <DialogPayment></DialogPayment>
     <div class="content">
-      <DialogPayment></DialogPayment>
       <FindMemberDialog></FindMemberDialog>
       <PromotionDialog></PromotionDialog>
+
       <div class="row">
         <div class="col-md-6 item-side">
           <div class="row-md-6">
@@ -55,15 +44,19 @@ const addToCart = (item: Product) => {
           </div>
           <div class="row">
             <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
+              <TestDialog
+                :cat="item.catagoryId + ''"
+                :name="item.name"
+                :type="item.type"
+              ></TestDialog>
+
               <MenuCard
-      
                 :name="item.name"
                 :cost="item.price"
-                :type="item.type+''"
+                :type="item.type + ''"
                 :img="item.image!"
                 :price="item.price"
-                :catagory-id="item.catagoryId+''"
-             
+                :catagory-id="item.catagoryId + ''"
                 @click="addToCart(item)"
               ></MenuCard>
             </div>

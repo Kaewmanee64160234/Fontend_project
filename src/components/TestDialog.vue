@@ -1,18 +1,36 @@
 <script lang="ts" setup>
 import { usePointOfSale } from '@/store/pointOfSell.store';
+import type { OrderItem } from '@/store/types/orderItem.type';
+import type Product from '@/store/types/product.type';
 import { ref } from 'vue'
-const toggle = ref(null)
-const toggle2 = ref(null)
-const amenities = ref([])
+
 const pointOfSaleStore = usePointOfSale();
 const props = defineProps({
   name: String,
   type: String,
-  cat: String
+  cat: String,
 })
+
+const save = ()=>{
+  const item = pointOfSaleStore.temProduct;
+  const product = pointOfSaleStore.orderItemList.findIndex((item_) => {
+    if (item_.productId === item.id) {
+      return (item_.amount += 1)
+    }
+  })
+  if (product < 0) {
+    const orderItem = ref<OrderItem>({
+      name: item.name,
+      amount: 1,
+      productId: item.id!
+    })
+    pointOfSaleStore.addToOrder(orderItem.value)
+  }
+  pointOfSaleStore.dialogTopping  = false;
+}
 </script>
 <template>
-  <v-row justify="center">
+  
     <v-dialog v-model="pointOfSaleStore.dialogTopping " width="600px" v-if="props.cat !== '1' && props.cat !== '3' " >
       <v-card >
         <v-card-title>
@@ -54,12 +72,11 @@ const props = defineProps({
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="secondary" variant="text" @click="pointOfSaleStore.dialogTopping  = false" > Save </v-btn>
+          <v-btn color="secondary" variant="text" @click="save()" > Save </v-btn>
           <v-btn color="primary" variant="text" @click="pointOfSaleStore.dialogTopping  = false"> Close </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
   
-  </v-row>
 </template>
