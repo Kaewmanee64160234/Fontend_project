@@ -94,7 +94,28 @@ onMounted(() => {
                 </div>
               </div>
             </div>
+<!-- ปุ่ม -->
+            <div class="col-md-12 content-area">
+              <div class="row-md-3">
+                  <div class="col">
+                    <v-btn color="#E9A178" >Promotion</v-btn>
+                  </div>
+                  <div class="col">
+                    <v-btn color="#E9A178" class="mt-5">Findmember</v-btn>
+                  </div>
+                  <div class="col">
+                    <v-btn color="#E9A178" class="mt-5">Clear</v-btn>
+                  </div>
+                  <div class="col">
+                    <v-btn color="#E9A178" class="mt-5">Save</v-btn>
+                  </div>
 
+                  
+                   
+                
+              </div>
+            </div>
+<!-- ปุ่ม -->
             </div>
 
           </div>

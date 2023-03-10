@@ -15,7 +15,7 @@ export const useProductStore = defineStore('Product', () => {
   const products = ref<Product[]>([])
   const editedProduct = ref<Product & { files: File[] }>({
     name: '',
-    catagory: '',
+    catagoryId: 1,
     type: '',
     size: '-',
     price: 0,
@@ -65,10 +65,10 @@ export const useProductStore = defineStore('Product', () => {
     if (!newDialog) {
       editedProduct.value = {
         name: '',
-        type: '-',
+        type: '',
         size: '-',
         price: 0,
-        catagory: '',
+        catagoryId: 1,
         image: 'no_image.jpg',
         files: []
       }
@@ -90,17 +90,9 @@ export const useProductStore = defineStore('Product', () => {
   async function saveProduct() {
     loadingStore.isLoading = true
     try {
-      if (editedProduct.value.catagory === 'Foods'){
-        //*
-        editedProduct.value.catagory = 1;
-      }else if (editedProduct.value.catagory === 'Drinks') {
-        editedProduct.value.catagory = 2;
-      }else if (editedProduct.value.catagory === 'Desserts') {
-        editedProduct.value.catagory = 3;
-      }
-
       if (editedProduct.value.id) {
         const res = await productService.updateProduct(editedProduct.value.id, editedProduct.value)
+
       } else {
         const res = await productService.saveProduct(editedProduct.value)
       }

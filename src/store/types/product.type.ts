@@ -5,7 +5,7 @@ export default interface Product {
     type?: string;
     size?: string;
     price: number;
-    catagory: string | number;
+    catagoryId: number;
     image?: string;
     createdAt?: Date;
     updatedAt?: Date;

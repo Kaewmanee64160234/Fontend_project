@@ -1,23 +1,21 @@
 <script setup lang="ts">
+import { useEmployeeStore } from '@/store/employee.store'
 import { ref } from 'vue'
 import type { VForm } from 'vuetify/components'
-import { useAuthStore } from '@/store/auth'
-
-const authStore = useAuthStore()
-const loginName = ref('')
-const password = ref('')
+const employeeStore = useEmployeeStore()
 const valid = ref(true)
 const form = ref<InstanceType<typeof VForm> | null>(null)
+const email = ref('')
+const name = ref('')
 const login = async () => {
   const { valid } = await form.value!.validate()
   if (valid) {
-    authStore.login(loginName.value, password.value)
+    employeeStore.loginEmployee(email.value, name.value)
   }
 }
-const reset = () => {
-  form.value?.reset()
+const clear = () => {
+  form.value?.reset();
 }
-
 </script>
 
 <template>
@@ -29,34 +27,27 @@ const reset = () => {
           height="200px"
           cover
         ></v-img>
-        <v-card-title primary-title class="text-center"> Login </v-card-title>
+        <v-card-title primary-title class="text-center"> Login Employee</v-card-title>
         <v-card-text>
           <v-form ref="form" v-model="valid">
             <v-text-field
-              v-model="loginName"
+              v-model="name"
               label="Login Name"
-              :rules="[
-                (v) => !!v || 'Email is required',
-                (v) =>
-                  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Email is not valid!!'
-              ]"
+              :rules="[(v) => !!v || 'Email is required']"
               required
             ></v-text-field>
             <v-text-field
-              v-model="password"
-              label="Password"
-              type="password"
-              :rules="[
-                (v) => !!v || 'Password is required',
-                (v) => v.length >= 8 || 'Password must be more than or equal 8 characters'
-              ]"
+              v-model="email"
+              label="email"
+              type="text"
+              :rules="[(v) => !!v || 'email is required']"
               required
             ></v-text-field>
           </v-form>
         </v-card-text>
         <v-card-actions class="justify-center">
           <v-btn color="success" @click="login">Login</v-btn>
-          <v-btn color="error" @click="reset">Clear</v-btn>
+          <v-btn color="error" @click="clear">Clear</v-btn>
         </v-card-actions>
       </v-card>
     </v-main>
