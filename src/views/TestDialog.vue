@@ -1,11 +1,10 @@
 <script lang="ts" setup>
+import { usePointOfSale } from '@/store/pointOfSell.store';
 import { ref } from 'vue'
 const toggle = ref(null)
-const dialog = ref(false)
-const dialog2 = ref(false)
 const toggle2 = ref(null)
 const amenities = ref([])
-// const dialog3 = ref(false);
+const pointOfSaleStore = usePointOfSale();
 const props = defineProps({
   name: String,
   type: String,
@@ -14,8 +13,7 @@ const props = defineProps({
 </script>
 <template>
   <v-row justify="center">
-    <v-btn color="primary" v-if="props.cat !== '1' && props.cat !== '3' " class="ma-2" @click="dialog = true"> Open Dialog 1 </v-btn>
-    <v-dialog v-model="dialog" width="600px" >
+    <v-dialog v-model="pointOfSaleStore.dialogTopping " width="600px" v-if="props.cat !== '1' && props.cat !== '3' " >
       <v-card >
         <v-card-title>
           {{ props.name }}
@@ -56,58 +54,12 @@ const props = defineProps({
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="secondary" variant="text" @click="dialog = false" > Save </v-btn>
-          <v-btn color="primary" variant="text" @click="dialog = false"> Close </v-btn>
+          <v-btn color="secondary" variant="text" @click="pointOfSaleStore.dialogTopping  = false" > Save </v-btn>
+          <v-btn color="primary" variant="text" @click="pointOfSaleStore.dialogTopping  = false"> Close </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
-    <!-- <v-dialog
-        v-model="dialog2"
-        width="auto"
-      >
-        <v-card>
-          <v-card-title>
-            Dialog 2
-          </v-card-title>
-          <v-card-text>
-            <v-btn
-              color="primary"
-              @click="dialog3 = !dialog3"
-            >
-              Open Dialog 3
-            </v-btn>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              color="primary"
-              variant="text"
-              @click="dialog2 = false"
-            >
-              Close
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-      <v-dialog
-        v-model="dialog3"
-        width="auto"
-      >
-        <v-card>
-          <v-card-title>
-            <span>Dialog 3</span>
-          </v-card-title>
-          <v-card-actions>
-            <v-btn
-              color="primary"
-              variant="text"
-              @click="dialog3 = false"
-            >
-              Close
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog> -->
+  
   </v-row>
 </template>

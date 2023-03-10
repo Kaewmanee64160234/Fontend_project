@@ -8,6 +8,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     const dialogPrompypay = ref(false);
     const dialogPromotion = ref(false);
     const orderItemList = ref<OrderItem[]>([]);
+    const dialogTopping = ref(false);
     const order = ref<Order>({
         customerId:'',
         discount: 0,
@@ -26,7 +27,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
 
 
 
-    return {dialogPayment, dialogPromotion,dialogPrompypay,orderItemList,addToOrder,order}
+    return {dialogTopping,dialogPayment, dialogPromotion,dialogPrompypay,orderItemList,addToOrder,order}
 
 
 });

@@ -56,11 +56,14 @@ const addToCart = (item: Product) => {
           <div class="row">
             <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
               <MenuCard
+      
                 :name="item.name"
                 :cost="item.price"
-                :type="'Hello'"
+                :type="item.type+''"
                 :img="item.image!"
                 :price="item.price"
+                :catagory-id="item.catagoryId+''"
+             
                 @click="addToCart(item)"
               ></MenuCard>
             </div>

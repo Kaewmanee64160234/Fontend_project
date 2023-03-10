@@ -26,12 +26,17 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  catagoryId:{
+    type: String,
+    required: true,
+  }
 
 });
 </script>
 
 <template >
   <a href="#" >
+    <TestDialogVue :cat="props.catagoryId+''" :name="props.name" :type="props.type"></TestDialogVue>
   <div class="card item-card mt-2">
   <img 
   class="card-img-top item-img"
