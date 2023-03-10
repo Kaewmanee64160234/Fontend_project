@@ -3,13 +3,9 @@ import { useProductStore } from '@/store/product.store';
 import { onMounted,ref } from 'vue';
 import type Product from '@/store/types/product.type';
 
-const orderList = ref<{product: Product; count: number; sum: number}[]>([]);
 const productStore = useProductStore();
-const backendURL = import.meta.env.VITE_BACKEND_URL;
-function addProduct(item:Product){
-  console.log(orderList.value);
-  orderList.value.push({product: item, count: 1, sum: 1* item.price});
-}
+const backendURL = import.meta.env.VITE_URL_PORT;
+
 onMounted(async () => {
   await productStore.getProducts();
 })
@@ -18,12 +14,8 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  // cost: {
-  //   type: String,
-  //   required: true,
-  // },
   img: {
-    type: String,
+    type: String ,
     required: true,
   },
   type: {
@@ -39,18 +31,17 @@ const props = defineProps({
 </script>
 
 <template >
-  <a href="#" v-for="item of productStore.products" :key="item.id">
-  <div class="card item-card" >
+  <a href="#" >
+  <div class="card item-card mt-2">
   <img 
   class="card-img-top item-img"
         :src="`${backendURL}/products/image/${props.img}`"
-        
         width="120px"
       />
 
-      <div class="card-body text-center">
-        <h5 class="card-title" >{{ item.name }}</h5>
-        <p class="card-text fontsm">{{ item.price }}</p>
+      <div class="card-body text-center " >
+        <h5 class="card-title" >{{ props.name }}</h5>
+        <p class="card-text fontsm">{{ props.price }}</p>
       </div>
     </div>
 </a>
