@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useCustomerStore } from '@/store/customer.store';
 const customerStore = useCustomerStore();
 
@@ -13,7 +13,6 @@ onMounted(() => {
       <v-card height="500px">
         <v-card-title>
           Find Member
-
         </v-card-title>
         <v-card-text>
         <v-text-field label="Phone Number" height="20px" hide-details="auto" ></v-text-field>
@@ -23,7 +22,8 @@ onMounted(() => {
               :title="item.name" :subtitle="item.point + ` Point`" style="font-size: 15px">
               <template v-slot:append>
               <v-btn variant="tonal"
-                    color="secondary">Add  Point</v-btn>
+                    color="teal-darken-1"
+                    @click="customerStore.AddPoint(item.tel)">Add  Point</v-btn>
               </template>
             </v-list-item>
             </v-list>

@@ -99,6 +99,10 @@ export const useCustomerStore = defineStore('customer', () => {
   const selectCustomer = () => {
     allSelected.value = false
   }
+  const AddPoint = (phone: string) => {
+    const customer = customers.value.findIndex((customer) => customer.tel === phone);
+    customers.value[customer].point += 5;
+  }
   const deleteCustomers = async () => {
     try{
       loadingStore.isLoading = true
@@ -129,5 +133,6 @@ export const useCustomerStore = defineStore('customer', () => {
     saveCustomer,
     editedCustomer,
     search,
+    AddPoint
   }
 })

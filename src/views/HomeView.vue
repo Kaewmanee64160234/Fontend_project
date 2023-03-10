@@ -3,14 +3,18 @@ import { useMenuStore } from '@/store/menu';
 import { onMounted, ref } from 'vue';
 import MenuCard from "@/components/MenuCard.vue";
 import FindMemberDialog from '@/components/FindMemberDialog.vue';
+import PromotionDialog from '@/components/promotion/PromotionDialog.vue';
 import { usePointOfSale } from '@/store/pointOfSell.store';
 import DialogPayment from '@/components/pos/DialogPayment.vue';
 import { useCustomerStore } from '@/store/customer.store';
+import { useProductStore } from '@/store/product.store';
 
 const customerStore = useCustomerStore();
+const productStore = useProductStore();
 const menuStore = useMenuStore();
 const pointOfSaleStore = usePointOfSale();
-onMounted(() => {
+onMounted(async () => {
+  await productStore.getProducts();
   menuStore.menuFilter("drink");
 });
 </script>
@@ -20,6 +24,7 @@ onMounted(() => {
     <div class="content">
       <DialogPayment></DialogPayment>
       <FindMemberDialog></FindMemberDialog>
+      <PromotionDialog></PromotionDialog>
       <div class="row">
         <div class="col-md-6 item-side">
           <div class="row-md-6">
@@ -36,11 +41,10 @@ onMounted(() => {
             </v-tabs>
           </div>
           <div class="row">
-            <div class="col-md-3 mb-2 mt-4" v-for="item in menuStore.menuSelected" :key="item.img">
-              <MenuCard :name="item.name" :cost="item.cost" :type="'Hello'" :img="item.img" :price="item.price">
-              </MenuCard>
+              <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
+                <MenuCard :name="item.name" :cost="item.price" :type="'Hello'" :img="item.image!" :price="item.price"></MenuCard>
+              </div>
             </div>
-          </div>
         </div>
 
         <div class="col-md-6 mt-2">
@@ -106,7 +110,7 @@ onMounted(() => {
             <div class="row " >
               <div class="col-md-6">
                 <div class="d-flex justify-content-between">
-                  <v-btn color="#E9A178" class="mt-5">Promotion</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.dialogPromotion = true">Promotion</v-btn>
                   <v-btn color="#E9A178" class="mt-5">Clear All</v-btn>
                 </div>
                 <br>
