@@ -2,10 +2,6 @@
 import { ref } from 'vue'
 import type { VForm } from 'vuetify/components'
 import { useAuthStore } from '@/store/auth'
-<<<<<<< HEAD
-
-=======
->>>>>>> b3cff45cf7af89a5760a5275cb3a8f03a4f7f293
 
 const authStore = useAuthStore()
 const loginName = ref('')

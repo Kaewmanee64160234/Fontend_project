@@ -1,6 +1,7 @@
 <script setup lang="ts">import { useMenuStore } from '@/store/menu';
 import { onMounted } from 'vue';
 import MenuCard from "@/components/MenuCard.vue";
+import FindMemberDialog from '@/components/FindMemberDialog.vue';
 
 
 const menuStore = useMenuStore();
@@ -101,7 +102,7 @@ onMounted(() => {
                     <v-btn color="#E9A178" >Promotion</v-btn>
                   </div>
                   <div class="col">
-                    <v-btn color="#E9A178" class="mt-5">Findmember</v-btn>
+                    <FindMemberDialog></FindMemberDialog>
                   </div>
                   <div class="col">
                     <v-btn color="#E9A178" class="mt-5">Clear</v-btn>
