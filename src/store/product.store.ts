@@ -15,7 +15,9 @@ export const useProductStore = defineStore('Product', () => {
   const products = ref<Product[]>([])
   const editedProduct = ref<Product & { files: File[] }>({
     name: '',
-    catagoryId: 1,
+    catagoryId:1,
+
+    category: '',
     type: '',
     size: '-',
     price: 0,
@@ -68,7 +70,8 @@ export const useProductStore = defineStore('Product', () => {
         type: '',
         size: '-',
         price: 0,
-        catagoryId: 1,
+        catagoryId:1,
+        category: '',
         image: 'no_image.jpg',
         files: []
       }
@@ -79,7 +82,9 @@ export const useProductStore = defineStore('Product', () => {
     loadingStore.isLoading = true
     try {
       const res = await productService.getProducts()
-      products.value = res.data
+      products.value = res.data;
+      console.log(...products.value);
+      
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถดึงข้อมูล Product ได้')
@@ -90,6 +95,15 @@ export const useProductStore = defineStore('Product', () => {
   async function saveProduct() {
     loadingStore.isLoading = true
     try {
+      if (editedProduct.value.category === 'Foods'){
+        //*
+        editedProduct.value.category = 1;
+      }else if (editedProduct.value.category === 'Drinks') {
+        editedProduct.value.category = 2;
+      }else if (editedProduct.value.category === 'Desserts') {
+        editedProduct.value.category = 3;
+      }
+
       if (editedProduct.value.id) {
         const res = await productService.updateProduct(editedProduct.value.id, editedProduct.value)
 
