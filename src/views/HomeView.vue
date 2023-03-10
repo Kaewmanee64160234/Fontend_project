@@ -1,11 +1,12 @@
 <script setup lang="ts">import { useMenuStore } from '@/store/menu';
 import { onMounted } from 'vue';
 import MenuCard from "@/components/MenuCard.vue";
+import { useProductStore } from '@/store/product.store';
+const productStore = useProductStore();
+const menuStore =  useMenuStore();
 
-
-const menuStore = useMenuStore();
-
-onMounted(() => {
+onMounted(async () => {
+  await productStore.getProducts();
   menuStore.menuFilter("drink");
 });
 </script>
@@ -29,8 +30,8 @@ onMounted(() => {
               </v-tabs>
             </div>
             <div class="row">
-              <div class="col-md-3 mb-2 mt-4" v-for="item in menuStore.menuSelected" :key="item.img">
-                <MenuCard :name="item.name" :cost="item.cost" :type="'Hello'" :img="item.img" :price="item.price"></MenuCard>
+              <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
+                <MenuCard :name="item.name" :cost="item.price" :type="'Hello'" :img="item.image!" :price="item.price"></MenuCard>
               </div>
             </div>
           </div>
