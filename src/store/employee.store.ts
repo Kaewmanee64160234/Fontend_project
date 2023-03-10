@@ -6,7 +6,7 @@ import { useLoadingStore } from './loading'
 import { useMessageStore } from './message'
 export const useEmployeeStore = defineStore('employee', () => {
   const loadingStore = useLoadingStore()
-const search = ref('');
+  const search = ref('')
   const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
   const allSelected = ref(false)
@@ -16,7 +16,7 @@ const search = ref('');
     name: '',
     address: '',
     tel: '',
-    email:'',
+    email: '',
     position: '',
     hourly: 0,
     image: 'no_image.jpg',
@@ -25,19 +25,18 @@ const search = ref('');
 
   watch(dialog, (newDialog, oldDialog) => {
     if (!newDialog) {
-      editEmployee.value = { name: '',
-      address: '',
-      tel: '',
-      email:'',
-      position: '',
-      hourly: 0,
-      image: 'no_image.jpg',
-      files: []};
+      editEmployee.value = {
+        name: '',
+        address: '',
+        tel: '',
+        email: '',
+        position: '',
+        hourly: 0,
+        image: 'no_image.jpg',
+        files: []
+      }
     }
-  });
-
-
-  
+  })
 
   const getEmployees = async () => {
     loadingStore.isLoading = true
@@ -47,20 +46,17 @@ const search = ref('');
       employees.value = res.data
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถดึงข้อมูลพนักงานได้");
-      
+      messageStore.showError('ไม่สามารถดึงข้อมูลพนักงานได้')
     }
     loadingStore.isLoading = false
-
   }
   const saveEmployee = async () => {
     loadingStore.isLoading = true
 
     try {
-
       if (!editEmployee.value.id) {
         await employeeService.createEmployee(editEmployee.value)
-          console.log(editEmployee.value)
+        console.log(editEmployee.value)
       } else {
         await employeeService.updateEmployee(editEmployee.value.id + '', editEmployee.value)
       }
@@ -69,11 +65,9 @@ const search = ref('');
       await getEmployees()
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถsaveข้อมูลพนักงานได้");
-
+      messageStore.showError('ไม่สามารถsaveข้อมูลพนักงานได้')
     }
     loadingStore.isLoading = false
-
   }
   const editedEmployee = async (item: Employee) => {
     loadingStore.isLoading = true
@@ -85,19 +79,15 @@ const search = ref('');
   const deleteEmployee = async (id: string) => {
     loadingStore.isLoading = true
 
-    try{
-
+    try {
       await employeeService.deleteEmployee(id)
       await getEmployees()
-    }catch (err) {
-      messageStore.showError("ไม่สามารถdeleteข้อมูลพนักงานได้");
+    } catch (err) {
+      messageStore.showError('ไม่สามารถdeleteข้อมูลพนักงานได้')
     }
     loadingStore.isLoading = false
-   
   }
   const selectEmployeeAll = async () => {
-    
-    
     loadingStore.isLoading = true
 
     if (!allSelected.value) {
@@ -105,11 +95,11 @@ const search = ref('');
     }
     loadingStore.isLoading = false
   }
-  const selectEmployee= () => {
+  const selectEmployee = () => {
     allSelected.value = false
   }
   const deleteEmployees = async () => {
-    try{
+    try {
       loadingStore.isLoading = true
 
       for (let i = 0; i < selected.value.length; i++) {
@@ -117,11 +107,13 @@ const search = ref('');
         await getEmployees()
       }
       loadingStore.isLoading = false
-    }catch(err){
-      messageStore.showError("ไม่สามารถdeleteข้อมูลพนักงานได้");
-
+    } catch (err) {
+      messageStore.showError('ไม่สามารถdeleteข้อมูลพนักงานได้')
     }
-  
+  }
+  const loginEmployee = async (name: string, email: string) => {
+    const employee = await employeeService.employeeLogin(name, email)
+    localStorage.setItem('employee', JSON.stringify(employee))
   }
 
   return {
@@ -137,7 +129,7 @@ const search = ref('');
     employees,
     saveEmployee,
     editedEmployee,
-    search
+    search,
+    loginEmployee
   }
 })
-

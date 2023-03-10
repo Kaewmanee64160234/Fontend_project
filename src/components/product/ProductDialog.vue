@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import { useProductStore } from '@/store/product.store';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import type { VForm } from 'vuetify/components'
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
+import { useCatagoryStore } from '@/store/catagory';
 
 const form = ref<VForm | null>(null)
 const url = import.meta.env.VITE_URL_PORT
 const confirmDlg = ref();
 const productStore = useProductStore();
+const catagoryStore = useCatagoryStore();
 async function save() {
   const { valid } = await form.value!.validate();
   if (valid) {
@@ -15,6 +17,10 @@ async function save() {
     await productStore.saveProduct();
   }
 }
+
+onMounted( async () => {
+  await catagoryStore.getCatagories();
+});
 </script>
 
 <template>
@@ -24,42 +30,39 @@ async function save() {
       <v-card-title>
         <span class="text-h5">Product</span>
       </v-card-title>
-      <v-card-text>
-        <v-form ref="form">
-          <v-container>
-            <v-row justify="center">
-              <v-avatar size="80"><v-img
-                  :src="`${url}/products/image/${productStore.editedProduct.image}`"></v-img></v-avatar>
-            </v-row>
-            <v-row>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Name*" required v-model="productStore.editedProduct.name" :rules="[
-                  (v) => !!v || 'Name is required',
-                  (v) => v.length >= 3 || 'Length must more than 3',
-                ]"></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-autocomplete v-model="productStore.editedProduct.catagory" label="Catagory*" required :rules="[(v) => !!v || 'Type is required',]"
-                  :items="['Foods', 'Drinks', 'Desserts']"></v-autocomplete>
-              </v-col>
-              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagory === ''">
-                <v-autocomplete label="Type*"></v-autocomplete>
-              </v-col>
-              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagory === 'Foods'">
-                <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
-                  (v) => !!v || 'Type is required',
-                ]" :items="productStore.typeProduct.food"></v-autocomplete>
-              </v-col>
-              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagory === 'Drinks'">
-                <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
-                  (v) => !!v || 'Type is required',
-                ]" :items="productStore.typeProduct.drink"></v-autocomplete>
-              </v-col>
-              <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagory === 'Desserts'">
-                <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
-                  (v) => !!v || 'Type is required',
-                ]" :items="productStore.typeProduct.dessert"></v-autocomplete>
-              </v-col>
+    <v-card-text>
+      <v-form ref="form">
+        <v-container>
+          <v-row justify="center">
+            <v-avatar size="80"><v-img
+                :src="`${url}/products/image/${productStore.editedProduct.image}`"></v-img></v-avatar>
+          </v-row>
+          <v-row>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field label="Name*" required v-model="productStore.editedProduct.name" :rules="[
+                (v) => !!v || 'Name is required',
+                (v) => v.length >= 3 || 'Length must more than 3',
+              ]"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-select label="Category*" v-model="productStore.editedProduct.catagoryId" :items="catagoryStore.catagories" item-title="name"
+                item-value="id" single-line></v-select>
+            </v-col>
+                  <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagoryId === 1">
+                    <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
+                      (v) => !!v || 'Type is required',
+                    ]" :items="productStore.typeProduct.food"></v-autocomplete>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagoryId === 2">
+                    <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
+                      (v) => !!v || 'Type is required',
+                    ]" :items="productStore.typeProduct.drink"></v-autocomplete>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagoryId === 3">
+                    <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
+                      (v) => !!v || 'Type is required',
+                    ]" :items="productStore.typeProduct.dessert"></v-autocomplete>
+                  </v-col>
             </v-row>
             <v-row>
               <v-col cols="12" sm="6" md="6">
@@ -81,6 +84,7 @@ async function save() {
               </v-col>
             </v-row>
           </v-container>
+          <div>{{ productStore.editedProduct }}</div>
         </v-form>
         <small>*indicates required field</small>
       </v-card-text>
