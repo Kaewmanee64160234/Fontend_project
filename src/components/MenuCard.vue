@@ -1,78 +1,67 @@
 <script lang="ts" setup>
-import { useProductStore } from '@/store/product.store'
+import { useProductStore } from '@/store/product.store';
+import { onMounted,ref } from 'vue';
+import type Product from '@/store/types/product.type';
 
-const productStore = useProductStore()
-const backendURL = import.meta.env.VITE_URL_PORT
+const backendURL = import.meta.env.VITE_URL_PORT;
 
 const props = defineProps({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   img: {
-    type: String,
-    required: true
+    type: String ,
+    required: true,
   },
   type: {
     type: String,
-    required: true
+    required: true,
   },
   price: {
     type: Number,
-    required: true
+    required: true,
   },
-  catagoryId: {
-    type: String,
-    required: true
-  }
-})
+
+});
 </script>
 
-<template>
- 
-    <div class="a-tag" >
-      <div class="card item-card mt-2">
+<template >
+  <a href="#" >
+  <div class="card item-card mt-2">
+  <img 
+  class="card-img-top item-img"
+        :src="`${backendURL}/products/image/${props.img}`"
+        alt="Card image cap"
+        width="120px"
+      />
 
-        <img
-          class="card-img-top item-img"
-          :src="`${backendURL}/products/image/${props.img}`"
-          width="120px"
-        />
-
-        <div class="card-body text-center">
-          <h5 class="card-title">{{ props.name }}</h5>
-          <p class="card-text fontsm">{{ props.price }}</p>
-        </div>
+      <div class="card-body text-center " >
+        <h5 class="card-title" >{{ props.name }}</h5>
+        <p class="card-text fontsm">{{ props.price }}</p>
       </div>
     </div>
-
+</a>
 </template>
 
 <style>
-.a-tag{
-  cursor: pointer;
-}
-.card-title {
+.card-title{
   font-size: 16px !important;
   margin-bottom: 0;
 }
-.item-card .item-img {
+.item-card .item-img{
   height: 115px !important;
   object-fit: cover;
 }
-.a-tag .item-card {
+a .item-card{
   /* width: 120px !important; */
-  cursor: pointer;
+  cursor:pointer;
   color: black !important;
 }
-.a-tag:hover .item-card {
-  color: #1f3611 !important;
+a:hover .item-card{
+  color: #1F3611  !important;;
 }
-.a-tag:link {
-  text-decoration: none;
-}
+a:link { text-decoration: none; }
 
-.fontsm {
-  font-size: small;
-}
+.fontsm { font-size:small}
 </style>
