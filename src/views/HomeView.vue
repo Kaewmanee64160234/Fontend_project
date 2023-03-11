@@ -72,15 +72,8 @@ const aboutCal = computed(() => {
 
               <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
                 :catagory-id="item.catagoryId + ''" @click="addToCart(item)"></MenuCard>
-              <MenuCard
-                :name="item.name"
-                :cost="item.price"
-                :type="item.type + ''"
-                :img="item.image!"
-                :price="item.price"
-                :catagory-id="item.catagoryId + ''"
-                @click="addToCart(item)"
-              ></MenuCard>
+              <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
+                :catagory-id="item.catagoryId + ''" @click="addToCart(item)"></MenuCard>
             </div>
           </div>
         </div>
@@ -106,33 +99,17 @@ const aboutCal = computed(() => {
                   <td style="text-align: center">{{ index + 1 }}</td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
                   <td class="text-center">
-                    <v-btn
-                      color="secondary"
-                      icon="mdi-plus"
-                      size="x-small"
-                      variant="text"
-                      @click="addAmoutProduct(index)"
-                    ></v-btn
-                    ><span class="pa-2">{{ item.amount }}</span>
-                    <v-btn
-                      color="warning"
-                      variant="text"
-                      icon="mdi-minus-thick"
-                      size="x-small"
-                      @click="reduceAmoutProduct(index)"
-                    ></v-btn>
+                    <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
+                      @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
+                    <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
+                      @click="reduceAmoutProduct(index)"></v-btn>
                   </td>
                   <td class="text-center">
                     {{ item.price }}
                   </td>
                   <td class="text-center">{{ item.total }}</td>
                   <td>
-                    <v-btn
-                      color="red"
-                      icon="mdi-delete"
-                      size="x-small"
-                      @click="deleteOrderItem(index)"
-                    ></v-btn>
+                    <v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
                   </td>
                 </tr>
               </tbody>
@@ -149,19 +126,19 @@ const aboutCal = computed(() => {
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ส่วนลด :</p>
-                  <p class="fw-bold mb-0">{{ pointOfSaleStore.total_dicount }} บาท</p>
+                  <p class="fw-bold mb-0">{{ pointOfSaleStore.total_discount }} บาท</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ยอดที่ต้องชำระ :</p>
-                  <p class="fw-bold mb-0">{{ pointOfSaleStore.totalAndDicount }} บาท</p>
+                  <p class="fw-bold mb-0">{{ aboutCal?.totalAndDicount }} บาท</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ยอดรับชำระ :</p>
-                  <p class="fw-bold mb-0">{{ pointOfSaleStore.totalAndDicount }} บาท</p>
+                  <p class="fw-bold mb-0">{{ pointOfSaleStore.recive_mon }} บาท</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">จำนวนเงินที่ทอน :</p>
-                  <p class="fw-bold mb-0">{{ pointOfSaleStore.change_money }} บาท</p>
+                  <p class="fw-bold mb-0">{{ aboutCal?.change_money }} บาท</p>
                 </div>
               </div>
 
@@ -184,12 +161,8 @@ const aboutCal = computed(() => {
                 <div class="d-flex justify-content-between">
                   <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true">Find Member</v-btn>
                   <v-btn color="#E9A178" class="mt-5">Save</v-btn>
-                  <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true"
-                    >Find Member</v-btn
-                  >
-                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder"
-                    >Save</v-btn
-                  >
+                  <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true">Find Member</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder">Save</v-btn>
                 </div>
               </div>
             </div>

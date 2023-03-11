@@ -29,7 +29,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   const order = ref<Order>({
 
     customerId: 1,
-    discount: 0,
+    discount: 10,
     total: 0,
     recieved: 0,
     change: 0,
@@ -38,7 +38,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   })
   const pointofsaleStore = usePointOfSale();
     const total_ = ref(0);
-    const total_dicount = ref(0);
+    const total_discount = ref(0);
     const totalAndDicount = ref(0);
     const recive_mon = ref(0);
     const change_money = ref(0);
@@ -48,20 +48,43 @@ export const usePointOfSale = defineStore('point of sale', () => {
             (accumulator, currentValue) => accumulator + currentValue.total,
             0
           )
+          if((total_.value - total_discount.value) <=0){
+            totalAndDicount.value =0
+          }else{
+            totalAndDicount.value = total_.value - total_discount.value;
+          }
+          change_money.value = recive_mon.value- totalAndDicount.value
+          if(recive_mon.value <=0){
+            change_money.value = 0;
+          }
+          if(recive_mon.value >0){
+            if(change_money.value <0){
+              //** message */
+            }
+          }
+
+      
           return {total_,totalAndDicount,change_money}
         } else {
             total_.value = 0;
             return {total_}
         }
+        
     };
-    const CalDiscout = (discout: number) => {
-        total_dicount.value += discout;
+    const CalDiscout = () => {
+      if (pointofsaleStore.orderItemList.length > 0){
+        total_discount.value = total_discount.value + order.value.discount,
+        0
+        return{total_discount}
+      }else{
+        total_discount.value = 0;
+        return {total_discount}
+      }
       };
       const calMonAndDiscount = () => {
-        if (total_.value > 0) {
-          totalAndDicount.value = total_.value - total_dicount.value;
+        if (pointofsaleStore.orderItemList.length > 0) {
+          totalAndDicount.value = total_.value - total_discount.value;
         }
-    
         if (recive_mon.value > 0) {
           if (recive_mon.value - totalAndDicount.value >= 0) {
             change_money.value = recive_mon.value - totalAndDicount.value;
@@ -69,6 +92,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
             change_money.value = 0;
           }
         }
+        return{totalAndDicount}
       };
 
   const addToOrder = (orderItem: OrderItem) => {
@@ -115,7 +139,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
 
   return {
     total_,
-    total_dicount,
+    total_discount,
     CaltotalPrice,
     CalDiscout,
     recive_mon,
