@@ -138,13 +138,14 @@ const aboutCal = computed(() => {
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">จำนวนเงินที่ทอน :</p>
-                  <p class="fw-bold mb-0">{{ aboutCal?.change_money }} บาท</p>
+                  <p class="fw-bold mb-0" v-if="aboutCal?.change_money?.value! <0"  style="color: red;">{{ aboutCal?.change_money }}</p>
+                  <p class="fw-bold mb-0" v-else>{{ aboutCal?.change_money }}</p>
                 </div>
               </div>
 
               <div class="col-md-5">
                 <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
-                <input class="form-control" id="amount" type="text" placeholder="Amount" />
+                <input class="form-control" id="amount" type="text" placeholder="Amount" v-model="pointOfSaleStore.recive_mon" />
                 <v-btn color="#E9A178" width="inherit" class="mt-5"
                   @click="pointOfSaleStore.dialogPayment = true">Payment</v-btn>
               </div>

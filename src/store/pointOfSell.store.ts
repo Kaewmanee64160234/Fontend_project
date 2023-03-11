@@ -5,8 +5,10 @@ import type { OrderItem } from './types/orderItem.type'
 import { useLoadingStore } from './loading'
 import orderService from '@/services/order'
 import type { Order } from '@/store/types/Order.type'
+import { useMessageStore } from './message'
 
 export const usePointOfSale = defineStore('point of sale', () => {
+  const messageStore = useMessageStore();
   const dialogPayment = ref(false)
   const dialogPrompypay = ref(false)
   const dialogPromotion = ref(false)
@@ -59,7 +61,12 @@ export const usePointOfSale = defineStore('point of sale', () => {
           }
           if(recive_mon.value >0){
             if(change_money.value <0){
-              //** message */
+              change_money.value = 0;
+              messageStore.showError(
+                `Money not enough : ${
+                  (recive_mon.value - totalAndDicount.value) * -1
+                } Bath`
+              );
             }
           }
 
