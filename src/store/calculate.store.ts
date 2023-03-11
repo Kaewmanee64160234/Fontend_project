@@ -1,20 +1,21 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useProductStore } from "./product.store";
+import { usePointOfSale } from "./pointOfSell.store";
 
 
 export const useCalculateStore = defineStore("calculate", () => {
-    const productStore = useProductStore();
+    const pointofsaleStore = usePointOfSale();
     const total_ = ref(0);
     const total_dicount = ref(0);
     const totalAndDicount = ref(0);
     const recive_mon = ref(0);
     const change_money = ref(0);
     const CaltotalPrice = () => {
-        if (productStore.products.length > 0) {
+        if (pointofsaleStore.orderItemList.length > 0) {
             let cal = 0;
-            for (let i = 0; i < productStore.products.length; i++) {
-                cal += productStore.products[i].price;
+            for (let i = 0; i < pointofsaleStore.orderItemList.length; i++) {
+                cal += pointofsaleStore.orderItemList[i].amount;
             }
             total_.value = cal;
         } else {
