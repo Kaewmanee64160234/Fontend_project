@@ -4,10 +4,20 @@ import auth from '@/services/auth'
 import router from '@/router'
 import { useLoadingStore } from './loading'
 import { useMessageStore } from './message'
+import type User from './types/user.type'
 export const useAuthStore = defineStore('auth', () => {
   const authName = ref({})
   const loadingStore = useLoadingStore()
   const messageStore = useMessageStore()
+  
+// const getUser = () => {
+//   const userString = localStorage.getItem('user');
+//   if (!userString) return null;
+//   const user = JSON.parse(userString ?? "");
+//   //*
+//   console.log(user)
+// }
+
   const login = async (email: string, password: string) => {
     loadingStore.isLoading = true
     try {
@@ -31,5 +41,5 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
 
-  return { login, logout, authName }
+  return { login, logout, authName,}
 })
