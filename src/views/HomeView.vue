@@ -197,7 +197,7 @@ onMounted(() => {
                     @click="pointOfSaleStore.dialogPromotion = true"
                     >Promotion</v-btn
                   >
-                  <v-btn color="#E9A178" class="mt-5">Clear All</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
                 </div>
                 <br />
                 <div class="d-flex justify-content-between">

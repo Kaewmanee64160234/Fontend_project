@@ -100,6 +100,9 @@ export const usePointOfSale = defineStore('point of sale', () => {
         }
         return{totalAndDicount}
       };
+    const deleteAllOrder = async () => {
+      orderItemList.value =  []
+    }
 
   const addToOrder = (orderItem: OrderItem) => {
     orderItemList.value.push(orderItem)
@@ -160,6 +163,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     toggle,
     toggle2,
     amenities,
-    openOrder
+    openOrder,
+    deleteAllOrder
   }
 })
