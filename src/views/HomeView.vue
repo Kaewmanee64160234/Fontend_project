@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <script setup lang="ts">
 import { useMenuStore } from '@/store/menu'
@@ -19,6 +20,14 @@ const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const menuStore = useMenuStore()
 const pointOfSaleStore = usePointOfSale()
+=======
+<script setup lang="ts">import { useMenuStore } from '@/store/menu';
+import { onMounted } from 'vue';
+import MenuCard from "@/components/MenuCard.vue";
+import { useProductStore } from '@/store/product.store';
+const productStore = useProductStore();
+const menuStore =  useMenuStore();
+>>>>>>> parent of 8277332 (add calculate)
 
 onMounted(async () => {
   await productStore.getProducts()
@@ -90,31 +99,30 @@ const addToCart = (item: Product) => {
                 <div class="col-md-7">
                   <div class="d-flex justify-content-between">
                     <p class="fw-bold mb-0">ราคารวม :</p>
-                    <p class="fw-bold mb-0">{{ calculateStore.total_ }} บาท</p>
+                    <p class="fw-bold mb-0">บาท</p>
                   </div>
                   <div class="d-flex justify-content-between">
                     <p class="fw-bold mb-0">ส่วนลด :</p>
-                    <p class="fw-bold mb-0">{{ calculateStore.total_dicount }} บาท</p>
+                    <p class="fw-bold mb-0">บาท</p>
                   </div>
                   <div class="d-flex justify-content-between">
                     <p class="fw-bold mb-0">ยอดที่ต้องชำระ :</p>
-                    <p class="fw-bold mb-0">{{ calculateStore.totalAndDicount }} บาท</p>
+                    <p class="fw-bold mb-0">บาท</p>
                   </div>
                   <div class="d-flex justify-content-between">
                     <p class="fw-bold mb-0">ยอดรับชำระ :</p>
-                    <p class="fw-bold mb-0">{{ calculateStore.recive_mon }} บาท</p>
+                    <p class="fw-bold mb-0">บาท</p>
                   </div>
                   <div class="d-flex justify-content-between">
                     <p class="fw-bold mb-0">จำนวนเงินที่ทอน :</p>
-                    <p class="fw-bold mb-0">{{ calculateStore.change_money }} บาท</p>
+                    <p class="fw-bold mb-0">บาท</p>
                   </div>
                 </div>
 
                 <div class="col-md-5">
                   <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
-                  <input class="form-control" id="amount" type="text" placeholder="Amount"
-                    v-model="calculateStore.recive_mon" />
-                  <v-btn color="#E9A178" width="inherit" class="mt-5" @click="calculateStore.calMonAndDiscount">Calculator</v-btn>
+                  <input class="form-control" id="amount" type="text" placeholder="Amount"/>
+                  <v-btn color="#E9A178" width="inherit" class="mt-5">Calculator</v-btn>
                 </div>
               </div>
 
