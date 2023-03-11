@@ -38,12 +38,12 @@ onMounted(() => {
                                 <tr>
                                   <td>
                                     <table class="invoice-items" cellpadding="0" cellspacing="0">
-                                      <tbody v-for="item in orderStore.tempOrder.orderItems" :key="item.name">
-                                        <tr >
+                                      <tbody >
+                                        <tr v-for="item in orderStore.tempOrder.orderItems" :key="item.name">
                                           <td>{{ item.name }}</td>
                                           <td class="alignright">{{ item.total }} ฿</td>
                                         </tr>
-                                        <tr >
+                                        <tr class="finishOrder" >
                                           <td>Discount</td>
                                           <td class="alignright">{{orderStore.tempOrder.discount }} ฿</td>
                                         </tr>
@@ -72,7 +72,7 @@ onMounted(() => {
                        
                         <tr>
                           <td class="content-block">
-                           All For One Company Inc.Buu section 2
+                           All For One Company Inc. Buu section 2 .
                           </td>
                         </tr>
                       </tbody>
@@ -309,6 +309,9 @@ a {
   border-top: 2px solid #333;
   border-bottom: 2px solid #333;
   font-weight: 700;
+}
+.finishOrder{
+    border-top: 2px solid #333;
 }
 
 /* -------------------------------------
