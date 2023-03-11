@@ -34,7 +34,7 @@ export const useOrderStore = defineStore('order', () => {
   const getOneOrder = async (id: string) => {
     loadingStore.isLoading = true
     try {
-      const response = await orderService.getOneOrder(id)
+      const response = await orderService.getOneOrder(id);
       tempOrder.value = response.data
     } catch (err) {
       console.log(err)
