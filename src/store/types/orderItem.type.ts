@@ -7,8 +7,6 @@ export interface OrderItem {
   productId: number
   total: number
   price: number
-  order?: Order
-  product?: Product // Product Id
   createdDate?: Date
   updatedDate?: Date
   deletedDate?: Date
