@@ -127,10 +127,10 @@ export const usePointOfSale = defineStore('point of sale', () => {
      
       order.value = {
         customerId: 1,
-        discount: 0,
-        total: 0,
-        recieved: 0,
-        change: 0,
+        discount : total_.value ,
+        total: total_discount.value,
+        recieved: recive_mon.value,
+        change: change_money.value,
         payment: 'promptpay',
         orderItems: orderItemList.value
       };

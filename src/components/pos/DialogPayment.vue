@@ -10,7 +10,6 @@ function Paypromptpay() {
   pointOfSaleStore.order.payment = 'promptpay'
 }
 function Paycash() {
-  pointOfSaleStore.dialogPrompypay = true
   pointOfSaleStore.order.payment = 'cash'
 }
 
