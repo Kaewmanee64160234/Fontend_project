@@ -15,22 +15,22 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true,
+        requiresAuth: true
       }
     },
     {
       path: '/about',
       name: 'about',
       components: {
-        default: ()=> import('@/views/AboutView.vue'),
+        default: () => import('@/views/AboutView.vue'),
         menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: 'MainLayout',
+        layout: 'MainLayout'
       }
     },
-    
+
     {
       path: '/product',
       name: 'product',
@@ -42,11 +42,10 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true,
-
+        requiresAuth: true
       }
     },
-    
+
     {
       path: '/login',
       name: 'login',
@@ -69,105 +68,116 @@ const router = createRouter({
 
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true,
-
+        requiresAuth: true
       }
     },
-    
+
     {
-      path: "/employee",
-      name: "employee",
+      path: '/employee',
+      name: 'employee',
 
       components: {
-        default: () => import("../views/employees/EmployeeView.vue"),
-        menu: () => import("@/components/menus/MainMenu.vue"),
-        header: () => import("@/components/headers/MainHeader.vue"),
+        default: () => import('../views/employees/EmployeeView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: "MainLayout",
-        requiresAuth: true,
-      },
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
     },
     {
-      path: "/store",
-      name: "store",
+      path: '/store',
+      name: 'store',
 
       components: {
-        default: () => import("../views/stores/StoreView.vue"),
-        menu: () => import("@/components/menus/MainMenu.vue"),
-        header: () => import("@/components/headers/MainHeader.vue"),
+        default: () => import('../views/stores/StoreView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: "MainLayout",
-        requiresAuth: true,
-      },
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
     },
     {
-      path: "/user",
-      name: "user",
+      path: '/user',
+      name: 'user',
 
       components: {
-        default: () => import("../views/users/UserView.vue"),
-        menu: () => import("@/components/menus/MainMenu.vue"),
-        header: () => import("@/components/headers/MainHeader.vue"),
+        default: () => import('../views/users/UserView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: "MainLayout",
-        requiresAuth: true,
-
-      },
-    },{
-      path: "/material",
-      name: "material",
-
-      components: {
-        default: () => import("../views/materials/MaterialsView.vue"),
-        menu: () => import("@/components/menus/MainMenu.vue"),
-        header: () => import("@/components/headers/MainHeader.vue"),
-      },
-      meta: {
-        layout: "MainLayout",
-        requiresAuth: true,
-      },
-    }, {
-      path: "/employee/login",
-      name: "employee login",
-
-      components: {
-        default: () => import("../views/EmployeeLogin.vue"),
-        menu: () => import("@/components/menus/MainMenu.vue"),
-        header: () => import("@/components/headers/MainHeader.vue"),
-      },
-      meta: {
-        layout: "MainLayout",
-        requiresAuth: true,
-      },
-    },{
-      path: "/:pathMatch(.*)*",
-      name: "not-found",
-      component: () => import("@/views/NotFound.vue")
-,
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
     },
-   
+    {
+      path: '/material',
+      name: 'material',
 
+      components: {
+        default: () => import('../views/materials/MaterialsView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+
+      components: {
+        default: () => import('../views/order/OrderView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/employee/login',
+      name: 'employee login',
+
+      components: {
+        default: () => import('../views/EmployeeLogin.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/views/NotFound.vue')
+    }
   ]
 })
 const isLoggedIn = () => {
-  const user = localStorage.getItem("user");
+  const user = localStorage.getItem('user')
   if (user) {
-    return true;
+    return true
   } else {
-    return false;
+    return false
   }
-};
+}
 router.beforeEach((to, from) => {
   if (to.meta.requiresAuth && !isLoggedIn()) {
     return {
-      path: "/login",
-      query: { redirect: to.fullPath },
-    };
+      path: '/login',
+      query: { redirect: to.fullPath }
+    }
   }
-});
+})
 
-export default router;
-
+export default router
