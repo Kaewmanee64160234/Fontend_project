@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMenuStore } from '@/store/menu'
 import { onMounted, ref } from 'vue'
-import TestDialog from '@/components/TestDialog.vue'
+import TestDialog from '@/components/ToppingDialog.vue'
 import MenuCard from '@/components/MenuCard.vue'
 import FindMemberDialog from '@/components/FindMemberDialog.vue'
 import PromotionDialog from '@/components/promotion/PromotionDialog.vue'
@@ -25,8 +25,23 @@ const addToCart = (item: Product) => {
   pointOfSaleStore.dialogTopping = true
 }
 
-const deleteOrderItem = (index:number) => {
+const deleteOrderItem = (index: number) => {
   pointOfSaleStore.orderItemList.splice(index, 1)
+}
+const addAmoutProduct = (index: number) => {
+  pointOfSaleStore.orderItemList[index].amount += 1
+  pointOfSaleStore.orderItemList[index].total =
+    pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
+}
+
+const reduceAmoutProduct = (index: number) => {
+  if (pointOfSaleStore.orderItemList[index].amount <= 1) {
+    deleteOrderItem(index)
+  } else {
+    pointOfSaleStore.orderItemList[index].amount -= 1
+    pointOfSaleStore.orderItemList[index].total =
+      pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
+  }
 }
 </script>
 
@@ -72,22 +87,45 @@ const deleteOrderItem = (index:number) => {
                   <th scope="col" class="text-center">จำนวน</th>
                   <th scope="col" class="text-center">ราคา</th>
                   <th scope="col" class="text-center">ราคารวม</th>
-                  <th scope="col" class="text-center">เพิ่มเติม</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-if="pointOfSaleStore.orderItemList.length === 0">
-                  <td style="text-align: center" colspan="6">No data</td>
+                  <td style="text-align: center" colspan="5">No data</td>
                 </tr>
                 <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index">
                   <td style="text-align: center">{{ index + 1 }}</td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
-                  <td class="text-center">{{ item.amount }}</td>
-                  <td class="text-center">{{ item.price }}</td>
+                  <td class="text-center">
+                    <v-btn
+                      color="secondary"
+                      icon="mdi-plus"
+                      size="x-small"
+                      variant="text"
+                      @click="addAmoutProduct(index)"
+                    ></v-btn
+                    ><span class="pa-2">{{ item.amount }}</span>
+                    <v-btn
+                      color="warning"
+                      variant="text"
+                      icon="mdi-minus-thick"
+                      size="x-small"
+                      @click="reduceAmoutProduct(index)"
+                    ></v-btn>
+                  </td>
+                  <td class="text-center">
+                    {{ item.price }}
+                  </td>
                   <td class="text-center">{{ item.total }}</td>
-                  <td class="text-center">addOn</td>
-                  <td><v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn></td>
+                  <td>
+                    <v-btn
+                      color="red"
+                      icon="mdi-delete"
+                      size="x-small"
+                      @click="deleteOrderItem(index)"
+                    ></v-btn>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -148,7 +186,9 @@ const deleteOrderItem = (index:number) => {
                   <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true"
                     >Find Member</v-btn
                   >
-                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder">Save</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder"
+                    >Save</v-btn
+                  >
                 </div>
               </div>
             </div>
