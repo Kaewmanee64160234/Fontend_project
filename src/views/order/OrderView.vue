@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import router from '@/router';
 import { useOrderStore } from '@/store/order.store';
 import { onMounted } from 'vue';
 
 const orderStore = useOrderStore();
-
+const goTo = (index:string) => { 
+    router.push('/order/' + index);
+}
 onMounted(() => {
     orderStore.getOrders();
     
@@ -49,7 +52,7 @@ onMounted(() => {
 
               <td>
                  
-                ><v-btn color="#F55050" class="mdi mdi-delete" >Delete</v-btn>
+                ><v-btn color="primary" class="mdi mdi-home-city" @click="goTo(item.id+'')">More</v-btn>
               </td>
             </tr>
            
