@@ -29,4 +29,8 @@ const deleteCustomer = (id:string)=>{
     return http.delete(`/customers/${id}`);
 }
 
-export default {getCustomers,createCustomer,updateCustomer,deleteCustomer}
+const upDatePointCustomer = (id:string,point:number)=>{
+    return http.patch(`/customers/${id}`,point);
+}
+
+export default {getCustomers,createCustomer,updateCustomer,deleteCustomer,upDatePointCustomer}
