@@ -41,12 +41,11 @@ const reduceAmoutProduct = (index: number) => {
 }
 
 const aboutCal = computed(() => {
-  return pointOfSaleStore.CaltotalPrice();
+  return pointOfSaleStore.CaltotalPrice()
 })
 
 onMounted(() => {
   productStore.getProductByCatagory('2')
-
 })
 </script>
 
@@ -69,11 +68,15 @@ onMounted(() => {
           </div>
           <div class="row">
             <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
-
-              <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
-                :catagory-id="item.catagoryId + ''" @click="addToCart(item)"></MenuCard>
-              <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
-                :catagory-id="item.catagoryId + ''" @click="addToCart(item)"></MenuCard>
+              <MenuCard
+                :name="item.name"
+                :cost="item.price"
+                :type="item.type + ''"
+                :img="item.image!"
+                :price="item.price"
+                :catagory-id="item.catagoryId + ''"
+                @click="addToCart(item)"
+              ></MenuCard>
             </div>
           </div>
         </div>
@@ -88,7 +91,7 @@ onMounted(() => {
                   <th scope="col" class="text-center">จำนวน</th>
                   <th scope="col" class="text-center">ราคา</th>
                   <th scope="col" class="text-center">ราคารวม</th>
-                  <th scope="col" class="text-center">เพิ่มเติม</th>
+
                   <th></th>
                 </tr>
               </thead>
@@ -99,24 +102,35 @@ onMounted(() => {
                 <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index">
                   <td style="text-align: center">{{ index + 1 }}</td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
-                  <td class="text-center">{{ item.amount }}</td>
-                  <td class="text-center">{{ item.price }}</td>
                   <td class="text-center">
-                    <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
-                      @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
-                    <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
-                      @click="reduceAmoutProduct(index)"></v-btn>
+                    <v-btn
+                      color="secondary"
+                      icon="mdi-plus"
+                      size="x-small"
+                      variant="text"
+                      @click="addAmoutProduct(index)"
+                    ></v-btn
+                    ><span class="pa-2">{{ item.amount }}</span>
+                    <v-btn
+                      color="warning"
+                      variant="text"
+                      icon="mdi-minus-thick"
+                      size="x-small"
+                      @click="reduceAmoutProduct(index)"
+                    ></v-btn>
                   </td>
-                <td class="text-center">
+                  <td class="text-center">
                     {{ item.price }}
                   </td>
                   <td class="text-center">{{ item.total }}</td>
                   <td>
-                    <v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
+                    <v-btn
+                      color="red"
+                      icon="mdi-delete"
+                      size="x-small"
+                      @click="deleteOrderItem(index)"
+                    ></v-btn>
                   </td>
-
-                  <td class="text-center">addOn</td>
-                  <td><v-btn color="red" icon="mdi-delete" size="x-small"></v-btn></td>
                 </tr>
               </tbody>
             </table>
@@ -127,8 +141,7 @@ onMounted(() => {
               <div class="col-md-7">
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ราคารวม :</p>
-                  <p class="fw-bold mb-0">{{ aboutCal?.total_
-                  }} บาท</p>
+                  <p class="fw-bold mb-0">{{ aboutCal?.total_ }} บาท</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ส่วนลด :</p>
@@ -144,16 +157,33 @@ onMounted(() => {
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">จำนวนเงินที่ทอน :</p>
-                  <p class="fw-bold mb-0" v-if="aboutCal?.change_money?.value! <0"  style="color: red;">{{ aboutCal?.change_money }} บาท</p>
+                  <p
+                    class="fw-bold mb-0"
+                    v-if="aboutCal?.change_money?.value! <0"
+                    style="color: red"
+                  >
+                    {{ aboutCal?.change_money }} บาท
+                  </p>
                   <p class="fw-bold mb-0" v-else>{{ aboutCal?.change_money }} บาท</p>
                 </div>
               </div>
 
               <div class="col-md-5">
                 <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
-                <input class="form-control" id="amount" type="text" placeholder="Amount" v-model="pointOfSaleStore.recive_mon" />
-                <v-btn color="#E9A178" width="inherit" class="mt-5"
-                  @click="pointOfSaleStore.dialogPayment = true">Payment</v-btn>
+                <input
+                  class="form-control"
+                  id="amount"
+                  type="text"
+                  placeholder="Amount"
+                  v-model="pointOfSaleStore.recive_mon"
+                />
+                <v-btn
+                  color="#E9A178"
+                  width="inherit"
+                  class="mt-5"
+                  @click="pointOfSaleStore.dialogPayment = true"
+                  >Payment</v-btn
+                >
               </div>
             </div>
           </div>
@@ -161,15 +191,22 @@ onMounted(() => {
             <div class="row">
               <div class="col-md-6">
                 <div class="d-flex justify-content-between">
-                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.dialogPromotion = true">Promotion</v-btn>
+                  <v-btn
+                    color="#E9A178"
+                    class="mt-5"
+                    @click="pointOfSaleStore.dialogPromotion = true"
+                    >Promotion</v-btn
+                  >
                   <v-btn color="#E9A178" class="mt-5">Clear All</v-btn>
                 </div>
                 <br />
                 <div class="d-flex justify-content-between">
-                  <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true">Find Member</v-btn>
-                  <v-btn color="#E9A178" class="mt-5">Save</v-btn>
-                  <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true">Find Member</v-btn>
-                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder">Save</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true"
+                    >Find Member</v-btn
+                  >
+                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder"
+                    >Save</v-btn
+                  >
                 </div>
               </div>
             </div>
