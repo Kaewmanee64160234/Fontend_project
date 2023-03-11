@@ -12,14 +12,18 @@ const product_ = computed(() => {
 const save = () => {
   const product = pointOfSaleStore.orderItemList.findIndex((item_) => {
     if (item_.productId === product_.value.id) {
-      return (item_.amount += 1)
+      item_.amount +=1;
+      item_.total = item_.amount * item_.price;
+      return item_;
     }
   })
   if (product < 0) {
     const orderItem = ref<OrderItem>({
       name: product_.value.name,
       amount: 1,
-      productId: product_.value.id!
+      productId: product_.value.id!,
+      price: product_.value.price,
+      total: product_.value.price * 1
     })
     pointOfSaleStore.addToOrder(orderItem.value)
   }
@@ -27,10 +31,10 @@ const save = () => {
 }
 </script>
 <template>
-  <v-dialog v-model="pointOfSaleStore.dialogTopping" width="auto" min-width="300px">
+  <v-dialog v-model="pointOfSaleStore.dialogTopping" width="35vw" min-width="500px">
     <v-card>
       <v-card-title>
-        {{ product_.name}}
+        {{ product_.name }}
       </v-card-title>
       <v-card-text v-if="product_.catagoryId === 2">
         <div class="d-flex align-left flex-column">
@@ -43,7 +47,7 @@ const save = () => {
         </div>
         <div
           class="d-flex align-left flex-column"
-          v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate'"
+          v-if="product_.type === 'tea' && 'smoothies' && 'milkshakes' && 'hot chocolate'"
         >
           <h5>Sweet</h5>
 
@@ -54,7 +58,7 @@ const save = () => {
             <v-btn>หวาน125% +15</v-btn>
           </v-btn-toggle>
         </div>
-        <div v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate'">
+        <div v-if="product_.type === 'tea' && 'smoothies' && 'milkshakes' && 'hot chocolate'">
           <h5>Topping</h5>
 
           <v-chip-group v-model="pointOfSaleStore.amenities" column multiple>
@@ -64,11 +68,8 @@ const save = () => {
             <v-chip filter variant="outlined"> วิปครีม +10 </v-chip>
           </v-chip-group>
         </div>
-        <div v-if="product_.type === 'juice' || 'soda' || 'alcoholic beverages' || 'etc.'"></div>
       </v-card-text>
-      <v-card-text>
-        เพิ่มลงตระกร้า 🛒
-      </v-card-text>
+      <v-card-text v-else> เพิ่มลงตระกร้า 🛒 </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="secondary" variant="text" @click="save()"> Save </v-btn>

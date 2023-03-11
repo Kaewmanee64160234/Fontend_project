@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Order } from './types/Order.type'
-import type { OrderItem } from './types/orderItem.type'
 import type Product from './types/product.type'
+import type { OrderItem } from './types/orderItem.type'
+import { useLoadingStore } from './loading'
+import orderService from '@/services/order'
+import type { Order } from '@/store/types/Order.type'
 
 export const usePointOfSale = defineStore('point of sale', () => {
   const dialogPayment = ref(false)
@@ -13,6 +15,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   const toggle = ref(null)
   const toggle2 = ref(null)
   const amenities = ref([])
+  const loadingStore = useLoadingStore();
   const temProduct = ref<Product>({
     name: '',
     catagoryId: 1,
@@ -24,12 +27,13 @@ export const usePointOfSale = defineStore('point of sale', () => {
     files: []
   })
   const order = ref<Order>({
-    customerId: '',
+
+    customerId: 1,
     discount: 0,
     total: 0,
     recieved: 0,
     change: 0,
-    payment: '',
+    payment: 'promptpay',
     orderItems: orderItemList.value
   })
   const pointofsaleStore = usePointOfSale();
@@ -40,13 +44,14 @@ export const usePointOfSale = defineStore('point of sale', () => {
     const change_money = ref(0);
     const CaltotalPrice = () => {
         if (pointofsaleStore.orderItemList.length > 0) {
-            let cal = 0;
-            for (let i = 0; i < pointofsaleStore.orderItemList.length; i++) {
-                cal += pointofsaleStore.orderItemList[i].amount;
-            }
-            total_.value = cal;
+         total_.value =  orderItemList.value.reduce(
+            (accumulator, currentValue) => accumulator + currentValue.total,
+            0
+          )
+          return {total_,totalAndDicount,change_money}
         } else {
             total_.value = 0;
+            return {total_}
         }
     };
     const CalDiscout = (discout: number) => {
@@ -78,6 +83,36 @@ export const usePointOfSale = defineStore('point of sale', () => {
     return temProduct.value
   }
 
+  async function openOrder() {
+    // const orderItems = orderList.value.map(item) => 
+    // <{ productId: number; amount: number}> {
+    //   productId = item.product.id,
+    //   amount = item.amount,}
+    // };
+    loadingStore.isLoading = true;
+    try {
+      console.log(order.value);
+      const res = await orderService.saveOrder(order.value);
+      console.log(res.data);
+     
+      order.value = {
+        customerId: 1,
+        discount: 0,
+        total: 0,
+        recieved: 0,
+        change: 0,
+        payment: 'promptpay',
+        orderItems: orderItemList.value
+      };
+      orderItemList.value = [];
+
+  
+    } catch (e) {
+      console.log(e);
+    }
+    loadingStore.isLoading = false;
+  }
+
   return {
     total_,
     total_dicount,
@@ -98,6 +133,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     order,
     toggle,
     toggle2,
-    amenities
+    amenities,
+    openOrder
   }
 })

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMenuStore } from '@/store/menu'
 import { onMounted, ref } from 'vue'
-import TestDialog from '@/components/TestDialog.vue'
+import TestDialog from '@/components/ToppingDialog.vue'
 import MenuCard from '@/components/MenuCard.vue'
 import FindMemberDialog from '@/components/FindMemberDialog.vue'
 import PromotionDialog from '@/components/promotion/PromotionDialog.vue'
@@ -11,11 +11,12 @@ import { useCustomerStore } from '@/store/customer.store'
 import { useProductStore } from '@/store/product.store'
 import type Product from '@/store/types/product.type'
 import type { OrderItem } from '@/store/types/orderItem.type'
-import { computed } from '@vue/reactivity'
+import { computed } from 'vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const menuStore = useMenuStore()
 const pointOfSaleStore = usePointOfSale()
+
 onMounted(async () => {
   await productStore.getProducts()
   menuStore.menuFilter('Drinks')
@@ -23,9 +24,28 @@ onMounted(async () => {
 
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
-  pointOfSaleStore.dialogTopping = true;
+  pointOfSaleStore.dialogTopping = true
 }
-const total = computed(() => {
+
+const deleteOrderItem = (index: number) => {
+  pointOfSaleStore.orderItemList.splice(index, 1)
+}
+const addAmoutProduct = (index: number) => {
+  pointOfSaleStore.orderItemList[index].amount += 1
+  pointOfSaleStore.orderItemList[index].total =
+    pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
+}
+
+const reduceAmoutProduct = (index: number) => {
+  if (pointOfSaleStore.orderItemList[index].amount <= 1) {
+    deleteOrderItem(index)
+  } else {
+    pointOfSaleStore.orderItemList[index].amount -= 1
+    pointOfSaleStore.orderItemList[index].total =
+      pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
+  }
+}
+const aboutCal = computed(() => {
   return pointOfSaleStore.CaltotalPrice();
 })
 </script>
@@ -52,7 +72,15 @@ const total = computed(() => {
 
               <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
                 :catagory-id="item.catagoryId + ''" @click="addToCart(item)"></MenuCard>
-
+              <MenuCard
+                :name="item.name"
+                :cost="item.price"
+                :type="item.type + ''"
+                :img="item.image!"
+                :price="item.price"
+                :catagory-id="item.catagoryId + ''"
+                @click="addToCart(item)"
+              ></MenuCard>
             </div>
           </div>
         </div>
@@ -62,23 +90,50 @@ const total = computed(() => {
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="text-center"></th>
+                  <th scope="col" class="text-center">ลำดับ</th>
                   <th scope="col" class="text-center">รายการ</th>
                   <th scope="col" class="text-center">จำนวน</th>
-                  <th scope="col" class="text-center">เพิ่มเติม</th>
-                  <th></th>
+                  <th scope="col" class="text-center">ราคา</th>
+                  <th scope="col" class="text-center">ราคารวม</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-if="pointOfSaleStore.orderItemList.length === 0">
-                  <td style="text-align: center" colspan="4">No data</td>
+                  <td style="text-align: center" colspan="5">No data</td>
                 </tr>
                 <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index">
                   <td style="text-align: center">{{ index + 1 }}</td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
-                  <td class="text-center">{{ item.amount }}</td>
-                  <td class="text-center">addOn</td>
+                  <td class="text-center">
+                    <v-btn
+                      color="secondary"
+                      icon="mdi-plus"
+                      size="x-small"
+                      variant="text"
+                      @click="addAmoutProduct(index)"
+                    ></v-btn
+                    ><span class="pa-2">{{ item.amount }}</span>
+                    <v-btn
+                      color="warning"
+                      variant="text"
+                      icon="mdi-minus-thick"
+                      size="x-small"
+                      @click="reduceAmoutProduct(index)"
+                    ></v-btn>
+                  </td>
+                  <td class="text-center">
+                    {{ item.price }}
+                  </td>
+                  <td class="text-center">{{ item.total }}</td>
+                  <td>
+                    <v-btn
+                      color="red"
+                      icon="mdi-delete"
+                      size="x-small"
+                      @click="deleteOrderItem(index)"
+                    ></v-btn>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -89,7 +144,7 @@ const total = computed(() => {
               <div class="col-md-7">
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ราคารวม :</p>
-                  <p class="fw-bold mb-0">{{ total
+                  <p class="fw-bold mb-0">{{ aboutCal?.total_
                   }} บาท</p>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -129,6 +184,12 @@ const total = computed(() => {
                 <div class="d-flex justify-content-between">
                   <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true">Find Member</v-btn>
                   <v-btn color="#E9A178" class="mt-5">Save</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true"
+                    >Find Member</v-btn
+                  >
+                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder"
+                    >Save</v-btn
+                  >
                 </div>
               </div>
             </div>
