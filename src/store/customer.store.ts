@@ -119,6 +119,10 @@ export const useCustomerStore = defineStore('customer', () => {
 
   }
 
+  const addPointCustomer = (id: string,point:number) => {
+
+  }
+
   return {
     deleteCustomers,
     selectCustomer,
@@ -133,6 +137,7 @@ export const useCustomerStore = defineStore('customer', () => {
     saveCustomer,
     editedCustomer,
     search,
-    AddPoint
+    AddPoint,
+    addPointCustomer
   }
 })
