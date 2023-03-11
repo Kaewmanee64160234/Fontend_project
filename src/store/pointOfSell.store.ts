@@ -4,8 +4,9 @@ import type Product from './types/product.type'
 import type { OrderItem } from './types/orderItem.type'
 import { useLoadingStore } from './loading'
 import orderService from '@/services/order'
-import type { Order } from '@/store/types/Order.type'
 import { useMessageStore } from './message'
+import { useAuthStore } from './auth'
+import type { Order } from '@/store/types/Order.type'
 
 export const usePointOfSale = defineStore('point of sale', () => {
   const messageStore = useMessageStore();
@@ -29,7 +30,6 @@ export const usePointOfSale = defineStore('point of sale', () => {
     files: []
   })
   const order = ref<Order>({
-
     customerId: 1,
     discount: 10,
     total: 0,
@@ -115,14 +115,9 @@ export const usePointOfSale = defineStore('point of sale', () => {
   }
 
   async function openOrder() {
-    // const orderItems = orderList.value.map(item) => 
-    // <{ productId: number; amount: number}> {
-    //   productId = item.product.id,
-    //   amount = item.amount,}
-    // };
     loadingStore.isLoading = true;
     try {
-      console.log(order.value);
+      
       const res = await orderService.saveOrder(order.value);
       console.log(res.data);
      
@@ -140,6 +135,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถบันทึกข้อมูล Orders ได้");
     }
     loadingStore.isLoading = false;
   }

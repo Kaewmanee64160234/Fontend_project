@@ -14,13 +14,7 @@ import type { OrderItem } from '@/store/types/orderItem.type'
 import { computed } from 'vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
-const menuStore = useMenuStore()
 const pointOfSaleStore = usePointOfSale()
-
-onMounted(async () => {
-  await productStore.getProducts()
-  menuStore.menuFilter('Drinks')
-})
 
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
@@ -45,8 +39,14 @@ const reduceAmoutProduct = (index: number) => {
       pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
   }
 }
+
 const aboutCal = computed(() => {
   return pointOfSaleStore.CaltotalPrice();
+})
+
+onMounted(() => {
+  productStore.getProductByCatagory('2')
+
 })
 </script>
 
@@ -62,9 +62,9 @@ const aboutCal = computed(() => {
         <div class="col-md-6 item-side">
           <div class="row-md-6">
             <v-tabs fixed-tabs color="#9F8772" dark>
-              <v-tab @click="menuStore.menuFilter('drink')"> เครื่องดื่ม </v-tab>
-              <v-tab @click="menuStore.menuFilter('food')"> อาหาร </v-tab>
-              <v-tab @click="menuStore.menuFilter('snack')"> ของหวาน </v-tab>
+              <v-tab @click="productStore.getProductByCatagory('2')"> เครื่องดื่ม </v-tab>
+              <v-tab @click="productStore.getProductByCatagory('1')"> อาหาร </v-tab>
+              <v-tab @click="productStore.getProductByCatagory('3')"> ของหวาน </v-tab>
             </v-tabs>
           </div>
           <div class="row">
@@ -88,29 +88,35 @@ const aboutCal = computed(() => {
                   <th scope="col" class="text-center">จำนวน</th>
                   <th scope="col" class="text-center">ราคา</th>
                   <th scope="col" class="text-center">ราคารวม</th>
+                  <th scope="col" class="text-center">เพิ่มเติม</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-if="pointOfSaleStore.orderItemList.length === 0">
-                  <td style="text-align: center" colspan="5">No data</td>
+                  <td style="text-align: center" colspan="6">No data</td>
                 </tr>
                 <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index">
                   <td style="text-align: center">{{ index + 1 }}</td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
+                  <td class="text-center">{{ item.amount }}</td>
+                  <td class="text-center">{{ item.price }}</td>
                   <td class="text-center">
                     <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
                       @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
                     <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
                       @click="reduceAmoutProduct(index)"></v-btn>
                   </td>
-                  <td class="text-center">
+                <td class="text-center">
                     {{ item.price }}
                   </td>
                   <td class="text-center">{{ item.total }}</td>
                   <td>
                     <v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
                   </td>
+
+                  <td class="text-center">addOn</td>
+                  <td><v-btn color="red" icon="mdi-delete" size="x-small"></v-btn></td>
                 </tr>
               </tbody>
             </table>
@@ -138,8 +144,8 @@ const aboutCal = computed(() => {
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">จำนวนเงินที่ทอน :</p>
-                  <p class="fw-bold mb-0" v-if="aboutCal?.change_money?.value! <0"  style="color: red;">{{ aboutCal?.change_money }}</p>
-                  <p class="fw-bold mb-0" v-else>{{ aboutCal?.change_money }}</p>
+                  <p class="fw-bold mb-0" v-if="aboutCal?.change_money?.value! <0"  style="color: red;">{{ aboutCal?.change_money }} บาท</p>
+                  <p class="fw-bold mb-0" v-else>{{ aboutCal?.change_money }} บาท</p>
                 </div>
               </div>
 

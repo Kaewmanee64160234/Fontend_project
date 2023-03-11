@@ -4,6 +4,10 @@ function getProducts() {
   return http.get("/products");
 }
 
+function getProductByCatagory(id: string){
+  return http.get("/products/catagory/" + id);
+}
+
 function saveProduct(product: Product & { files: File[] }) {
     const formData = new FormData();
     formData.append("name", product.name);
@@ -36,4 +40,4 @@ function deleteProduct(id: number) {
   return http.delete(`/products/${id}`);
 }
 
-export default { getProducts, saveProduct, updateProduct, deleteProduct };
+export default { getProducts, saveProduct, updateProduct, deleteProduct, getProductByCatagory };
