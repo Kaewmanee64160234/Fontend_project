@@ -64,9 +64,11 @@ const addToCart = (item: Product) => {
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="text-center"></th>
+                  <th scope="col" class="text-center">ลำดับ</th>
                   <th scope="col" class="text-center">รายการ</th>
                   <th scope="col" class="text-center">จำนวน</th>
+                  <th scope="col" class="text-center">ราคา</th>
+                  <th scope="col" class="text-center">ราคารวม</th>
                   <th scope="col" class="text-center">เพิ่มเติม</th>
                   <th></th>
                   <th></th>
@@ -74,12 +76,14 @@ const addToCart = (item: Product) => {
               </thead>
               <tbody>
                 <tr v-if="pointOfSaleStore.orderItemList.length === 0">
-                  <td style="text-align: center" colspan="4">No data</td>
+                  <td style="text-align: center" colspan="6">No data</td>
                 </tr>
                 <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index">
                   <td style="text-align: center">{{ index + 1 }}</td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
                   <td class="text-center">{{ item.amount }}</td>
+                  <td class="text-center">{{ item.price }}</td>
+                  <td class="text-center">{{ item.total }}</td>
                   <td class="text-center">addOn</td>
                 </tr>
               </tbody>
