@@ -10,7 +10,6 @@ import DialogPayment from '@/components/pos/DialogPayment.vue'
 import { useCustomerStore } from '@/store/customer.store'
 import { useProductStore } from '@/store/product.store'
 import type Product from '@/store/types/product.type'
-import type { OrderItem } from '@/store/types/orderItem.type'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const menuStore = useMenuStore()
