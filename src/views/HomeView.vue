@@ -12,13 +12,8 @@ import { useProductStore } from '@/store/product.store'
 import type Product from '@/store/types/product.type'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
-const menuStore = useMenuStore()
 const pointOfSaleStore = usePointOfSale()
 
-onMounted(async () => {
-  await productStore.getProducts()
-  menuStore.menuFilter('Drinks')
-})
 
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
@@ -43,6 +38,9 @@ const reduceAmoutProduct = (index: number) => {
       pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
   }
 }
+onMounted(()=>{
+  productStore.getProductByCatagory('2');
+})
 </script>
 
 <template>
@@ -57,9 +55,9 @@ const reduceAmoutProduct = (index: number) => {
         <div class="col-md-6 item-side">
           <div class="row-md-6">
             <v-tabs fixed-tabs color="#9F8772" dark>
-              <v-tab @click="menuStore.menuFilter('drink')"> เครื่องดื่ม </v-tab>
-              <v-tab @click="menuStore.menuFilter('food')"> อาหาร </v-tab>
-              <v-tab @click="menuStore.menuFilter('snack')"> ของหวาน </v-tab>
+              <v-tab @click="productStore.getProductByCatagory('2')"> เครื่องดื่ม </v-tab>
+              <v-tab @click="productStore.getProductByCatagory('1')"> อาหาร </v-tab>
+              <v-tab @click="productStore.getProductByCatagory('3')"> ของหวาน </v-tab>
             </v-tabs>
           </div>
           <div class="row">

@@ -22,6 +22,8 @@ export const useStoreStore = defineStore('Store', () => {
       editedStore.value = {name:"", address: "", tel: ""};
     }
   })
+
+ 
   
   async function getStores() {
     loadingStore.isLoading = true;

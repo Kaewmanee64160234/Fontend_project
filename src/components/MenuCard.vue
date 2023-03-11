@@ -3,12 +3,8 @@ import { useProductStore } from '@/store/product.store';
 import { onMounted,ref } from 'vue';
 import type Product from '@/store/types/product.type';
 
-const productStore = useProductStore();
 const backendURL = import.meta.env.VITE_URL_PORT;
 
-onMounted(async () => {
-  await productStore.getProducts();
-})
 const props = defineProps({
   name: {
     type: String,
