@@ -24,6 +24,10 @@ const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
   pointOfSaleStore.dialogTopping = true
 }
+
+const deleteOrderItem = (index:number) => {
+  pointOfSaleStore.orderItemList.splice(index, 1)
+}
 </script>
 
 <template>
@@ -83,7 +87,7 @@ const addToCart = (item: Product) => {
                   <td class="text-center">{{ item.price }}</td>
                   <td class="text-center">{{ item.total }}</td>
                   <td class="text-center">addOn</td>
-                  <td><v-btn color="red" icon="mdi-delete" size="x-small">X</v-btn></td>
+                  <td><v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn></td>
                 </tr>
               </tbody>
             </table>
