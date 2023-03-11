@@ -14,6 +14,7 @@ const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const menuStore = useMenuStore()
 const pointOfSaleStore = usePointOfSale()
+
 onMounted(async () => {
   await productStore.getProducts()
   menuStore.menuFilter('Drinks')
@@ -145,7 +146,7 @@ const addToCart = (item: Product) => {
                   <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true"
                     >Find Member</v-btn
                   >
-                  <v-btn color="#E9A178" class="mt-5">Save</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder">Save</v-btn>
                 </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
-import type Order from "@/store/types/order.type";
+
+import type { Order } from "@/store/types/order.type";
 import http from "./axios";
 function getOrders() {
   return http.get("/orders");
