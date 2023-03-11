@@ -4,7 +4,7 @@ import type Product from './types/product.type'
 import type { OrderItem } from './types/orderItem.type'
 import { useLoadingStore } from './loading'
 import orderService from '@/services/order'
-import type { Order } from './types/order.type'
+import type { Order } from '@/store/types/Order.type'
 
 export const usePointOfSale = defineStore('point of sale', () => {
   const dialogPayment = ref(false)
@@ -27,6 +27,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     files: []
   })
   const order = ref<Order>({
+
     customerId: 1,
     discount: 0,
     total: 0,
