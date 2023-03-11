@@ -4,9 +4,11 @@ import type Product from './types/product.type'
 import type { OrderItem } from './types/orderItem.type'
 import { useLoadingStore } from './loading'
 import orderService from '@/services/order'
+import { useMessageStore } from './message'
 import type { Order } from '@/store/types/Order.type'
 
 export const usePointOfSale = defineStore('point of sale', () => {
+  const messageStore = useMessageStore();
   const dialogPayment = ref(false)
   const dialogPrompypay = ref(false)
   const dialogPromotion = ref(false)
@@ -28,13 +30,78 @@ export const usePointOfSale = defineStore('point of sale', () => {
   })
   const order = ref<Order>({
     customerId: 1,
-    discount: 0,
+    discount: 10,
     total: 0,
     recieved: 0,
     change: 0,
     payment: 'promptpay',
     orderItems: orderItemList.value
   })
+  const pointofsaleStore = usePointOfSale();
+  const dialogComplteOrder = ref(false);
+  const total_ = ref(0);
+  const total_discount = ref(0);
+  const totalAndDicount = ref(0);
+  const recive_mon = ref(0);
+  const change_money = ref(0);
+  const CaltotalPrice = () => {
+    if (pointofsaleStore.orderItemList.length > 0) {
+      total_.value = orderItemList.value.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.total,
+        0
+      )
+      if ((total_.value - total_discount.value) <= 0) {
+        totalAndDicount.value = 0
+      } else {
+        totalAndDicount.value = total_.value - total_discount.value;
+      }
+      change_money.value = recive_mon.value - totalAndDicount.value
+      if (recive_mon.value <= 0) {
+        change_money.value = 0;
+      }
+      if (recive_mon.value > 0) {
+        if (change_money.value < 0) {
+          messageStore.showError(
+            `Money not enough : ${(change_money.value)
+            } Bath`
+          );
+        }
+      }
+
+
+      return { total_, totalAndDicount, change_money }
+    } else {
+      total_.value = 0;
+      return { total_ }
+    }
+
+  };
+  const CalDiscout = () => {
+    if (pointofsaleStore.orderItemList.length > 0) {
+      total_discount.value = total_discount.value + order.value.discount,
+        0
+      return { total_discount }
+    } else {
+      total_discount.value = 0;
+      return { total_discount }
+    }
+  };
+  const calMonAndDiscount = () => {
+    if (pointofsaleStore.orderItemList.length > 0) {
+      totalAndDicount.value = total_.value - total_discount.value;
+    }
+    if (recive_mon.value > 0) {
+      if (recive_mon.value - totalAndDicount.value >= 0) {
+        change_money.value = recive_mon.value - totalAndDicount.value;
+      } else {
+        change_money.value = 0;
+      }
+    }
+    return { totalAndDicount }
+  };
+  const deleteAllOrder = async () => {
+    orderItemList.value = []
+  }
 
   const addToOrder = (orderItem: OrderItem) => {
     orderItemList.value.push(orderItem)
@@ -42,27 +109,48 @@ export const usePointOfSale = defineStore('point of sale', () => {
 
   const updatetmpProduct = (product: Product) => {
     temProduct.value = product
-     toggle.value = null
-     toggle2.value = null
-     amenities.value = []
+    toggle.value = null
+    toggle2.value = null
+    amenities.value = []
     return temProduct.value
   }
 
   async function openOrder() {
-    // const orderItems = orderList.value.map(item) => 
-    // <{ productId: number; amount: number}> {
-    //   productId = item.product.id,
-    //   amount = item.amount,}
-    // };
     loadingStore.isLoading = true;
     try {
-      console.log(order.value);
+      if (order.value.orderItems?.length === 0) {
+        messageStore.showError("ไม่สามารถบันทึกข้อมูล Orders ได้");
+        loadingStore.isLoading = false;
+        return;
+      }
+      if (order.value.payment === "promptpay") {
+        order.value = {
+          customerId: 1,
+          discount: total_discount.value,
+          total: totalAndDicount.value,
+          recieved: totalAndDicount.value,
+          change: 0,
+          payment: 'promptpay',
+          orderItems: orderItemList.value
+        }
+      } else {
+        order.value = {
+          customerId: 1,
+          discount: total_discount.value,
+          total: totalAndDicount.value,
+          recieved: recive_mon.value,
+          change: change_money.value,
+          payment: 'cash',
+          orderItems: orderItemList.value
+        }
+      }
+
       const res = await orderService.saveOrder(order.value);
       console.log(res.data);
-     
+
       order.value = {
         customerId: 1,
-        discount: 0,
+        discount: 10,
         total: 0,
         recieved: 0,
         change: 0,
@@ -71,14 +159,24 @@ export const usePointOfSale = defineStore('point of sale', () => {
       };
       orderItemList.value = [];
 
-  
+
     } catch (e) {
       console.log(e);
+      messageStore.showError("ไม่สามารถบันทึกข้อมูล Orders ได้");
     }
     loadingStore.isLoading = false;
+
   }
 
   return {
+    total_,
+    total_discount,
+    CaltotalPrice,
+    CalDiscout,
+    recive_mon,
+    totalAndDicount,
+    change_money,
+    calMonAndDiscount,
     updatetmpProduct,
     temProduct,
     dialogTopping,
@@ -91,6 +189,8 @@ export const usePointOfSale = defineStore('point of sale', () => {
     toggle,
     toggle2,
     amenities,
-    openOrder
+    openOrder,
+    dialogComplteOrder,
+    deleteAllOrder
   }
 })

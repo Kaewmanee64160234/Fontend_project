@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useMenuStore } from '@/store/menu'
 import { onMounted, ref } from 'vue'
 import TestDialog from '@/components/ToppingDialog.vue'
 import MenuCard from '@/components/MenuCard.vue'
@@ -10,6 +9,8 @@ import DialogPayment from '@/components/pos/DialogPayment.vue'
 import { useCustomerStore } from '@/store/customer.store'
 import { useProductStore } from '@/store/product.store'
 import type Product from '@/store/types/product.type'
+import type { OrderItem } from '@/store/types/orderItem.type'
+import { computed } from 'vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()
@@ -37,6 +38,11 @@ const reduceAmoutProduct = (index: number) => {
       pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
   }
 }
+
+const aboutCal = computed(() => {
+  return pointOfSaleStore.CaltotalPrice()
+})
+
 onMounted(() => {
   productStore.getProductByCatagory('2')
 })
@@ -84,7 +90,7 @@ onMounted(() => {
                   <th scope="col" class="text-center">จำนวน</th>
                   <th scope="col" class="text-center">ราคา</th>
                   <th scope="col" class="text-center">ราคารวม</th>
-                  <th scope="col" class="text-center">เพิ่มเติม</th>
+
                   <th></th>
                 </tr>
               </thead>
@@ -95,8 +101,6 @@ onMounted(() => {
                 <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index">
                   <td style="text-align: center">{{ index + 1 }}</td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
-                  <td class="text-center">{{ item.amount }}</td>
-                  <td class="text-center">{{ item.price }}</td>
                   <td class="text-center">
                     <v-btn
                       color="secondary"
@@ -114,8 +118,18 @@ onMounted(() => {
                       @click="reduceAmoutProduct(index)"
                     ></v-btn>
                   </td>
-                  <td class="text-center">addOn</td>
-                  <td><v-btn color="red" icon="mdi-delete" size="x-small"></v-btn></td>
+                  <td class="text-center">
+                    {{ item.price }}
+                  </td>
+                  <td class="text-center">{{ item.total }}</td>
+                  <td>
+                    <v-btn
+                      color="red"
+                      icon="mdi-delete"
+                      size="x-small"
+                      @click="deleteOrderItem(index)"
+                    ></v-btn>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -126,29 +140,42 @@ onMounted(() => {
               <div class="col-md-7">
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ราคารวม :</p>
-                  <p class="fw-bold mb-0">บาท</p>
+                  <p class="fw-bold mb-0">{{ aboutCal?.total_ }} บาท</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ส่วนลด :</p>
-                  <p class="fw-bold mb-0">บาท</p>
+                  <p class="fw-bold mb-0">{{ pointOfSaleStore.total_discount }} บาท</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ยอดที่ต้องชำระ :</p>
-                  <p class="fw-bold mb-0">บาท</p>
+                  <p class="fw-bold mb-0">{{ aboutCal?.totalAndDicount }} บาท</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ยอดรับชำระ :</p>
-                  <p class="fw-bold mb-0">บาท</p>
+                  <p class="fw-bold mb-0">{{ pointOfSaleStore.recive_mon }} บาท</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">จำนวนเงินที่ทอน :</p>
-                  <p class="fw-bold mb-0">บาท</p>
+                  <p
+                    class="fw-bold mb-0"
+                    v-if="aboutCal?.change_money?.value! <0"
+                    style="color: red"
+                  >
+                    {{ aboutCal?.change_money }} บาท
+                  </p>
+                  <p class="fw-bold mb-0" v-else>{{ aboutCal?.change_money }} บาท</p>
                 </div>
               </div>
 
               <div class="col-md-5">
                 <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
-                <input class="form-control" id="amount" type="text" placeholder="Amount" />
+                <input
+                  class="form-control"
+                  id="amount"
+                  type="text"
+                  placeholder="Amount"
+                  v-model="pointOfSaleStore.recive_mon"
+                />
                 <v-btn
                   color="#E9A178"
                   width="inherit"
@@ -169,7 +196,7 @@ onMounted(() => {
                     @click="pointOfSaleStore.dialogPromotion = true"
                     >Promotion</v-btn
                   >
-                  <v-btn color="#E9A178" class="mt-5">Clear All</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
                 </div>
                 <br />
                 <div class="d-flex justify-content-between">

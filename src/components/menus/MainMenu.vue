@@ -39,7 +39,7 @@ const user_ = JSON.parse(user.value);
       to="/store"></v-list-item>
       <v-list-item prepend-icon="mdi-account-group-outline" title="Login employee" value="Login employee"
         to="/employee/login"></v-list-item>
-        <v-list-item prepend-icon="mdi-account-group-outline" title="Order" value="Order"
+        <v-list-item prepend-icon="mdi-book " title="Order" value="Order"
         to="/orders"></v-list-item>
       <v-list-item prepend-icon="mdi-logout-variant" title="Logout" value="logout"
       @click="authStore.logout"></v-list-item>

@@ -5,6 +5,14 @@ const close2Dialog = ()=>{
   pointOfSaleStore.dialogPayment = false;
   pointOfSaleStore.dialogPrompypay = false;
 }
+function Paypromptpay() {
+  pointOfSaleStore.dialogPrompypay = true
+  pointOfSaleStore.order.payment = 'promptpay'
+}
+function Paycash() {
+  pointOfSaleStore.order.payment = 'cash'
+}
+
 </script>
 <template>
   <v-dialog v-model="pointOfSaleStore.dialogPayment" persistent width="600px">
@@ -12,7 +20,7 @@ const close2Dialog = ()=>{
       <v-card-title>💰 Select payment 💰</v-card-title>
       <v-row justify="space-around" class="pa-5">
         <v-col cols="4">
-          <v-card @click="pointOfSaleStore.dialogPrompypay = true">
+          <v-card @click="Paypromptpay">
             <v-img
               :lazy-src="`https://play-lh.googleusercontent.com/UIdkgBTFEFYTbE-_hUnekG5Aq16au9J7C6RI5gnoAeEZV2zMC3XgOnjL-0aYdmyWk6k=w240-h480-rw`"
               src="https://play-lh.googleusercontent.com/UIdkgBTFEFYTbE-_hUnekG5Aq16au9J7C6RI5gnoAeEZV2zMC3XgOnjL-0aYdmyWk6k=w240-h480-rw"
@@ -27,7 +35,7 @@ const close2Dialog = ()=>{
           </v-card>
         </v-col>
         <v-col cols="4">
-          <v-card>
+          <v-card @click="Paycash">
             <v-img
               :lazy-src="`https://media.bizj.us/view/img/10352497/pileofmoney*1200xx2033-1144-249-431.jpg`"
               src="https://media.bizj.us/view/img/10352497/pileofmoney*1200xx2033-1144-249-431.jpg"
