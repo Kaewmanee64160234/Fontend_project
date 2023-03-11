@@ -61,10 +61,9 @@ export const usePointOfSale = defineStore('point of sale', () => {
           }
           if(recive_mon.value >0){
             if(change_money.value <0){
-              change_money.value = 0;
               messageStore.showError(
                 `Money not enough : ${
-                  (recive_mon.value - totalAndDicount.value) * -1
+                  (change_money.value)
                 } Bath`
               );
             }
