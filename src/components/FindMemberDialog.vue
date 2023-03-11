@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { useCustomerStore } from '@/store/customer.store';
-import customer from '@/services/customer';
 const customerStore = useCustomerStore();
 
 onMounted(() => {
@@ -17,6 +16,8 @@ const customers = computed(() => {
   });
   }
 });
+
+
 </script>
 <template>
     <v-dialog persistent v-model="customerStore.dialog" width="50%">
@@ -33,7 +34,7 @@ const customers = computed(() => {
               <template v-slot:append>
               <v-btn variant="tonal"
                     color="teal-darken-1"
-                    @click="customerStore.addPointCustomer(item.id+'',item.point)">Add  Point</v-btn>
+                    @click="customerStore.addPointCustomer(item.id+''),customerStore.dialog = false">Add  Point</v-btn>
               </template>
             </v-list-item>
             </v-list>
