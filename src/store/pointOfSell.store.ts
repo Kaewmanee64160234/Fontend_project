@@ -30,13 +30,75 @@ export const usePointOfSale = defineStore('point of sale', () => {
   })
   const order = ref<Order>({
     customerId: 1,
-    discount: 0,
+    discount: 10,
     total: 0,
     recieved: 0,
     change: 0,
     payment: 'promptpay',
     orderItems: orderItemList.value
   })
+  const pointofsaleStore = usePointOfSale();
+    const total_ = ref(0);
+    const total_discount = ref(0);
+    const totalAndDicount = ref(0);
+    const recive_mon = ref(0);
+    const change_money = ref(0);
+    const CaltotalPrice = () => {
+        if (pointofsaleStore.orderItemList.length > 0) {
+         total_.value =  orderItemList.value.reduce(
+            (accumulator, currentValue) => accumulator + currentValue.total,
+            0
+          )
+          if((total_.value - total_discount.value) <=0){
+            totalAndDicount.value =0
+          }else{
+            totalAndDicount.value = total_.value - total_discount.value;
+          }
+          change_money.value = recive_mon.value- totalAndDicount.value
+          if(recive_mon.value <=0){
+            change_money.value = 0;
+          }
+          if(recive_mon.value >0){
+            if(change_money.value <0){
+              messageStore.showError(
+                `Money not enough : ${
+                  (change_money.value)
+                } Bath`
+              );
+            }
+          }
+
+      
+          return {total_,totalAndDicount,change_money}
+        } else {
+            total_.value = 0;
+            return {total_}
+        }
+        
+    };
+    const CalDiscout = () => {
+      if (pointofsaleStore.orderItemList.length > 0){
+        total_discount.value = total_discount.value + order.value.discount,
+        0
+        return{total_discount}
+      }else{
+        total_discount.value = 0;
+        return {total_discount}
+      }
+      };
+      const calMonAndDiscount = () => {
+        if (pointofsaleStore.orderItemList.length > 0) {
+          totalAndDicount.value = total_.value - total_discount.value;
+        }
+        if (recive_mon.value > 0) {
+          if (recive_mon.value - totalAndDicount.value >= 0) {
+            change_money.value = recive_mon.value - totalAndDicount.value;
+          } else {
+            change_money.value = 0;
+          }
+        }
+        return{totalAndDicount}
+      };
 
   const addToOrder = (orderItem: OrderItem) => {
     orderItemList.value.push(orderItem)
@@ -84,6 +146,14 @@ export const usePointOfSale = defineStore('point of sale', () => {
   }
 
   return {
+    total_,
+    total_discount,
+    CaltotalPrice,
+    CalDiscout,
+    recive_mon,
+    totalAndDicount,
+    change_money,
+    calMonAndDiscount,
     updatetmpProduct,
     temProduct,
     dialogTopping,
