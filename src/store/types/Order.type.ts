@@ -1,12 +1,13 @@
-import type { OrderItem } from "./orderItem.type";
-
-export interface Order{
-    customerId: string;
-    discount: number;
-    total: number;
-    recieved:number;
-    change:number;
-    payment:string;
-    orderItems:OrderItem[];
+import type Customer from "./customer.type";
+import type OrderItem from "./orderItem.type";
+export default interface Order{
+    id?: number;
+    amount?: number;
+    total?: number;
+    customer?: Customer; // Customer Id
+    createdDate?: Date;
+    updatedDate?: Date;
+    deletedDate?: Date;
+    orderItems?: OrderItem[];
 
 }

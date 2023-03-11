@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Order } from './types/Order.type'
-import type { OrderItem } from './types/orderItem.type'
 import type Product from './types/product.type'
+import type OrderItem from './types/orderItem.type'
+import type Order from './types/order.type'
 
 export const usePointOfSale = defineStore('point of sale', () => {
   const dialogPayment = ref(false)
