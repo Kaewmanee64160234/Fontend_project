@@ -22,7 +22,7 @@ onMounted(async () => {
 
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
-  pointOfSaleStore.dialogTopping = true;
+  pointOfSaleStore.dialogTopping = true
 }
 </script>
 
@@ -45,7 +45,6 @@ const addToCart = (item: Product) => {
           </div>
           <div class="row">
             <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
-             
               <MenuCard
                 :name="item.name"
                 :cost="item.price"
@@ -55,7 +54,6 @@ const addToCart = (item: Product) => {
                 :catagory-id="item.catagoryId + ''"
                 @click="addToCart(item)"
               ></MenuCard>
-              
             </div>
           </div>
         </div>
@@ -72,7 +70,6 @@ const addToCart = (item: Product) => {
                   <th scope="col" class="text-center">ราคารวม</th>
                   <th scope="col" class="text-center">เพิ่มเติม</th>
                   <th></th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -86,6 +83,7 @@ const addToCart = (item: Product) => {
                   <td class="text-center">{{ item.price }}</td>
                   <td class="text-center">{{ item.total }}</td>
                   <td class="text-center">addOn</td>
+                  <td><v-btn color="red" icon="mdi-delete" size="x-small">X</v-btn></td>
                 </tr>
               </tbody>
             </table>
