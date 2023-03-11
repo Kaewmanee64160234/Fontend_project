@@ -72,8 +72,6 @@ onMounted(() => {
 
               <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
                 :catagory-id="item.catagoryId + ''" @click="addToCart(item)"></MenuCard>
-              <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
-                :catagory-id="item.catagoryId + ''" @click="addToCart(item)"></MenuCard>
             </div>
           </div>
         </div>
