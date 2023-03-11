@@ -9,5 +9,8 @@ export interface Order{
     change:number;
     payment:string;
     orderItems:OrderItem[];
+    createdDate?: Date
+    updatedDate?: Date
+    deletedDate?: Date
 
 }
