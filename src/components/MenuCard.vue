@@ -36,6 +36,7 @@ const props = defineProps({
   <img 
   class="card-img-top item-img"
         :src="`${backendURL}/products/image/${props.img}`"
+        alt="Card image cap"
         width="120px"
       />
 
