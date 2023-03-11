@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMenuStore } from '@/store/menu'
 import { onMounted, ref } from 'vue'
-import TestDialog from '@/components/TestDialog.vue'
+import TestDialog from '@/components/ToppingDialog.vue'
 import MenuCard from '@/components/MenuCard.vue'
 import FindMemberDialog from '@/components/FindMemberDialog.vue'
 import PromotionDialog from '@/components/promotion/PromotionDialog.vue'
@@ -12,18 +12,34 @@ import { useProductStore } from '@/store/product.store'
 import type Product from '@/store/types/product.type'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
-const menuStore = useMenuStore()
 const pointOfSaleStore = usePointOfSale()
-
-onMounted(async () => {
-  await productStore.getProducts()
-  menuStore.menuFilter('Drinks')
-})
 
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
   pointOfSaleStore.dialogTopping = true
 }
+
+const deleteOrderItem = (index: number) => {
+  pointOfSaleStore.orderItemList.splice(index, 1)
+}
+const addAmoutProduct = (index: number) => {
+  pointOfSaleStore.orderItemList[index].amount += 1
+  pointOfSaleStore.orderItemList[index].total =
+    pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
+}
+
+const reduceAmoutProduct = (index: number) => {
+  if (pointOfSaleStore.orderItemList[index].amount <= 1) {
+    deleteOrderItem(index)
+  } else {
+    pointOfSaleStore.orderItemList[index].amount -= 1
+    pointOfSaleStore.orderItemList[index].total =
+      pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
+  }
+}
+onMounted(() => {
+  productStore.getProductByCatagory('2')
+})
 </script>
 
 <template>
@@ -38,9 +54,9 @@ const addToCart = (item: Product) => {
         <div class="col-md-6 item-side">
           <div class="row-md-6">
             <v-tabs fixed-tabs color="#9F8772" dark>
-              <v-tab @click="menuStore.menuFilter('drink')"> เครื่องดื่ม </v-tab>
-              <v-tab @click="menuStore.menuFilter('food')"> อาหาร </v-tab>
-              <v-tab @click="menuStore.menuFilter('snack')"> ของหวาน </v-tab>
+              <v-tab @click="productStore.getProductByCatagory('2')"> เครื่องดื่ม </v-tab>
+              <v-tab @click="productStore.getProductByCatagory('1')"> อาหาร </v-tab>
+              <v-tab @click="productStore.getProductByCatagory('3')"> ของหวาน </v-tab>
             </v-tabs>
           </div>
           <div class="row">
@@ -81,9 +97,25 @@ const addToCart = (item: Product) => {
                   <td scope="col" class="text-center">{{ item.name }}</td>
                   <td class="text-center">{{ item.amount }}</td>
                   <td class="text-center">{{ item.price }}</td>
-                  <td class="text-center">{{ item.total }}</td>
+                  <td class="text-center">
+                    <v-btn
+                      color="secondary"
+                      icon="mdi-plus"
+                      size="x-small"
+                      variant="text"
+                      @click="addAmoutProduct(index)"
+                    ></v-btn
+                    ><span class="pa-2">{{ item.amount }}</span>
+                    <v-btn
+                      color="warning"
+                      variant="text"
+                      icon="mdi-minus-thick"
+                      size="x-small"
+                      @click="reduceAmoutProduct(index)"
+                    ></v-btn>
+                  </td>
                   <td class="text-center">addOn</td>
-                  <td><v-btn color="red" icon="mdi-delete" size="x-small">X</v-btn></td>
+                  <td><v-btn color="red" icon="mdi-delete" size="x-small"></v-btn></td>
                 </tr>
               </tbody>
             </table>
@@ -144,7 +176,9 @@ const addToCart = (item: Product) => {
                   <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true"
                     >Find Member</v-btn
                   >
-                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder">Save</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder"
+                    >Save</v-btn
+                  >
                 </div>
               </div>
             </div>

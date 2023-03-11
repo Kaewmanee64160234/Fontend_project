@@ -2,14 +2,13 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type Product from './types/product.type'
 import type { OrderItem } from './types/orderItem.type'
-import type { Order } from './types/order.type'
 import { useLoadingStore } from './loading'
 import orderService from '@/services/order'
 import { useMessageStore } from './message'
 import { useAuthStore } from './auth'
+import type { Order } from '@/store/types/Order.type'
 
 export const usePointOfSale = defineStore('point of sale', () => {
-  const authStore = useAuthStore();
   const messageStore = useMessageStore();
   const dialogPayment = ref(false)
   const dialogPrompypay = ref(false)
