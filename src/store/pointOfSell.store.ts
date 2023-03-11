@@ -27,7 +27,6 @@ export const usePointOfSale = defineStore('point of sale', () => {
     files: []
   })
   const order = ref<Order>({
-
     customerId: 1,
     discount: 0,
     total: 0,
