@@ -8,7 +8,7 @@ export interface Order{
     recieved:number;
     change:number;
     payment:string;
-    orderItems:OrderItem[];
+    orderItems?:OrderItem[];
     createdDate?: Date
     updatedDate?: Date
     deletedDate?: Date

@@ -143,6 +143,20 @@ const router = createRouter({
       }
     },
     {
+      path: '/order/:id',
+      name: 'order',
+
+      components: {
+        default: () => import('../views/order/OrderDetail.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
       path: '/employee/login',
       name: 'employee login',
 
