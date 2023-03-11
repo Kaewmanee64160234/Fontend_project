@@ -10,11 +10,11 @@ import DialogPayment from '@/components/pos/DialogPayment.vue'
 import { useCustomerStore } from '@/store/customer.store'
 import { useProductStore } from '@/store/product.store'
 import type Product from '@/store/types/product.type'
-import type { OrderItem } from '@/store/types/orderItem.type'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const menuStore = useMenuStore()
 const pointOfSaleStore = usePointOfSale()
+
 onMounted(async () => {
   await productStore.getProducts()
   menuStore.menuFilter('Drinks')
@@ -148,7 +148,7 @@ const deleteOrderItem = (index:number) => {
                   <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true"
                     >Find Member</v-btn
                   >
-                  <v-btn color="#E9A178" class="mt-5">Save</v-btn>
+                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder">Save</v-btn>
                 </div>
               </div>
             </div>

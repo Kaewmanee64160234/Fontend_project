@@ -1,4 +1,3 @@
-import type { Order } from './Order.type'
 import type Product from './product.type'
 
 export interface OrderItem {
@@ -11,3 +10,4 @@ export interface OrderItem {
   updatedDate?: Date
   deletedDate?: Date
 }
+
