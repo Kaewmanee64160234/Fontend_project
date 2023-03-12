@@ -197,6 +197,13 @@ onMounted(() => {
                     color="#E9A178"
                     class="mt-5"
                     @click="pointOfSaleStore.dialogPromotion = true"
+                    v-if="pointOfSaleStore.order.customerId !== 0"
+                    >Promotion</v-btn
+                  >
+                  <v-btn
+                    color="#E9A178"
+                    class="mt-5"
+                    v-else 
                     >Promotion</v-btn
                   >
                   <v-btn color="#E9A178" class="mt-5" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>

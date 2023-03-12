@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { usePointOfSale } from '@/store/pointOfSell.store';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useCustomerStore } from '@/store/customer.store'
 
+const customerStore = useCustomerStore()
 const pointOfSaleStore =  usePointOfSale();
 let namePromotion = ref("");
 let CodeInput = ref("");
@@ -12,6 +14,9 @@ const showName = (namePromo: string) => {
 const reCode = () => {
   CodeInput = ref("");
 }
+onMounted(() => {
+  customerStore.getCustomers()
+})
 </script>
 
 <template>
@@ -24,7 +29,7 @@ const reCode = () => {
           <v-container>
             <v-row>
               <v-col cols="4"  v-for="item in pointOfSaleStore.promo" :key="item.id">
-                <v-card variant="outlined" class="ma-2 pa-2 card" @click="pointOfSaleStore.selectCode(item.id),showName(item.name)">
+                <v-card variant="outlined" class="ma-2 pa-2 card" @click="pointOfSaleStore.selectCode(item.id),showName(item.name)" >
                   <v-img :src="item.img" style="height: 100px;"></v-img>
                   <v-card-title class="mt-5" style="font-size: 20px; text-align: center;">
                     {{ item.name }}
@@ -42,8 +47,11 @@ const reCode = () => {
              <v-col cols="12">
               <v-text-field
             label="กรุณากรอก Code ⭐"
+            required
             v-model="CodeInput"
-            >
+            :rules="[
+                    (v) => !!v || 'Item is required',
+                  ]">
           </v-text-field></v-col>
             </v-row>
           </v-container>

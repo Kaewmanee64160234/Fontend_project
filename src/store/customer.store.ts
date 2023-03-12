@@ -124,7 +124,7 @@ export const useCustomerStore = defineStore('customer', () => {
       customers.value[customer].point += 5;
       await customerService.updateCustomer(id,{...customers.value[customer],files: []})
       customerId.value = customers.value[customer].id+''
-  
+      pointofsellStore.order.customerId = customers.value[customer].id
     } catch (e) {
       messageStore.showError("ไม่สามารถเพิ่มPoinของลูกค้าได้");
       console.log(e);
@@ -147,6 +147,7 @@ export const useCustomerStore = defineStore('customer', () => {
     saveCustomer,
     editedCustomer,
     search,
-    addPointCustomer
+    addPointCustomer,
+    customerService
   }
 })

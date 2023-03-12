@@ -8,6 +8,7 @@ import { useMessageStore } from './message'
 import type { Order } from '@/store/types/Order.type'
 import { useCustomerStore } from './customer.store'
 import { useOrderStore } from './order.store'
+import customer from '@/services/customer'
 
 export const usePointOfSale = defineStore('point of sale', () => {
   const messageStore = useMessageStore();
@@ -35,7 +36,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     files: []
   })
   const order = ref<Order>({
-    customerId: 1,
+    customerId: 0,
     discount: 10,
     total: 0,
     recieved: 0,
@@ -48,7 +49,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       id: 1,
       name: "แฮปปี้รับแต้ม",
       price: 10,
-      point: 50,
+      point: 30,
       code: "HAPPY250",
       img: "https://cdn-icons-png.flaticon.com/512/2583/2583401.png",
     },
@@ -206,7 +207,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       dialogComplteOrder.value = true;
 
       order.value = {
-        customerId: 1,
+        customerId: 0,
         discount: 10,
         total: 0,
         recieved: 0,
@@ -229,11 +230,21 @@ export const usePointOfSale = defineStore('point of sale', () => {
     realCode.value = promo.value[correctCode].code;
     order.value.discount = promo.value[correctCode].price;
     codePoint.value = promo.value[correctCode].point;
+
   };
   const checkCode = (Code: string) => {
     if(realCode.value === Code) {
-      total_discount.value = order.value.discount;
+      total_discount.value = order.value.discount;      
       dialogPromotion.value = false;
+      const customer = customerStore.customers.findIndex((customer) => customer.id === order.value.customerId)
+      let cusPoint = customerStore.customers[customer].point
+      if(cusPoint >= codePoint.value) {
+        cusPoint = cusPoint - codePoint.value;
+        customerStore.customers[customer].point = cusPoint
+        customerStore.customerService.updateCustomer(order.value.customerId+'',{...customerStore.customers[customer],files: []})
+      } else if(cusPoint < codePoint.value) {
+        messageStore.showError("ไม่สามารถบันทึกข้อมูล Promotion ได้ เนื่องจาก Point ไม่เพียงพอ");
+      }
     }else {
       messageStore.showError("ไม่สามารถบันทึกข้อมูล Promotion ได้");
     }
@@ -265,6 +276,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     deleteAllOrder,
     promo,
     selectCode,
-    checkCode
+    checkCode,
+    codePoint
   }
 })

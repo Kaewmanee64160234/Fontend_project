@@ -39,7 +39,6 @@ const customers = computed(() => {
             </v-list-item>
             </v-list>
            </v-card>
-        
         </v-card-text>
         <v-card-actions>
             <v-btn color="primary" variant="text" @click="customerStore.dialog = false">Close
