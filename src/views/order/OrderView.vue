@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import router from '@/router';
+import { mdiReceiptText } from '@mdi/js';
+
+import ConfirmDialog from '@/components/ConfirmDialog.vue';
 import { useOrderStore } from '@/store/order.store';
 import { onMounted } from 'vue';
 
@@ -13,56 +16,50 @@ onMounted(() => {
 });
 </script>
 <template>
+  <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-container>
     <v-card>
       <v-card-title>
         Orders
-       <v-spacer> </v-spacer>
-        <!-- <v-text-field
-          style="width: 20%"
-          variant="solo"
-          color="deep-purple-accent-4"
-          class="mt-7"
-          density="compact"
-          append-inner-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-          v-model="customerStore.search"
-        ></v-text-field> -->
-        <v-table class="text-center mt-5">
-          <thead>
-            <tr>
-             
-             
-              <th>ID</th>
-              <th>Name</th>
-              <th>tel</th>
-              <th>Point</th>
-              <th>Operations</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item,index) in orderStore.orders" :key="index" class="text-center">
-              
-             
-              <td>{{ item.id }}</td>
-              <td>{{ item.customerId }}</td>
-              <td>{{ item.total }}</td>
+        <VTextField style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
+                    append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="orderStore.search">
+                </VTextField>
+        <VTable class="text-center mt-5">
+                    <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>CustomerID</th>
+                          <th>Discount</th>
+                          <th>Total</th>
+                          <th>Recieved</th>
+                          <th>Change</th>
+                          <th>Payment</th>
+                          <th>Operations</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(item,index) in orderStore.orders" :key="index" class="text-center">
+                          
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.customerId }}</td>
+                        <td>{{ item.discount}}</td>
+                        <td>{{ item.total }}</td>
+                        <td>{{ item.recieved }}</td>
+                        <td>{{ item.change}}</td>
+                        <td>{{ item.payment}}</td>
 
-              <td>
-                 
-                ><v-btn color="primary" class="mdi mdi-home-city" @click="goTo(item.id+'')">More</v-btn>
-              </td>
-            </tr>
-           
-          </tbody>
-          <tbody v-if="orderStore.orders.length == 0" >
-          <tr >
-            <td colspan="7" class="text-center">No data</td>
-          </tr>
-        </tbody>
-        </v-table>
+                            <td>
+                              <v-btn color="grey" class="mdi mdi-receipt-text" @click="goTo(item.id+'')"> RECEIPT </v-btn>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody v-if="orderStore.orders.length == 0" >
+                        <tr>
+                            <td colspan="7" class="text-center">No data</td>
+                        </tr>
+                    </tbody>
+                </VTable>
       </v-card-title>
     </v-card>
   </v-container>
