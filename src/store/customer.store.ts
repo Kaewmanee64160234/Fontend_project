@@ -131,9 +131,6 @@ export const useCustomerStore = defineStore('customer', () => {
     }
     loadingStore.isLoading = false
 }
-const deletePoint = (cusPoint:number) => {
-    
-}
 
   return {
     customerId,
