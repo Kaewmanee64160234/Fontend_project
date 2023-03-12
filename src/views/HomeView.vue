@@ -11,6 +11,7 @@ import { useProductStore } from '@/store/product.store'
 import type Product from '@/store/types/product.type'
 import type { OrderItem } from '@/store/types/orderItem.type'
 import { computed } from 'vue'
+import DialogCompleteOrder from '@/components/pos/DialogCompleteOrder.vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()
@@ -51,6 +52,7 @@ onMounted(() => {
 <template>
   <div class="content-area">
     <DialogPayment></DialogPayment>
+    <DialogCompleteOrder></DialogCompleteOrder>
     <div class="content">
       <FindMemberDialog></FindMemberDialog>
       <PromotionDialog></PromotionDialog>

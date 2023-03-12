@@ -7,13 +7,14 @@ import orderService from '@/services/order'
 import { useMessageStore } from './message'
 import type { Order } from '@/store/types/Order.type'
 import { useCustomerStore } from './customer.store'
+import { useOrderStore } from './order.store'
 
 export const usePointOfSale = defineStore('point of sale', () => {
   const messageStore = useMessageStore();
+  const orderStore = useOrderStore();
   const dialogPayment = ref(false)
   const dialogPrompypay = ref(false)
   const customerStore = useCustomerStore( )
-
   const dialogPromotion = ref(false)
   const orderItemList = ref<OrderItem[]>([])
   const dialogTopping = ref(false)
@@ -147,9 +148,10 @@ export const usePointOfSale = defineStore('point of sale', () => {
           orderItems: orderItemList.value
         }
       }
-
+      
       const res = await orderService.saveOrder(order.value);
-      console.log(res.data);
+      orderStore.tempOrder = res.data;
+      dialogComplteOrder.value = true;
 
       order.value = {
         customerId: 1,
