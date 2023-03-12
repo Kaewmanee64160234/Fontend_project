@@ -46,6 +46,7 @@ const aboutCal = computed(() => {
 
 onMounted(() => {
   productStore.getProductByCatagory('2')
+  pointOfSaleStore.total_discount;
 })
 </script>
 

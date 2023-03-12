@@ -4,10 +4,13 @@ import { ref } from 'vue';
 
 const pointOfSaleStore =  usePointOfSale();
 let namePromotion = ref("");
-const CodeInput = ref("");
+let CodeInput = ref("");
 
 const showName = (namePromo: string) => {
   namePromotion.value = namePromo;
+}
+const reCode = () => {
+  CodeInput = ref("");
 }
 </script>
 
@@ -46,10 +49,10 @@ const showName = (namePromo: string) => {
           </v-container>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue-darken-1" variant="text" @click="pointOfSaleStore.dialogPromotion = false">
+        <v-btn color="primary" variant="text" @click="pointOfSaleStore.dialogPromotion = false">
           Close
         </v-btn>
-        <v-btn color="blue-darken-1" variant="text" @click="pointOfSaleStore.checkCode(CodeInput)"> Save </v-btn>
+        <v-btn color="primary" variant="text" @click="pointOfSaleStore.checkCode(CodeInput),reCode()"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

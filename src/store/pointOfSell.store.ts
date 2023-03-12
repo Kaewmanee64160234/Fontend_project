@@ -230,8 +230,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   };
   const checkCode = (Code: string) => {
     if(realCode.value === Code) {
-      const res = total_discount.value = order.value.discount;
-      console.log(res);
+      total_discount.value = order.value.discount;
       dialogPromotion.value = false;
     }else {
       messageStore.showError("ไม่สามารถบันทึกข้อมูล Promotion ได้");
