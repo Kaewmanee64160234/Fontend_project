@@ -159,7 +159,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       };
       orderItemList.value = [];
 
-
+      
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถบันทึกข้อมูล Orders ได้");

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useMenuStore } from '@/store/menu'
 import { onMounted, ref } from 'vue'
 import TestDialog from '@/components/ToppingDialog.vue'
 import MenuCard from '@/components/MenuCard.vue'
