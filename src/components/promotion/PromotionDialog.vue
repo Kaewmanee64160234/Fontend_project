@@ -15,7 +15,7 @@ const reCode = () => {
 </script>
 
 <template>
-  <v-dialog v-model="pointOfSaleStore.dialogPromotion" persistent width="700">
+  <v-dialog v-model="pointOfSaleStore.dialogPromotion" persistent width="900">
     <v-card>
       <v-card-title >
         <span class="text-h5">Promotion</span>
@@ -23,9 +23,9 @@ const reCode = () => {
       <v-card-text>
           <v-container>
             <v-row>
-              <v-col cols="12" sm="4" v-for="item in pointOfSaleStore.promo" :key="item.id">
+              <v-col cols="4"  v-for="item in pointOfSaleStore.promo" :key="item.id">
                 <v-card variant="outlined" class="ma-2 pa-2 card" @click="pointOfSaleStore.selectCode(item.id),showName(item.name)">
-                  <v-img :src="item.img" class="img-promo"></v-img>
+                  <v-img :src="item.img" style="height: 100px;"></v-img>
                   <v-card-title class="mt-5" style="font-size: 20px; text-align: center;">
                     {{ item.name }}
                   </v-card-title>

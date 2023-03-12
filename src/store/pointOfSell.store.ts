@@ -17,6 +17,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   const customerStore = useCustomerStore( )
   const dialogPromotion = ref(false)
   const realCode = ref("");
+  const codePoint = ref();
   const orderItemList = ref<OrderItem[]>([])
   const dialogTopping = ref(false)
   const toggle = ref(null)
@@ -49,7 +50,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       price: 10,
       point: 50,
       code: "HAPPY250",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+      img: "https://cdn-icons-png.flaticon.com/512/2583/2583401.png",
     },
     {
       id: 2,
@@ -57,15 +58,15 @@ export const usePointOfSale = defineStore('point of sale', () => {
       price: 10,
       point: 100,
       code: "Point10010",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+      img: "https://cdn-icons-png.flaticon.com/512/3399/3399561.png",
     },
     {
       id: 3,
       name: "ช้อปครบลดราคา",
       price: 5,
-      point: 0,
+      point: 5,
       code: "Shop1005",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+      img: "https://cdn-icons-png.flaticon.com/512/9717/9717754.png",
     },
     {
       id: 4,
@@ -73,7 +74,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       price: 20,
       point: 5,
       code: "Shop1006",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+      img: "https://cdn-icons-png.flaticon.com/512/762/762048.png",
     },
     {
       id: 5,
@@ -81,7 +82,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       price: 20,
       point: 5,
       code: "Shop1007",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+      img: "https://cdn-icons-png.flaticon.com/512/3656/3656962.png",
     },
     {
       id: 6,
@@ -89,7 +90,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       price: 20,
       point: 10,
       code: "Shop1008",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+      img: "https://cdn-icons-png.flaticon.com/512/3990/3990495.png",
     },
   ]);
   const pointofsaleStore = usePointOfSale();
@@ -227,6 +228,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     const correctCode = promo.value.findIndex((code) => code.id === idCode);
     realCode.value = promo.value[correctCode].code;
     order.value.discount = promo.value[correctCode].price;
+    codePoint.value = promo.value[correctCode].point;
   };
   const checkCode = (Code: string) => {
     if(realCode.value === Code) {
