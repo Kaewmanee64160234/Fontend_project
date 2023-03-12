@@ -4,7 +4,9 @@ import customerService from '@/services/customer'
 import type Customer from './types/customer.type'
 import { useLoadingStore } from './loading'
 import { useMessageStore } from './message'
+import { usePointOfSale } from './pointOfSell.store'
 export const useCustomerStore = defineStore('customer', () => {
+  const pointofsellStore = usePointOfSale()
   const loadingStore = useLoadingStore()
   const search = ref('');
   const selected = ref<string[] | any[]>([])
@@ -12,6 +14,7 @@ export const useCustomerStore = defineStore('customer', () => {
   const allSelected = ref(false)
   const customers = ref<Customer[]>([])
   const messageStore = useMessageStore()
+  const customerId = ref('');
   const editCustomer = ref<Customer & { files: File[] }>({
     name: '',
     tel: '',
@@ -99,10 +102,6 @@ export const useCustomerStore = defineStore('customer', () => {
   const selectCustomer = () => {
     allSelected.value = false
   }
-  const AddPoint = (phone: string) => {
-    const customer = customers.value.findIndex((customer) => customer.tel === phone);
-    customers.value[customer].point += 5;
-  }
   const deleteCustomers = async () => {
     try{
       loadingStore.isLoading = true
@@ -118,12 +117,23 @@ export const useCustomerStore = defineStore('customer', () => {
     }
 
   }
-
-  const addPointCustomer = (id: string,point:number) => {
-
-  }
+  const addPointCustomer = async (id:string) => {
+    loadingStore.isLoading = true
+    try {
+      const customer = customers.value.findIndex((customer) => customer.id+'' === id);
+      customers.value[customer].point += 5;
+      await customerService.updateCustomer(id,{...customers.value[customer],files: []})
+      customerId.value = customers.value[customer].id+''
+  
+    } catch (e) {
+      messageStore.showError("ไม่สามารถเพิ่มPoinของลูกค้าได้");
+      console.log(e);
+    }
+    loadingStore.isLoading = false
+}
 
   return {
+    customerId,
     deleteCustomers,
     selectCustomer,
     allSelected,
@@ -137,7 +147,6 @@ export const useCustomerStore = defineStore('customer', () => {
     saveCustomer,
     editedCustomer,
     search,
-    AddPoint,
     addPointCustomer
   }
 })
