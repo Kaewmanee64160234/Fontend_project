@@ -72,23 +72,23 @@ export const usePointOfSale = defineStore('point of sale', () => {
       name: "DTAC Reward",
       price: 20,
       point: 5,
-      code: "Shop1005",
+      code: "Shop1006",
       img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
     },
     {
       id: 5,
-      name: "DTAC Reward",
+      name: "AIS Reward",
       price: 20,
       point: 5,
-      code: "Shop1005",
+      code: "Shop1007",
       img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
     },
     {
       id: 6,
-      name: "DTAC Reward",
+      name: "TRUE Reward",
       price: 20,
       point: 10,
-      code: "Shop1005",
+      code: "Shop1008",
       img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
     },
   ]);
@@ -223,10 +223,19 @@ export const usePointOfSale = defineStore('point of sale', () => {
     loadingStore.isLoading = false;
 
   }
-  const checkCode = (idCode: number) => {
+  const selectCode = (idCode: number) => {
     const correctCode = promo.value.findIndex((code) => code.id === idCode);
     realCode.value = promo.value[correctCode].code;
     order.value.discount = promo.value[correctCode].price;
+  };
+  const checkCode = (Code: string) => {
+    if(realCode.value === Code) {
+      const res = total_discount.value = order.value.discount;
+      console.log(res);
+      dialogPromotion.value = false;
+    }else {
+      messageStore.showError("ไม่สามารถบันทึกข้อมูล Promotion ได้");
+    }
   };
 
   return {
@@ -254,6 +263,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     dialogComplteOrder,
     deleteAllOrder,
     promo,
+    selectCode,
     checkCode
   }
 })

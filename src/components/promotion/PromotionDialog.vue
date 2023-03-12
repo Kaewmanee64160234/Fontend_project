@@ -4,6 +4,7 @@ import { ref } from 'vue';
 
 const pointOfSaleStore =  usePointOfSale();
 let namePromotion = ref("");
+const CodeInput = ref("");
 
 const showName = (namePromo: string) => {
   namePromotion.value = namePromo;
@@ -20,7 +21,7 @@ const showName = (namePromo: string) => {
           <v-container>
             <v-row>
               <v-col cols="12" sm="4" v-for="item in pointOfSaleStore.promo" :key="item.id">
-                <v-card variant="outlined" class="ma-2 pa-2 card" @click="pointOfSaleStore.checkCode(item.id),showName(item.name)">
+                <v-card variant="outlined" class="ma-2 pa-2 card" @click="pointOfSaleStore.selectCode(item.id),showName(item.name)">
                   <v-img :src="item.img" class="img-promo"></v-img>
                   <v-card-title class="mt-5" style="font-size: 20px; text-align: center;">
                     {{ item.name }}
@@ -37,7 +38,9 @@ const showName = (namePromo: string) => {
             <v-row >
              <v-col cols="12">
               <v-text-field
-            label="กรุณากรอก Code ⭐">
+            label="กรุณากรอก Code ⭐"
+            v-model="CodeInput"
+            >
           </v-text-field></v-col>
             </v-row>
           </v-container>
@@ -46,7 +49,7 @@ const showName = (namePromo: string) => {
         <v-btn color="blue-darken-1" variant="text" @click="pointOfSaleStore.dialogPromotion = false">
           Close
         </v-btn>
-        <v-btn color="blue-darken-1" variant="text" @click="pointOfSaleStore.dialogPromotion = false"> Save </v-btn>
+        <v-btn color="blue-darken-1" variant="text" @click="pointOfSaleStore.checkCode(CodeInput)"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
