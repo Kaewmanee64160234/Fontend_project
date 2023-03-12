@@ -16,6 +16,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   const dialogPrompypay = ref(false)
   const customerStore = useCustomerStore( )
   const dialogPromotion = ref(false)
+  const realCode = ref("");
   const orderItemList = ref<OrderItem[]>([])
   const dialogTopping = ref(false)
   const toggle = ref(null)
@@ -41,6 +42,56 @@ export const usePointOfSale = defineStore('point of sale', () => {
     payment: 'promptpay',
     orderItems: orderItemList.value
   })
+  const promo = ref([
+    {
+      id: 1,
+      name: "แฮปปี้รับแต้ม",
+      price: 10,
+      point: 50,
+      code: "HAPPY250",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+    },
+    {
+      id: 2,
+      name: "แลกคะแนนลดราคา",
+      price: 10,
+      point: 100,
+      code: "Point10010",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+    },
+    {
+      id: 3,
+      name: "ช้อปครบลดราคา",
+      price: 5,
+      point: 0,
+      code: "Shop1005",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+    },
+    {
+      id: 4,
+      name: "DTAC Reward",
+      price: 20,
+      point: 5,
+      code: "Shop1005",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+    },
+    {
+      id: 5,
+      name: "DTAC Reward",
+      price: 20,
+      point: 5,
+      code: "Shop1005",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+    },
+    {
+      id: 6,
+      name: "DTAC Reward",
+      price: 20,
+      point: 10,
+      code: "Shop1005",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Advanced_Info_Service_logo.svg/2560px-Advanced_Info_Service_logo.svg.png",
+    },
+  ]);
   const pointofsaleStore = usePointOfSale();
   const dialogComplteOrder = ref(false);
   const total_ = ref(0);
@@ -172,6 +223,11 @@ export const usePointOfSale = defineStore('point of sale', () => {
     loadingStore.isLoading = false;
 
   }
+  const checkCode = (idCode: number) => {
+    const correctCode = promo.value.findIndex((code) => code.id === idCode);
+    realCode.value = promo.value[correctCode].code;
+    order.value.discount = promo.value[correctCode].price;
+  };
 
   return {
     total_,
@@ -196,6 +252,8 @@ export const usePointOfSale = defineStore('point of sale', () => {
     amenities,
     openOrder,
     dialogComplteOrder,
-    deleteAllOrder
+    deleteAllOrder,
+    promo,
+    checkCode
   }
 })
