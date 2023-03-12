@@ -351,6 +351,62 @@ export const useMenuStore = defineStore("menu", () => {
       price: 40,
       img: "https://i.pinimg.com/564x/c0/d4/9e/c0d49ebd6402929b95c825b76474d1f3.jpg",
     },
+    {
+      name: "ข้าวผัดอเมริกัน",
+      type: "Foods",
+      cost: "ราคา 50 บาท",
+      price: 50,
+      img: "https://i.pinimg.com/564x/a5/f6/7f/a5f67fdce8f8229e35572c142410b390.jpg",
+    },
+    {
+      name: "ข้าวปั้นหมีน้อย",
+      type: "Foods",
+      cost: "ราคา 40 บาท",
+      price: 40,
+      img: "https://i.pinimg.com/564x/b2/10/41/b21041f7d63b88893884c4dd3893a09c.jpg",
+    },
+    {
+      name: "อุด้งหน้าปลาแซวมอน",
+      type: "Foods",
+      cost: "ราคา 60 บาท",
+      price: 60,
+      img: "https://i.pinimg.com/564x/e3/2f/0e/e32f0eab5b245c09dd54f290a8cc60db.jpg",
+    },
+    {
+      name: "โอชะสึเกะหน้าปลาแซวมอน",
+      type: "Foods",
+      cost: "ราคา 70 บาท",
+      price: 70,
+      img: "https://i.pinimg.com/564x/a4/9b/3a/a49b3adc24b45ff06719545587b1d97f.jpg",
+    },
+    {
+      name: "ไก่ตุ๋นยาจีน",
+      type: "Foods",
+      cost: "ราคา 65 บาท",
+      price: 65,
+      img: "https://i.pinimg.com/564x/98/ba/ea/98baeaaeceffa5cd7e0575ee282a2242.jpg",
+    },
+    {
+      name: "ไข่ต้มนางพญา",
+      type: "Foods",
+      cost: "ราคา 50 บาท",
+      price: 50,
+      img: "https://i.pinimg.com/564x/4b/51/ad/4b51adf255d9c88b9fac3bf00b103ddc.jpg",
+    },
+    {
+      name: "พิซซ่ามหาชน",
+      type: "Foods",
+      cost: "ราคา 80 บาท",
+      price: 80,
+      img: "https://i.pinimg.com/564x/30/10/c6/3010c69b887070cb12c6dbc77b4ffb5d.jpg",
+    },
+    {
+      name: "ไข่ม้วนทรงเบคอน",
+      type: "Foods",
+      cost: "ราคา 80 บาท",
+      price: 80,
+      img: "https://i.pinimg.com/564x/20/ed/ea/20edeabdfc6858b19308382e9458f07d.jpg",
+    },
   ]);
   const menuFilter = (type: string) => {
     if (type === "") {
