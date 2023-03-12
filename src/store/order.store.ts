@@ -8,6 +8,7 @@ export const useOrderStore = defineStore('order', () => {
   const orders = ref<Order[]>([])
   const loadingStore = useLoadingStore()
   const messageStore = useMessageStore();
+  const search = ref('');
   const tempOrder = ref<Order>({
     customerId: 1,
     discount: 0,
@@ -44,5 +45,6 @@ export const useOrderStore = defineStore('order', () => {
 
     loadingStore.isLoading = false
   }
-  return { getOrders, orders, getOneOrder, tempOrder }
+  return { getOrders, orders, getOneOrder, tempOrder ,  search }
 })
+
