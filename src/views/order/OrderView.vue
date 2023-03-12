@@ -50,7 +50,7 @@ onMounted(() => {
                         <td>{{ item.payment}}</td>
 
                             <td>
-                              <v-btn color="grey" class="mdi mdi-receipt-text" @click="goTo(item.id+'')"> RECEIPT </v-btn>
+                              <v-btn color="blue-lighten-1" variant="outlined" class="mdi mdi-receipt-text" @click="goTo(item.id+'')"> RECEIPT </v-btn>
                             </td>
                         </tr>
                     </tbody>
