@@ -15,12 +15,10 @@ import DialogCompleteOrder from '@/components/pos/DialogCompleteOrder.vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()
-
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
   pointOfSaleStore.dialogTopping = true
 }
-
 const deleteOrderItem = (index: number) => {
   pointOfSaleStore.orderItemList.splice(index, 1)
 }
@@ -29,7 +27,6 @@ const addAmoutProduct = (index: number) => {
   pointOfSaleStore.orderItemList[index].total =
     pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
 }
-
 const reduceAmoutProduct = (index: number) => {
   if (pointOfSaleStore.orderItemList[index].amount <= 1) {
     deleteOrderItem(index)
@@ -39,11 +36,9 @@ const reduceAmoutProduct = (index: number) => {
       pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
   }
 }
-
 const aboutCal = computed(() => {
   return pointOfSaleStore.CaltotalPrice()
 })
-
 onMounted(() => {
   productStore.getProductByCatagory('2')
   pointOfSaleStore.total_discount;
