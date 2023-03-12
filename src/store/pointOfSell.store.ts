@@ -6,11 +6,14 @@ import { useLoadingStore } from './loading'
 import orderService from '@/services/order'
 import { useMessageStore } from './message'
 import type { Order } from '@/store/types/Order.type'
+import { useCustomerStore } from './customer.store'
 
 export const usePointOfSale = defineStore('point of sale', () => {
   const messageStore = useMessageStore();
   const dialogPayment = ref(false)
   const dialogPrompypay = ref(false)
+  const customerStore = useCustomerStore( )
+
   const dialogPromotion = ref(false)
   const orderItemList = ref<OrderItem[]>([])
   const dialogTopping = ref(false)
@@ -125,7 +128,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       }
       if (order.value.payment === "promptpay") {
         order.value = {
-          customerId: 1,
+          customerId: parseInt(customerStore.customerId),
           discount: total_discount.value,
           total: totalAndDicount.value,
           recieved: totalAndDicount.value,
@@ -135,7 +138,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
         }
       } else {
         order.value = {
-          customerId: 1,
+          customerId: parseInt(customerStore.customerId),
           discount: total_discount.value,
           total: totalAndDicount.value,
           recieved: recive_mon.value,

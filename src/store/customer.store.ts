@@ -14,6 +14,7 @@ export const useCustomerStore = defineStore('customer', () => {
   const allSelected = ref(false)
   const customers = ref<Customer[]>([])
   const messageStore = useMessageStore()
+  const customerId = ref('');
   const editCustomer = ref<Customer & { files: File[] }>({
     name: '',
     tel: '',
@@ -122,7 +123,8 @@ export const useCustomerStore = defineStore('customer', () => {
       const customer = customers.value.findIndex((customer) => customer.id+'' === id);
       customers.value[customer].point += 5;
       await customerService.updateCustomer(id,{...customers.value[customer],files: []})
-      pointofsellStore.order.customerId = parseInt(customers.value[customer].id!+'');
+      customerId.value = customers.value[customer].id+''
+  
     } catch (e) {
       messageStore.showError("ไม่สามารถเพิ่มPoinของลูกค้าได้");
       console.log(e);
@@ -131,6 +133,7 @@ export const useCustomerStore = defineStore('customer', () => {
 }
 
   return {
+    customerId,
     deleteCustomers,
     selectCustomer,
     allSelected,

@@ -4,7 +4,6 @@ import type { Order } from '@/store/types/Order.type'
 import orderService from '@/services/order'
 import { useLoadingStore } from './loading'
 import { useMessageStore } from './message'
-
 export const useOrderStore = defineStore('order', () => {
   const orders = ref<Order[]>([])
   const loadingStore = useLoadingStore()
@@ -36,6 +35,7 @@ export const useOrderStore = defineStore('order', () => {
     try {
       const response = await orderService.getOneOrder(id);
       tempOrder.value = response.data
+      console.log(tempOrder.value)
     } catch (err) {
       console.log(err)
       messageStore.showError("ไม่สามารถดึงข้อมูลได้");
