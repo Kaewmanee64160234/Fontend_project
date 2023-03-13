@@ -101,8 +101,10 @@ const deleteAllMaterials = async () => {
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.unit }}</td>
                 <td>{{ item.price_per_unit }}</td>
-                <td><v-btn color="yellow" class="mr-5 mdi mdi-pencil"  @click="materialStore.editMaterial(item)">Edit</v-btn>
-                <v-btn color="#F55050" class="mdi mdi-delete" @click="deleteMaterial(item.id + '')">Delete</v-btn></td>
+                <td><v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="materialStore.editMaterial(item)"></v-btn>
+                <v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteMaterial(item.id + '')"></v-btn>
+                <v-btn color="#98DFD6" icon="mdi-clipboard-check-outline" ></v-btn>
+              </td>
             </tr>
         </tbody>
         <tbody v-if="material.length == 0" >
