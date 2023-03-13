@@ -75,8 +75,8 @@ const deleteAllUsers = async () => {
               <td>{{ item.login }}</td>
               <td>{{ item.role }}</td>
               <td>
-                <VBtn color="yellow" class="mr-5 mdi mdi-pencil" @click="userStore.editUser(item)">Edit</VBtn>
-                <VBtn color="#F55050" class="mdi mdi-delete" @click="deleteUser(item.id!)">Delete</VBtn>
+                <VBtn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="userStore.editUser(item)"></VBtn>
+                <VBtn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteUser(item.id!)"></VBtn>
               </td>
             </tr>
           </tbody>

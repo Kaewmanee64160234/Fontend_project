@@ -7,6 +7,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'dashboard fullscreen',
+      components: {
+        default: () => import('../views/dashboard/DashboardView.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: "FullLayout",
+      },
+    },
+    {
+      path: '/home',
       name: 'home',
       components: {
         default: HomeView,

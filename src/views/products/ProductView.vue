@@ -77,8 +77,8 @@ const deleteAllProducts = async () => {
             <td>{{ item.price }}</td>
             <td>{{ item.size }}</td>
             <td>
-              <v-btn color="yellow" class="mr-5 mdi mdi-pencil" @click="productStore.editProduct(item)">Edit </v-btn>
-              <v-btn color="#F55050" class="mdi mdi-delete" @click="deleteProduct(item.id!)">Delete</v-btn>
+              <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="productStore.editProduct(item)"></v-btn>
+              <v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteProduct(item.id!)"></v-btn>
             </td>
 
           </tr>

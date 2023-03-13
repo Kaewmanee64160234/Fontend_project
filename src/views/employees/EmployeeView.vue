@@ -120,9 +120,9 @@ const deleteAllEmployees = async () => {
               
 
               <td>
-                <v-btn color="yellow" class="mr-5 mdi mdi-pencil" @click="employeeStore.editedEmployee(item)"
-                  >Edit</v-btn
-                ><v-btn color="#F55050" class="mdi mdi-delete" @click="deleteEmployee(item.id + '')">Delete</v-btn>
+                <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="employeeStore.editedEmployee(item)"
+                  ></v-btn
+                ><v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteEmployee(item.id + '')"></v-btn>
               </td>
             </tr>
            
