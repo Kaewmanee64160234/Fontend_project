@@ -2,13 +2,16 @@
 import { RouterView } from 'vue-router'
 import { ref } from 'vue'
 import MainLayout from '@/components/layouts/MainLayout.vue'
+import FullLayout from "@/components/layouts/FullLayout.vue";
 import LoadingDialog from './components/LoadingDialog.vue';
 import MessageDialog from './components/MessageDialog.vue';
 </script>
 
 <template>
   <component :is="MainLayout"></component>
-
+  <component
+  :is="$route.meta.layout === 'MainLayout' ? MainLayout : FullLayout"
+  ></component>
   <!-- <main>
     <RouterView></RouterView>
   </main> -->
