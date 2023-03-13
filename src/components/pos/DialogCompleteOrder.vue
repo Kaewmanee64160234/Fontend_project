@@ -3,110 +3,114 @@ import { useOrderStore } from '@/store/order.store'
 import { usePointOfSale } from '@/store/pointOfSell.store'
 
 const pointOfSaleStore = usePointOfSale()
+const orderStore = useOrderStore()
 </script>
 <template>
-  <v-dialog v-model="pointOfSaleStore.dialogComplteOrder">
+  <v-dialog width="auto" height="auto" v-model="pointOfSaleStore.dialogComplteOrder">
     <v-card>
-      <table class="body-wrap">
-        <tbody>
-          <tr>
-            <td></td>
-            <td class="container" width="600">
-              <div class="content">
-                <table class="main" width="100%" cellpadding="0" cellspacing="0">
-                  <tbody>
-                    <tr>
-                      <td class="content-wrap aligncenter">
-                        <table width="100%" cellpadding="0" cellspacing="0">
-                          <tbody>
-                            <tr>
-                              <td class="content-block">
-                                <h2>☕ Thanks You ☕</h2>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="content-block">
-                                <table class="invoice">
-                                  <tbody>
-                                    <tr>
-                                      <td>
-                                        customer: {{ pointOfSaleStore.order.customerId }}<br />
-                                        order: {{ pointOfSaleStore.order.id }}<br />Date :{{
-                                          pointOfSaleStore.order.createdDate
-                                        }}<br />
-                                        payment: {{ pointOfSaleStore.order.payment }}
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <table
-                                          class="invoice-items"
-                                          cellpadding="0"
-                                          cellspacing="0"
-                                        >
-                                          <tbody>
-                                            <tr
-                                              v-for="item in pointOfSaleStore.order.orderItems"
-                                              :key="item.name"
-                                            >
-                                              <td>{{ item.name }}</td>
-                                              <td class="alignright">{{ item.total }} ฿</td>
-                                            </tr>
-                                            <tr class="finishOrder">
-                                              <td>Discount</td>
-                                              <td class="alignright">
-                                                {{ pointOfSaleStore.order.discount }} ฿
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td>Recieve</td>
-                                              <td class="alignright">
-                                                {{ pointOfSaleStore.order.recieved }} ฿
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td>Change</td>
-                                              <td class="alignright">
-                                                {{ pointOfSaleStore.order.change }} ฿
-                                              </td>
-                                            </tr>
+      <v-card-title>
+        <table class="body-wrap">
+          <tbody>
+            <tr>
+              <td></td>
+              <td class="container" width="600">
+                <div class="content">
+                  <table class="main" width="100%" cellpadding="0" cellspacing="0">
+                    <tbody>
+                      <tr>
+                        <td class="content-wrap aligncenter">
+                          <table width="100%" cellpadding="0" cellspacing="0">
+                            <tbody>
+                              <tr>
+                                <td class="content-block">
+                                  <h2>☕ Thanks You ☕</h2>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="content-block">
+                                  <table class="invoice">
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          <!-- customer: {{ orderStore.tempOrder.customer?.id! }}<br /> -->
+                                          orderId: {{ orderStore.tempOrder.id }}:{{
+                                            orderStore.tempOrder.createdDate
+                                          }}<br />Date :{{ orderStore.tempOrder.createdDate }}<br />
+                                          payment: {{ orderStore.tempOrder.payment }}
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <table
+                                            class="invoice-items"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                          >
+                                            <tbody>
+                                              <tr
+                                                v-for="item in orderStore.tempOrder.orderItems"
+                                                :key="item.name"
+                                              >
+                                                <td>{{ item.name }}</td>
+                                                <td class="alignright">{{ item.total }} ฿</td>
+                                              </tr>
+                                              <tr class="finishOrder">
+                                                <td>Discount</td>
+                                                <td class="alignright">
+                                                  {{ orderStore.tempOrder.discount }} ฿
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>Recieve</td>
+                                                <td class="alignright">
+                                                  {{ orderStore.tempOrder.recieved }} ฿
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>Change</td>
+                                                <td class="alignright">
+                                                  {{ orderStore.tempOrder.change }} ฿
+                                                </td>
+                                              </tr>
 
-                                            <tr class="total">
-                                              <td class="alignright" width="80%">Total</td>
-                                              <td class="alignright">
-                                                {{ pointOfSaleStore.order.total }} ฿
-                                              </td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
+                                              <tr class="total">
+                                                <td class="alignright" width="80%">Total</td>
+                                                <td class="alignright">
+                                                  {{ orderStore.tempOrder.total }} ฿
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
 
-                            <tr>
-                              <td class="content-block">
-                                All For One Company Inc. Buu section 2 .
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-      <v-card-action>
-        <v-spacer></v-spacer>
-        <v-btn color="red" @click="pointOfSaleStore.dialogComplteOrder = false">Close</v-btn>
-      </v-card-action>
+                              <tr>
+                                <td class="content-block">
+                                  All For One Company Inc. Buu section 2 .
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </v-card-title>
+      <v-card-actions class="justify-end">
+        <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogComplteOrder = false"
+          >Close</v-btn
+        >
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
@@ -144,9 +148,10 @@ body {
 }
 
 .body-wrap {
-  width: 100vw;
-  height: 100vh;
-  background-color: #eee;
+  width: 40vw;
+  /* background-color: #eee; */
+  display: flex;
+  justify-content: center;
 }
 
 .container {
