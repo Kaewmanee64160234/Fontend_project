@@ -12,6 +12,7 @@ import type Product from '@/store/types/product.type'
 import type { OrderItem } from '@/store/types/orderItem.type'
 import { computed } from 'vue'
 import DialogCompleteOrder from '@/components/pos/DialogCompleteOrder.vue'
+import FullLayout from '@/components/layouts/FullLayout.vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()

@@ -25,9 +25,9 @@ const user_ = JSON.parse(user.value);
       <v-divider></v-divider>
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-logout-variant" title="Dashboard" value="dashboard"
-        to="/dashboard/full"
+        to="/"
         ></v-list-item>
-        <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="/"></v-list-item>
+        <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="//home"></v-list-item>
         <v-list-item prepend-icon="mdi-inbox-multiple " title="Product" value="product" to="/product"></v-list-item>
       
         <v-list-item prepend-icon="mdi-account" title="User" value="user" to="/user"></v-list-item>
