@@ -17,6 +17,7 @@ const reCode = () => {
 onMounted(() => {
   customerStore.getCustomers()
 })
+
 </script>
 
 <template>
@@ -57,7 +58,7 @@ onMounted(() => {
           </v-container>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" variant="text" @click="pointOfSaleStore.dialogPromotion = false">
+        <v-btn color="primary" variant="text" @click="pointOfSaleStore.dialogPromotion = false,reCode()">
           Close
         </v-btn>
         <v-btn color="primary" variant="text" @click="pointOfSaleStore.checkCode(CodeInput),reCode()"> Save </v-btn>
