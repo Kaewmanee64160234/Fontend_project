@@ -45,14 +45,13 @@ export const usePointOfSale = defineStore('point of sale', () => {
     payment: 'promptpay',
     orderItems: orderItemList.value
   })
-  const pointofsaleStore = usePointOfSale();
     const total_ = ref(0);
     const total_discount = ref(0);
     const totalAndDicount = ref(0);
     const recive_mon = ref(0);
     const change_money = ref(0);
     const CaltotalPrice = () => {
-        if (pointofsaleStore.orderItemList.length > 0) {
+        if (orderItemList.value.length > 0) {
          total_.value =  orderItemList.value.reduce(
             (accumulator, currentValue) => accumulator + currentValue.total,
             0
@@ -85,7 +84,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
         
     };
     const CalDiscout = () => {
-      if (pointofsaleStore.orderItemList.length > 0){
+      if (orderItemList.value.length > 0){
         total_discount.value = total_discount.value + order.value.discount,
         0
         return{total_discount}
@@ -95,7 +94,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       }
       };
       const calMonAndDiscount = () => {
-        if (pointofsaleStore.orderItemList.length > 0) {
+        if (orderItemList.value.length > 0) {
           totalAndDicount.value = total_.value - total_discount.value;
         }
         if (recive_mon.value > 0) {
@@ -160,7 +159,6 @@ export const usePointOfSale = defineStore('point of sale', () => {
       img: 'https://cdn-icons-png.flaticon.com/512/3990/3990495.png'
     }
   ])
-  const pointofsaleStore = usePointOfSale()
   const dialogComplteOrder = ref(false)
   const total_ = ref(0)
   const total_discount = ref(0)
@@ -168,7 +166,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   const recive_mon = ref(0)
   const change_money = ref(0)
   const CaltotalPrice = () => {
-    if (pointofsaleStore.orderItemList.length > 0) {
+    if (orderItemList.value.length > 0) {
       total_.value = orderItemList.value.reduce(
         (accumulator, currentValue) => accumulator + currentValue.total,
         0
@@ -195,7 +193,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     }
   }
   const CalDiscout = () => {
-    if (pointofsaleStore.orderItemList.length > 0) {
+    if (orderItemList.value.length > 0) {
       ;(total_discount.value = total_discount.value + order.value.discount), 0
       return { total_discount }
     } else {
@@ -204,7 +202,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     }
   }
   const calMonAndDiscount = () => {
-    if (pointofsaleStore.orderItemList.length > 0) {
+    if (orderItemList.value.length > 0) {
       totalAndDicount.value = total_.value - total_discount.value
     }
     if (recive_mon.value > 0) {
@@ -236,8 +234,8 @@ export const usePointOfSale = defineStore('point of sale', () => {
     loadingStore.isLoading = true
     try {
       
-      const res = await orderService.saveOrder(order.value);
-      console.log(res.data);
+      const response = await orderService.saveOrder(order.value);
+      console.log(response.data);
      
       if (order.value.orderItems?.length === 0 && order.value.customerId === 0) {
         messageStore.showError('ไม่สามารถบันทึกข้อมูล Orders ได้')
@@ -357,5 +355,5 @@ export const usePointOfSale = defineStore('point of sale', () => {
     checkCode,
     codePoint
   }
-})
+}})
 
