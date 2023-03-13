@@ -29,4 +29,5 @@ const deleteCustomer = (id:string)=>{
     return http.delete(`/customers/${id}`);
 }
 
+
 export default {getCustomers,createCustomer,updateCustomer,deleteCustomer}

@@ -77,12 +77,25 @@ export const useProductStore = defineStore('Product', () => {
       }
     }
   })
+  
   async function getProductByCatagory(id: string) {
-    const response = await productService.getProductByCatagory(id);
-    products.value = response.data;
-    console.log(products.value);
-    return products.value;
+    loadingStore.isLoading = true
+    try{
+      const response = await productService.getProductByCatagory(id);
+      products.value = response.data;
+      console.log(products.value);
+
+      loadingStore.isLoading = false
+      return products.value;
+      
+    }
+    catch (e) {
+      messageStore.showError('ไม่สามารถดึงข้อมูล Product ได้')
+    }
+
+    loadingStore.isLoading = false
   }
+  
 
   async function getProducts() {
     loadingStore.isLoading = true

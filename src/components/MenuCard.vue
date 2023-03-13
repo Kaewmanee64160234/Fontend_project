@@ -41,7 +41,7 @@ const props = defineProps({
 
         <div class="card-body text-center">
           <h5 class="card-title">{{ props.name }}</h5>
-          <p class="card-text fontsm">{{ props.price }}</p>
+          <p class="card-text fontsm">{{ props.price }} ฿</p>
         </div>
       </div>
     </div>

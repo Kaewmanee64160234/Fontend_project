@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useMenuStore } from '@/store/menu'
 import { onMounted, ref } from 'vue'
 import TestDialog from '@/components/ToppingDialog.vue'
 import MenuCard from '@/components/MenuCard.vue'
@@ -12,15 +11,14 @@ import { useProductStore } from '@/store/product.store'
 import type Product from '@/store/types/product.type'
 import type { OrderItem } from '@/store/types/orderItem.type'
 import { computed } from 'vue'
+import DialogCompleteOrder from '@/components/pos/DialogCompleteOrder.vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()
-
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
   pointOfSaleStore.dialogTopping = true
 }
-
 const deleteOrderItem = (index: number) => {
   pointOfSaleStore.orderItemList.splice(index, 1)
 }
@@ -29,7 +27,6 @@ const addAmoutProduct = (index: number) => {
   pointOfSaleStore.orderItemList[index].total =
     pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
 }
-
 const reduceAmoutProduct = (index: number) => {
   if (pointOfSaleStore.orderItemList[index].amount <= 1) {
     deleteOrderItem(index)
@@ -39,19 +36,19 @@ const reduceAmoutProduct = (index: number) => {
       pointOfSaleStore.orderItemList[index].amount * pointOfSaleStore.orderItemList[index].price
   }
 }
-
 const aboutCal = computed(() => {
   return pointOfSaleStore.CaltotalPrice()
 })
-
 onMounted(() => {
   productStore.getProductByCatagory('2')
+  pointOfSaleStore.total_discount;
 })
 </script>
 
 <template>
   <div class="content-area">
     <DialogPayment></DialogPayment>
+    <DialogCompleteOrder></DialogCompleteOrder>
     <div class="content">
       <FindMemberDialog></FindMemberDialog>
       <PromotionDialog></PromotionDialog>
@@ -195,6 +192,13 @@ onMounted(() => {
                     color="#E9A178"
                     class="mt-5"
                     @click="pointOfSaleStore.dialogPromotion = true"
+                    v-if="pointOfSaleStore.order.customerId !== 0"
+                    >Promotion</v-btn
+                  >
+                  <v-btn
+                    color="#E9A178"
+                    class="mt-5"
+                    v-else 
                     >Promotion</v-btn
                   >
                   <v-btn color="#E9A178" class="mt-5" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
