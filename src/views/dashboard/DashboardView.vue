@@ -1,3 +1,4 @@
+
 <script lang="ts" setup>
 import BoarddayDialog from "../../components/dashboards/BoardmonthDialog.vue"
 import BoardmonthDialog from "../../components/dashboards/BoardmonthDialog.vue"

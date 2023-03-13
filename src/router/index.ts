@@ -6,19 +6,18 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/dashboard/full',
+      path: '/',
       name: 'dashboard fullscreen',
       components: {
-        default: () => import('@/views/dashboard/DashboardView.vue'),
-        menu: () => import('@/components/menus/MainMenu.vue'),
+        default: () => import('../views/dashboard/DashboardView.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
         layout: "FullLayout",
-      }
+      },
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       components: {
         default: HomeView,
