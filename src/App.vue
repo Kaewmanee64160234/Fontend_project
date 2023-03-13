@@ -9,9 +9,7 @@ import MessageDialog from './components/MessageDialog.vue';
 
 <template>
   <component :is="MainLayout"></component>
-  <component
-  :is="$route.meta.layout === 'MainLayout' ? MainLayout : FullLayout"
-  ></component>
+  
   <!-- <main>
     <RouterView></RouterView>
   </main> -->
