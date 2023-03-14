@@ -20,20 +20,23 @@ const clear = () => {
 
 <template>
     <v-container>
+        
         <v-card>
-            <v-card-title>
+            <v-card-title >
                 Employee
-                <v-spacer>
-                    <v-table class="text-center mt-5">
-                        <v-spacer>
-                            <td>
-                                <v-avatar color="info">
-                                    <v-icon icon="mdi-account-circle"></v-icon>
-                                </v-avatar>
-                            </td>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
 
-                        </v-spacer>
-                    </v-table>
+                <v-spacer>
+                    <v-toolbar flat color="white">
+                        <v-avatar size="100"><v-icon icon="mdi-account-circle"></v-icon></v-avatar>
+
+                        <v-toolbar-title class="font-weight-light">
+                            nontiya
+                        </v-toolbar-title>
+                    </v-toolbar>
+
+
                 </v-spacer>
 
                 <v-spacer> </v-spacer>
@@ -53,8 +56,8 @@ const clear = () => {
                         </tr>
 
 
-                        <td>
-                            <v-btn color="green" style="float: right; ">Login</v-btn>
+                        <td  class="text-center">
+                            <v-btn color="green" >Login</v-btn>
                         </td>
                     </tbody>
 
@@ -65,6 +68,5 @@ const clear = () => {
         </v-card>
     </v-container>
 </template>
-
 
 
