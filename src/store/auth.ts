@@ -24,6 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
       const res = await auth.login(email, password)
       localStorage.setItem('token', res.data.access_token)
       localStorage.setItem('user', JSON.stringify(res.data.user))
+      localStorage.setItem('employee', res.data.user.employee)
       authName.value = JSON.parse(JSON.stringify(localStorage.getItem('user')))
     } catch (e) {
       console.log(e)
