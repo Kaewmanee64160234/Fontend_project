@@ -3,6 +3,7 @@ import type { SummarySalary } from "./SummarySalary.type";
 
 export interface CheckInOut {
   id?: number;
+  employeeId?: number;
 
   date?: Date;
 

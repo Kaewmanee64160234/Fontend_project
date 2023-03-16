@@ -1,6 +1,7 @@
 
 import http from "./axios";
 import type Employee from "@/store/types/employee.type";
+import type { CheckInOut } from "@/store/types/CheckInOut";
 
 const getEmployees = ()=>{
     return http.get("/employees");
@@ -41,8 +42,12 @@ const employeeLogin = (name:string,email:string)=>{
     return http.post("/employees/login",{name,email});
 }
 
-const employeeCheckIn = (checkInCheckOut:any)=>{
+const employeeCheckIn = (checkInCheckOut:CheckInOut)=>{
     return http.post("/check-in-outs",checkInCheckOut);
 }
 
-export default {getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin}
+const employeeCheckOut = (id:number)=>{
+    return http.patch("/check-out-outs/"+id);
+}
+
+export default {employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin}
