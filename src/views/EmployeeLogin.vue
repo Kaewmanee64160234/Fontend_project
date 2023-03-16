@@ -18,43 +18,46 @@ const login = async () => {
 
 <template>
     <v-container>
-        <v-card>
+        <v-card style="background-color: #F1DEC9;">
             <v-card-title>
                 Employee
                 <v-spacer> </v-spacer>
 
-                <v-table class="text-center mt-5">
+                <v-table class="text-center mt-5" style="background-color: #F1DEC9;">
                     <v-row>
                         <v-col colspan="2">
                             <v-avatar size="80" color="black"></v-avatar>
-                            <div class="d-flex align-center flex-column" >
-                                <div class="text-subtitle-2 mt-3">nontiya</div>
-                                
-                                <v-card class="mt-3" width="350" title="This is a title" subtitle="This is a subtitle" text="This is content"></v-card>
-
+                            <div class="d-flex align-center flex-column">
+                                <div class="text-subtitle-2 mt-3">Napassorn navapa</div>
+                                <v-card class="mt-5" width="350" text="This is content"></v-card>
                             </div>
 
                         </v-col>
-
-
                     </v-row>
 
                 </v-table>
 
                 <v-table height="400px">
-                    <thead>
+                    <thead style="background-color: #F1DEC9;">
                         <tr>
-                            <th class="text-left"> </th>
-                            <th class="text-left"></th>
+                            <td></td>
+                            
+                            <td> 
+                                <v-btn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red">Checkout</v-btn>
+                                <v-btn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="blue">Checkin</v-btn>
+                            </td>
+
+
+
                         </tr>
                     </thead>
                     <thead>
                         <tr>
                             <th class="text-center ml-5">
-                                Checkin
+                                Timein
                             </th>
                             <th class="text-center mr-5">
-                                Checkout
+                                Timeout
                             </th>
 
                         </tr>
