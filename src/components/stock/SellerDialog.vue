@@ -82,7 +82,6 @@ export default defineComponent({
 </script>
 
 <template>
-  
   <div style="width: 400px">
     <div style="display: flex; justify-content: center">
       <button type="button" @click="shuffleData">Add data</button>

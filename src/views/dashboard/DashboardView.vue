@@ -8,27 +8,51 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
   <a class="font">Dashbords</a>
         <v-row>
           <v-col cols="12" md="4">
+            <v-container>
+            <v-card width="400px">
+            ยอดขายรายวัน
             <ChartComponentDialog></ChartComponentDialog>
+          </v-card>
+        </v-container>
           </v-col>
           <v-col cols="12" md="4">
+            <v-container>
+            <v-card width="400px">
+            ยอดขายรายเดือน
             <ChartComponentDialog></ChartComponentDialog>
+          </v-card>
+        </v-container>
           </v-col>
           <v-col cols="12" md="4">
+            <v-container>
+            <v-card width="400px">
+            ยอดขายรายปี
             <ChartComponentDialog></ChartComponentDialog>
+          </v-card>
+        </v-container>
           </v-col>
           
         </v-row>
         <v-row>
           <v-col cols="12" md="4">
+            <v-container>
+            <v-card width="400px">
             สินค้าขายดี
             <SellerDialog></SellerDialog>
+          </v-card>
+        </v-container>
           </v-col>
           <v-col cols="12" md="4">
+            <v-container>
+            <v-card width="400px">
             สินค้ายอดขายน้อย
             <SellerDialog></SellerDialog>
+          </v-card>
+        </v-container>
           </v-col>
           <v-col cols="12" md="4">
-            <v-card>
+            <v-container>
+            <v-card width="400px">
             สินค้าใกล้หมดสต็อก
             <v-table style="margin-bottom: 2;">
               <thead>
@@ -47,8 +71,12 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
               </tbody>
             </v-table>
           </v-card>
+<<<<<<< HEAD
           
           
+=======
+        </v-container>
+>>>>>>> fd998486ada6a45c93b1c938e0b85a6ccd110342
           </v-col>
         </v-row>
       
