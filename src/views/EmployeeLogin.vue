@@ -13,58 +13,63 @@ const login = async () => {
         employeeStore.loginEmployee(email.value, name.value)
     }
 }
-const clear = () => {
-    form.value?.reset();
-}
+
 </script>
 
 <template>
     <v-container>
-        
         <v-card>
-            <v-card-title >
+            <v-card-title>
                 Employee
-                <v-spacer></v-spacer>
-                <v-spacer></v-spacer>
-
-                <v-spacer>
-                    <v-toolbar flat color="white">
-                        <v-avatar size="100"><v-icon icon="mdi-account-circle"></v-icon></v-avatar>
-
-                        <v-toolbar-title class="font-weight-light">
-                            nontiya
-                        </v-toolbar-title>
-                    </v-toolbar>
-
-
-                </v-spacer>
-
                 <v-spacer> </v-spacer>
+
                 <v-table class="text-center mt-5">
-                    <tbody>
-                        <tr class="text-center">
-                            <v-text-field style=""></v-text-field>
+                    <v-row>
+                        <v-col colspan="2">
+                            <v-avatar size="80" color="black"></v-avatar>
+                            <div class="d-flex align-center flex-column" >
+                                <div class="text-subtitle-2 mt-3">nontiya</div>
+                                
+                                <v-card class="mt-3" width="350" title="This is a title" subtitle="This is a subtitle" text="This is content"></v-card>
 
-                        </tr>
-                        <tr class="text-center">
-                            <v-text-field style=""></v-text-field>
+                            </div>
 
-                        </tr>
-                        <tr class="text-center">
-                            <v-text-field style=""></v-text-field>
-
-                        </tr>
+                        </v-col>
 
 
-                        <td  class="text-center">
-                            <v-btn color="green" >Login</v-btn>
-                        </td>
-                    </tbody>
-
-
+                    </v-row>
 
                 </v-table>
+
+                <v-table height="400px">
+                    <thead>
+                        <tr>
+                            <th class="text-left"> </th>
+                            <th class="text-left"></th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="text-center ml-5">
+                                Checkin
+                            </th>
+                            <th class="text-center mr-5">
+                                Checkout
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ name }}</td>
+
+                        </tr>
+                    </tbody>
+                </v-table>
+
+
             </v-card-title>
+
         </v-card>
     </v-container>
 </template>
