@@ -76,12 +76,8 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
               </tbody>
             </v-table>
           </v-card>
-<<<<<<< HEAD
-          
-          
-=======
+
         </v-container>
->>>>>>> fd998486ada6a45c93b1c938e0b85a6ccd110342
           </v-col>
         </v-row>
       </div>
