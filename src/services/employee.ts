@@ -41,4 +41,8 @@ const employeeLogin = (name:string,email:string)=>{
     return http.post("/employees/login",{name,email});
 }
 
+const employeeCheckIn = (checkInCheckOut:any)=>{
+    return http.post("/check-in-outs",checkInCheckOut);
+}
+
 export default {getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin}
