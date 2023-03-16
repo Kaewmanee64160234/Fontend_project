@@ -1,19 +1,20 @@
 <script lang='ts'>
 import { computed, defineComponent, ref } from "vue";
 // import {shuffle} from "lo"
-import { DoughnutChart, useDoughnutChart } from "vue-chart-3";
+import { LineChart, useLineChart } from "vue-chart-3";
 import { Chart, registerables, type ChartData, type ChartOptions } from "chart.js";
 
 Chart.register(...registerables);
 export default defineComponent({
   name: "App",
-  components: { DoughnutChart },
+  // eslint-disable-next-line vue/no-unused-components
+  components: { LineChart },
   setup() {
-    const dataValues = ref([30, 40, 60, 70, 5]);
+    const dataValues = ref([17, 24, 10, 30]);
     const dataLabels = ref(["Paris", "Nîmes", "Toulon", "Perpignan", "Autre"]);
     const toggleLegend = ref(true);
 
-    const testData = computed<ChartData<"doughnut">>(() => ({
+    const testData = computed<ChartData<"line">>(() => ({
       labels: dataLabels.value,
       datasets: [
         {
@@ -29,7 +30,7 @@ export default defineComponent({
       ],
     }));
 
-    const options = computed<ChartOptions<"doughnut">>(() => ({
+    const options = computed<ChartOptions<"line">>(() => ({
       scales: {
         myScale: {
           type: "logarithmic",
@@ -42,24 +43,24 @@ export default defineComponent({
         },
         title: {
           display: true,
-          text: "Chart.js Doughnut Chart",
+          text: "Chart.js Line Chart",
         },
       },
     }));
 
-    const { doughnutChartProps, doughnutChartRef } = useDoughnutChart({
+    const { lineChartProps, lineChartRef } = useLineChart({
       chartData: testData,
       options,
     });
 
-    let index = ref(20);
+    let index = ref(10);
 
     function shuffleData() {
       // dataValues.value = shuffle(dataValues.value);
       dataValues.value.push(index.value);
       dataLabels.value.push("Other" + index.value);
       console.log(dataValues.value);
-      console.log(doughnutChartRef.value.chartInstance);
+      console.log(lineChartRef.value.chartInstance);
       index.value++;
     }
 
@@ -72,22 +73,25 @@ export default defineComponent({
       switchLegend,
       testData,
       options,
-      doughnutChartRef,
-      doughnutChartProps,
+      lineChartRef,
+      lineChartProps,
     };
   },
 });
 </script>
 
 <template>
-  
+  <v-container>
+  <v-card width="400px">
   <div style="width: 400px">
     <div style="display: flex; justify-content: center">
       <button type="button" @click="shuffleData">Add data</button>
       <button type="button" @click="switchLegend">Swicth legends</button>
     </div>
-    <DoughnutChart v-bind="doughnutChartProps" />
+    <LineChart style="justify-content: center" v-bind="lineChartProps" />
   </div>
+</v-card>
+</v-container>
 </template>
 
 <style>

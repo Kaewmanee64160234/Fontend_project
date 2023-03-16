@@ -1,40 +1,34 @@
 
 <script lang="ts" setup>
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
-import ChartComponentDialogTest from "../../components/dashboards/ChartComponentDialogTest.vue"
 </script>
 
 <template>
-  <v-container>
-    <v-card>
-      <v-card-title>
-        Dashbords
-        </v-card-title>
+  <a class="font">Dashbords</a>
         <v-row>
-          <v-col cols="12" sm="4" md="5">
+          <v-col cols="12" md="4">
             <ChartComponentDialog></ChartComponentDialog>
           </v-col>
-          <v-col cols="12" sm="4" md="5">
+          <v-col cols="12" md="4">
             <ChartComponentDialog></ChartComponentDialog>
           </v-col>
-          <v-col cols="12" sm="4" md="5">
+          <v-col cols="12" md="4">
             <ChartComponentDialog></ChartComponentDialog>
-          </v-col>
-          <v-col cols="12" sm="4" md="5">
-            <ChartComponentDialogTest></ChartComponentDialogTest>
           </v-col>
           
         </v-row>
         <v-row>
-          <v-col cols="12" sm="4" md="5">
+          <v-col cols="12" md="4">
             สินค้าขายดี
           </v-col>
-          <v-col cols="12" sm="4" md="5">
+          <v-col cols="12" md="4">
             สินค้ายอดขายน้อย
           </v-col>
-          <v-col cols="12" sm="4" md="5">
+          <v-col cols="12" md="4">
+            <v-card>
+            สินค้าใกล้หมดสต็อก
             <v-table>
-              <thead style="text-align: center">สินค้าใกล้หมดสต็อก
+              <thead>
                 <tr>
                   <th scope="col" class="text-center">No.</th>
                   <th scope="col" class="text-center">ชื่อ</th>
@@ -49,10 +43,16 @@ import ChartComponentDialogTest from "../../components/dashboards/ChartComponent
                 </tr>
               </tbody>
             </v-table>
+          </v-card>
           </v-col>
         </v-row>
-       
-        
-        </v-card>
-        </v-container>
+      
+
 </template>
+
+<style>
+.font {
+  font-size: 200%;
+}
+
+</style>
