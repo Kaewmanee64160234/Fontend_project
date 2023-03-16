@@ -1,6 +1,7 @@
 
 <script lang="ts" setup>
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
+import ChartComponentDialogTest from "../../components/dashboards/ChartComponentDialogTest.vue"
 </script>
 
 <template>
@@ -15,7 +16,14 @@ import ChartComponentDialog from "../../components/dashboards/ChartComponentDial
           </v-col>
           <v-col cols="12" sm="4" md="5">
             <ChartComponentDialog></ChartComponentDialog>
-            </v-col>
+          </v-col>
+          <v-col cols="12" sm="4" md="5">
+            <ChartComponentDialog></ChartComponentDialog>
+          </v-col>
+          <v-col cols="12" sm="4" md="5">
+            <ChartComponentDialogTest></ChartComponentDialogTest>
+          </v-col>
+          
         </v-row>
         <v-row>
           <v-col cols="12" sm="4" md="5">
