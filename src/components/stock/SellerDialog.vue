@@ -61,7 +61,7 @@ export default defineComponent({
       dataValues.value.push(index.value);
       dataLabels.value.push("Other" + index.value);
       console.log(dataValues.value);
-      console.log(pieChartRef.value.chartInstance);
+      console.log(pieChartRef.value!.chartInstance);
       index.value++;
     }
 
@@ -82,7 +82,6 @@ export default defineComponent({
 </script>
 
 <template>
-  
   <div style="width: 400px">
     <div style="display: flex; justify-content: center">
       <button type="button" @click="shuffleData">Add data</button>

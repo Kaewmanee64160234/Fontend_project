@@ -20,11 +20,11 @@ export default defineComponent({
         {
           data: dataValues.value,
           backgroundColor: [
-            "#77CEFF",
-            "#0079AF",
-            "#123E6B",
-            "#97B0C4",
-            "#A5C8ED",
+          "#BBD6B8",
+            "#AEC2B6",
+            "#94AF9F",
+            "#DBE4C6",
+            "#CDE990"
           ],
         },
       ],
@@ -60,7 +60,7 @@ export default defineComponent({
       dataValues.value.push(index.value);
       dataLabels.value.push("Other" + index.value);
       console.log(dataValues.value);
-      console.log(lineChartRef.value.chartInstance);
+      console.log(lineChartRef.value!.chartInstance);
       index.value++;
     }
 
@@ -81,8 +81,6 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-container>
-  <v-card width="400px">
   <div style="width: 400px">
     <div style="display: flex; justify-content: center">
       <button type="button" @click="shuffleData">Add data</button>
@@ -90,8 +88,6 @@ export default defineComponent({
     </div>
     <LineChart style="justify-content: center" v-bind="lineChartProps" />
   </div>
-</v-card>
-</v-container>
 </template>
 
 <style>
