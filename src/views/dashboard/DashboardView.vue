@@ -2,6 +2,7 @@
 <script lang="ts" setup>
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
 import ChartComponentDialogTest from "../../components/dashboards/ChartComponentDialogTest.vue"
+import SellerDialog from "../../components/stock/SellerDialog.vue"
 </script>
 
 <template>
@@ -28,9 +29,11 @@ import ChartComponentDialogTest from "../../components/dashboards/ChartComponent
         <v-row>
           <v-col cols="12" sm="4" md="5">
             สินค้าขายดี
+            <SellerDialog></SellerDialog>
           </v-col>
           <v-col cols="12" sm="4" md="5">
             สินค้ายอดขายน้อย
+            <SellerDialog></SellerDialog>
           </v-col>
           <v-col cols="12" sm="4" md="5">
             <v-table>
