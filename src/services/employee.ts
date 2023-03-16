@@ -54,7 +54,7 @@ const getOneEmployee = (id:string)=>{
     http.get(`/employees/${id}`);
 }
 
-const getOneSummaryByCustomerId = (id:string)=>{
+const getOneSummaryByEmployeeId = (id:string)=>{
     return http.get(`/summary-salary/employee/${id}`);
 }
 
@@ -66,4 +66,4 @@ const getAllCheckInOut = ()=>{
 }
  
 
-export default {getAllCheckInOut,getAllSummarySalary,getOneSummaryByCustomerId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin}
+export default {getAllCheckInOut,getAllSummarySalary,getOneSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin}

@@ -129,6 +129,10 @@ export const useEmployeeStore = defineStore('employee', () => {
     const res = await employeeService.employeeCheckOut(id);
     console.log(res.data)
   }
+  const getOneSummarySalaryEmp = async (id:string)=>{
+    const res = await employeeService.getOneSummaryByEmployeeId(id+'');
+    console.log(res.data);
+  }
 
   return {
     deleteEmployees,
@@ -150,6 +154,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     summary_salaries,
     summary_salary,
     empCheckIn,
-    empCheckOut
+    empCheckOut,
+    getOneSummarySalaryEmp
   }
 })
