@@ -30,7 +30,7 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
           <v-col cols="12" md="4">
             <v-card>
             สินค้าใกล้หมดสต็อก
-            <v-table>
+            <v-table style="margin-bottom: 2;">
               <thead>
                 <tr>
                   <th scope="col" class="text-center">No.</th>
@@ -47,6 +47,8 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
               </tbody>
             </v-table>
           </v-card>
+          
+          
           </v-col>
         </v-row>
       

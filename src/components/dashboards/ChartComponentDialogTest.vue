@@ -43,7 +43,7 @@ export default defineComponent({
         },
         title: {
           display: true,
-          text: "Chart.js Line Chart",
+          text: "Chart.js Doughnut Chart",
         },
       },
     }));
@@ -81,17 +81,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-container>
-  <v-card width="400px">
+  
   <div style="width: 400px">
     <div style="display: flex; justify-content: center">
       <button type="button" @click="shuffleData">Add data</button>
       <button type="button" @click="switchLegend">Swicth legends</button>
     </div>
-    <LineChart style="justify-content: center" v-bind="lineChartProps" />
+    <LineChart v-bind="lineChartProps" />
   </div>
-</v-card>
-</v-container>
 </template>
 
 <style>

@@ -61,7 +61,7 @@ export default defineComponent({
       dataValues.value.push(index.value);
       dataLabels.value.push("Other" + index.value);
       console.log(dataValues.value);
-      console.log(pieChartRef.value.chartInstance);
+      console.log(pieChartRef.value!.chartInstance);
       index.value++;
     }
 
