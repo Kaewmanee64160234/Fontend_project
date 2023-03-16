@@ -20,11 +20,11 @@ export default defineComponent({
         {
           data: dataValues.value,
           backgroundColor: [
-            "#BBD6B8",
-            "#AEC2B6",
-            "#94AF9F",
-            "#DBE4C6",
-            "#CDE990"
+            "#77CEFF",
+            "#0079AF",
+            "#123E6B",
+            "#97B0C4",
+            "#A5C8ED",
           ],
         },
       ],
@@ -43,7 +43,7 @@ export default defineComponent({
         },
         title: {
           display: true,
-          text: "Chart.js Line Chart",
+          text: "Chart.js Doughnut Chart",
         },
       },
     }));
@@ -81,12 +81,13 @@ export default defineComponent({
 </script>
 
 <template>
+  
   <div style="width: 400px">
     <div style="display: flex; justify-content: center">
       <button type="button" @click="shuffleData">Add data</button>
       <button type="button" @click="switchLegend">Swicth legends</button>
     </div>
-    <LineChart style="justify-content: center" v-bind="lineChartProps" />
+    <LineChart v-bind="lineChartProps" />
   </div>
 </template>
 
