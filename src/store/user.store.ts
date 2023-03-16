@@ -14,12 +14,21 @@ export const useUserStore = defineStore('User', () => {
   const allSelected = ref(false)
   const loadingStore = useLoadingStore();
   const search = ref('');
-  const editedUser = ref<User>({username:"", login: "", password: "", role: "" });
+
+  const editedUser = ref<User & { files: File[] }>({
+    username: '',
+    login: '',
+    password: '',
+    role: '',
+    image: 'no_image.jpg',
+    files: []
+  })
 
   watch(dialog, (newDialog, oldDialog) => {
     console.log(newDialog);
     if(!newDialog){
-      editedUser.value = {username:"", login: "", password: "", role: "" };
+      editedUser.value = {username:"", login: "", password: "", role: "",image: 'no_image.jpg',
+      files: [] };
     }
   })
   async function getUsers() {

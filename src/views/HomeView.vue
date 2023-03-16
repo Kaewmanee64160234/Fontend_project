@@ -14,7 +14,7 @@ import { computed } from 'vue'
 import DialogCompleteOrder from '@/components/pos/DialogCompleteOrder.vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
-const pointOfSaleStore = usePointOfSale()
+const pointOfSaleStore = usePointOfSale();
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
   pointOfSaleStore.dialogTopping = true

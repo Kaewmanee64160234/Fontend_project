@@ -5,7 +5,6 @@ import type { OrderItem } from './types/orderItem.type'
 import { useLoadingStore } from './loading'
 import orderService from '@/services/order'
 import { useMessageStore } from './message'
-import { useAuthStore } from './auth'
 import type { Order } from '@/store/types/Order.type'
 import { useCustomerStore } from './customer.store'
 import { useOrderStore } from './order.store'
@@ -45,70 +44,6 @@ export const usePointOfSale = defineStore('point of sale', () => {
     payment: 'promptpay',
     orderItems: orderItemList.value
   })
-    const total_ = ref(0);
-    const total_discount = ref(0);
-    const totalAndDicount = ref(0);
-    const recive_mon = ref(0);
-    const change_money = ref(0);
-    const CaltotalPrice = () => {
-        if (orderItemList.value.length > 0) {
-         total_.value =  orderItemList.value.reduce(
-            (accumulator, currentValue) => accumulator + currentValue.total,
-            0
-          )
-          if((total_.value - total_discount.value) <=0){
-            totalAndDicount.value =0
-          }else{
-            totalAndDicount.value = total_.value - total_discount.value;
-          }
-          change_money.value = recive_mon.value- totalAndDicount.value
-          if(recive_mon.value <=0){
-            change_money.value = 0;
-          }
-          if(recive_mon.value >0){
-            if(change_money.value <0){
-              messageStore.showError(
-                `Money not enough : ${
-                  (change_money.value)
-                } Bath`
-              );
-            }
-          }
-
-      
-          return {total_,totalAndDicount,change_money}
-        } else {
-            total_.value = 0;
-            return {total_}
-        }
-        
-    };
-    const CalDiscout = () => {
-      if (orderItemList.value.length > 0){
-        total_discount.value = total_discount.value + order.value.discount,
-        0
-        return{total_discount}
-      }else{
-        total_discount.value = 0;
-        return {total_discount}
-      }
-      };
-      const calMonAndDiscount = () => {
-        if (orderItemList.value.length > 0) {
-          totalAndDicount.value = total_.value - total_discount.value;
-        }
-        if (recive_mon.value > 0) {
-          if (recive_mon.value - totalAndDicount.value >= 0) {
-            change_money.value = recive_mon.value - totalAndDicount.value;
-          } else {
-            change_money.value = 0;
-          }
-        }
-        return{totalAndDicount}
-      };
-    const deleteAllOrder = async () => {
-      orderItemList.value = []
-
   const promo = ref([
     {
       id: 1,
@@ -159,6 +94,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       img: 'https://cdn-icons-png.flaticon.com/512/3990/3990495.png'
     }
   ])
+  const pointofsaleStore = usePointOfSale()
   const dialogComplteOrder = ref(false)
   const total_ = ref(0)
   const total_discount = ref(0)
@@ -166,7 +102,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   const recive_mon = ref(0)
   const change_money = ref(0)
   const CaltotalPrice = () => {
-    if (orderItemList.value.length > 0) {
+    if (pointofsaleStore.orderItemList.length > 0) {
       total_.value = orderItemList.value.reduce(
         (accumulator, currentValue) => accumulator + currentValue.total,
         0
@@ -193,7 +129,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     }
   }
   const CalDiscout = () => {
-    if (orderItemList.value.length > 0) {
+    if (pointofsaleStore.orderItemList.length > 0) {
       ;(total_discount.value = total_discount.value + order.value.discount), 0
       return { total_discount }
     } else {
@@ -202,7 +138,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     }
   }
   const calMonAndDiscount = () => {
-    if (orderItemList.value.length > 0) {
+    if (pointofsaleStore.orderItemList.length > 0) {
       totalAndDicount.value = total_.value - total_discount.value
     }
     if (recive_mon.value > 0) {
@@ -233,10 +169,6 @@ export const usePointOfSale = defineStore('point of sale', () => {
   async function openOrder() {
     loadingStore.isLoading = true
     try {
-      
-      const response = await orderService.saveOrder(order.value);
-      console.log(response.data);
-     
       if (order.value.orderItems?.length === 0 && order.value.customerId === 0) {
         messageStore.showError('ไม่สามารถบันทึกข้อมูล Orders ได้')
         loadingStore.isLoading = false
@@ -321,9 +253,6 @@ export const usePointOfSale = defineStore('point of sale', () => {
     } else {
       messageStore.showError('ไม่สามารถบันทึกข้อมูล Promotion ได้')
     }
-
-    loadingStore.isLoading = false;
-
   }
 
   return {
@@ -355,5 +284,4 @@ export const usePointOfSale = defineStore('point of sale', () => {
     checkCode,
     codePoint
   }
-}})
-
+})
