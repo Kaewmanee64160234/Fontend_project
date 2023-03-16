@@ -5,6 +5,7 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
 </script>
 
 <template>
+  <div class="page">
   <a class="font">Dashbords</a>
         <v-row>
           <v-col cols="12" md="4">
@@ -74,13 +75,26 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
         </v-container>
           </v-col>
         </v-row>
-      
-
+      </div>
 </template>
 
 <style>
 .font {
   font-size: 200%;
+}
+.page {
+  max-height: 90vh;
+  overflow: scroll;
+}
+
+.page::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.page::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 999px;
 }
 
 </style>
