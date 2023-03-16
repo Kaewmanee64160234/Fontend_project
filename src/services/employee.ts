@@ -50,4 +50,8 @@ const employeeCheckOut = (id:number)=>{
     return http.patch("/check-out-outs/"+id);
 }
 
-export default {employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin}
+const getOneEmployee = (id:string)=>{
+    http.get(`/employees/${id}`);
+}
+
+export default {getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin}
