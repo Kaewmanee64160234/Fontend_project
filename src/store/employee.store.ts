@@ -4,6 +4,8 @@ import employeeService from '@/services/employee'
 import type Employee from './types/employee.type'
 import { useLoadingStore } from './loading'
 import { useMessageStore } from './message'
+import type { CheckInOut } from './types/CheckInOut'
+import type { SummarySalary } from './types/SummarySalary.type'
 export const useEmployeeStore = defineStore('employee', () => {
   const loadingStore = useLoadingStore()
   const search = ref('')
@@ -22,7 +24,10 @@ export const useEmployeeStore = defineStore('employee', () => {
     image: 'no_image.jpg',
     files: []
   })
-
+  const checkInOut = ref<CheckInOut>({})
+  const checkInOuts = ref<CheckInOut[]>([])
+  const summary_salary = ref<SummarySalary>({})
+  const summary_salaries = ref<SummarySalary[]>([])
   watch(dialog, (newDialog, oldDialog) => {
     if (!newDialog) {
       editEmployee.value = {
@@ -115,6 +120,15 @@ export const useEmployeeStore = defineStore('employee', () => {
     const employee = await employeeService.employeeLogin(name, email)
     localStorage.setItem('employee', JSON.stringify(employee))
   }
+  const empCheckIn = async (id: number) => {
+    checkInOut.value.employeeId = id
+    const res = await employeeService.employeeCheckIn(checkInOut.value)
+    console.log(res.data)
+  }
+  const empCheckOut = async (id: number) => {
+    const res = await employeeService.employeeCheckOut(id);
+    console.log(res.data)
+  }
 
   return {
     deleteEmployees,
@@ -130,6 +144,12 @@ export const useEmployeeStore = defineStore('employee', () => {
     saveEmployee,
     editedEmployee,
     search,
-    loginEmployee
+    loginEmployee,
+    checkInOut,
+    checkInOuts,
+    summary_salaries,
+    summary_salary,
+    empCheckIn,
+    empCheckOut
   }
 })
