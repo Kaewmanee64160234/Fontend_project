@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useEmployeeStore } from '@/store/employee.store'
+import type Employee from '@/store/types/employee.type';
+import type User from '@/store/types/user.type';
 import { ref } from 'vue'
 import type { VForm } from 'vuetify/components'
 const employeeStore = useEmployeeStore()
@@ -7,20 +9,15 @@ const valid = ref(true)
 const form = ref<InstanceType<typeof VForm> | null>(null)
 const email = ref('')
 const name = ref('')
-const login = async () => {
-    const { valid } = await form.value!.validate()
-    if (valid) {
-        employeeStore.loginEmployee(email.value, name.value)
-    }
-}
-
+const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
+const employee = ref<Employee>(JSON.parse(data.value));
 </script>
 
 <template>
     <v-container>
         <v-card style="background-color: #F1DEC9;">
             <v-card-title>
-                Employee
+                Employee 
                 <v-spacer> </v-spacer>
 
                 <v-table class="text-center mt-5" style="background-color: #F1DEC9;">
@@ -28,7 +25,7 @@ const login = async () => {
                         <v-col colspan="2">
                             <v-avatar size="80" color="black"></v-avatar>
                             <div class="d-flex align-center flex-column">
-                                <div class="text-subtitle-2 mt-3">Napassorn navapa</div>
+                                <div class="text-subtitle-2 mt-3"> {{ employee.name }}</div>
                                 <v-card class="mt-5" width="350" text="This is content"></v-card>
                             </div>
 
