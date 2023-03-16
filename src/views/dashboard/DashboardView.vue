@@ -1,8 +1,6 @@
 
 <script lang="ts" setup>
-import BoarddayDialog from "../../components/dashboards/BoardmonthDialog.vue"
-import BoardmonthDialog from "../../components/dashboards/BoardmonthDialog.vue"
-import BoardyearDialog from "../../components/dashboards/BoardyearDialog.vue"
+import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
 </script>
 
 <template>
@@ -11,9 +9,7 @@ import BoardyearDialog from "../../components/dashboards/BoardyearDialog.vue"
       <v-card-title>
         Dashbords
         </v-card-title>
-        <BoarddayDialog></BoarddayDialog>
-        <BoardmonthDialog></BoardmonthDialog>
-        <BoardyearDialog></BoardyearDialog>
+        <ChartComponentDialog></ChartComponentDialog>
         </v-card>
         </v-container>
 </template>
