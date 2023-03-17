@@ -133,7 +133,7 @@ export const useEmployeeStore = defineStore('employee', () => {
   }
   const getOneSummarySalaryEmp = async (id:string)=>{
     const res = await employeeService.getOneSummaryByEmployeeId(id+'');
-    
+
     console.log(res.data);
   }
   const getOneEmployee = async (id:string)=>{

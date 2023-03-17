@@ -64,9 +64,10 @@ const getAllSummarySalary = ()=>{
 const getAllCheckInOut = ()=>{
     return http.get("/check-in-outs");
 }
-
 const findEmployeeByName = (name:string)=>{
     return http.get(`/employees/search/name/${name}`);
 }
+ 
 
-export default {findEmployeeByName,getAllCheckInOut,getAllSummarySalary,getOneSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin}
+export default {getAllCheckInOut,getAllSummarySalary,getOneSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin,findEmployeeByName }
+
