@@ -171,8 +171,17 @@ export const useProductStore = defineStore('Product', () => {
       await getProductByCatagory('2')
     }
   }
+const getProductByName = async (name:string) => {
+  try{
+    const res = await productService.findProductByName(name);
+    products.value = res.data;
 
+  }catch(err) {
+    console.log(err)
+  }
+}
   return {
+    getProductByName,
     products,
     getProducts,
     dialog,
