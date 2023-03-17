@@ -80,10 +80,20 @@ export const useUserStore = defineStore('User', () => {
     }
     await getUsers()
   }
-  const getUserBtEmail = async(email:string)=>{
+  const getUserByEmail = async(email:string)=>{
     const data = await userService.getUserByEmail(email);
+    users.value = data.data;
+  }
+  const getUserByUsername = async(username:string)=>{
+    try{
+      const res = await userService.findUserByName(username);
+      users.value = res.data;
+
+    }catch(e){
+      console.log(e);
+    }
   }
 
 
-  return { users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser, selectUserAll, selectUser, allSelected, selected, deleteAllUser, search }
+  return { getUserByUsername,getUserByEmail,users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser, selectUserAll, selectUser, allSelected, selected, deleteAllUser, search }
 })
