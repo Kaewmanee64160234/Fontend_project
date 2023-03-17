@@ -27,8 +27,13 @@ export const useUserStore = defineStore('User', () => {
   watch(dialog, (newDialog, oldDialog) => {
     console.log(newDialog);
     if(!newDialog){
-      editedUser.value = {username:"", login: "", password: "", role: "",image: 'no_image.jpg',
-      files: [] };
+      editedUser.value = { 
+      username: '',
+      login: '',
+      password: '',
+      role: '',
+      image: 'no_image.jpg',
+      files: []};
     }
   })
   async function getUsers() {

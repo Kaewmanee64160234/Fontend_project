@@ -13,6 +13,7 @@ const showName = (namePromo: string) => {
 }
 const reCode = () => {
   CodeInput = ref("");
+  namePromotion.value = "";
 }
 onMounted(() => {
   customerStore.getCustomers()

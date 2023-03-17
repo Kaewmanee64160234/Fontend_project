@@ -4,6 +4,7 @@ import ConfirmDialog from "@/components/ConfirmDialog.vue";
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components';
 const form = ref<VForm | null>(null);
+const url = import.meta.env.VITE_URL_PORT
 const userStore = useUserStore();
 const confirmDlg = ref();
 
@@ -27,6 +28,10 @@ async function save() {
       <v-card-text>
         <v-form ref="form">
           <v-container>
+            <v-row justify="center">
+                                <v-avatar size="80"><v-img
+                                        :src="`${url}/employees/image/${userStore.editedUser.image}`"></v-img></v-avatar>
+                            </v-row>
             <v-row>
               <v-col cols="12" sm="6" md="6">
                 <v-text-field label="Username*" required v-model="userStore.editedUser.username"
@@ -41,6 +46,9 @@ async function save() {
               <v-col cols="12" sm="6" md="6">
                 <v-autocomplete label="Autocomplete" v-model="userStore.editedUser.role" :items="['Owner', 'Employee']"></v-autocomplete>
               </v-col>
+              <v-file-input color="deep-purple-accent-4" counter multiple placeholder="Select your files"
+                  prepend-icon="mdi-paperclip" variant="outlined" :show-size="1000" label="File input"
+                  accept="image/png, image/jpeg, image/bmp" v-model="userStore.editedUser.files"></v-file-input>
             </v-row>
           </v-container>
         </v-form>
