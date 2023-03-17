@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from '@/router'
 import { useEmployeeStore } from '@/store/employee.store'
 import type Employee from '@/store/types/employee.type'
 import type User from '@/store/types/user.type'
@@ -12,6 +13,12 @@ const email = ref('')
 const name = ref('')
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
+const goTo = (index: string) => {
+  router.push('/manager/' + index);
+}
+
+
+
 
 onMounted(async () => {
     await employeeStore.getAllSummarySalary();
@@ -37,9 +44,8 @@ onMounted(async () => {
                             <th>SS Date</th>
                             <th>Hour</th>
                             <th>Salary</th>
-                            <th>CheckInout</th>
-                           
-
+                            <th>Operations</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -49,8 +55,12 @@ onMounted(async () => {
                             <td>{{ item.ss_date }}</td>
                             <td>{{ item.hour}}</td>
                             <td>{{ item.salary }}</td>
-     
-                          
+
+                            <td>
+                                <v-btn color="green" class="mdi mr-2 mdi-checkbox-marked-circle" style=" color: white"
+                                         @click="goTo(item.id + '')"> CheckInOut </v-btn>
+                            </td>
+                              
                         </tr>
 
 
