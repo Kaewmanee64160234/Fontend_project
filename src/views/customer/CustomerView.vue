@@ -10,16 +10,6 @@ const customerStore = useCustomerStore()
 const url = import.meta.env.VITE_URL_PORT
 
 
-const customers = computed(() => {
-  if (!customerStore.search) {
-    return customerStore.customers;
-  } else {
-    return customerStore.customers.filter((customer) => {
-      return customer.name.toLocaleLowerCase().includes( customerStore.search
-      )
-    });
-  }
-});
 onMounted(() => {
   console.log(url)
   customerStore.getCustomers()
@@ -61,18 +51,16 @@ const deleteAllCustomers = async () => {
         >
         <v-btn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red" @click="deleteAllCustomers">Delete All</v-btn>
         <v-spacer> </v-spacer>
-        <v-text-field
-          style="width: 20%"
-          variant="solo"
-          color="deep-purple-accent-4"
-          class="mt-7"
-          density="compact"
-          append-inner-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-          v-model="customerStore.search"
-        ></v-text-field>
+        <v-text-field style="width: 30%;"
+        :loading="customerStore.loading"
+        density="compact"
+        variant="solo"
+        v-model="customerStore.search"
+        label="Search templates"
+        append-inner-icon="mdi-magnify"
+        hide-details
+        @click:append-inner="customerStore.getCustomerByTel"
+      ></v-text-field>
         <v-table class="text-center mt-5">
           <thead>
             <tr>
@@ -93,7 +81,7 @@ const deleteAllCustomers = async () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item of customers" :key="item.id" class="text-center">
+            <tr v-for="item of customerStore.customers" :key="item.id" class="text-center">
               <td>
                 <v-checkbox
                   class="d-flex pa-4"
@@ -119,7 +107,7 @@ const deleteAllCustomers = async () => {
             </tr>
            
           </tbody>
-          <tbody v-if="customers.length == 0" >
+          <tbody v-if="customerStore.customers.length == 0" >
           <tr >
             <td colspan="7" class="text-center">No data</td>
           </tr>

@@ -13,17 +13,6 @@ const goTo = (index:string) => {
     router.push('/material/' + index);
 }
 
-const material = computed(() => {
-  if (!materialStore.search) {
-    return materialStore.materials;
-  } else {
-    return materialStore.materials.filter((material) => {
-      return material.name.toLocaleLowerCase().includes( materialStore.search
-      )
-    });
-  }
-});
-
 
 onMounted(async() => {
     await materialStore.getMaterials();
@@ -68,7 +57,7 @@ const deleteAllMaterials = async () => {
         label="Search templates"
         append-inner-icon="mdi-magnify"
         hide-details
-        @click:append-inner="materialStore.getMaterials"
+        @click:append-inner="materialStore.getMatByName"
       ></v-text-field>
     </v-card-title>
     <v-table class="text-center mt-5">
@@ -93,7 +82,7 @@ const deleteAllMaterials = async () => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item of material" :key="item.id" style="text-align:center">
+            <tr v-for="item of materialStore.materials" :key="item.id" style="text-align:center">
                 <v-checkbox
                 style="justify-content: center;"
                   class="d-flex pa-4"
@@ -115,7 +104,7 @@ const deleteAllMaterials = async () => {
               </td>
             </tr>
         </tbody>
-        <tbody v-if="material.length == 0" >
+        <tbody v-if="materialStore.materials.length == 0" >
           <tr >
             <td colspan="7" class="text-center">No data</td>
           </tr>

@@ -8,16 +8,6 @@ const productStore = useProductStore();
 const confirmDlg = ref();
 const url = import.meta.env.VITE_URL_PORT
 
-const products = computed(() => {
-  if (!productStore.search) {
-    return productStore.products;
-  } else {
-    return productStore.products.filter((product) => {
-      return product.name.toLocaleLowerCase().includes( productStore.search
-      )
-    });
-  }
-});
 onMounted(async () => {
 
   await productStore.getProducts();
@@ -75,7 +65,7 @@ const deleteAllProducts = async () => {
           </tr>
         </thead>
         <tbody>
-          <tr style="text-align:center" v-for="item of products" :key="item.id">
+          <tr style="text-align:center" v-for="item of productStore.products" :key="item.id">
             <td><v-checkbox class="d-flex pa-4" color="indigo" v-model="productStore.selected"
                 @click="productStore.selectProduct" :value="item.id + ''"></v-checkbox></td>
             <td>{{ item.id }}</td>
@@ -91,7 +81,7 @@ const deleteAllProducts = async () => {
 
           </tr>
         </tbody>
-        <tbody v-if="products.length == 0" >
+        <tbody v-if="productStore.products.length == 0" >
           <tr >
             <td colspan="7" class="text-center">No data</td>
           </tr>
