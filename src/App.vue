@@ -5,6 +5,7 @@ import MainLayout from '@/components/layouts/MainLayout.vue'
 import FullLayout from "@/components/layouts/FullLayout.vue";
 import LoadingDialog from './components/LoadingDialog.vue';
 import MessageDialog from './components/MessageDialog.vue';
+import BillDialog from './components/bill/BillDialog.vue';
 </script>
 
 <template>
@@ -16,7 +17,7 @@ import MessageDialog from './components/MessageDialog.vue';
   <LoadingDialog></LoadingDialog>
 
   <MessageDialog></MessageDialog>
-
+<BillDialog></BillDialog>
 </template>
 
 <style>
