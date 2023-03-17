@@ -12,6 +12,7 @@ export const useMaterialStore = defineStore('material', () => {
   const selected = ref<string[] | any[]>([])
   const allSelected = ref(false)
   const dialog = ref(false)
+  const dialog2 = ref(false)
   const materials = ref<Material[]>([])
   const editedMaterial = ref<Material>({
     name: "",
@@ -106,6 +107,7 @@ export const useMaterialStore = defineStore('material', () => {
     selectMaterialAll,
     allSelected,
     selected,
-    search
+    search,
+    dialog2
   }
 })
