@@ -132,7 +132,18 @@ export const useCustomerStore = defineStore('customer', () => {
     loadingStore.isLoading = false
 }
 
+const getCustomerByTel = async (tel: string) => {
+  try{
+    const res = await customerService.findCustomerBytel(tel);
+    customers.value = res.data;
+
+  }catch (e) {
+    console.log(e);
+  }
+}
+
   return {
+    getCustomerByTel,
     customerId,
     deleteCustomers,
     selectCustomer,
