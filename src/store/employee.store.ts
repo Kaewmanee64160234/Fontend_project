@@ -160,9 +160,18 @@ const getEmployeeByName = async ()=>{
   
 
   }catch(err){console.log(err);}
+
   
+  }
+  const getAllSummarySalary = async ()=>{
+    try{
+      const res = await employeeService.getAllSummarySalary();
+      summary_salaries.value = res.data;
+
+    }catch(err){console.log(err);}
 }
   return {
+    getAllSummarySalary,
     loaded,
     loading,
     getEmployeeByName,

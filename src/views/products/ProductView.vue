@@ -7,7 +7,8 @@ import ConfirmDialog from '@/components/ConfirmDialog.vue';
 const productStore = useProductStore();
 const confirmDlg = ref();
 const url = import.meta.env.VITE_URL_PORT
-
+const page = ref(1);
+const pageSize = ref(2);
 onMounted(async () => {
 
   await productStore.getProducts();
@@ -78,6 +79,7 @@ const deleteAllProducts = async () => {
               <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="productStore.editProduct(item)"></v-btn>
               <v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteProduct(item.id!)"></v-btn>
             </td>
+           
 
           </tr>
         </tbody>
@@ -86,6 +88,11 @@ const deleteAllProducts = async () => {
             <td colspan="7" class="text-center">No data</td>
           </tr>
         </tbody>
+        <v-pagination
+      v-model="page"
+      :length="4"
+      rounded="circle"
+    ></v-pagination>
       </v-table>
 
     </v-card>
