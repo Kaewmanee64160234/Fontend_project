@@ -22,7 +22,8 @@ export const useEmployeeStore = defineStore('employee', () => {
     position: '',
     hourly: 0,
     image: 'no_image.jpg',
-    files: []
+    files: [],
+    check_in_outs:[]
   })
   const checkInOut = ref<CheckInOut>({})
   const checkInOuts = ref<CheckInOut[]>([])
@@ -38,7 +39,8 @@ export const useEmployeeStore = defineStore('employee', () => {
         position: '',
         hourly: 0,
         image: 'no_image.jpg',
-        files: []
+        files: [],
+        check_in_outs:[]
       }
     }
   })
@@ -131,7 +133,13 @@ export const useEmployeeStore = defineStore('employee', () => {
   }
   const getOneSummarySalaryEmp = async (id:string)=>{
     const res = await employeeService.getOneSummaryByEmployeeId(id+'');
+    
     console.log(res.data);
+  }
+  const getOneEmployee = async (id:string)=>{
+    const res = await employeeService.getOneEmployee(id);
+    editEmployee.value = res.data;
+    console.log( editEmployee.value);
   }
 
   return {
@@ -155,6 +163,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     summary_salary,
     empCheckIn,
     empCheckOut,
-    getOneSummarySalaryEmp
+    getOneSummarySalaryEmp,
+    getOneEmployee
   }
 })

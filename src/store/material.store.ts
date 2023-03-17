@@ -14,6 +14,7 @@ export const useMaterialStore = defineStore('material', () => {
   const dialog = ref(false)
   const dialog2 = ref(false)
   const materials = ref<Material[]>([])
+  const BillDialog = ref(true)
   const editedMaterial = ref<Material>({
     name: "",
     min_quantity: 0,

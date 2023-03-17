@@ -51,7 +51,7 @@ const employeeCheckOut = (id:number)=>{
 }
 
 const getOneEmployee = (id:string)=>{
-    http.get(`/employees/${id}`);
+   return http.get(`/employees/${id}`);
 }
 
 const getOneSummaryByEmployeeId = (id:string)=>{
