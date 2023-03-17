@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 import { useEmployeeStore } from '@/store/employee.store'
 import type Employee from '@/store/types/employee.type'
@@ -21,23 +22,23 @@ onMounted(async () => {
 
 <template>
     <v-container>
-        <v-card style="background-color: #f1dec9">
+        <v-card style="background-color: #E9EDC9">
             <v-card-title>
                 Employee
                 <v-spacer> </v-spacer>
 
-                <v-table class="text-center mt-5" style="background-color: #f1dec9">
+                <v-table class="text-center mt-5" style="background-color: #E9EDC9">
                     <v-row>
-                        <v-col colspan="2">
+                        <v-col >
                             <v-avatar size="80"><v-img :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
                             <div class="d-flex align-center flex-column">
                                 <div class="text-subtitle-2 mt-3">{{ employee.name }}</div>
                                 <v-card class="mt-5" width="350" text="Pofile">
                                     <v-card-title>
                                         <div class="text-left">
-                                            <p>ชื่อ : {{ employee.name }}</p>
-                                            <p>email : {{ employee.email }}</p>
-                                            <p>ตำแหน่ง : {{ employee.position }}</p>
+                                            <p>Name : {{ employee.name }}</p>
+                                            <p>Email : {{ employee.email }}</p>
+                                            <p>Position : {{ employee.position }}</p>
                                         </div>
                                     </v-card-title>
                                 </v-card>
@@ -47,7 +48,7 @@ onMounted(async () => {
                 </v-table>
 
                 <v-table height="400px">
-                    <thead style="background-color: #f1dec9">
+                    <thead style="background-color: #E9EDC9">
                         <tr>
                             <td></td>
                             <td></td>
@@ -61,6 +62,7 @@ onMounted(async () => {
                         </tr>
                     </thead>
                     <thead>
+                      
                         <tr>
                             <td class="text-center mr-5">Time in</td>
                             <td class="text-center mr-5">Time out</td>
@@ -80,3 +82,6 @@ onMounted(async () => {
         </v-card>
     </v-container>
 </template>
+<style>
+</style>
+
