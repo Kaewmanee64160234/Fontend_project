@@ -26,62 +26,118 @@ onMounted(async () => {
             <v-card-title>
                 Employee
                 <v-spacer> </v-spacer>
-
+            </v-card-title>
+            <v-card-text>
                 <v-table class="text-center mt-5" style="background-color: #E9EDC9">
                     <v-row>
-                        <v-col >
-                            <v-avatar size="80"><v-img :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
-                            <div class="d-flex align-center flex-column">
-                                <div class="text-subtitle-2 mt-3">{{ employee.name }}</div>
-                                <v-card class="mt-5" width="350" text="Pofile">
-                                    <v-card-title>
-                                        <div class="text-left">
-                                            <p>Name : {{ employee.name }}</p>
-                                            <p>Email : {{ employee.email }}</p>
-                                            <p>Position : {{ employee.position }}</p>
-                                        </div>
-                                    </v-card-title>
-                                </v-card>
-                            </div>
+                        <v-col>
+                            <v-row>
+                                <v-col style="justify-content: center">
+                                    <v-avatar size="100"><v-img
+                                            :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
+                                    <div class="text-subtitle-2 mt-3">{{ employee.name }}</div>
+
+                                </v-col>
+
+                            </v-row>
+
+
+                            <v-row style="justify-content: center ">
+                                <div>
+                                    <v-card style="justify-content: center" width="400" text="Pofile">
+                                        <v-card-title style="justify-content: center">
+                                            <div class="text-center" style="font-size: 75%;">
+                                                <p>Name : {{ employee.name }}</p>
+                                                <p>Email : {{ employee.email }}</p>
+                                                <p>Position : {{ employee.position }}</p>
+                                            </div>
+                                        </v-card-title>
+                                    </v-card>
+                                </div>
+                            </v-row>
+                            <v-row>
+                                <v-col>
+
+                                    <v-btn class="mdi mr-2 mdi-checkbox-marked-circle" style="float: right; color: white"
+                                        color="green">Checkin</v-btn>
+
+                                </v-col>
+                            </v-row>
+
                         </v-col>
                     </v-row>
+
+                    <VTable class="text-center mt-5" style="justify-content: center">
+
+                        <thead style="justify-content: center">
+
+                            <tr > 
+                                <th >Time in</th>
+                                <th>Time out</th>
+                                <th>Total hour</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center mr-5 " style="justify-content: center"
+                                v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
+                                <td>{{ item.time_in }}</td>
+                                <td>{{ item.time_out }}</td>
+                                <td>{{ item.total_hour }}</td>
+                            </tr>
+                        </tbody>
+
+                    </VTable>
                 </v-table>
-
-                <v-table height="400px">
-                    <thead style="background-color: #E9EDC9">
-                        <tr>
-                            <td></td>
-                            <td></td>
-
-                            <td>
-                                <v-btn class="mdi mr-2 mdi-delete" style="float: right; color: white"
-                                    color="red">Checkout</v-btn>
-                                <v-btn class="mdi mr-2 mdi-delete" style="float: right; color: white"
-                                    color="blue">Checkin</v-btn>
-                            </td>
-                        </tr>
-                    </thead>
-                    <thead>
-                      
-                        <tr>
-                            <td class="text-center mr-5">Time in</td>
-                            <td class="text-center mr-5">Time out</td>
-                            <td class="text-center mr-5">Total hour</td>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="text-center mr-5" v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
-                            <td>{{ item.time_in }}</td>
-                            <td>{{ item.time_out }}</td>
-                            <td>{{ item.total_hour }}</td>
-                        </tr>
-                    </tbody>
-                </v-table>
-            </v-card-title>
+            </v-card-text>
         </v-card>
     </v-container>
 </template>
 <style>
+body {
+    background-color: #eefbfb;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.policy-table {
+    color: grey;
+    text-align: center;
+}
+
+.headings,
+.policy {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+
+.heading {
+    flex-basis: 33.333%;
+    font-weight: bold;
+}
+
+.policy {
+    border-radius: 2em;
+    background-color: white;
+    margin-bottom: 20px;
+    -moz-box-shadow: 0 0 3px grey;
+    -webkit-box-shadow: 0 0 3px grey;
+    box-shadow: 0 0 5px grey;
+}
+
+span {
+    flex-basis: 33.333%;
+}
+
+a {
+    text-decoration: none;
+    color: #4c4c4c;
+}
 </style>
 
