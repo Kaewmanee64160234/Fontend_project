@@ -56,10 +56,10 @@ onMounted(async () => {
                                 </div>
                             </v-row>
                             <v-row>
-                                <v-col>
-
-                                    <v-btn class="mdi mr-2 mdi-checkbox-marked-circle" style="float: right; color: white"
-                                        color="green">Checkin</v-btn>
+                                <v-col class="switch">
+                                    <v-btn class="mdi mr-2 mdi-checkbox-marked-circle" style="float: right; color: white" color="red">Checkout</v-btn>
+    
+                                    <v-btn class="mdi mr-2 mdi-checkbox-marked-circle" style="float: right; color: white" color="green">Checkin</v-btn>
 
                                 </v-col>
                             </v-row>
@@ -67,9 +67,9 @@ onMounted(async () => {
                         </v-col>
                     </v-row>
 
-                    <VTable class="text-center mt-5" style="justify-content: center">
+                    <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto;">
 
-                        <thead style="justify-content: center">
+                        <thead style="justify-content: center; overflow-y: auto;">
 
                             <tr > 
                                 <th >Time in</th>
@@ -94,50 +94,6 @@ onMounted(async () => {
     </v-container>
 </template>
 <style>
-body {
-    background-color: #eefbfb;
-    font-family: sans-serif;
-    font-size: 16px;
-}
 
-.policy-table {
-    color: grey;
-    text-align: center;
-}
-
-.headings,
-.policy {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    margin-bottom: 1em;
-    padding: 1em;
-}
-
-.heading {
-    flex-basis: 33.333%;
-    font-weight: bold;
-}
-
-.policy {
-    border-radius: 2em;
-    background-color: white;
-    margin-bottom: 20px;
-    -moz-box-shadow: 0 0 3px grey;
-    -webkit-box-shadow: 0 0 3px grey;
-    box-shadow: 0 0 5px grey;
-}
-
-span {
-    flex-basis: 33.333%;
-}
-
-a {
-    text-decoration: none;
-    color: #4c4c4c;
-}
 </style>
 
