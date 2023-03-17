@@ -45,8 +45,16 @@ const deleteAllProducts = async () => {
           @click="deleteAllProducts">Delete All</v-btn>
         <v-spacer>
         </v-spacer>
-            <v-text-field style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
-              append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="productStore.search"></v-text-field>
+        <v-text-field style="width: 30%;"
+        :loading="productStore.loading"
+        density="compact"
+        variant="solo"
+        v-model="productStore.search"
+        label="Search templates"
+        append-inner-icon="mdi-magnify"
+        hide-details
+        @click:append-inner="productStore.getProductByName"
+      ></v-text-field>
       </v-card-title>
 
       <v-table class="text-center mt-5">

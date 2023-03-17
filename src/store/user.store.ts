@@ -15,7 +15,8 @@ export const useUserStore = defineStore('User', () => {
   const loadingStore = useLoadingStore();
   const search = ref('');
   const editedUser = ref<User>({username:"", login: "", password: "", role: "" });
-
+const loaded = ref(false);
+const loading = ref(false);
   watch(dialog, (newDialog, oldDialog) => {
     console.log(newDialog);
     if(!newDialog){
@@ -84,10 +85,21 @@ export const useUserStore = defineStore('User', () => {
     const data = await userService.getUserByEmail(email);
     users.value = data.data;
   }
-  const getUserByUsername = async(username:string)=>{
+  const getUserByUsername = async()=>{
     try{
-      const res = await userService.findUserByName(username);
+
+      if(search.value !== ''){
+      const res = await userService.findUserByName(search.value);
+
+        setTimeout(() => {
+        loading.value = false
+        loaded.value = true
+      }, 2000)
       users.value = res.data;
+      console.log(users.value)
+    }else{
+        await getUsers();
+      }
 
     }catch(e){
       console.log(e);
@@ -95,5 +107,5 @@ export const useUserStore = defineStore('User', () => {
   }
 
 
-  return { getUserByUsername,getUserByEmail,users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser, selectUserAll, selectUser, allSelected, selected, deleteAllUser, search }
+  return {loading,loaded, getUserByUsername,getUserByEmail,users, getUsers, dialog, saveUser, deleteUser, editUser, editedUser, selectUserAll, selectUser, allSelected, selected, deleteAllUser, search }
 })
