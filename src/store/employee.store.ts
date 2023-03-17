@@ -141,8 +141,12 @@ export const useEmployeeStore = defineStore('employee', () => {
     editEmployee.value = res.data;
     console.log( editEmployee.value);
   }
-
+const getEmployeeByName = async (name:string)=>{
+  const res = await employeeService.findEmployeeByName(name);
+  employees.value = res.data;
+}
   return {
+    getEmployeeByName,
     deleteEmployees,
     selectEmployee,
     allSelected,
