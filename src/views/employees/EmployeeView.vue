@@ -8,18 +8,8 @@ import ConfirmDialog from '@/components/ConfirmDialog.vue'
 const confirmDlg = ref()
 const employeeStore = useEmployeeStore()
 const url = import.meta.env.VITE_URL_PORT
+const loading = ref(false);
 
-
-const employees = computed(() => {
-  if (!employeeStore.search) {
-    return employeeStore.employees;
-  } else {
-    return employeeStore.employees.filter((employee) => {
-      return employee.name.toLocaleLowerCase().includes( employeeStore.search
-      )
-    });
-  }
-});
 onMounted(() => {
   console.log(url)
   employeeStore.getEmployees()
@@ -61,18 +51,17 @@ const deleteAllEmployees = async () => {
         >
         <v-btn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red" @click="deleteAllEmployees">Delete All</v-btn>
         <v-spacer> </v-spacer>
-        <v-text-field
-          style="width: 20%"
-          variant="solo"
-          color="deep-purple-accent-4"
-          class="mt-7"
-          density="compact"
-          append-inner-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-          v-model="employeeStore.search"
-        ></v-text-field>
+          <v-text-field style="width: 30%;"
+        :loading="employeeStore.loading"
+        density="compact"
+        variant="solo"
+        v-model="employeeStore.search"
+        label="Search templates"
+        append-inner-icon="mdi-magnify"
+        hide-details
+        @click:append-inner="employeeStore.getEmployeeByName"
+      ></v-text-field>
+       
         <v-table class="text-center mt-5">
           <thead>
             <tr>
@@ -95,8 +84,8 @@ const deleteAllEmployees = async () => {
               <th>Operations</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="item of employees" :key="item.id" class="text-center">
+          <tbody v-if="employeeStore.employees.length >0">
+            <tr v-for="item of employeeStore.employees" :key="item.id" class="text-center">
               <td>
                 <v-checkbox
                   class="d-flex pa-4"
@@ -127,7 +116,7 @@ const deleteAllEmployees = async () => {
             </tr>
            
           </tbody>
-          <tbody v-if="employees.length == 0" >
+          <tbody v-else >
           <tr >
             <td colspan="10" class="text-center">No data</td>
           </tr>

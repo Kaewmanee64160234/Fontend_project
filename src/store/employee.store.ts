@@ -9,6 +9,8 @@ import type { SummarySalary } from './types/SummarySalary.type'
 export const useEmployeeStore = defineStore('employee', () => {
   const loadingStore = useLoadingStore()
   const search = ref('')
+  const loading = ref(false)
+  const loaded = ref(false)
   const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
   const allSelected = ref(false)
@@ -141,11 +143,28 @@ export const useEmployeeStore = defineStore('employee', () => {
     editEmployee.value = res.data;
     console.log( editEmployee.value);
   }
-const getEmployeeByName = async (name:string)=>{
-  const res = await employeeService.findEmployeeByName(name);
-  employees.value = res.data;
+const getEmployeeByName = async ()=>{
+  try{
+    if(search.value !== ''){
+      loading.value = true
+      const res = await employeeService.findEmployeeByName(search.value);
+  
+      setTimeout(() => {
+        loading.value = false
+        loaded.value = true
+      }, 2000)
+    employees.value = res.data;
+    }else{
+      await getEmployees();
+    }
+  
+
+  }catch(err){console.log(err);}
+  
 }
   return {
+    loaded,
+    loading,
     getEmployeeByName,
     deleteEmployees,
     selectEmployee,
