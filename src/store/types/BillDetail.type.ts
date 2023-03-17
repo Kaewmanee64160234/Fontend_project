@@ -1,3 +1,5 @@
+import type { Bill } from "./Bill.type"
+
 export interface BillDetail {
   id?: number
 
