@@ -25,7 +25,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     hourly: 0,
     image: 'no_image.jpg',
     files: [],
-    check_in_outs:[]
+    check_in_outs: []
   })
   const checkInOut = ref<CheckInOut>({})
   const checkInOuts = ref<CheckInOut[]>([])
@@ -42,7 +42,7 @@ export const useEmployeeStore = defineStore('employee', () => {
         hourly: 0,
         image: 'no_image.jpg',
         files: [],
-        check_in_outs:[]
+        check_in_outs: []
       }
     }
   })
@@ -133,43 +133,51 @@ export const useEmployeeStore = defineStore('employee', () => {
     const res = await employeeService.employeeCheckOut(id);
     console.log(res.data)
   }
-  const getOneSummarySalaryEmp = async (id:string)=>{
-    const res = await employeeService.getOneSummaryByEmployeeId(id+'');
+  const getOneSummarySalaryEmp = async (id: string) => {
+    const res = await employeeService.getOneSummaryByEmployeeId(id + '');
 
     console.log(res.data);
   }
-  const getOneEmployee = async (id:string)=>{
+  const getOneEmployee = async (id: string) => {
+    
     const res = await employeeService.getOneEmployee(id);
     editEmployee.value = res.data;
-    console.log( editEmployee.value);
+    console.log(editEmployee.value);
+    
   }
-const getEmployeeByName = async ()=>{
-  try{
-    if(search.value !== ''){
-      loading.value = true
-      const res = await employeeService.findEmployeeByName(search.value);
-  
-      setTimeout(() => {
-        loading.value = false
-        loaded.value = true
-      }, 2000)
-    employees.value = res.data;
-    }else{
-      await getEmployees();
-    }
-  
+  const getEmployeeByName = async () => {
+    try {
+      if (search.value !== '') {
+        loading.value = true
+        const res = await employeeService.findEmployeeByName(search.value);
 
-  }catch(err){console.log(err);}
+        setTimeout(() => {
+          loading.value = false
+          loaded.value = true
+        }, 2000)
+        employees.value = res.data;
+      } else {
+        await getEmployees();
+      }
 
-  
+
+    } catch (err) { console.log(err); }
+
+
   }
-  const getAllSummarySalary = async ()=>{
-    try{
+  const getAllSummarySalary = async () => {
+    loadingStore.isLoading = true;
+    try {
       const res = await employeeService.getAllSummarySalary();
       summary_salaries.value = res.data;
 
-    }catch(err){console.log(err);}
-}
+    } catch (err) {
+      console.log(err); 
+    }
+    loadingStore.isLoading = false;
+
+    
+  }
   return {
     getAllSummarySalary,
     loaded,
