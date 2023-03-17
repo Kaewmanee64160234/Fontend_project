@@ -14,7 +14,7 @@ const name = ref('')
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
 const goTo = (index: string) => {
-  router.push('/manager/' + index);
+    router.push('/manager/' + index);
 }
 
 
@@ -45,7 +45,7 @@ onMounted(async () => {
                             <th>Hour</th>
                             <th>Salary</th>
                             <th>Operations</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -53,14 +53,14 @@ onMounted(async () => {
                             v-for="(item, index) in employeeStore.summary_salaries" :key="index">
                             <td>{{ item.id }}</td>
                             <td>{{ item.ss_date }}</td>
-                            <td>{{ item.hour}}</td>
+                            <td>{{ item.hour }}</td>
                             <td>{{ item.salary }}</td>
 
                             <td>
                                 <v-btn color="green" class="mdi mr-2 mdi-checkbox-marked-circle" style=" color: white"
-                                         @click="goTo(item.id + '')"> CheckInOut </v-btn>
+                                    @click="goTo(item.id + '')"> CheckInOut </v-btn>
                             </td>
-                              
+
                         </tr>
 
 
