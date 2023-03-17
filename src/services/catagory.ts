@@ -15,5 +15,7 @@ const updateCatagory= (id:number, catagory:Catagory) => {
 const deleteCatagory  = (id:number) => {
   return http.delete("/catagories/" + id)
 }
-
-export default { getCatagories ,saveCatagory, updateCatagory, deleteCatagory};
+const findCatByName = (name:string) => {
+  return http.get("/catagories/search/name"+ name)
+}
+export default { findCatByName,getCatagories ,saveCatagory, updateCatagory, deleteCatagory};

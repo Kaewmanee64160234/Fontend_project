@@ -40,4 +40,8 @@ function deleteProduct(id: number) {
   return http.delete(`/products/${id}`);
 }
 
-export default { getProducts, saveProduct, updateProduct, deleteProduct, getProductByCatagory };
+const findProductByName = (name: string) => {
+  return http.get(`/products/search/name/${name}`);
+}
+
+export default { findProductByName,getProducts, saveProduct, updateProduct, deleteProduct, getProductByCatagory };
