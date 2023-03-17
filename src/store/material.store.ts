@@ -14,7 +14,9 @@ export const useMaterialStore = defineStore('material', () => {
   const dialog = ref(false)
   const dialog2 = ref(false)
   const materials = ref<Material[]>([])
+  const loaded = ref(false)
   const BillDialog = ref(true)
+  const loading = ref(false);
   const editedMaterial = ref<Material>({
     name: "",
     min_quantity: 0,
@@ -95,7 +97,29 @@ export const useMaterialStore = defineStore('material', () => {
     }
     loadingStore.isLoading = false
   }
+
+  const getMatByName = async () => {
+    try{
+      if(search.value !== ''){
+        loading.value = true
+        const res = await materialService.findMatByName(search.value);
+    
+        setTimeout(() => {
+          loading.value = false
+          loaded.value = true
+        }, 2000)
+      materials.value = res.data;
+      }else{
+        await getMaterials();
+      }
+    
+  
+    }catch(err){console.log(err);}
+  }
   return {
+    getMatByName,
+    loaded,
+    loading,
     materials,
     getMaterials,
     dialog,
