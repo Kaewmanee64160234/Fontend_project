@@ -33,8 +33,8 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
             <v-container>
             <v-card width="400px">
             ยอดขายรายปี
-            <ChartComponentDialog></ChartComponentDialog>
-            <!-- <ChartComponentDialogCopy></ChartComponentDialogCopy> -->
+            <!-- <ChartComponentDialog></ChartComponentDialog> -->
+            <ChartComponentDialogCopy></ChartComponentDialogCopy>
           </v-card>
         </v-container>
           </v-col>

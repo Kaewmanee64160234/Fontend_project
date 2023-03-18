@@ -53,7 +53,7 @@ const deleteAllProducts = async () => {
           <tr>
             <th>
              
-             \
+             
              
              
               <v-checkbox class="d-flex pa-4" color="indigo" v-model="productStore.allSelected"
