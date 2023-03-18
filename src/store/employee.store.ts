@@ -139,10 +139,19 @@ export const useEmployeeStore = defineStore('employee', () => {
     console.log(res.data);
   }
   const getOneEmployee = async (id: string) => {
+    loadingStore.isLoading = true;
+    try{
+      const res = await employeeService.getOneEmployee(id);
+       editEmployee.value = res.data;
+
+    }catch (err) {
+      console.log(editEmployee.value);
+
+    }
+    loadingStore.isLoading = false;
     
-    const res = await employeeService.getOneEmployee(id);
-    editEmployee.value = res.data;
-    console.log(editEmployee.value);
+    
+    
     
   }
   const getEmployeeByName = async () => {
