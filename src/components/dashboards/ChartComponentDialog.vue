@@ -2,7 +2,7 @@
 import { computed, defineComponent, ref } from "vue";
 // import {shuffle} from "lo"
 import { LineChart, useLineChart } from "vue-chart-3";
-import { Chart, registerables, type ChartData, type ChartOptions } from "chart.js";
+import { Chart, registerables, type ChartData, type ChartOptions,type Color } from "chart.js";
 
 Chart.register(...registerables);
 export default defineComponent({
@@ -26,6 +26,9 @@ export default defineComponent({
             "#DBE4C6",
             "#CDE990"
           ],
+          tension:0.4,
+          borderColor: '#FF6384',
+          pointBackgroundColor:'#FF6384',
         },
       ],
     }));
