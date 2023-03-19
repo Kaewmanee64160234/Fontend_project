@@ -17,7 +17,7 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
         <v-container>
           <v-card width="400px">
             ยอดขายรายวัน
-            <ChartComponentDialog :dataValues="[30, 50, 40, 45, 50, 40, 32, 60, 40, 20, 30, 50]" :dataLabels="[
+            <ChartComponentDialog :background="`rgb(151, 222, 255,0.4)`" :color="`#62CDFF`" :dataValues="[30, 50, 40, 45, 50, 40, 32, 60, 40, 20, 30, 50]" :dataLabels="[
               'Sun',
               'Mon',
               'Tue',
@@ -33,7 +33,7 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
         <v-container>
           <v-card width="400px">
             ยอดขายรายเดือน
-            <ChartComponentDialog :dataValues="[100, 200, 300, 400, 500, 450, 320, 600, 400, 200, 300, 500]" :dataLabels="[
+            <ChartComponentDialog :background="`rgb(237, 241, 214,0.5)`" :color="`#609966`" :dataValues="[100, 200, 300, 400, 500, 450, 320, 600, 400, 200, 300, 500]" :dataLabels="[
               'Jan',
               'Feb',
               'Mar',
@@ -54,7 +54,7 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
         <v-container>
           <v-card width="400px">
             ยอดขายรายปี
-            <ChartComponentDialog :dataValues="[200, 300, 400]" :dataLabels="[
+            <ChartComponentDialog :background="`rgb(241, 103, 103,0.3)`" :color="`#F16767`"  :dataValues="[200, 300, 400]" :dataLabels="[
               '2020',
               '2021',
               '2023'

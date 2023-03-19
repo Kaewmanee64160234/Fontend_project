@@ -8,6 +8,8 @@ const props = defineProps<{
   dataValues: number[];
   dataLabels: string[];
   label: String;
+  color: String;
+  background: String;
 }>();
 const options = {
   responsive: true,
@@ -21,10 +23,10 @@ const data = ref({
       label: props.label,
       data: props.dataValues,
       fill: true,
-      backgroundColor: "rgb(237, 241, 214,0.5)",
+      backgroundColor: props.background,
       tension: 0.4,
-      borderColor: '#609966',
-      pointBackgroundColor: '#609966',
+      borderColor: props.color,
+      pointBackgroundColor:  props.color,
       pointStyle: 'circle',
       pointRadius: 5,
       pointHoverRadius: 8,
