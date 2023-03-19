@@ -40,7 +40,7 @@ const loaded = ref(false);
 
     try {
       const res = await customerService.getCustomers()
-      customers.value = res.data
+      customers.value = res.data.data
     } catch (err) {
       console.log(err)
       messageStore.showError("ไม่สามารถดึงข้อมูลลูกค้าได้");

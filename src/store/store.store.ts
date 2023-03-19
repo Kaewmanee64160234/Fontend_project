@@ -29,7 +29,7 @@ export const useStoreStore = defineStore('Store', () => {
     loadingStore.isLoading = true;
     try {
       const res = await storeService.getStores();
-      stores.value = res.data;
+      stores.value = res.data.data
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถดึงข้อมูล Stores ได้");

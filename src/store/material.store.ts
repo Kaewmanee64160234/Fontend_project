@@ -40,7 +40,7 @@ export const useMaterialStore = defineStore('material', () => {
     loadingStore.isLoading = true
     try {
       const res = await materialService.getMaterials()
-      materials.value = res.data
+      materials.value = res.data.data
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถดึงข้อมูล Material ได้')

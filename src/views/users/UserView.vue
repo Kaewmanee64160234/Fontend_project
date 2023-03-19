@@ -42,7 +42,7 @@ const deleteAllUsers = async () => {
         :loading="userStore.loading"
         density="compact"
         variant="solo"
-        v-model="userStore.search"
+        v-model="userStore.keyword"
         label="Search templates"
         append-inner-icon="mdi-magnify"
         hide-details
@@ -77,6 +77,11 @@ const deleteAllUsers = async () => {
           </tr>
         </tbody>
         </VTable>
+        <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="userStore.page" :length="userStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
       </VCardTitle>
     </VCard>
   </VContainer>

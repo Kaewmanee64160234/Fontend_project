@@ -52,7 +52,7 @@ export const useEmployeeStore = defineStore('employee', () => {
 
     try {
       const res = await employeeService.getEmployees()
-      employees.value = res.data
+      employees.value = res.data.data
     } catch (err) {
       console.log(err)
       messageStore.showError('ไม่สามารถดึงข้อมูลพนักงานได้')
@@ -179,7 +179,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     loadingStore.isLoading = true;
     try {
       const res = await employeeService.getAllSummarySalary();
-      summary_salaries.value = res.data;
+      summary_salaries.value = res.data.data;
 
     } catch (err) {
       console.log(err); 

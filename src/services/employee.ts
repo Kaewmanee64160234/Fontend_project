@@ -68,6 +68,9 @@ const findEmployeeByName = (name:string)=>{
     return http.get(`/employees/search/name/${name}`);
 }
  
+const getCioByIdEmp = (params:any)=>{
+    return http.get(`/employees/cio/employee`,{params:params});
+}
 
-export default {getAllCheckInOut,getAllSummarySalary,getOneSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin,findEmployeeByName }
+export default {getCioByIdEmp,getAllCheckInOut,getAllSummarySalary,getOneSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin,findEmployeeByName }
 
