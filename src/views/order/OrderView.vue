@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import router from '@/router';
-import { mdiReceiptText } from '@mdi/js';
+
 
 import ConfirmDialog from '@/components/ConfirmDialog.vue';
 import { useOrderStore } from '@/store/order.store';

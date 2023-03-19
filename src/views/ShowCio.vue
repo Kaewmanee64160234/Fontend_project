@@ -1,14 +1,11 @@
-
 <script setup lang="ts">
-import ConfirmDialog from '@/components/ConfirmDialog.vue';
+
 import { useEmployeeStore } from '@/store/employee.store'
 import type Employee from '@/store/types/employee.type'
-
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router';
 import type { VForm } from 'vuetify/components'
 const url = import.meta.env.VITE_URL_PORT
-const employeeStore = useEmployeeStore()
 const valid = ref(true)
 const form = ref<InstanceType<typeof VForm> | null>(null)
 const email = ref('')
@@ -18,15 +15,16 @@ const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
 const route = useRoute();
 const id = ref(route.params.id);
+const employeeStore = useEmployeeStore()
 
-onMounted(async () => {
-    await employeeStore.getOneEmployee(employee.value.id + '')
-    console.log(employeeStore.editEmployee)
+
+onMounted(() => {
+    employeeStore.getOneEmployee(employee.value.id + '')
+    
 });
 </script>
-
 <template>
-    <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
+    
     <v-container>
         <v-card style="background-color: #E9EDC9">
             <v-card-title>
@@ -99,5 +97,3 @@ onMounted(async () => {
         </v-card>
     </v-container>
 </template>
-<style></style>
-
