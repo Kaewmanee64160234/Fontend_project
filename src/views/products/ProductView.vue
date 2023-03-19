@@ -91,11 +91,6 @@ const deleteAllProducts = async () => {
             <td colspan="7" class="text-center">No data</td>
           </tr>
         </tbody>
-        <v-pagination
-      v-model="page"
-      :length="4"
-      rounded="circle"
-    ></v-pagination>
       </v-table>
 
     </v-card>
