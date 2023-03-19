@@ -135,8 +135,9 @@ export const useEmployeeStore = defineStore('employee', () => {
   }
   const getOneSummarySalaryEmp = async (id: string) => {
     const res = await employeeService.getOneSummaryByEmployeeId(id + '');
+    summary_salary.value = res.data[0];
 
-    console.log(res.data);
+    // console.log(res.data[0]);
   }
   const getOneEmployee = async (id: string) => {
     loadingStore.isLoading = true;
