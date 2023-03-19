@@ -21,6 +21,7 @@ const id = ref(route.params.id)
 onMounted(async () => {
   await employeeStore.getOneEmployee(employee.value.id + '')
   await employeeStore.getOneSummarySalaryEmp(employee.value.id + '')
+  await employeeStore.getCioByIdEmp(employee.value.id+'')
   console.log(employeeStore.editEmployee)
 })
 </script>
@@ -103,7 +104,7 @@ onMounted(async () => {
 
           <v-col class="detail">
             <v-container>
-              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto">
+              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto;">
                 <thead style="justify-content: center; overflow-y: auto">
                   <tr>
                     <th>Time in</th>
@@ -115,7 +116,7 @@ onMounted(async () => {
                   <tr
                     class="text-center mr-5"
                     style="justify-content: center"
-                    v-for="(item, index) in employeeStore.editEmployee.check_in_outs"
+                    v-for="(item, index) in employeeStore.checkInOuts"
                     :key="index"
                   >
                     <td>{{ item.time_in }}</td>
@@ -124,6 +125,11 @@ onMounted(async () => {
                   </tr>
                 </tbody>
               </VTable>
+              <v-container width="100%" justify="center" >
+       
+       <v-pagination  justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
             </v-container>
           </v-col>
         </v-row>

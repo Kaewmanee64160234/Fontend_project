@@ -66,7 +66,7 @@ onMounted(async () => {
 
 
                     </tbody>
-                    <tbody>
+                    <tbody v-if="employeeStore.checkInOuts.length === 0">
                         <tr>
                             <td colspan="6"> No Data</td>
                         </tr>

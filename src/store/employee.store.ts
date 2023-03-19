@@ -58,12 +58,14 @@ const lastPage = ref(0)
 
 watch(page, async (newPage, oldPage) => {
   await getEmployees()
+
 })
 watch(keyword, async (newKey, oldKey) => {
   await getEmployees()
 })
 watch(keyword, async (newKey, oldKey) => {
   await getAllSummarySalary()
+
 })
 watch(page, async (newPage, oldPage) => {
   await getAllSummarySalary()
@@ -226,10 +228,28 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       console.log(err); 
     }
     loadingStore.isLoading = false;
+  }
+  const getCioByIdEmp = async (empId:string) => {
+    loadingStore.isLoading = true;
+    try{
+      const res = await employeeService.getCioByIdEmp({
+        page: page.value,
+        take: take.value,
+        empId: empId,
+        order: 'DESC',
+        orderBy: orderBy.value
+      });
+      lastPage.value = res.data.lastPage
+
+      checkInOuts.value = res.data.data;
+    }catch(err){console.log(err);}
+    loadingStore.isLoading = false;
 
     
+
   }
   return {
+    getCioByIdEmp,
     page,
     keyword,
     take,
