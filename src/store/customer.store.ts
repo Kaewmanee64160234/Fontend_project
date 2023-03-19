@@ -15,6 +15,8 @@ export const useCustomerStore = defineStore('customer', () => {
   const customers = ref<Customer[]>([])
   const messageStore = useMessageStore()
   const customerId = ref('');
+  const loading = ref(false)
+const loaded = ref(false);
   const editCustomer = ref<Customer & { files: File[] }>({
     name: '',
     tel: '',
@@ -132,7 +134,28 @@ export const useCustomerStore = defineStore('customer', () => {
     loadingStore.isLoading = false
 }
 
+const getCustomerByTel = async () => {
+  
+    try{
+      if(search.value !== ''){
+        loading.value = true
+        const res = await  customerService.findCustomerBytel(search.value);
+    
+        setTimeout(() => {
+          loading.value = false
+          loaded.value = true
+        }, 2000)
+      customers.value = res.data;
+      }else{
+        await getCustomers();
+      }
+    
+  
+    }catch(err){console.log(err);}
+  
+}
   return {
+    getCustomerByTel,
     customerId,
     deleteCustomers,
     selectCustomer,
@@ -148,6 +171,8 @@ export const useCustomerStore = defineStore('customer', () => {
     editedCustomer,
     search,
     addPointCustomer,
-    customerService
+    customerService,
+    loaded,
+    loading,
   }
 })

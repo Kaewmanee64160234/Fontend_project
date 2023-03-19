@@ -3,19 +3,15 @@ import { computed, onMounted, ref } from 'vue';
 import { useMaterialStore } from '@/store/material.store.js';
 import MaterialsDialog from '@/components/material/MaterialsDialog.vue';
 import ConfirmDialog from '@/components/ConfirmDialog.vue';
+import router from '@/router';
+import AddBillDialog from '@/components/material/AddBillDialog.vue';
+import { useBillDetailStore } from '@/store/billdetail.store';
+const billdetailStore = useBillDetailStore();
 const materialStore = useMaterialStore();
 const confirmDlg = ref();
-
-const material = computed(() => {
-  if (!materialStore.search) {
-    return materialStore.materials;
-  } else {
-    return materialStore.materials.filter((material) => {
-      return material.name.toLocaleLowerCase().includes( materialStore.search
-      )
-    });
-  }
-});
+const goTo = (index:string) => { 
+    router.push('/material/' + index);
+}
 
 
 onMounted(async() => {
@@ -43,6 +39,7 @@ const deleteAllMaterials = async () => {
 <template>
     <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
     <MaterialsDialog></MaterialsDialog>
+    <AddBillDialog></AddBillDialog>
     <v-container>
     <v-card>
      <v-card-title>
@@ -50,18 +47,18 @@ const deleteAllMaterials = async () => {
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
           <v-btn class="mdi mdi-delete mr-2" style="float: right; color: white" color="red" @Click="deleteAllMaterials">Delete All</v-btn>
+          <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billdetailStore.dialog = true">Add Bill</v-btn>
       <v-spacer></v-spacer>
-      <v-text-field
-      style="width: 20%"
-          variant="solo"
-          color="deep-purple-accent-4"
-          class="mt-7"
-          density="compact"
-          append-inner-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-          v-model="materialStore.search"></v-text-field>
+      <v-text-field style="width: 30%;"
+        :loading="materialStore.loading"
+        density="compact"
+        variant="solo"
+        v-model="materialStore.search"
+        label="Search templates"
+        append-inner-icon="mdi-magnify"
+        hide-details
+        @click:append-inner="materialStore.getMatByName"
+      ></v-text-field>
     </v-card-title>
     <v-table class="text-center mt-5">
         <thead>
@@ -85,7 +82,7 @@ const deleteAllMaterials = async () => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item of material" :key="item.id" style="text-align:center">
+            <tr v-for="item of materialStore.materials" :key="item.id" style="text-align:center">
                 <v-checkbox
                 style="justify-content: center;"
                   class="d-flex pa-4"
@@ -103,11 +100,11 @@ const deleteAllMaterials = async () => {
                 <td>{{ item.price_per_unit }}</td>
                 <td><v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="materialStore.editMaterial(item)"></v-btn>
                 <v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteMaterial(item.id + '')"></v-btn>
-                <v-btn color="#98DFD6" icon="mdi-clipboard-check-outline" ></v-btn>
+                <v-btn color="#98DFD6" icon="mdi-clipboard-check-outline" @click="goTo(item.id+'')" ></v-btn>
               </td>
             </tr>
         </tbody>
-        <tbody v-if="material.length == 0" >
+        <tbody v-if="materialStore.materials.length == 0" >
           <tr >
             <td colspan="7" class="text-center">No data</td>
           </tr>

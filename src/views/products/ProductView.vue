@@ -7,17 +7,8 @@ import ConfirmDialog from '@/components/ConfirmDialog.vue';
 const productStore = useProductStore();
 const confirmDlg = ref();
 const url = import.meta.env.VITE_URL_PORT
-
-const products = computed(() => {
-  if (!productStore.search) {
-    return productStore.products;
-  } else {
-    return productStore.products.filter((product) => {
-      return product.name.toLocaleLowerCase().includes( productStore.search
-      )
-    });
-  }
-});
+const page = ref(1);
+const pageSize = ref(2);
 onMounted(async () => {
 
   await productStore.getProducts();
@@ -45,14 +36,26 @@ const deleteAllProducts = async () => {
           @click="deleteAllProducts">Delete All</v-btn>
         <v-spacer>
         </v-spacer>
-            <v-text-field style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
-              append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="productStore.search"></v-text-field>
+        <v-text-field style="width: 30%;"
+        :loading="productStore.loading"
+        density="compact"
+        variant="solo"
+        v-model="productStore.search"
+        label="Search templates"
+        append-inner-icon="mdi-magnify"
+        hide-details
+        @click:append-inner="productStore.getProductByName"
+      ></v-text-field>
       </v-card-title>
 
       <v-table class="text-center mt-5">
         <thead>
           <tr>
             <th>
+             
+             
+             
+             
               <v-checkbox class="d-flex pa-4" color="indigo" v-model="productStore.allSelected"
                 @click="productStore.selectProductAll"></v-checkbox>
             </th>
@@ -63,11 +66,10 @@ const deleteAllProducts = async () => {
             <th>Price</th>
             <th>Size</th>
             <th>Operations</th>
-
           </tr>
         </thead>
         <tbody>
-          <tr style="text-align:center" v-for="item of products" :key="item.id">
+          <tr style="text-align:center" v-for="item of productStore.products" :key="item.id">
             <td><v-checkbox class="d-flex pa-4" color="indigo" v-model="productStore.selected"
                 @click="productStore.selectProduct" :value="item.id + ''"></v-checkbox></td>
             <td>{{ item.id }}</td>
@@ -80,14 +82,20 @@ const deleteAllProducts = async () => {
               <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="productStore.editProduct(item)"></v-btn>
               <v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteProduct(item.id!)"></v-btn>
             </td>
+           
 
           </tr>
         </tbody>
-        <tbody v-if="products.length == 0" >
+        <tbody v-if="productStore.products.length == 0" >
           <tr >
             <td colspan="7" class="text-center">No data</td>
           </tr>
         </tbody>
+        <v-pagination
+      v-model="page"
+      :length="4"
+      rounded="circle"
+    ></v-pagination>
       </v-table>
 
     </v-card>

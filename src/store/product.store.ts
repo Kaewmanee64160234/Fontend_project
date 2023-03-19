@@ -13,6 +13,8 @@ export const useProductStore = defineStore('Product', () => {
   const allSelected = ref(false)
   const dialog = ref(false)
   const products = ref<Product[]>([])
+  const loaded = ref(false)
+  const loading = ref(false)
   const editedProduct = ref<Product & { files: File[] }>({
     name: '',
     catagoryId: 1,
@@ -103,7 +105,6 @@ export const useProductStore = defineStore('Product', () => {
       const res = await productService.getProducts()
       products.value = res.data;
       console.log("products.value");
-      console.log(products.value);
 
     } catch (e) {
       console.log(e)
@@ -171,8 +172,28 @@ export const useProductStore = defineStore('Product', () => {
       await getProductByCatagory('2')
     }
   }
+const getProductByName = async () => {
+  try{
+    if(search.value !== ''){
+      setTimeout(() => {
+        loading.value = false
+        loaded.value = true
+      }, 2000)
+      const res = await productService.findProductByName(search.value);
+      products.value = res.data;
+    }else{
+      await getProducts();
+    }
+    
 
+  }catch(err) {
+    console.log(err)
+  }
+}
   return {
+    loading,
+    loaded,
+    getProductByName,
     products,
     getProducts,
     dialog,

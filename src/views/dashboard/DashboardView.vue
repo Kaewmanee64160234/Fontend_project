@@ -1,5 +1,6 @@
 
 <script lang="ts" setup>
+import ChartComponentDialogCopy from "@/components/dashboards/ChartComponentDialogExample.vue";
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
 import SellerDialog from "../../components/stock/SellerDialog.vue"
 </script>
@@ -32,7 +33,8 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
             <v-container>
             <v-card width="400px">
             ยอดขายรายปี
-            <ChartComponentDialog></ChartComponentDialog>
+            <!-- <ChartComponentDialog></ChartComponentDialog> -->
+            <ChartComponentDialogCopy></ChartComponentDialogCopy>
           </v-card>
         </v-container>
           </v-col>

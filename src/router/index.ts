@@ -140,6 +140,20 @@ const router = createRouter({
       }
     },
     {
+      path: '/material/:id',
+      name: 'materials',
+
+      components: {
+        default: () => import('../views/materials/CheckMaterialView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
       path: '/orders',
       name: 'orders',
 
@@ -170,6 +184,34 @@ const router = createRouter({
     {
       path: '/employee/login',
       name: 'employee login',
+
+      components: {
+        default: () => import('../views/EmployeeLogin.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/manager/login',
+      name: 'manager login',
+
+      components: {
+        default: () => import('../views/ManagerLogin.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/manager/:id',
+      name: 'manager',
 
       components: {
         default: () => import('../views/EmployeeLogin.vue'),

@@ -29,5 +29,9 @@ const deleteCustomer = (id:string)=>{
     return http.delete(`/customers/${id}`);
 }
 
+const findCustomerBytel = (tel:string)=>{
+    return http.get(`/customers/search/tel/${tel}`);
+}
 
-export default {getCustomers,createCustomer,updateCustomer,deleteCustomer}
+
+export default {findCustomerBytel,getCustomers,createCustomer,updateCustomer,deleteCustomer}

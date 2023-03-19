@@ -16,4 +16,7 @@ function updateMaterial(id: number, material:Material) {
 function deleteMaterial(id: string) {
     return http.delete(`/materials/${id}`);
 }
-export default {getMaterials, saveMaterial , updateMaterial , deleteMaterial}
+const findMatByName = (name: string) => {
+  return http.get(`/materials/search/name/${name}`);
+}
+export default {findMatByName,getMaterials, saveMaterial , updateMaterial , deleteMaterial}
