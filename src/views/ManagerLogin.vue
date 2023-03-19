@@ -57,8 +57,7 @@ onMounted(async () => {
                             <td>{{ item.salary }}</td>
 
                             <td>
-                                <v-btn color="green" class="mdi mr-2 mdi-checkbox-marked-circle" style=" color: white"
-                                    @click="goTo(item.id + '')"> CheckInOut </v-btn>
+                                
                             </td>
 
                         </tr>
