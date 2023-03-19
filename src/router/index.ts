@@ -200,7 +200,7 @@ const router = createRouter({
       name: 'manager login',
 
       components: {
-        default: () => import('../views/ManagerLogin.vue'),
+        default: () => import('../views/manager/ManagerLogin.vue'),
         menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },
@@ -211,10 +211,10 @@ const router = createRouter({
     },
     {
       path: '/manager/:id',
-      name: 'manager',
+      name: 'show cio',
 
       components: {
-        default: () => import('../views/EmployeeLogin.vue'),
+        default: () => import('../views/ShowCio.vue'),
         menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },
