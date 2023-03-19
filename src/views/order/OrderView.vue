@@ -21,9 +21,7 @@ onMounted(() => {
     <v-card>
       <v-card-title>
         Orders
-        <VTextField style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
-          append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="orderStore.search">
-        </VTextField>
+       
         <VTable class="text-center mt-5">
           <thead>
             <tr>
@@ -39,7 +37,7 @@ onMounted(() => {
           <tbody>
             <tr v-for="(item, index) in orderStore.orders" :key="index" class="text-center">
 
-              <td>{{ index+1 }}</td>
+              <td>{{ item.id }}</td>
               <td>{{ item.createdDate }}</td>
               <td>{{ item.discount }}</td>
               <td>{{ item.total }}</td>
@@ -58,6 +56,12 @@ onMounted(() => {
             </tr>
           </tbody>
         </VTable>
+        
+ <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="orderStore.page" :length="orderStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
       </v-card-title>
     </v-card>
   </v-container>

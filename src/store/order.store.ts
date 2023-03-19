@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import type { Order } from '@/store/types/Order.type'
 import orderService from '@/services/order'
 import { useLoadingStore } from './loading'
@@ -17,10 +17,39 @@ export const useOrderStore = defineStore('order', () => {
     change: 0,
     payment: 'promptpay'
   })
+
+// about pagination
+const page = ref(1)
+const take = ref(5)
+const keyword = ref('')
+const order = ref('ASC')
+const orderBy = ref('')
+const lastPage = ref(0)
+
+watch(page, async (newPage, oldPage) => {
+  await getOrders()
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getOneOrder()
+})
+watch(lastPage, async (newlastPage, oldlastPage) => {
+  if (newlastPage < page.value) {
+    page.value = 1
+  }
+})
+
+
   const getOrders = async () => {
     loadingStore.isLoading = true
     try {
-      const response = await orderService.getOrders()
+      const response = await orderService.getOrders({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+        order: order.value,
+        orderBy: orderBy.value
+      })
+      lastPage.value = response.data.lastPage
       orders.value = response.data.data
     } catch (err) {
       console.log(err)
@@ -31,11 +60,13 @@ export const useOrderStore = defineStore('order', () => {
     loadingStore.isLoading = false
   }
 
-  const getOneOrder = async (id: string) => {
+  const getOneOrder = async () => {
     loadingStore.isLoading = true
     try {
-      const response = await orderService.getOneOrder(id);
-      tempOrder.value = response.data
+      const response = await orderService.getOneOrder(keyword.value);
+      tempOrder.value = response.data.data
+      orders.value = [];
+      orders.value.push(tempOrder.value);
       console.log(tempOrder.value)
     } catch (err) {
       console.log(err)
@@ -45,6 +76,11 @@ export const useOrderStore = defineStore('order', () => {
 
     loadingStore.isLoading = false
   }
-  return { getOrders, orders, getOneOrder, tempOrder ,  search }
+  return {   page,
+    keyword,
+    take,
+    order,
+    orderBy,
+    lastPage, getOrders, orders, getOneOrder, tempOrder ,  search }
 })
 
