@@ -64,7 +64,7 @@ onMounted(async () => {
                             <v-row>
                                 <v-col class="switch">
                                     <v-btn class="mdi mr-2 mdi-close-circle" style="float: right; color: white" color="red"
-                                        @click="employeeStore.empCheckOut"> Checkout</v-btn>
+                                        @click="employeeStore.empCheckOut"> Checkin</v-btn>
 
                                     <v-btn class="mdi mr-2 mdi-checkbox-marked-circle" style="float: right; color: white"
                                         color="green" @click="employeeStore.empCheckIn">Checkin</v-btn>
