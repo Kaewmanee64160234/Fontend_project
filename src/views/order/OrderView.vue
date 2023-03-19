@@ -27,12 +27,10 @@ onMounted(() => {
         <VTable class="text-center mt-5">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>CustomerID</th>
+              <th></th>
+              <th>Date</th>
               <th>Discount</th>
               <th>Total</th>
-              <th>Recieved</th>
-              <th>Change</th>
               <th>Payment</th>
               <th>Operations</th>
 
@@ -41,12 +39,10 @@ onMounted(() => {
           <tbody>
             <tr v-for="(item, index) in orderStore.orders" :key="index" class="text-center">
 
-              <td>{{ item.id }}</td>
-              <td>{{ item.customerId }}</td>
+              <td>{{ index+1 }}</td>
+              <td>{{ item.createdDate }}</td>
               <td>{{ item.discount }}</td>
               <td>{{ item.total }}</td>
-              <td>{{ item.recieved }}</td>
-              <td>{{ item.change }}</td>
               <td>{{ item.payment }}</td>
 
               <td>
