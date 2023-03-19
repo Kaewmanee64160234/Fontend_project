@@ -24,31 +24,8 @@ export const useProductStore = defineStore('Product', () => {
     size: '-',
     price: 0,
     image: 'no_image.jpg',
-    files: [],
+    files: []
   })
-
-  // const typeProductFood = ref(['breakfast', 'side dish', 'main dish', 'appetizer', 'etc.'])
-  // const typeProductDrink = ref([
-  //   'coffee',
-  //   'tea',
-  //   'hot chocolate',
-  //   'smoothies',
-  //   'juice',
-  //   'soda',
-  //   'milkshakes',
-  //   'alcoholic beverages',
-  //   'etc.'
-  // ])
-  // const typeProductDessert = ref([
-  //   'pastries',
-  //   'cookies',
-  //   'cake',
-  //   'pies',
-  //   'brownie',
-  //   'macarons',
-  //   'cookie',
-  //   'etc.'
-  // ])
   const typeProduct = ref({
     Foods: ['breakfast', 'side dish', 'main dish', 'appetizer', 'etc.'],
     Drinks: [
@@ -65,6 +42,13 @@ export const useProductStore = defineStore('Product', () => {
     Desserts: ['pastries', 'cookies', 'cake', 'pies', 'brownie', 'macarons', 'cookie', 'etc.']
   })
 
+  // about pagination
+  const page = ref(1)
+  const take = ref(2)
+  const keyword = ref('')
+  const order = ref('ASC')
+  const orderBy = ref('')
+
   watch(dialog, (newDialog, oldDialog) => {
     if (!newDialog) {
       editedProduct.value = {
@@ -79,33 +63,35 @@ export const useProductStore = defineStore('Product', () => {
       }
     }
   })
-  
+
   async function getProductByCatagory(id: string) {
     loadingStore.isLoading = true
-    try{
-      const response = await productService.getProductByCatagory(id);
-      products.value = response.data;
-      console.log(products.value);
+    try {
+      const response = await productService.getProductByCatagory(id)
+      products.value = response.data.data
+      // console.log(products.value)
 
       loadingStore.isLoading = false
-      return products.value;
-      
-    }
-    catch (e) {
+      return products.value
+    } catch (e) {
       messageStore.showError('ไม่สามารถดึงข้อมูล Product ได้')
     }
 
     loadingStore.isLoading = false
   }
-  
 
   async function getProducts() {
     loadingStore.isLoading = true
     try {
-      const res = await productService.getProducts()
-      products.value = res.data;
-      console.log("products.value");
-
+      const res = await productService.getProducts({
+        page:page.value,
+        take:take.value,
+        keyword:keyword.value,
+        order:order.value,
+        orderBy:orderBy.value
+      })
+      products.value = res.data.data
+      console.log('products.value')
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถดึงข้อมูล Product ได้')
@@ -118,22 +104,20 @@ export const useProductStore = defineStore('Product', () => {
     try {
       if (editedProduct.value.category === 'Foods') {
         //*
-        editedProduct.value.category = 1;
+        editedProduct.value.category = 1
       } else if (editedProduct.value.category === 'Drinks') {
-        editedProduct.value.category = 2;
+        editedProduct.value.category = 2
       } else if (editedProduct.value.category === 'Desserts') {
-        editedProduct.value.category = 3;
+        editedProduct.value.category = 3
       }
 
       if (editedProduct.value.id) {
         const res = await productService.updateProduct(editedProduct.value.id, editedProduct.value)
-
       } else {
         const res = await productService.saveProduct(editedProduct.value)
       }
       dialog.value = false
       await getProductByCatagory('2')
-
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถบันทึกข้อมูล Product ได้')
@@ -172,25 +156,29 @@ export const useProductStore = defineStore('Product', () => {
       await getProductByCatagory('2')
     }
   }
-const getProductByName = async () => {
-  try{
-    if(search.value !== ''){
-      setTimeout(() => {
-        loading.value = false
-        loaded.value = true
-      }, 2000)
-      const res = await productService.findProductByName(search.value);
-      products.value = res.data;
-    }else{
-      await getProducts();
+  const getProductByName = async () => {
+    try {
+      if (search.value !== '') {
+        setTimeout(() => {
+          loading.value = false
+          loaded.value = true
+        }, 2000)
+        const res = await productService.findProductByName(search.value)
+        products.value = res.data
+      } else {
+        await getProducts()
+      }
+    } catch (err) {
+      console.log(err)
     }
-    
-
-  }catch(err) {
-    console.log(err)
   }
-}
+
   return {
+    order,
+    orderBy,
+    page,
+    take,
+    keyword,
     loading,
     loaded,
     getProductByName,

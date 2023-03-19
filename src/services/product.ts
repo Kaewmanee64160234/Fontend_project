@@ -1,7 +1,7 @@
 import type Product from "@/store/types/product.type";
 import http from "./axios";
-function getProducts() {
-  return http.get("/products");
+function getProducts(params:any) {
+  return http.get("/products",{params:params});
 }
 
 function getProductByCatagory(id: string){
