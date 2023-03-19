@@ -43,11 +43,13 @@ export const useProductStore = defineStore('Product', () => {
   })
 
   // about pagination
-  const page = ref(1)
-  const take = ref(2)
+  const page = ref(2)
+  const take = ref(10)
   const keyword = ref('')
   const order = ref('ASC')
-  const orderBy = ref('')
+  const orderBy = ref('');
+  const lastPage = ref(0);
+
 
   watch(dialog, (newDialog, oldDialog) => {
     if (!newDialog) {
@@ -91,6 +93,7 @@ export const useProductStore = defineStore('Product', () => {
         orderBy:orderBy.value
       })
       products.value = res.data.data
+      lastPage.value = res.data.lastPage
       console.log('products.value')
     } catch (e) {
       console.log(e)
@@ -174,6 +177,7 @@ export const useProductStore = defineStore('Product', () => {
   }
 
   return {
+    lastPage,
     order,
     orderBy,
     page,
