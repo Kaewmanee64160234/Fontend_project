@@ -55,7 +55,7 @@ const deleteAllCustomers = async () => {
         :loading="customerStore.loading"
         density="compact"
         variant="solo"
-        v-model="customerStore.search"
+        v-model="customerStore.keyword"
         label="Search templates"
         append-inner-icon="mdi-magnify"
         hide-details
@@ -113,6 +113,11 @@ const deleteAllCustomers = async () => {
           </tr>
         </tbody>
         </v-table>
+        <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="customerStore.page" :length="customerStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
       </v-card-title>
     </v-card>
   </v-container>

@@ -1,8 +1,8 @@
 import type Customer from "@/store/types/customer.type";
 import http from "./axios";
 
-const getCustomers = ()=>{
-    return http.get("/customers");
+const getCustomers = (params:any)=>{
+    return http.get("/customers",{params:params});
 }
 const createCustomer = (data:Customer & {files:File[]})=>{
     const formData = new FormData();
