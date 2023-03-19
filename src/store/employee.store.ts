@@ -62,6 +62,12 @@ watch(page, async (newPage, oldPage) => {
 watch(keyword, async (newKey, oldKey) => {
   await getEmployees()
 })
+watch(keyword, async (newKey, oldKey) => {
+  await getAllSummarySalary()
+})
+watch(page, async (newPage, oldPage) => {
+  await getAllSummarySalary()
+})
 watch(lastPage, async (newlastPage, oldlastPage) => {
   if (newlastPage < page.value) {
     page.value = 1
@@ -207,9 +213,15 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
   const getAllSummarySalary = async () => {
     loadingStore.isLoading = true;
     try {
-      const res = await employeeService.getAllSummarySalary();
+      const res = await employeeService.getAllSummarySalary({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+        order: order.value,
+        orderBy: orderBy.value
+      });
       summary_salaries.value = res.data.data;
-
+      lastPage.value = res.data.lastPage
     } catch (err) {
       console.log(err); 
     }

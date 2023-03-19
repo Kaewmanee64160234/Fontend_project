@@ -34,11 +34,12 @@ onMounted(async () => {
                 Manager
                 <v-spacer> </v-spacer>
                 <v-text-field style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
-                    append-inner-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
+                   v-model="employeeStore.keyword" append-inner-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
                 <v-table class="text-center mt-5">
                     <thead>
                         <tr>
                             <th>ID Employee</th>
+                            <th>Name</th>
                             <th>SS Date</th>
                             <th>Hour</th>
                             <th>Salary</th>
@@ -50,6 +51,7 @@ onMounted(async () => {
                         <tr class="text-center mr-5 " style="justify-content: center"
                             v-for="(item, index) in employeeStore.summary_salaries" :key="index">
                             <td>{{ item.id }}</td>
+                            <td>{{ item.checkInOut[0].employee?.name }}</td>
                             <td>{{ item.ss_date }}</td>
                             <td>{{ item.hour }}</td>
                             <td>{{ item.salary }}</td>
@@ -64,8 +66,19 @@ onMounted(async () => {
 
 
                     </tbody>
+                    <tbody>
+                        <tr>
+                            <td colspan="6"> No Data</td>
+                        </tr>
+
+                    </tbody>
 
                 </v-table>
+                <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
             </v-card-title>
         </v-card>
     </v-container>

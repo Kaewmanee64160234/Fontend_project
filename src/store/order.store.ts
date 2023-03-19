@@ -21,7 +21,7 @@ export const useOrderStore = defineStore('order', () => {
     loadingStore.isLoading = true
     try {
       const response = await orderService.getOrders()
-      orders.value = response.data
+      orders.value = response.data.data
     } catch (err) {
       console.log(err)
       messageStore.showError("ไม่สามารถดึงข้อมูลได้");

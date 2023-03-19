@@ -1,7 +1,7 @@
 import type Store from "@/store/types/store.type";
 import http from "./axios";
-function getStores() {
-  return http.get("/stores");
+function getStores(params: any) {
+  return http.get("/stores",{params: params});
 }
 const saveStore = (store:Store) => {
   return http.post("/stores", store)

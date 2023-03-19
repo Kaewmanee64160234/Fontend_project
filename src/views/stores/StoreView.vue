@@ -50,7 +50,7 @@ const deleteAllStores = async () => {
                     Delete All</VBtn>
                 <VSpacer> </VSpacer>
                 <VTextField style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
-                    append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="storeStore.search">
+                    append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="storeStore.keyword">
                 </VTextField>
                 <VTable class="text-center mt-5">
                     <thead>
@@ -90,6 +90,11 @@ const deleteAllStores = async () => {
                         </tr>
                     </tbody>
                 </VTable>
-            </VCardTitle>
+                
+ <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="storeStore.page" :length="storeStore.lastPage" rounded="circle"></v-pagination>
+    </v-container>        
+    </VCardTitle>
         </VCard>
 </VContainer></template>

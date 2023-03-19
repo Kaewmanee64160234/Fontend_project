@@ -50,6 +50,7 @@ watch(page, async (newPage, oldPage) => {
 watch(keyword, async (newKey, oldKey) => {
   await getCustomers()
 })
+
 watch(lastPage, async (newlastPage, oldlastPage) => {
   if (newlastPage < page.value) {
     page.value = 1

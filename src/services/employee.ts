@@ -58,8 +58,8 @@ const getOneSummaryByEmployeeId = (id:string)=>{
     return http.get(`/summary-salary/employee/${id}`);
 }
 
-const getAllSummarySalary = ()=>{
-    return http.get("/summary-salary");
+const getAllSummarySalary = (params:any)=>{
+    return http.get("/summary-salary",{params:params});
 }
 const getAllCheckInOut = ()=>{
     return http.get("/check-in-outs");

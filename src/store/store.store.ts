@@ -23,12 +23,39 @@ export const useStoreStore = defineStore('Store', () => {
     }
   })
 
+// about pagination
+const page = ref(1)
+const take = ref(5)
+const keyword = ref('')
+const order = ref('ASC')
+const orderBy = ref('')
+const lastPage = ref(0)
+
+watch(page, async (newPage, oldPage) => {
+  await getStores()
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getStores()
+})
+watch(lastPage, async (newlastPage, oldlastPage) => {
+  if (newlastPage < page.value) {
+    page.value = 1
+  }
+})
+
  
   
   async function getStores() {
     loadingStore.isLoading = true;
     try {
-      const res = await storeService.getStores();
+      const res = await storeService.getStores({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+        order: order.value,
+        orderBy: orderBy.value
+      });
+      lastPage.value = res.data.lastPage
       stores.value = res.data.data
     } catch (e) {
       console.log(e);
@@ -85,5 +112,10 @@ export const useStoreStore = defineStore('Store', () => {
   }
 
 
-  return { stores, getStores, dialog, saveStore, deleteStore, editStore, editedStore, selectStoreAll, selectStore, allSelected, selected, deleteAllStore, search }
+  return {    page,
+    keyword,
+    take,
+    order,
+    orderBy,
+    lastPage,stores, getStores, dialog, saveStore, deleteStore, editStore, editedStore, selectStoreAll, selectStore, allSelected, selected, deleteAllStore, search }
 })
