@@ -2,8 +2,8 @@
 import type { Material } from "@/store/types/material.type";
 import http from "./axios";
 
-function getMaterials() {
-    return http.get("/materials");
+function getMaterials(params:any) {
+    return http.get("/materials",{params:params});
   }
   function saveMaterial(material: Material) {
     return http.post("/materials", material);

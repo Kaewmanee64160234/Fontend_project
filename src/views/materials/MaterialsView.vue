@@ -53,7 +53,7 @@ const deleteAllMaterials = async () => {
         :loading="materialStore.loading"
         density="compact"
         variant="solo"
-        v-model="materialStore.search"
+        v-model="materialStore.keyword"
         label="Search templates"
         append-inner-icon="mdi-magnify"
         hide-details
@@ -110,6 +110,11 @@ const deleteAllMaterials = async () => {
           </tr>
         </tbody>
     </v-table>
+    <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="materialStore.page" :length="materialStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
 </v-card>
 </v-container>
 </template>
