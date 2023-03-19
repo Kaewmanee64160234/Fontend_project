@@ -104,7 +104,7 @@ const deleteAllProducts = async () => {
         </tbody>
       
        
-        <tbody v-if="productStore.products.length == 0">
+        <tbody v-if="!productStore.products">
           <tr>
             <td colspan="7" class="text-center">No data</td>
           </tr>
