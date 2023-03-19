@@ -3,8 +3,8 @@ import http from "./axios";
 import type Employee from "@/store/types/employee.type";
 import type { CheckInOut } from "@/store/types/CheckInOut";
 
-const getEmployees = ()=>{
-    return http.get("/employees");
+const getEmployees = (params:any)=>{
+    return http.get("/employees",{params:params});
 }
 const createEmployee = (data:Employee & {files:File[]})=>{
     const formData = new FormData();

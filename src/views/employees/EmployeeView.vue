@@ -56,7 +56,7 @@ const deleteAllEmployees = async () => {
         :loading="employeeStore.loading"
         density="compact"
         variant="solo"
-        v-model="employeeStore.search"
+        v-model="employeeStore.keyword"
         label="Search templates"
         append-inner-icon="mdi-magnify"
         hide-details
@@ -123,6 +123,11 @@ const deleteAllEmployees = async () => {
           </tr>
         </tbody>
         </v-table>
+        <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
       </v-card-title>
     </v-card>
   </v-container>

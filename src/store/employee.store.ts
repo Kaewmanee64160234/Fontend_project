@@ -47,12 +47,41 @@ export const useEmployeeStore = defineStore('employee', () => {
     }
   })
 
+
+// about pagination
+const page = ref(1)
+const take = ref(5)
+const keyword = ref('')
+const order = ref('ASC')
+const orderBy = ref('')
+const lastPage = ref(0)
+
+watch(page, async (newPage, oldPage) => {
+  await getEmployees()
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getEmployees()
+})
+watch(lastPage, async (newlastPage, oldlastPage) => {
+  if (newlastPage < page.value) {
+    page.value = 1
+  }
+})
+
+
   const getEmployees = async () => {
     loadingStore.isLoading = true
 
     try {
-      const res = await employeeService.getEmployees()
+      const res = await employeeService.getEmployees({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+        order: order.value,
+        orderBy: orderBy.value
+      })
       employees.value = res.data.data
+      lastPage.value = res.data.lastPage
     } catch (err) {
       console.log(err)
       messageStore.showError('ไม่สามารถดึงข้อมูลพนักงานได้')
@@ -189,6 +218,13 @@ export const useEmployeeStore = defineStore('employee', () => {
     
   }
   return {
+    page,
+    keyword,
+    take,
+    order,
+    orderBy,
+    lastPage,
+
     getAllSummarySalary,
     loaded,
     loading,
