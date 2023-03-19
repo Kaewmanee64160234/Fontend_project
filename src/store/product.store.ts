@@ -43,12 +43,19 @@ export const useProductStore = defineStore('Product', () => {
   })
 
   // about pagination
-  const page = ref(2)
-  const take = ref(10)
-  const keyword = ref('')
+  const page = ref(1)
+  const take = ref(5)
+  const keyword = ref("")
   const order = ref('ASC')
   const orderBy = ref('');
   const lastPage = ref(0);
+
+  watch(page,async (newPage, oldPage) => {
+    await getProducts()
+  })
+  watch(keyword,async (newPage, oldPage) => {
+    await getProducts()
+  })
 
 
   watch(dialog, (newDialog, oldDialog) => {

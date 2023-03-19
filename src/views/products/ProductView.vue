@@ -45,39 +45,25 @@ const deleteAllProducts = async () => {
           @click="productStore.dialog = true"
           >Add New Product</v-btn
         >
-        <v-btn
-          class="mdi mdi-delete mr-2"
-          style="float: right; color: white"
-          color="red"
-          @click="deleteAllProducts"
-          >Delete All</v-btn
-        >
+       
         <v-spacer> </v-spacer>
         <v-text-field
           style="width: 30%"
           :loading="productStore.loading"
           density="compact"
           variant="solo"
-          v-model="productStore.search"
+          v-model="productStore.keyword"
           label="Search templates"
           append-inner-icon="mdi-magnify"
           hide-details
-          @click:append-inner="productStore.getProductByName"
         ></v-text-field>
       </v-card-title>
 
       <v-table class="text-center mt-5">
         <thead>
           <tr>
-            <th>
-              <v-checkbox
-                class="d-flex pa-4"
-                color="indigo"
-                v-model="productStore.allSelected"
-                @click="productStore.selectProductAll"
-              ></v-checkbox>
-            </th>
-            <th>ID</th>
+    
+            <th></th>
             <th>Image</th>
             <th>Name</th>
             <th>Type</th>
@@ -87,17 +73,9 @@ const deleteAllProducts = async () => {
           </tr>
         </thead>
         <tbody>
-          <tr style="text-align: center" v-for="item of productStore.products" :key="item.id">
-            <td>
-              <v-checkbox
-                class="d-flex pa-4"
-                color="indigo"
-                v-model="productStore.selected"
-                @click="productStore.selectProduct"
-                :value="item.id + ''"
-              ></v-checkbox>
-            </td>
-            <td>{{ item.id }}</td>
+          <tr style="text-align: center" v-for="(item,index) in productStore.products" :key="index">
+           
+            <td>{{ index+1}}</td>
             <td>
               <v-avatar size="80"
                 ><v-img :src="`${url}/products/image/${item.image}`"></v-img
@@ -122,14 +100,21 @@ const deleteAllProducts = async () => {
               ></v-btn>
             </td>
           </tr>
+          
         </tbody>
-        <v-pagination :length="productStore.lastPage" rounded="circle"></v-pagination>
+      
+       
         <tbody v-if="productStore.products.length == 0">
           <tr>
             <td colspan="7" class="text-center">No data</td>
           </tr>
         </tbody>
       </v-table>
+      <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="productStore.page" :length="productStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
     </v-card>
   </v-container>
 </template>
