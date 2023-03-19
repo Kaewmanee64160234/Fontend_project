@@ -8,6 +8,7 @@ import type { CheckInOut } from './types/CheckInOut'
 import type { SummarySalary } from './types/SummarySalary.type'
 export const useEmployeeStore = defineStore('employee', () => {
   const loadingStore = useLoadingStore()
+  const employeeId = ref('');
   const search = ref('')
   const loading = ref(false)
   const loaded = ref(false)
@@ -213,6 +214,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     empCheckIn,
     empCheckOut,
     getOneSummarySalaryEmp,
-    getOneEmployee
+    getOneEmployee,
+    employeeId
   }
 })
