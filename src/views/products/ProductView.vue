@@ -7,8 +7,6 @@ import ConfirmDialog from '@/components/ConfirmDialog.vue'
 const productStore = useProductStore()
 const confirmDlg = ref()
 const url = import.meta.env.VITE_URL_PORT
-const page = ref(1)
-const pageSize = ref(2)
 onMounted(async () => {
   await productStore.getProducts()
 })

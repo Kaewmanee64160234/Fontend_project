@@ -82,7 +82,7 @@ export const useProductStore = defineStore('Product', () => {
     loadingStore.isLoading = true
     try {
       const response = await productService.getProductByCatagory(id)
-      products.value = response.data.data
+      products.value = response.data
       // console.log(products.value)
 
       loadingStore.isLoading = false
@@ -106,7 +106,7 @@ export const useProductStore = defineStore('Product', () => {
       })
       products.value = res.data.data
       lastPage.value = res.data.lastPage
-      console.log('products.value')
+      console.log(products.value)
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถดึงข้อมูล Product ได้')
