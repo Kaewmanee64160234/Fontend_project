@@ -53,8 +53,13 @@ export const useProductStore = defineStore('Product', () => {
   watch(page,async (newPage, oldPage) => {
     await getProducts()
   })
-  watch(keyword,async (newPage, oldPage) => {
+  watch(keyword,async (newKey, oldKey) => {
     await getProducts()
+  })
+  watch(lastPage,async (newlastPage, oldlastPage) => {
+    if(newlastPage <page.value){
+      page.value = 1;
+    }
   })
 
 
