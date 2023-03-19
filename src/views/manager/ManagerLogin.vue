@@ -42,7 +42,7 @@ onMounted(async () => {
                             <th>SS Date</th>
                             <th>Hour</th>
                             <th>Salary</th>
-                            <th>Operations</th>
+                            <th>CheckInOut</th>
 
                         </tr>
                     </thead>
@@ -55,8 +55,8 @@ onMounted(async () => {
                             <td>{{ item.salary }}</td>
 
                             <td>
-                                <v-btn class="mdi mr-2 mdi-checkbox-marked-circle" style=" color: white" color="blue-lighten-1"
-                                @click="goTo(item.id + '')">LookCheckInOut</v-btn>
+                                <v-btn class="mdi mr-2  mdi-eye" style=" color: white" color="blue-lighten-1"
+                                @click="goTo(item.id + '')">   History  </v-btn>
 
                             </td>
 
