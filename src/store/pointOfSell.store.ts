@@ -250,8 +250,8 @@ export const usePointOfSale = defineStore('point of sale', () => {
       } else if (cusPoint < codePoint.value) {
         messageStore.showError('ไม่สามารถบันทึกข้อมูล Promotion ได้ เนื่องจาก Point ไม่เพียงพอ')
       }
-    } else {
-      messageStore.showError('ไม่สามารถบันทึกข้อมูล Promotion ได้')
+    } else{
+      messageStore.showError('ไม่สามารถบันทึกข้อมูล Promotion ได้ ')
     }
   }
 

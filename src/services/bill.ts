@@ -18,4 +18,4 @@ function updateBill(id: string, bill: BILL) {
 function deleteBill(id: string) {
     return http.delete(`/bills/${id}`);
 }
-export default {getBill, saveBill , updateBill, deleteBill,getOneBill}
+export default {getBill, saveBill , updateBill, deleteBill, getOneBill}

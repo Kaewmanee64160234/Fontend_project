@@ -12,7 +12,7 @@ async function save() {
   const { valid } = await form.value!.validate()
   if (valid) {
   billStore.bill_list.employeeId = employee.value.id;
-  billStore.sumBill()
+  billStore.sumBill();
   await billStore.saveBill();
   billStore.dialog = false
   }

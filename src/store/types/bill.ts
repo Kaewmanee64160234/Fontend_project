@@ -4,7 +4,7 @@ export default interface BILL{
     id?: number;
     name: string;
     date: Date;
-    time: Date;
+    time?: Date;
     total: number;
     buy: number;
     change: number;

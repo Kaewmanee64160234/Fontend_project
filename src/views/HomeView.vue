@@ -46,6 +46,10 @@ onMounted(() => {
 </script>
 
 <template>
+   <v-row class="ml-5" style="float:left">
+    <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-arrow-left-circle" title="Home" value="home" to="/main">
+    </v-btn>
+  </v-row>
   <div class="content-area">
     <DialogPayment></DialogPayment>
     <DialogCompleteOrder></DialogCompleteOrder>
@@ -53,7 +57,6 @@ onMounted(() => {
       <FindMemberDialog></FindMemberDialog>
       <PromotionDialog></PromotionDialog>
       <TestDialog></TestDialog>
-
       <div class="row">
         <div class="col-md-6 item-side">
           <div class="row-md-6">
