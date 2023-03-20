@@ -64,13 +64,13 @@ watch(page, async (newPage, oldPage) => {
 watch(keyword, async (newKey, oldKey) => {
   await getEmployees()
 })
-watch(keyword, async (newKey, oldKey) => {
-  await getAllSummarySalary()
+// watch(keyword, async (newKey, oldKey) => {
+//   await getAllSummarySalary()
 
-})
-watch(page, async (newPage, oldPage) => {
-  await getAllSummarySalary()
-})
+// })
+// watch(page, async (newPage, oldPage) => {
+//   await getAllSummarySalary()
+// })
 watch(lastPage, async (newlastPage, oldlastPage) => {
   if (newlastPage < page.value) {
     page.value = 1

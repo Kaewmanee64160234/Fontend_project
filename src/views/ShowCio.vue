@@ -15,25 +15,13 @@ const name = ref('')
 const loading = ref(false)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
-<<<<<<< HEAD
-  const employeeStore = useEmployeeStore()
-
 const route = useRoute();
 const id = ref(route.params.id);
-
-onMounted(() => {
-    employeeStore.getOneEmployee(employee.value.id + '')
-    
-});
-=======
-const route = useRoute()
-const id = ref(route.params.id)
 
 onMounted(async () => {
     await employeeStore.getOneSummarySalaryEmp(id.value+'')
   
 })
->>>>>>> 520f1e71d936cf951b909fada1fc067bf45410e0
 </script>
 
 <template>
