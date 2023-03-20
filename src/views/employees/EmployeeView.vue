@@ -78,15 +78,7 @@ const deleteAllEmployees = async () => {
           </thead>
           <tbody v-if="employeeStore.employees.length >0">
             <tr v-for="item of employeeStore.employees" :key="item.id" class="text-center">
-              <td>
-                <v-checkbox
-                  class="d-flex pa-4"
-                  color="indigo"
-                  v-model="employeeStore.selected"
-                  @click="employeeStore.selectEmployee()"
-                  :value="item.id+''"
-                ></v-checkbox>
-              </td>
+
               <td>
                 <v-avatar size="80"><v-img :src="`${url}/employees/image/${item.image}`"></v-img></v-avatar>
               </td>

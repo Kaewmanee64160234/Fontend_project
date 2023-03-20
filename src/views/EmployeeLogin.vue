@@ -21,7 +21,6 @@ const id = ref(route.params.id)
 onMounted(async () => {
   await employeeStore.getOneEmployee(employee.value.id + '')
   await employeeStore.getOneSummarySalaryEmp(employee.value.id + '')
-  await employeeStore.getCioByIdEmp(employee.value.id+'')
   console.log(employeeStore.editEmployee)
 })
 </script>
@@ -55,7 +54,6 @@ onMounted(async () => {
                         <p>🗃️ hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
                     </v-card-text>
                   </v-card>
-
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
@@ -86,7 +84,7 @@ onMounted(async () => {
                     class="mdi mr-2 mdi-close-circle"
                     style="float: right; color: white"
                     color="red"
-                    @click="employeeStore.empCheckOut"
+                    @click="employeeStore.empCheckOut(employee.id+'')"
                   >
                     Checkout</v-btn
                   >
@@ -95,7 +93,7 @@ onMounted(async () => {
                     class="mdi mr-2 mdi-checkbox-marked-circle"
                     style="float: right; color: white"
                     color="green"
-                    @click="employeeStore.empCheckIn"
+                    @click="employeeStore.empCheckIn(employeeStore.editEmployee.id!)"
                     >Checkin</v-btn
                   >
                 </v-col>
@@ -105,7 +103,7 @@ onMounted(async () => {
 
           <v-col class="detail">
             <v-container>
-              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto;">
+              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto">
                 <thead style="justify-content: center; overflow-y: auto">
                   <tr>
                     <th>Time in</th>
@@ -117,7 +115,7 @@ onMounted(async () => {
                   <tr
                     class="text-center mr-5"
                     style="justify-content: center"
-                    v-for="(item, index) in employeeStore.checkInOuts"
+                    v-for="(item, index) in employeeStore.editEmployee.check_in_outs"
                     :key="index"
                   >
                     <td>{{ item.time_in }}</td>
@@ -126,11 +124,6 @@ onMounted(async () => {
                   </tr>
                 </tbody>
               </VTable>
-              <v-container width="100%" justify="center" >
-       
-       <v-pagination  justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage" rounded="circle"></v-pagination>
-
-     </v-container>
             </v-container>
           </v-col>
         </v-row>

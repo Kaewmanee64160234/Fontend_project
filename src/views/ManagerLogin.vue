@@ -13,8 +13,6 @@ const email = ref('')
 const name = ref('')
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
-
-
 const goTo = (index: string) => {
     router.push('/manager/login/' + index);
 }
@@ -37,7 +35,7 @@ onMounted(async () => {
             <v-card-title>
                 Manager
                 <v-spacer> </v-spacer>
-                
+
                 <v-table class="text-center mt-5">
                     <thead>
                         <tr>
@@ -52,16 +50,16 @@ onMounted(async () => {
                     <tbody>
                         <tr class="text-center mr-5 " style="justify-content: center"
                             v-for="(item, index) in employeeStore.summary_salaries" :key="index">
-            
+
                             <td>{{ item.checkInOut[0].employee?.id }}</td>
-                            <td>{{ item.checkInOut[0].employee?.name  }}</td>
+                            <td>{{ item.checkInOut[0].employee?.name }}</td>
                             <td>{{ item.hour }}</td>
                             <td>{{ item.salary }}</td>
 
                             <td>
                                 <v-btn class="mdi mr-2  mdi-eye" style=" color: white" color="blue-lighten-1"
-                                @click="goTo(item.id+'')">History</v-btn>
-                                
+                                    @click="goTo(item.checkInOut[0].employee?.id + '')"> History </v-btn>
+
                             </td>
 
                         </tr>

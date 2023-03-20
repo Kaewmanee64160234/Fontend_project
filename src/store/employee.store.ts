@@ -163,14 +163,34 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     localStorage.setItem('employee', JSON.stringify(employee))
   }
   const empCheckIn = async (id: number) => {
-    checkInOut.value.employeeId = id
+    loadingStore.isLoading = true
+    try{
+      checkInOut.value.employeeId = id
     const res = await employeeService.employeeCheckIn(checkInOut.value)
     console.log(res.data)
+
+    }catch(err) {
+      console.log(err)
+
+    }
+    loadingStore.isLoading = false
+    
   }
 
-  const empCheckOut = async (id: number) => {
+  const empCheckOut = async (id: string) => {
+    loadingStore.isLoading = true
+    try{
+      console.log(id)
     const res = await employeeService.employeeCheckOut(id);
     console.log(res.data)
+
+    }catch(err) {
+      console.log(err)
+
+    }
+    loadingStore.isLoading = false
+    
+    
   }
   const getOneSummarySalaryEmp = async (id: string) => {
     const res = await employeeService.getOneSummaryByEmployeeId(id + '');
