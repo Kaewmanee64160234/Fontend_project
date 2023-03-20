@@ -73,15 +73,7 @@ const deleteAllCustomers = async () => {
           </thead>
           <tbody>
             <tr v-for="item of customerStore.customers" :key="item.id" class="text-center">
-              <td>
-                <v-checkbox
-                  class="d-flex pa-4"
-                  color="indigo"
-                  v-model="customerStore.selected"
-                  @click="customerStore.selectCustomer()"
-                  :value="item.id+''"
-                ></v-checkbox>
-              </td>
+
               <td>
                 <v-avatar size="80"><v-img :src="`${url}/customers/image/${item.image}`"></v-img></v-avatar>
               </td>

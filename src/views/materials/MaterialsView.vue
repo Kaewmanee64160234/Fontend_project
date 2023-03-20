@@ -74,14 +74,8 @@ const deleteAllMaterials = async () => {
         </thead>
         <tbody>
             <tr v-for="item of materialStore.materials" :key="item.id" style="text-align:center">
-                <v-checkbox
-                style="justify-content: center;"
-                  class="d-flex pa-4"
-                  color="indigo"
-                  v-model="materialStore.selected"
-                  @click="materialStore.selectMaterial"
-                  :value="item.id+''"
-                ></v-checkbox>
+               
+
                 <td>{{ item.id }}</td>
                 <td v-if="item.min_quantity <= 5" style="color: red;">{{ item.name }}</td>
                 <td v-if="item.min_quantity > 5">{{ item.name }}</td>
