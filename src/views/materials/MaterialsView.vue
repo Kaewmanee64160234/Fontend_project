@@ -16,17 +16,6 @@ const ToCheckMaterial = (index:string) => {
     router.push('/checkmaterial/' + index);
 }
 
-const material = computed(() => {
-  if (!materialStore.search) {
-    return materialStore.materials;
-  } else {
-    return materialStore.materials.filter((material) => {
-      return material.name.toLocaleLowerCase().includes( materialStore.search
-      )
-    });
-  }
-});
-
 
 onMounted(async() => {
     await materialStore.getMaterials();
@@ -63,17 +52,16 @@ const deleteAllMaterials = async () => {
           <v-btn class="mdi mdi-delete mr-2" style="float: right; color: white" color="red" @Click="deleteAllMaterials">Delete All</v-btn>
           <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billdetailStore.dialog = true">Add Bill</v-btn>
       <v-spacer></v-spacer>
-      <v-text-field
-      style="width: 20%"
-          variant="solo"
-          color="deep-purple-accent-4"
-          class="mt-7"
-          density="compact"
-          append-inner-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-          v-model="materialStore.search"></v-text-field>
+      <v-text-field style="width: 30%;"
+        :loading="materialStore.loading"
+        density="compact"
+        variant="solo"
+        v-model="materialStore.keyword"
+        label="Search templates"
+        append-inner-icon="mdi-magnify"
+        hide-details
+        @click:append-inner="materialStore.getMatByName"
+      ></v-text-field>
     </v-card-title>
     <v-table class="text-center mt-5">
         <thead>
@@ -97,7 +85,7 @@ const deleteAllMaterials = async () => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item of material" :key="item.id" style="text-align:center">
+            <tr v-for="item of materialStore.materials" :key="item.id" style="text-align:center">
                 <v-checkbox
                 style="justify-content: center;"
                   class="d-flex pa-4"
@@ -120,12 +108,17 @@ const deleteAllMaterials = async () => {
               </td>
             </tr>
         </tbody>
-        <tbody v-if="material.length == 0" >
+        <tbody v-if="materialStore.materials.length == 0" >
           <tr >
             <td colspan="7" class="text-center">No data</td>
           </tr>
         </tbody>
     </v-table>
+    <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="materialStore.page" :length="materialStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
 </v-card>
 </v-container>
 </template>

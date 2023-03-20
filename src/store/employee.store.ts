@@ -9,6 +9,8 @@ import type { SummarySalary } from './types/SummarySalary.type'
 export const useEmployeeStore = defineStore('employee', () => {
   const loadingStore = useLoadingStore()
   const search = ref('')
+  const loading = ref(false)
+  const loaded = ref(false)
   const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
   const allSelected = ref(false)
@@ -23,7 +25,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     hourly: 0,
     image: 'no_image.jpg',
     files: [],
-    check_in_outs:[]
+    check_in_outs: []
   })
   const checkInOut = ref<CheckInOut>({})
   const checkInOuts = ref<CheckInOut[]>([])
@@ -40,17 +42,54 @@ export const useEmployeeStore = defineStore('employee', () => {
         hourly: 0,
         image: 'no_image.jpg',
         files: [],
-        check_in_outs:[]
+        check_in_outs: []
       }
     }
   })
+
+
+// about pagination
+const page = ref(1)
+const take = ref(5)
+const keyword = ref('')
+const order = ref('ASC')
+const orderBy = ref('')
+const lastPage = ref(0)
+
+watch(page, async (newPage, oldPage) => {
+  await getEmployees()
+
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getEmployees()
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getAllSummarySalary()
+
+})
+watch(page, async (newPage, oldPage) => {
+  await getAllSummarySalary()
+})
+watch(lastPage, async (newlastPage, oldlastPage) => {
+  if (newlastPage < page.value) {
+    page.value = 1
+  }
+})
+
 
   const getEmployees = async () => {
     loadingStore.isLoading = true
 
     try {
-      const res = await employeeService.getEmployees()
-      employees.value = res.data
+      const res = await employeeService.getEmployees({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+        order: order.value,
+        orderBy: orderBy.value
+      })
+      employees.value = res.data.data
+      lastPage.value = res.data.lastPage
     } catch (err) {
       console.log(err)
       messageStore.showError('ไม่สามารถดึงข้อมูลพนักงานได้')
@@ -131,18 +170,97 @@ export const useEmployeeStore = defineStore('employee', () => {
     const res = await employeeService.employeeCheckOut(id);
     console.log(res.data)
   }
-  const getOneSummarySalaryEmp = async (id:string)=>{
-    const res = await employeeService.getOneSummaryByEmployeeId(id+'');
-    
-    console.log(res.data);
-  }
-  const getOneEmployee = async (id:string)=>{
-    const res = await employeeService.getOneEmployee(id);
-    editEmployee.value = res.data;
-    console.log( editEmployee.value);
-  }
+  const getOneSummarySalaryEmp = async (id: string) => {
+    const res = await employeeService.getOneSummaryByEmployeeId(id + '');
+    summary_salary.value = res.data[0];
 
+    // console.log(res.data[0]);
+  }
+  const getOneEmployee = async (id: string) => {
+    loadingStore.isLoading = true;
+    try{
+      const res = await employeeService.getOneEmployee(id);
+       editEmployee.value = res.data;
+
+    }catch (err) {
+      console.log(editEmployee.value);
+
+    }
+    loadingStore.isLoading = false;
+    
+    
+    
+    
+  }
+  const getEmployeeByName = async () => {
+    try {
+      if (search.value !== '') {
+        loading.value = true
+        const res = await employeeService.findEmployeeByName(search.value);
+
+        setTimeout(() => {
+          loading.value = false
+          loaded.value = true
+        }, 2000)
+        employees.value = res.data;
+      } else {
+        await getEmployees();
+      }
+
+
+    } catch (err) { console.log(err); }
+
+
+  }
+  const getAllSummarySalary = async () => {
+    loadingStore.isLoading = true;
+    try {
+      const res = await employeeService.getAllSummarySalary({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+        order: order.value,
+        orderBy: orderBy.value
+      });
+      summary_salaries.value = res.data.data;
+      lastPage.value = res.data.lastPage
+    } catch (err) {
+      console.log(err); 
+    }
+    loadingStore.isLoading = false;
+  }
+  const getCioByIdEmp = async (empId:string) => {
+    loadingStore.isLoading = true;
+    try{
+      const res = await employeeService.getCioByIdEmp({
+        page: page.value,
+        take: take.value,
+        empId: empId,
+        order: 'DESC',
+        orderBy: orderBy.value
+      });
+      lastPage.value = res.data.lastPage
+
+      checkInOuts.value = res.data.data;
+    }catch(err){console.log(err);}
+    loadingStore.isLoading = false;
+
+    
+
+  }
   return {
+    getCioByIdEmp,
+    page,
+    keyword,
+    take,
+    order,
+    orderBy,
+    lastPage,
+
+    getAllSummarySalary,
+    loaded,
+    loading,
+    getEmployeeByName,
     deleteEmployees,
     selectEmployee,
     allSelected,

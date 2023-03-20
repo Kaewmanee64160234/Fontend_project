@@ -1,7 +1,7 @@
 import type User from "@/store/types/user.type";
 import http from "./axios";
-function getUsers() {
-  return http.get("/users");
+function getUsers(params: any) {
+  return http.get("/users",{params: params});
 }
 const saveUser = (user:User) => {
   return http.post("/users", user)
@@ -17,4 +17,8 @@ const deleteUser  = (id:number) => {
 const getUserByEmail = (email:string) => {
   return http.get(`/users/${email}`)
 }
-export default { getUsers ,saveUser, updateUser, deleteUser,getUserByEmail};
+
+const findUserByName = (name:string) => {
+  return http.get(`/users/search/name/${name}`)
+}
+export default { findUserByName,getUsers ,saveUser, updateUser, deleteUser,getUserByEmail};

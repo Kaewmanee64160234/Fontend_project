@@ -15,6 +15,8 @@ export const useCustomerStore = defineStore('customer', () => {
   const customers = ref<Customer[]>([])
   const messageStore = useMessageStore()
   const customerId = ref('');
+  const loading = ref(false)
+const loaded = ref(false);
   const editCustomer = ref<Customer & { files: File[] }>({
     name: '',
     tel: '',
@@ -33,12 +35,41 @@ export const useCustomerStore = defineStore('customer', () => {
       };
     }
   });
+
+// about pagination
+const page = ref(1)
+const take = ref(5)
+const keyword = ref('')
+const order = ref('ASC')
+const orderBy = ref('')
+const lastPage = ref(0)
+
+watch(page, async (newPage, oldPage) => {
+  await getCustomers()
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getCustomers()
+})
+
+watch(lastPage, async (newlastPage, oldlastPage) => {
+  if (newlastPage < page.value) {
+    page.value = 1
+  }
+})
+
   const getCustomers = async () => {
     loadingStore.isLoading = true
 
     try {
-      const res = await customerService.getCustomers()
-      customers.value = res.data
+      const res = await customerService.getCustomers({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+        order: order.value,
+        orderBy: orderBy.value
+      })
+      customers.value = res.data.data
+      lastPage.value = res.data.lastPage
     } catch (err) {
       console.log(err)
       messageStore.showError("ไม่สามารถดึงข้อมูลลูกค้าได้");
@@ -132,7 +163,34 @@ export const useCustomerStore = defineStore('customer', () => {
     loadingStore.isLoading = false
 }
 
+const getCustomerByTel = async () => {
+  
+    try{
+      if(search.value !== ''){
+        loading.value = true
+        const res = await  customerService.findCustomerBytel(search.value);
+    
+        setTimeout(() => {
+          loading.value = false
+          loaded.value = true
+        }, 2000)
+      customers.value = res.data;
+      }else{
+        await getCustomers();
+      }
+    
+  
+    }catch(err){console.log(err);}
+  
+}
   return {
+    page,
+    keyword,
+    take,
+    order,
+    orderBy,
+    lastPage,
+    getCustomerByTel,
     customerId,
     deleteCustomers,
     selectCustomer,
@@ -148,6 +206,8 @@ export const useCustomerStore = defineStore('customer', () => {
     editedCustomer,
     search,
     addPointCustomer,
-    customerService
+    customerService,
+    loaded,
+    loading,
   }
 })

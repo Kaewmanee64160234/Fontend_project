@@ -1,102 +1,46 @@
-<script lang='ts'>
-import { computed, defineComponent, ref } from "vue";
-// import {shuffle} from "lo"
-import { LineChart, useLineChart } from "vue-chart-3";
-import { Chart, registerables, type ChartData, type ChartOptions } from "chart.js";
+<script setup lang="ts">
+import { LineChart } from 'vue-chart-3'
+import { Chart, registerables } from 'chart.js'
+import { ref} from 'vue'
+Chart.register(...registerables)
 
-Chart.register(...registerables);
-export default defineComponent({
-  name: "App",
-  // eslint-disable-next-line vue/no-unused-components
-  components: { LineChart },
-  setup() {
-    const dataValues = ref([17, 24, 10, 30]);
-    const dataLabels = ref(["Paris", "Nîmes", "Toulon", "Perpignan", "Autre"]);
-    const toggleLegend = ref(true);
+const props = defineProps<{
+  dataValues: number[];
+  dataLabels: string[];
+  label: String;
+  color: String;
+  background: String;
+}>();
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
 
-    const testData = computed<ChartData<"line">>(() => ({
-      labels: dataLabels.value,
-      datasets: [
-        {
-          data: dataValues.value,
-          backgroundColor: [
-            "#BBD6B8",
-            "#AEC2B6",
-            "#94AF9F",
-            "#DBE4C6",
-            "#CDE990"
-          ],
-        },
-      ],
-    }));
-
-    const options = computed<ChartOptions<"line">>(() => ({
-      scales: {
-        myScale: {
-          type: "logarithmic",
-          position: toggleLegend.value ? "left" : "right",
-        },
-      },
-      plugins: {
-        legend: {
-          position: toggleLegend.value ? "top" : "bottom",
-        },
-        title: {
-          display: true,
-          text: "Chart.js Line Chart",
-        },
-      },
-    }));
-
-    const { lineChartProps, lineChartRef } = useLineChart({
-      chartData: testData,
-      options,
-    });
-
-    let index = ref(10);
-
-    function shuffleData() {
-      // dataValues.value = shuffle(dataValues.value);
-      dataValues.value.push(index.value);
-      dataLabels.value.push("Other" + index.value);
-      console.log(dataValues.value);
-      console.log(lineChartRef.value!.chartInstance);
-      index.value++;
+}
+const data = ref({
+  labels: props.dataLabels,
+  datasets: [
+    {
+      label: props.label,
+      data: props.dataValues,
+      fill: true,
+      backgroundColor: props.background,
+      tension: 0.4,
+      borderColor: props.color,
+      pointBackgroundColor:  props.color,
+      pointStyle: 'circle',
+      pointRadius: 5,
+      pointHoverRadius: 8,
+      
     }
-
-    function switchLegend() {
-      toggleLegend.value = !toggleLegend.value;
-    }
-
-    return {
-      shuffleData,
-      switchLegend,
-      testData,
-      options,
-      lineChartRef,
-      lineChartProps,
-    };
-  },
-});
+  ],
+ 
+}
+)
 </script>
 
 <template>
-  <div style="width: 400px">
-    <div style="display: flex; justify-content: center">
-      <button type="button" @click="shuffleData">Add data</button>
-      <button type="button" @click="switchLegend">Swicth legends</button>
-    </div>
-    <LineChart style="justify-content: center" v-bind="lineChartProps" />
+  <div>
+    <LineChart :chart-data="data" :options="options"></LineChart>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

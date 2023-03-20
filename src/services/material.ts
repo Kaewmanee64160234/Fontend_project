@@ -2,8 +2,8 @@
 import type { Material } from "@/store/types/material.type";
 import http from "./axios";
 
-function getMaterials() {
-    return http.get("/materials");
+function getMaterials(params:any) {
+    return http.get("/materials",{params:params});
   }
   function saveMaterial(material: Material) {
     return http.post("/materials", material);
@@ -16,4 +16,7 @@ function updateMaterial(id: number, material:Material) {
 function deleteMaterial(id: string) {
     return http.delete(`/materials/${id}`);
 }
-export default {getMaterials, saveMaterial , updateMaterial , deleteMaterial}
+const findMatByName = (name: string) => {
+  return http.get(`/materials/search/name/${name}`);
+}
+export default {findMatByName,getMaterials, saveMaterial , updateMaterial , deleteMaterial}

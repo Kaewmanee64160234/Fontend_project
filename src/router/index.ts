@@ -21,12 +21,11 @@ const router = createRouter({
       name: 'home',
       components: {
         default: HomeView,
-        menu: () => import('@/components/menus/MainMenu.vue'),
+        // menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: 'MainLayout',
-        requiresAuth: true
+        layout: "FullLayout"
       }
     },
     {
@@ -201,6 +200,34 @@ const router = createRouter({
 
       components: {
         default: () => import('../views/EmployeeLogin.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/manager/login',
+      name: 'manager login',
+
+      components: {
+        default: () => import('../views/manager/ManagerLogin.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/manager/:id',
+      name: 'show cio',
+
+      components: {
+        default: () => import('../views/ShowCio.vue'),
         menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },

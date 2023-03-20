@@ -1,7 +1,7 @@
 import type Product from "@/store/types/product.type";
 import http from "./axios";
-function getProducts() {
-  return http.get("/products");
+function getProducts(params:any) {
+  return http.get("/products",{params:params});
 }
 
 function getProductByCatagory(id: string){
@@ -40,4 +40,8 @@ function deleteProduct(id: number) {
   return http.delete(`/products/${id}`);
 }
 
-export default { getProducts, saveProduct, updateProduct, deleteProduct, getProductByCatagory };
+const findProductByName = (name: string) => {
+  return http.get(`/products/search/name/${name}`);
+}
+
+export default { findProductByName,getProducts, saveProduct, updateProduct, deleteProduct, getProductByCatagory };

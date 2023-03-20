@@ -1,8 +1,8 @@
 import type Customer from "@/store/types/customer.type";
 import http from "./axios";
 
-const getCustomers = ()=>{
-    return http.get("/customers");
+const getCustomers = (params:any)=>{
+    return http.get("/customers",{params:params});
 }
 const createCustomer = (data:Customer & {files:File[]})=>{
     const formData = new FormData();
@@ -29,5 +29,9 @@ const deleteCustomer = (id:string)=>{
     return http.delete(`/customers/${id}`);
 }
 
+const findCustomerBytel = (tel:string)=>{
+    return http.get(`/customers/search/tel/${tel}`);
+}
 
-export default {getCustomers,createCustomer,updateCustomer,deleteCustomer}
+
+export default {findCustomerBytel,getCustomers,createCustomer,updateCustomer,deleteCustomer}
