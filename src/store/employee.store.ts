@@ -167,6 +167,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     const res = await employeeService.employeeCheckIn(checkInOut.value)
     console.log(res.data)
   }
+
   const empCheckOut = async (id: number) => {
     const res = await employeeService.employeeCheckOut(id);
     console.log(res.data)
@@ -188,9 +189,6 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
 
     }
     loadingStore.isLoading = false;
-    
-    
-    
     
   }
   const getEmployeeByName = async () => {

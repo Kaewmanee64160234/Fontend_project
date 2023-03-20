@@ -19,10 +19,8 @@ const route = useRoute()
 const id = ref(route.params.id)
 
 onMounted(async () => {
-  await employeeStore.getOneEmployee(employee.value.id + '')
-  await employeeStore.getOneSummarySalaryEmp(employee.value.id + '')
-  await employeeStore.getCioByIdEmp(employee.value.id+'')
-  console.log(employeeStore.editEmployee)
+    await employeeStore.getOneSummarySalaryEmp(id.value+'')
+  
 })
 </script>
 
@@ -49,10 +47,10 @@ onMounted(async () => {
                 <v-col class="detail-emp">
                   <v-card variant="outlined">
                     <v-card-text  style="text-align: left">
-                        <p>📛 Name : {{ employeeStore.editEmployee.name }}</p>
-                        <p>📨 Email : {{ employeeStore.editEmployee.email }}</p>
-                        <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                        <p>🗃️ hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                        <p>📛 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}</p>
+                        <p>📨 Email : {{ employeeStore.summary_salary.checkInOut[0].employee?.email}}</p>
+                        <p>🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}</p>
+                        <p>🗃️ hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly}} ฿</p>
                     </v-card-text>
                   </v-card>
                   
@@ -87,7 +85,7 @@ onMounted(async () => {
                   <tr
                     class="text-center mr-5"
                     style="justify-content: center"
-                    v-for="(item, index) in employeeStore.checkInOuts"
+                    v-for="(item, index) in employeeStore.summary_salary.checkInOut"
                     :key="index"
                   >
                     <td>{{ item.time_in }}</td>
