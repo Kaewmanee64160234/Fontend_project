@@ -1,18 +1,21 @@
 <script setup lang="ts">
-
+import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import { useEmployeeStore } from '@/store/employee.store'
 import type Employee from '@/store/types/employee.type'
+import type User from '@/store/types/user.type'
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router'
 import type { VForm } from 'vuetify/components'
 const url = import.meta.env.VITE_URL_PORT
+const employeeStore = useEmployeeStore()
 const valid = ref(true)
 const form = ref<InstanceType<typeof VForm> | null>(null)
 const email = ref('')
 const name = ref('')
-const loading = ref(false);
+const loading = ref(false)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
+<<<<<<< HEAD
   const employeeStore = useEmployeeStore()
 
 const route = useRoute();
@@ -22,10 +25,19 @@ onMounted(() => {
     employeeStore.getOneEmployee(employee.value.id + '')
     
 });
+=======
+const route = useRoute()
+const id = ref(route.params.id)
+
+onMounted(async () => {
+    await employeeStore.getOneSummarySalaryEmp(id.value+'')
+  
+})
+>>>>>>> 520f1e71d936cf951b909fada1fc067bf45410e0
 </script>
+
 <template>
-    
-    <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
+  <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-container>
     <v-card>
       <v-card-text width="100vw" style="height: 90vh ;">
@@ -47,12 +59,13 @@ onMounted(() => {
                 <v-col class="detail-emp">
                   <v-card variant="outlined">
                     <v-card-text  style="text-align: left">
-                        <p>📛 Name : {{ employeeStore.editEmployee.name }}</p>
-                        <p>📨 Email : {{ employeeStore.editEmployee.email }}</p>
-                        <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                        <p>🗃️ hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                        <p>📛 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}</p>
+                        <p>📨 Email : {{ employeeStore.summary_salary.checkInOut[0].employee?.email}}</p>
+                        <p>🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}</p>
+                        <p>🗃️ hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly}} ฿</p>
                     </v-card-text>
                   </v-card>
+                  
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
@@ -67,15 +80,12 @@ onMounted(() => {
                   </v-col>
                 </v-row>
               </v-row>
-              <v-row class="button" style="height: 10%">
-               
-              </v-row>
             </v-container>
           </v-col>
 
           <v-col class="detail">
             <v-container>
-              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto">
+              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto;">
                 <thead style="justify-content: center; overflow-y: auto">
                   <tr>
                     <th>Time in</th>
@@ -87,7 +97,7 @@ onMounted(() => {
                   <tr
                     class="text-center mr-5"
                     style="justify-content: center"
-                    v-for="(item, index) in employeeStore.editEmployee.check_in_outs"
+                    v-for="(item, index) in employeeStore.summary_salary.checkInOut"
                     :key="index"
                   >
                     <td>{{ item.time_in }}</td>
@@ -96,6 +106,11 @@ onMounted(() => {
                   </tr>
                 </tbody>
               </VTable>
+              <v-container width="100%" justify="center" >
+       
+       <v-pagination  justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
             </v-container>
           </v-col>
         </v-row>
@@ -103,7 +118,6 @@ onMounted(() => {
     </v-card>
   </v-container>
 </template>
-
 <style scoped>
 .title {
   background-color: rgb(250, 235, 215, 0.5);
@@ -118,4 +132,3 @@ onMounted(() => {
   width: 70vw;
 }
 </style>
-

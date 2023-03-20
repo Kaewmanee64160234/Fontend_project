@@ -55,6 +55,7 @@ onMounted(async () => {
                         <p>🗃️ hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
                     </v-card-text>
                   </v-card>
+
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
@@ -87,7 +88,7 @@ onMounted(async () => {
                     color="red"
                     @click="employeeStore.empCheckOut"
                   >
-                    Checkin</v-btn
+                    Checkout</v-btn
                   >
 
                   <v-btn
