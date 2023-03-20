@@ -4,9 +4,7 @@ import UserDialog from '@/components/user/UserDialog.vue';
 import { useUserStore } from '@/store/user.store';
 import { onMounted, ref, computed } from 'vue';
 const confirmDlg = ref();
-const url = import.meta.env.VITE_URL_PORT
 const userStore = useUserStore();
-
 onMounted(async () => {
   await userStore.getUsers();
 });
@@ -36,8 +34,6 @@ const deleteAllUsers = async () => {
     <VCard>
       <VCardTitle>
         User
-        <VBtn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red" @click="deleteAllUsers">Delete All</VBtn>
-
         <VBtn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
           @click="userStore.dialog = true">Add new user</VBtn>
         <VSpacer> </VSpacer>
@@ -54,10 +50,7 @@ const deleteAllUsers = async () => {
         <VTable class="text-center mt-5">
           <thead>
             <tr>
-              <th>
-                <VCheckbox class="d-flex pa-4" color="indigo" v-model="userStore.allSelected"
-                  @click="userStore.selectUserAll"></VCheckbox>
-              </th>
+              
               <th>ID</th>
               <th>Username</th>
               <th>Login</th>
@@ -66,18 +59,7 @@ const deleteAllUsers = async () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item of userStore" :key="item.id" class="text-center">
-              <td>
-                <VCheckbox class="d-flex pa-4" color="indigo" v-model="userStore.selected" @click="userStore.selectUser()"
-                  :value="item.id + ''"></VCheckbox>
-              </td>
-              <td>
-                <v-avatar size="80"><v-img :src="`${url}/employees/image/${item.image}`"></v-img></v-avatar>
-              </td>
-              </tr>
-
             <tr v-for="(item,index) of userStore.users" :key="index" class="text-center">
-
               <td>{{ item.id }}</td>
               <td>{{ item.username }}</td>
               <td>{{ item.login }}</td>

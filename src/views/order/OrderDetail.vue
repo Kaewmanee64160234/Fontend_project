@@ -7,7 +7,7 @@ const route = useRoute()
 const id = route.params.id
 const orderStore = useOrderStore()
 onMounted(() => {
-  orderStore.getOneOrder(id + '')
+  orderStore.getOneOrder(id+'')
 })
 </script>
 <template >

@@ -12,30 +12,6 @@ export const useUserStore = defineStore('User', () => {
   const users = ref<User[]>([])
   const selected = ref<string[] | any[]>([])
   const allSelected = ref(false)
-<<<<<<< HEAD
-  const loadingStore = useLoadingStore();
-  const search = ref('');
-
-  const editedUser = ref<User & { files: File[] }>({
-    username: '',
-    login: '',
-    password: '',
-    role: '',
-    image: 'no_image.jpg',
-    files: []
-  })
-
-  watch(dialog, (newDialog, oldDialog) => {
-    console.log(newDialog);
-    if(!newDialog){
-      editedUser.value = { 
-      username: '',
-      login: '',
-      password: '',
-      role: '',
-      image: 'no_image.jpg',
-      files: []};
-=======
   const loadingStore = useLoadingStore()
   const search = ref('')
   const editedUser = ref<User>({ username: '', login: '', password: '', role: '' })
@@ -45,7 +21,6 @@ export const useUserStore = defineStore('User', () => {
     console.log(newDialog)
     if (!newDialog) {
       editedUser.value = { username: '', login: '', password: '', role: '' }
->>>>>>> de8faaa6d4607a1751355d2268b5ab6429723421
     }
   })
 
