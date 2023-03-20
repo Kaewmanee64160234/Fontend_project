@@ -118,13 +118,12 @@ export const useBillStore = defineStore("bill", () => {
         totalAll.value = 0
         buy_mon.value = 0
         change_money.value = 0
-        // orderItemList.value = []
       } catch (e) {
         console.log(e)
-        messageStore.showError('ไม่สามารถบันทึกข้อมูล Orders ได้')
+        messageStore.showError('ไม่สามารถบันทึกข้อมูล Bill ได้')
       }
       loadingStore.isLoading = false
   
     }
-    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Dettail_List,sumBill};  
+    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Dettail_List,sumBill,openBill};  
   });

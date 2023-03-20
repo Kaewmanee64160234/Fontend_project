@@ -90,7 +90,7 @@ async function save() {
               <v-text-field v-model="item.name" label="Name"></v-text-field>
               <v-text-field v-model="item.price" label="price"></v-text-field>
               <v-text-field v-model="item.amount" label="amount"></v-text-field>
-              <v-card>{{ item.total = item.amount*item.price }}</v-card>
+              <v-card hidden>{{ item.total = item.amount*item.price }}</v-card>
               <v-card-actions class="justify-center">
                 <v-btn color="error" @click="billStore.deleteBillDetail(index)">Delete</v-btn>
               </v-card-actions>

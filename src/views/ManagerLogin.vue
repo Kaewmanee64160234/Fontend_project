@@ -14,7 +14,7 @@ const name = ref('')
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
 const goTo = (index: string) => {
-    router.push('/manager/' + index);
+    router.push('/manager-login/' + index);
 }
 
 
@@ -40,7 +40,7 @@ onMounted(async () => {
                 <v-table class="text-center mt-5">
                     <thead>
                         <tr>
-                            <th>ID Employee</th>
+                            <th>ID Summary</th>
                             <th>SS Date</th>
                             <th>Hour</th>
                             <th>Salary</th>
