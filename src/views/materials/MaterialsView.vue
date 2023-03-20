@@ -47,7 +47,6 @@ const deleteAllMaterials = async () => {
       Material
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
-          <v-btn class="mdi mdi-delete mr-2" style="float: right; color: white" color="red" @Click="deleteAllMaterials">Delete All</v-btn>
           <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
       <v-spacer></v-spacer>
       <v-text-field style="width: 30%;"
@@ -64,15 +63,6 @@ const deleteAllMaterials = async () => {
     <v-table class="text-center mt-5">
         <thead>
             <tr>
-                <th>
-              <v-checkbox
-                  class="d-flex pa-4"
-                  style="justify-content: center"
-                  color="indigo"
-                  v-model="materialStore.allSelected"
-                  @click="materialStore.selectMaterialAll"
-                ></v-checkbox>
-            </th>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Min_quantity</th>

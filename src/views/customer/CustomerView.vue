@@ -49,7 +49,6 @@ const deleteAllCustomers = async () => {
           @click="customerStore.dialog = !customerStore.dialog"
           >Add new customer</v-btn
         >
-        <v-btn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red" @click="deleteAllCustomers">Delete All</v-btn>
         <v-spacer> </v-spacer>
         <v-text-field style="width: 30%;"
         :loading="customerStore.loading"
@@ -64,14 +63,6 @@ const deleteAllCustomers = async () => {
         <v-table class="text-center mt-5">
           <thead>
             <tr>
-              <th>
-                <v-checkbox
-                  class="d-flex pa-4"
-                  color="indigo"
-                  v-model="customerStore.allSelected"
-                  @click="customerStore.selectCustomerAll"
-                ></v-checkbox>
-              </th>
               <th></th>
               <th>ID</th>
               <th>Name</th>

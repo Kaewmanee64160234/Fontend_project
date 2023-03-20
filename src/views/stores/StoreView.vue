@@ -46,8 +46,6 @@ const deleteAllStores = async () => {
                 Store
                 <VBtn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
                     @click="storeStore.dialog = true">Add new store</VBtn>
-                <VBtn class="mdi mr-2  mdi-delete" style="float: right; color: white" color="red" @click="deleteAllStores">
-                    Delete All</VBtn>
                 <VSpacer> </VSpacer>
                 <VTextField style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
                     append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="storeStore.keyword">
@@ -55,10 +53,6 @@ const deleteAllStores = async () => {
                 <VTable class="text-center mt-5">
                     <thead>
                         <tr>
-                            <th>
-                                <VCheckbox class="d-flex pa-4" color="indigo" v-model="storeStore.allSelected"
-                                    @click="storeStore.selectStoreAll"></VCheckbox>
-                            </th>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Address</th>
@@ -69,10 +63,7 @@ const deleteAllStores = async () => {
                     </thead>
                     <tbody>
                         <tr v-for="item of stores" :key="item.id" class="text-center">
-                            <td>
-                                <VCheckbox class="d-flex pa-4" color="indigo" v-model="storeStore.selected"
-                                    @click="storeStore.selectStore()" :value="item.id + ''"></VCheckbox>
-                            </td>
+
                             <td>{{ item.id }}</td>
                             <td>{{ item.name }}</td>
                             <td>{{ item.address }}</td>
