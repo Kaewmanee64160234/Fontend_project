@@ -36,11 +36,39 @@ export const useMaterialStore = defineStore('material', () => {
     }
   });
 
+// about pagination
+const page = ref(1)
+const take = ref(5)
+const keyword = ref('')
+const order = ref('ASC')
+const orderBy = ref('')
+const lastPage = ref(0)
+
+watch(page, async (newPage, oldPage) => {
+  await getMaterials()
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getMaterials()
+})
+watch(lastPage, async (newlastPage, oldlastPage) => {
+  if (newlastPage < page.value) {
+    page.value = 1
+  }
+})
+
   async function getMaterials() {
     loadingStore.isLoading = true
     try {
-      const res = await materialService.getMaterials()
-      materials.value = res.data
+      const res = await materialService.getMaterials({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+        order: order.value,
+        orderBy: orderBy.value
+      })
+      materials.value = res.data.data
+      
+ lastPage.value = res.data.lastPage
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถดึงข้อมูล Material ได้')
@@ -117,6 +145,13 @@ export const useMaterialStore = defineStore('material', () => {
     }catch(err){console.log(err);}
   }
   return {
+    page,
+    keyword,
+    take,
+    order,
+    orderBy,
+    lastPage,
+
     getMatByName,
     loaded,
     loading,

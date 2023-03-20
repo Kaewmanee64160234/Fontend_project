@@ -35,12 +35,41 @@ const loaded = ref(false);
       };
     }
   });
+
+// about pagination
+const page = ref(1)
+const take = ref(5)
+const keyword = ref('')
+const order = ref('ASC')
+const orderBy = ref('')
+const lastPage = ref(0)
+
+watch(page, async (newPage, oldPage) => {
+  await getCustomers()
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getCustomers()
+})
+
+watch(lastPage, async (newlastPage, oldlastPage) => {
+  if (newlastPage < page.value) {
+    page.value = 1
+  }
+})
+
   const getCustomers = async () => {
     loadingStore.isLoading = true
 
     try {
-      const res = await customerService.getCustomers()
-      customers.value = res.data
+      const res = await customerService.getCustomers({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+        order: order.value,
+        orderBy: orderBy.value
+      })
+      customers.value = res.data.data
+      lastPage.value = res.data.lastPage
     } catch (err) {
       console.log(err)
       messageStore.showError("ไม่สามารถดึงข้อมูลลูกค้าได้");
@@ -155,6 +184,12 @@ const getCustomerByTel = async () => {
   
 }
   return {
+    page,
+    keyword,
+    take,
+    order,
+    orderBy,
+    lastPage,
     getCustomerByTel,
     customerId,
     deleteCustomers,

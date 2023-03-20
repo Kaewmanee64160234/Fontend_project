@@ -7,8 +7,6 @@ import ConfirmDialog from '@/components/ConfirmDialog.vue'
 const productStore = useProductStore()
 const confirmDlg = ref()
 const url = import.meta.env.VITE_URL_PORT
-const page = ref(1)
-const pageSize = ref(2)
 onMounted(async () => {
   await productStore.getProducts()
 })
@@ -104,7 +102,7 @@ const deleteAllProducts = async () => {
         </tbody>
       
        
-        <tbody v-if="productStore.products.length == 0">
+        <tbody v-if="!productStore.products">
           <tr>
             <td colspan="7" class="text-center">No data</td>
           </tr>

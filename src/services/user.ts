@@ -1,7 +1,7 @@
 import type User from "@/store/types/user.type";
 import http from "./axios";
-function getUsers() {
-  return http.get("/users");
+function getUsers(params: any) {
+  return http.get("/users",{params: params});
 }
 const saveUser = (user:User) => {
   return http.post("/users", user)

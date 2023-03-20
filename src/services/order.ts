@@ -1,7 +1,7 @@
 import type { Order } from "@/store/types/Order.type";
 import http from "./axios";
-function getOrders() {
-  return http.get("/orders");
+function getOrders(params:any) {
+  return http.get("/orders",{params:params});
 }
 
 function getOneOrder(id: string) {

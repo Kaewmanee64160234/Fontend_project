@@ -3,8 +3,8 @@ import http from "./axios";
 import type Employee from "@/store/types/employee.type";
 import type { CheckInOut } from "@/store/types/CheckInOut";
 
-const getEmployees = ()=>{
-    return http.get("/employees");
+const getEmployees = (params:any)=>{
+    return http.get("/employees",{params:params});
 }
 const createEmployee = (data:Employee & {files:File[]})=>{
     const formData = new FormData();
@@ -58,8 +58,8 @@ const getOneSummaryByEmployeeId = (id:string)=>{
     return http.get(`/summary-salary/employee/${id}`);
 }
 
-const getAllSummarySalary = ()=>{
-    return http.get("/summary-salary");
+const getAllSummarySalary = (params:any)=>{
+    return http.get("/summary-salary",{params:params});
 }
 const getAllCheckInOut = ()=>{
     return http.get("/check-in-outs");
@@ -68,6 +68,9 @@ const findEmployeeByName = (name:string)=>{
     return http.get(`/employees/search/name/${name}`);
 }
  
+const getCioByIdEmp = (params:any)=>{
+    return http.get(`/employees/cio/employee`,{params:params});
+}
 
-export default {getAllCheckInOut,getAllSummarySalary,getOneSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin,findEmployeeByName }
+export default {getCioByIdEmp,getAllCheckInOut,getAllSummarySalary,getOneSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin,findEmployeeByName }
 
