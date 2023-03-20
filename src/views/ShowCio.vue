@@ -1,32 +1,33 @@
 <script setup lang="ts">
-
+import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import { useEmployeeStore } from '@/store/employee.store'
 import type Employee from '@/store/types/employee.type'
+import type User from '@/store/types/user.type'
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router'
 import type { VForm } from 'vuetify/components'
 const url = import.meta.env.VITE_URL_PORT
+const employeeStore = useEmployeeStore()
 const valid = ref(true)
 const form = ref<InstanceType<typeof VForm> | null>(null)
 const email = ref('')
 const name = ref('')
-const loading = ref(false);
+const loading = ref(false)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
+const route = useRoute()
+const id = ref(route.params.id)
 
-const route = useRoute();
-const id = ref(route.params.id);
-const employeeStore = useEmployeeStore()
-
-
-onMounted(() => {
-    employeeStore.getOneEmployee(employee.value.id + '')
-    
-});
+onMounted(async () => {
+  await employeeStore.getOneEmployee(employee.value.id + '')
+  await employeeStore.getOneSummarySalaryEmp(employee.value.id + '')
+  await employeeStore.getCioByIdEmp(employee.value.id+'')
+  console.log(employeeStore.editEmployee)
+})
 </script>
+
 <template>
-    
-    <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
+  <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-container>
     <v-card>
       <v-card-text width="100vw" style="height: 90vh ;">
@@ -54,6 +55,7 @@ onMounted(() => {
                         <p>🗃️ hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
                     </v-card-text>
                   </v-card>
+                  
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
@@ -68,15 +70,12 @@ onMounted(() => {
                   </v-col>
                 </v-row>
               </v-row>
-              <v-row class="button" style="height: 10%">
-               
-              </v-row>
             </v-container>
           </v-col>
 
           <v-col class="detail">
             <v-container>
-              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto">
+              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto;">
                 <thead style="justify-content: center; overflow-y: auto">
                   <tr>
                     <th>Time in</th>
@@ -88,7 +87,7 @@ onMounted(() => {
                   <tr
                     class="text-center mr-5"
                     style="justify-content: center"
-                    v-for="(item, index) in employeeStore.editEmployee.check_in_outs"
+                    v-for="(item, index) in employeeStore.checkInOuts"
                     :key="index"
                   >
                     <td>{{ item.time_in }}</td>
@@ -97,6 +96,11 @@ onMounted(() => {
                   </tr>
                 </tbody>
               </VTable>
+              <v-container width="100%" justify="center" >
+       
+       <v-pagination  justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage" rounded="circle"></v-pagination>
+
+     </v-container>
             </v-container>
           </v-col>
         </v-row>
@@ -104,7 +108,6 @@ onMounted(() => {
     </v-card>
   </v-container>
 </template>
-
 <style scoped>
 .title {
   background-color: rgb(250, 235, 215, 0.5);
@@ -119,4 +122,3 @@ onMounted(() => {
   width: 70vw;
 }
 </style>
-
