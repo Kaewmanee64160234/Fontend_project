@@ -8,7 +8,7 @@ function getBillDetail() {
     return http.post("/bill-detail", bill_detail);
 }
   
-function updateBillDetail(id: number, bill_detail: BILL_DETAIL) {
+function updateBillDetail(id: string, bill_detail: BILL_DETAIL) {
     return http.patch(`/bill-detail/${id}`, bill_detail);
   }
   

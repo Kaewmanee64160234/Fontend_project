@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script lang="ts" setup>
 import type checkmaterial from '@/services/checkmaterial';
 import { useCheckMaterialStore } from '@/store/checkmaterial.store';
@@ -10,9 +11,20 @@ const id = route.params.id
 const checkmaterialStore = useCheckMaterialStore()
 onMounted(() => {
     checkmaterialStore.getOneCheckMatrial(id + '')
+=======
+<script setup lang="ts">
+import { useBillStore } from '@/store/bill.store';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+const billStore = useBillStore();
+
+onMounted(() => {
+  billStore.getBills()
+>>>>>>> 2eaa9b70f0ecb3969068d6356c88b99005d4e65b
 })
 
 </script>
+<<<<<<< HEAD
 <template >
     <table class="body-wrap">
       <tbody>
@@ -77,3 +89,20 @@ onMounted(() => {
       </tbody>
     </table>
   </template>
+=======
+<template>
+    <div>Check Material {{ id }}</div>
+    <v-container>
+        <v-card>
+            <v-card-title> BIll
+               <v-table>
+                <v-row>
+                    <v-col>
+                    </v-col>
+                </v-row>
+               </v-table>
+            </v-card-title>
+        </v-card>
+    </v-container>
+</template>
+>>>>>>> 2eaa9b70f0ecb3969068d6356c88b99005d4e65b

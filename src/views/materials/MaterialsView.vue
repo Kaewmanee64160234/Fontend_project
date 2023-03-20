@@ -5,8 +5,8 @@ import MaterialsDialog from '@/components/material/MaterialsDialog.vue';
 import ConfirmDialog from '@/components/ConfirmDialog.vue';
 import router from '@/router';
 import AddBillDialog from '@/components/material/AddBillDialog.vue';
-import { useBillDetailStore } from '@/store/billdetail.store';
-const billdetailStore = useBillDetailStore();
+import { useBillStore } from '@/store/bill.store';
+const billStore = useBillStore();
 const materialStore = useMaterialStore();
 const confirmDlg = ref();
 const goTo = (index:string) => { 
@@ -50,7 +50,7 @@ const deleteAllMaterials = async () => {
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
           <v-btn class="mdi mdi-delete mr-2" style="float: right; color: white" color="red" @Click="deleteAllMaterials">Delete All</v-btn>
-          <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billdetailStore.dialog = true">Add Bill</v-btn>
+          <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
       <v-spacer></v-spacer>
       <v-text-field style="width: 30%;"
         :loading="materialStore.loading"

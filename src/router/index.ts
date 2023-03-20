@@ -210,10 +210,10 @@ const router = createRouter({
     },
     {
       path: '/manager/login',
-      name: 'manager login',
+      name: 'manager-login',
 
       components: {
-        default: () => import('../views/manager/ManagerLogin.vue'),
+        default: () => import('../views/ManagerLogin.vue'),
         menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },
@@ -224,7 +224,7 @@ const router = createRouter({
     },
     {
       path: '/manager/:id',
-      name: 'show cio',
+      name: 'show-cio',
 
       components: {
         default: () => import('../views/ShowCio.vue'),

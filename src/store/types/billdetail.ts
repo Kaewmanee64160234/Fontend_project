@@ -1,7 +1,7 @@
 export default interface BILL_DETAIL{
     id?: number;
     name: string;
-    amount: number
+    amount: number;
     price: number;
     total: number;
     materialId?: number;
