@@ -60,11 +60,7 @@ onMounted(async () => {
 
                             <td>
                                 <v-btn class="mdi mr-2  mdi-eye" style=" color: white" color="blue-lighten-1"
-<<<<<<< HEAD
                                 @click="goTo(item.id+'')">History</v-btn>
-=======
-                                @click="goTo(item.checkInOut[0].employee?.id + '')">   History  </v-btn>
->>>>>>> 520f1e71d936cf951b909fada1fc067bf45410e0
                                 
                             </td>
 
