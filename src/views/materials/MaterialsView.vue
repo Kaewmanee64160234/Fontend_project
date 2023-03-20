@@ -9,6 +9,7 @@ import { useBillStore } from '@/store/bill.store';
 const billStore = useBillStore();
 const materialStore = useMaterialStore();
 const confirmDlg = ref();
+
 const goTo = (index:string) => { 
     router.push('/material/' + index);
 }

@@ -13,8 +13,10 @@ const email = ref('')
 const name = ref('')
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
+
+
 const goTo = (index: string) => {
-    router.push('/show-cio/' + index);
+    router.push('/manager/login/' + index);
 }
 
 
@@ -58,7 +60,7 @@ onMounted(async () => {
 
                             <td>
                                 <v-btn class="mdi mr-2  mdi-eye" style=" color: white" color="blue-lighten-1"
-                                @click="goTo(item.id + '')">   History  </v-btn>
+                                @click="goTo(item.id+'')">History</v-btn>
                                 
                             </td>
 

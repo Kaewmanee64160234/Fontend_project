@@ -16,8 +16,8 @@ const name = ref('')
 const loading = ref(false);
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
-const route = useRoute();
-const id = ref(route.params.id);
+// const route = useRoute();
+// const id = ref(route.params.id);
 
 onMounted(async () => {
     await employeeStore.getOneEmployee(employee.value.id + '')
