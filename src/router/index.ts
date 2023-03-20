@@ -209,7 +209,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/manager/:id',
+      path: '/manager/login/:id',
       name: 'show-cio',
 
       components: {
