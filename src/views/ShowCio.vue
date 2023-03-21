@@ -60,6 +60,16 @@ onMounted(async () => {
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
+                <v-row class="text-center">
+                  <v-col class="detail-emp">
+                    <v-card height="80px" width="250px">
+                      <v-card-title class="text-left" >
+                        <h7> {{ employeeStore.summary_salary.salary}} ฿ </h7> <br />
+                        <h7 style="font-size: 15px; color: #30e3df">🕒 Your Salary </h7>
+                      </v-card-title>
+                    </v-card>
+                  </v-col>
+                </v-row>
                 <v-row>
                   <v-col class="detail-emp">
                     <v-card height="80px" width="250px">
