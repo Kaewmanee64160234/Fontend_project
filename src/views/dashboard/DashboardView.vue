@@ -1,13 +1,12 @@
 
 <script lang="ts" setup>
-import ChartComponentDialogCopy from "@/components/dashboards/ChartComponentDialogExample.vue";
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
 import SellerDialog from "../../components/stock/SellerDialog.vue"
 </script>
 
 <template>
   <v-row class="ml-5" style="float:left">
-    <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-arrow-left-circle" title="Home" value="home" to="/home">
+    <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="Home" value="home" to="/home">
     </v-btn>
   </v-row>
   <div class="page">
@@ -59,7 +58,6 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
               '2021',
               '2023'
             ]" label="Years"></ChartComponentDialog>
-            <!-- <ChartComponentDialogCopy></ChartComponentDialogCopy> -->
           </v-card>
         </v-container>
       </v-col>
