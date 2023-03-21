@@ -1,4 +1,5 @@
 import type { CheckInOut } from "./CheckInOut";
+import type Employee from "./employee.type";
 
 export interface SummarySalary {
   id?: number;
@@ -12,4 +13,5 @@ export interface SummarySalary {
   updatedAt?: Date;
 
   deletedAt?: Date;
+  employee?: Employee
 }

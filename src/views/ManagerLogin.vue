@@ -13,6 +13,11 @@ const email = ref('')
 const name = ref('')
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
+onMounted(() => {
+    if(employee.value.position === 'employee'){
+        router.push('/employee/login')
+    }
+});
 const goTo = (index: string) => {
     router.push('/manager/login/' + index);
 }

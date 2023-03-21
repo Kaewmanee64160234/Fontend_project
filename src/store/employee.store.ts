@@ -8,7 +8,7 @@ import type { CheckInOut } from './types/CheckInOut'
 import type { SummarySalary } from './types/SummarySalary.type'
 export const useEmployeeStore = defineStore('employee', () => {
   const loadingStore = useLoadingStore()
-  const employeeId = ref('');
+  const employeeId = ref('')
   const search = ref('')
   const loading = ref(false)
   const loaded = ref(false)
@@ -48,35 +48,34 @@ export const useEmployeeStore = defineStore('employee', () => {
     }
   })
 
+  // about pagination
+  const page = ref(1)
+  const take = ref(5)
+  const keyword = ref('')
+  const order = ref('ASC')
+  const orderBy = ref('')
+  const lastPage = ref(0)
 
-// about pagination
-const page = ref(1)
-const take = ref(5)
-const keyword = ref('')
-const order = ref('ASC')
-const orderBy = ref('')
-const lastPage = ref(0)
+  // about checkIn checkout
+  const checkIn = ref(true)
 
-watch(page, async (newPage, oldPage) => {
-  await getEmployees()
-
-})
-watch(keyword, async (newKey, oldKey) => {
-  await getEmployees()
-})
-watch(keyword, async (newKey, oldKey) => {
-  await getAllSummarySalary()
-
-})
-watch(page, async (newPage, oldPage) => {
-  await getAllSummarySalary()
-})
-watch(lastPage, async (newlastPage, oldlastPage) => {
-  if (newlastPage < page.value) {
-    page.value = 1
-  }
-})
-
+  watch(page, async (newPage, oldPage) => {
+    await getEmployees()
+  })
+  watch(keyword, async (newKey, oldKey) => {
+    await getEmployees()
+  })
+  watch(keyword, async (newKey, oldKey) => {
+    await getAllSummarySalary()
+  })
+  watch(page, async (newPage, oldPage) => {
+    await getAllSummarySalary()
+  })
+  watch(lastPage, async (newlastPage, oldlastPage) => {
+    if (newlastPage < page.value) {
+      page.value = 1
+    }
+  })
 
   const getEmployees = async () => {
     loadingStore.isLoading = true
@@ -164,75 +163,72 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
   }
   const empCheckIn = async (id: number) => {
     loadingStore.isLoading = true
-    try{
+    try {
       checkInOut.value.employeeId = id
-    const res = await employeeService.employeeCheckIn(checkInOut.value)
-    console.log(res.data)
-
-    }catch(err) {
+      const res = await employeeService.employeeCheckIn(checkInOut.value)
+      console.log(res.data)
+      await getOneEmployee(editEmployee.value.id + '')
+      checkIn.value = false;
+    } catch (err) {
       console.log(err)
-
     }
     loadingStore.isLoading = false
-    
   }
 
   const empCheckOut = async (id: string) => {
     loadingStore.isLoading = true
-    try{
+    try {
       console.log(id)
-    const res = await employeeService.employeeCheckOut(id);
-    console.log(res.data)
-
-    }catch(err) {
+      const res = await employeeService.employeeCheckOut(id)
+      console.log(res.data)
+      await getOneEmployee(editEmployee.value.id + '')
+      checkIn.value = true;
+    } catch (err) {
       console.log(err)
-
     }
     loadingStore.isLoading = false
-    
-    
   }
   const getOneSummarySalaryEmp = async (id: string) => {
-    const res = await employeeService.getOneSummaryByEmployeeId(id + '');
-    summary_salary.value = res.data[0];
+    const res = await employeeService.getOneSummaryByEmployeeId(id + '')
+    summary_salary.value = res.data[0]
 
     // console.log(res.data[0]);
   }
   const getOneEmployee = async (id: string) => {
-    loadingStore.isLoading = true;
-    try{
-      const res = await employeeService.getOneEmployee(id);
-       editEmployee.value = res.data;
-
-    }catch (err) {
-      console.log(editEmployee.value);
-
+    loadingStore.isLoading = true
+    try {
+      const res = await employeeService.getOneEmployee(id)
+      editEmployee.value = res.data
+      if (editEmployee.value.check_in_outs[0].time_out === null) {
+        checkIn.value = false
+      } else {
+        checkIn.value = true
+      }
+    } catch (err) {
+      console.log(editEmployee.value)
     }
-    loadingStore.isLoading = false;
-    
+    loadingStore.isLoading = false
   }
   const getEmployeeByName = async () => {
     try {
       if (search.value !== '') {
         loading.value = true
-        const res = await employeeService.findEmployeeByName(search.value);
+        const res = await employeeService.findEmployeeByName(search.value)
 
         setTimeout(() => {
           loading.value = false
           loaded.value = true
         }, 2000)
-        employees.value = res.data;
+        employees.value = res.data
       } else {
-        await getEmployees();
+        await getEmployees()
       }
-
-
-    } catch (err) { console.log(err); }
-
-
+    } catch (err) {
+      console.log(err)
+    }
   }
   const getAllSummarySalary = async () => {
-    loadingStore.isLoading = true;
+    loadingStore.isLoading = true
     try {
       const res = await employeeService.getAllSummarySalary({
         page: page.value,
@@ -240,32 +236,31 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
         keyword: keyword.value,
         order: order.value,
         orderBy: orderBy.value
-      });
-      summary_salaries.value = res.data.data;
+      })
+      summary_salaries.value = res.data.data
       lastPage.value = res.data.lastPage
     } catch (err) {
-      console.log(err); 
+      console.log(err)
     }
-    loadingStore.isLoading = false;
+    loadingStore.isLoading = false
   }
-  const getCioByIdEmp = async (empId:string) => {
-    loadingStore.isLoading = true;
-    try{
+  const getCioByIdEmp = async (empId: string) => {
+    loadingStore.isLoading = true
+    try {
       const res = await employeeService.getCioByIdEmp({
         page: page.value,
         take: take.value,
         empId: empId,
         order: 'DESC',
         orderBy: orderBy.value
-      });
+      })
       lastPage.value = res.data.lastPage
 
-      checkInOuts.value = res.data.data;
-    }catch(err){console.log(err);}
-    loadingStore.isLoading = false;
-
-    
-
+      checkInOuts.value = res.data.data
+    } catch (err) {
+      console.log(err)
+    }
+    loadingStore.isLoading = false
   }
   return {
     getCioByIdEmp,
@@ -302,6 +297,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     empCheckOut,
     getOneSummarySalaryEmp,
     getOneEmployee,
-    employeeId
+    employeeId,
+    checkIn
   }
 })
