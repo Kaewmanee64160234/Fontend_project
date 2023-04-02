@@ -127,6 +127,8 @@ onMounted(() => {
                 <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
                 <input class="form-control" id="amount" type="text" placeholder="Amount"
                   v-model="pointOfSaleStore.recive_mon" />
+
+                  <v-btn class="mt-5" width="300px">Promotion</v-btn>
               </div>
 
               <div class="col-md-7">
