@@ -119,32 +119,33 @@ onMounted(() => {
             </table>
           </div>
 
-          
+
           <div class="summary mt-2" style="height: 20vh">
             <div class="row">
 
               <div class="col-md-5">
                 <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
-                <input class="form-control" id="amount" type="text" placeholder="Amount"
+                <input class="form-control mt-3" id="amount" type="text" placeholder="Amount"
                   v-model="pointOfSaleStore.recive_mon" />
 
-                  <v-btn style="background-color: #FFCB42; color: white;" class="mt-5" width="300px"
-                    @click="customerStore.dialog = true">Find Member</v-btn>
+                <v-btn block rounded="xl" style="background-color: #FFCB42; color: white;" class="mt-7" width="300px"
+                  @click="customerStore.dialog = true">Find Member</v-btn>
 
-                  <v-btn style="background-color: #607EAA; color: white;" class="mt-5" width="300px"
-                    @click="pointOfSaleStore.dialogPromotion = true"
-                    v-if="pointOfSaleStore.order.customerId !== 0">Promotion</v-btn>
-                    <v-btn style="background-color: #607EAA; color: white;" class="mt-5" width="300px"
-                    v-else :disabled="true">Promotion</v-btn>
-                  
-                    <v-btn style="background-color: #7DB9B6; color: white" class="mt-5" width="300px" @click="customerStore.addCustomerDialog = true"
-                    >Add Customer</v-btn>
+                <v-btn block rounded="xl" style="background-color: #607EAA; color: white;" class="mt-7" width="300px"
+                  @click="pointOfSaleStore.dialogPromotion = true"
+                  v-if="pointOfSaleStore.order.customerId !== 0">Promotion</v-btn>
+                <v-btn block rounded="xl" tyle="background-color: #607EAA; color: white;" class="mt-7" width="300px"
+                  v-else :disabled="true">Promotion</v-btn>
 
-                    <v-btn style="background-color: #FF2442; color: white" class="mt-5" width="300px" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
+                <v-btn block rounded="xl" style="background-color: #7DB9B6; color: white" class="mt-7" width="300px"
+                  @click="customerStore.addCustomerDialog = true">Add Customer</v-btn>
+
+                <v-btn block rounded="xl" style="background-color: #FF2442; color: white" class="mt-7" width="300px"
+                  @click="pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
               </div>
 
               <div class="col-md-7">
-                <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ราคารวม :</p>
                   <p class="fw-bold mb-0">{{ aboutCal?.total_ }} บาท</p>
                 </div>
@@ -168,29 +169,32 @@ onMounted(() => {
                   <p class="fw-bold mb-0" v-else>{{ aboutCal?.change_money }} บาท</p>
                 </div>
                 <div class="mt-2">Select Payment Menthod</div>
-                  <v-row dense>
-                    <v-col><v-btn width="inherit" height="65px" prepend-icon="mdi mdi-barcode-scan" stacked variant="tonal" @click="DialogPayment.Paypromptpay">Promt Pay</v-btn></v-col>
-                  </v-row>
-                  <v-row dense>
-                    <v-col><v-btn width="inherit" height="65px" prepend-icon="mdi mdi-cash" stacked variant="tonal" @click="DialogPayment.Paycash">Cash</v-btn></v-col>
-                  </v-row>
-                  <v-row dense>
-                    <v-col><v-btn block rounded="xl" width="inherit" height="40px" style="background-color: #AACB73; color: white;"
-                    @click="pointOfSaleStore.openOrder">Save</v-btn></v-col>
-                  </v-row>
+                <v-row dense>
+                  <v-col><v-btn width="inherit" height="65px" prepend-icon="mdi mdi-barcode-scan" stacked variant="tonal"
+                      @click="DialogPayment.Paypromptpay">Promt Pay</v-btn></v-col>
+                </v-row>
+                <v-row dense>
+                  <v-col><v-btn width="inherit" height="65px" prepend-icon="mdi mdi-cash" stacked variant="tonal"
+                      @click="DialogPayment.Paycash">Cash</v-btn></v-col>
+                </v-row>
+                <v-row dense>
+                  <v-col><v-btn block rounded="xl" width="inherit" height="40px"
+                      style="background-color: #AACB73; color: white;"
+                      @click="pointOfSaleStore.openOrder">Save</v-btn></v-col>
+                </v-row>
               </div>
             </div>
           </div>
           <div class="summary mt-4" style="height: 30vh">
             <div class="row justify-center">
               <div class="col-md-7">
-                
-                
-                
-                
+
+
+
+
                 <div class="d-flex justify-content-between">
                   <!-- <v-btn style="background-color: #FFCB42; color: white; margin-right: 50px;" class="mt-5" width="150px"
-                    @click="customerStore.dialog = true">Find Member</v-btn> -->
+                      @click="customerStore.dialog = true">Find Member</v-btn> -->
                 </div>
               </div>
             </div>
@@ -227,5 +231,4 @@ onMounted(() => {
 .cart-table::-webkit-scrollbar-thumb {
   background-color: #ddd;
   border-radius: 999px;
-}
-</style>
+}</style>
