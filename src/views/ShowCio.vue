@@ -50,10 +50,10 @@ onMounted(async () => {
                 <v-col class="detail-emp">
                   <v-card variant="outlined">
                     <v-card-text  style="text-align: left">
-                        <p>📛 Name : {{ employeeStore.summary_salary.employee?.name }}</p>
-                        <p>📨 Email : {{ employeeStore.summary_salary.employee?.email}}</p>
-                        <p>🗃️ Position : {{ employeeStore.summary_salary.employee?.position }}</p>
-                        <p>🗃️ hourly : {{ employeeStore.summary_salary.employee?.hourly}} ฿</p>
+                        <p>📛 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}</p>
+                        <p>📨 Email : {{ employeeStore.summary_salary.checkInOut[0].employee?.email}}</p>
+                        <p>🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}</p>
+                        <p>🗃️ hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly}} ฿</p>
                     </v-card-text>
                   </v-card>
                   

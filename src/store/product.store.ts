@@ -133,6 +133,7 @@ export const useProductStore = defineStore('Product', () => {
       }
       dialog.value = false
       await getProductByCatagory('2')
+      await getProducts()
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถบันทึกข้อมูล Product ได้')
