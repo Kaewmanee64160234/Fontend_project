@@ -30,7 +30,15 @@ watch(page, async (newPage, oldPage) => {
   await getOrders()
 })
 watch(keyword, async (newKey, oldKey) => {
-  await getOneOrder(keyword.value)
+  if(keyword.value.length >=3){
+    await getOneOrder(keyword.value)
+  }
+  if(keyword.value.length ===0){
+    await getOneOrder(keyword.value)
+
+
+  }
+  
 })
 watch(lastPage, async (newlastPage, oldlastPage) => {
   if (newlastPage < page.value) {
