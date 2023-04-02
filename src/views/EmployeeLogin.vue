@@ -50,29 +50,7 @@ onMounted(async () => {
                   </v-card>
                 </v-col>
               </v-row>
-              <v-row style="height: 30%">
-                <v-row class="text-center">
-                  <v-col class="detail-emp">
-                    <v-card height="80px" width="250px">
-                      <v-card-title class="text-left">
-                        <!-- {{ employeeStore.summary_salary }} -->
-                        <h7> {{ employeeStore.summary_salary.salary}} ฿ </h7> <br />
-                        <h7 style="font-size: 15px; color: #30e3df">🕒 Your Salary </h7>
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col class="detail-emp">
-                    <v-card height="80px" width="250px">
-                      <v-card-title class="text-left">
-                        <h7> {{ employeeStore.summary_salary.hour }} hour </h7> <br />
-                        <h7 style="font-size: 15px; color: #ff9e9e">🕒 Total work </h7>
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-row>
+             
               <v-row class="button" style="height: 10%">
                 <v-col>
                   
@@ -98,7 +76,28 @@ onMounted(async () => {
           </v-col>
 
           <v-col class="detail">
-            <v-container>
+            <v-container style="height: 100%;">
+              <v-row style="height: 10%">
+                <v-row class="text-center">
+                  <v-col class="detail-emp">
+                    <v-card height="100px" width="300px" style=" border-radius: 15px">
+                      <v-card-title class="text-left">
+                        <h7> {{ employeeStore.summary_salary.salary}} ฿ </h7> <br />
+                        <h7 style="font-size: 15px; color: #30e3df">🕒 Your Salary </h7>
+                      </v-card-title>
+                    </v-card>
+                  </v-col>
+                  <v-col class="detail-emp">
+                    <v-card height="100px" width="300px" style=" border-radius: 15px">
+                      <v-card-title class="text-left">
+                        <h7> {{ employeeStore.summary_salary.hour }} hour </h7> <br />
+                        <h7 style="font-size: 15px; color: #ff9e9e">🕒 Total work </h7>
+                      </v-card-title>
+                    </v-card>
+                  </v-col>
+
+                </v-row>
+              </v-row>
               <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto">
                 <thead style="justify-content: center; overflow-y: auto">
                   <tr>
