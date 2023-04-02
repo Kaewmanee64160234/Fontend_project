@@ -192,11 +192,7 @@ onMounted(() => {
           <div class="summary mt-4" style="height: 30vh">
             <div class="row justify-center" >
               <div class="col-md-6">
-                <div class="d-flex justify-content-between">
-                  <v-btn style="background-color: #7DB9B6; color: white; margin-right: 50px;" class="mt-5" width="150px" @click="customerStore.addCustomerDialog = true"
-                    >Add Customer</v-btn
-                  >      
-                </div>
+                
                 <div class="d-flex justify-content-between">
                   <v-btn
                   style="background-color: #607EAA; color: white; margin-right: 50px;"
@@ -222,6 +218,12 @@ onMounted(() => {
                   <v-btn  style="background-color: #AACB73; color: white; margin-right: 100px;" class="mt-5" width="150px" @click="pointOfSaleStore.openOrder"
                     >Save</v-btn
                   >
+                </div>
+                <br />
+                <div class="d-flex justify-content-center">
+                  <v-btn style="background-color: #7DB9B6; color: white; margin-left: 20px;" class="mt-5" width="150px" @click="customerStore.addCustomerDialog = true"
+                    >Add Customer</v-btn
+                  >      
                 </div>
               </div>
             </div>
