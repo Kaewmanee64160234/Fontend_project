@@ -34,10 +34,10 @@ onMounted(async () => {
                     <div class="text-subtitle-2 mt-3">{{ employee.name }}</div>
                   </v-container>
                 </v-col>
-              </v-row>  
+              </v-row>
               <v-row style="height: 30%">
                 <v-col>
-                  <v-card style="background-color: white" >
+                  <v-card style="background-color: white">
                     <v-card-text style="text-align: center">
                       <p>📛 Name : {{ employeeStore.editEmployee.name }}</p>
                       <br />
@@ -66,11 +66,11 @@ onMounted(async () => {
           </v-col>
 
           <v-col class="detail">
-            <v-container style="height: 100%;">
+            <v-container style="height: 100%; ">
               <v-row style="height: 13%">
                 <v-row class="text-center">
                   <v-col class="detail-emp">
-                    <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #DEF5E5;" >
+                    <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #DEF5E5;">
                       <v-card-title class="text-left">
                         <h7> {{ employeeStore.summary_salary.salary }} ฿ </h7> <br />
                         <h7 style="font-size: 15px; color: #6D9886">🕒 Your Salary </h7>
@@ -81,30 +81,40 @@ onMounted(async () => {
                     <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #FFE3E1;">
                       <v-card-title class="text-left">
                         <h7> {{ employeeStore.summary_salary.hour }} hour </h7> <br />
-                        <h7 style="font-size: 15px; color: #ff9e9e">🕒 Total work </h7>
+                        <h7 style="font-size: 15px; color: #FF9494">🕒 Total work </h7>
                       </v-card-title>
                     </v-card>
                   </v-col>
 
                 </v-row>
               </v-row>
-              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto">
-                <thead style="justify-content: center; overflow-y: auto">
-                  <tr>
-                    <th>Time in</th>
-                    <th>Time out</th>
-                    <th>Total hour</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="text-center mr-5" style="justify-content: center"
-                    v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
-                    <td>{{ item.time_in }}</td>
-                    <td>{{ item.time_out }}</td>
-                    <td>{{ item.total_hour }}</td>
-                  </tr>
-                </tbody>
-              </VTable>
+              <v-col class="detail">
+                <v-container style="height: 60%; ">
+                  <VTable fixed-header height="600px" class="text-center mt-5;" style="justify-content: center; ">
+                    <thead style="justify-content: center;  ">
+                      <tr>
+                        <th>Time in</th>
+                        <th>Time out</th>
+                        <th>Total hour</th>
+                      </tr>
+                    </thead>
+                    <tbody style=" overflow-y: auto;">
+                      <tr class="text-center mr-5" style="justify-content: center;  overflow-y: auto;"
+                        v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
+                        <td>{{ item.time_in }}</td>
+                        <td>{{ item.time_out }}</td>
+                        <td>{{ item.total_hour }}</td>
+                      </tr>
+                    </tbody>
+                  </VTable>
+
+                </v-container>
+
+              </v-col>
+
+
+
+
             </v-container>
           </v-col>
         </v-row>
@@ -126,6 +136,6 @@ onMounted(async () => {
 }
 
 .detail {
-  width: 70vw;
+  width: 70 vw;
 }
 </style>
