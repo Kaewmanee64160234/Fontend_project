@@ -66,7 +66,11 @@ export const useEmployeeStore = defineStore('employee', () => {
     await getEmployees()
   })
   watch(keyword, async (newKey, oldKey) => {
-    await getAllSummarySalary()
+    if(keyword.value.length >=3){
+      await getAllSummarySalary()
+    }if(keyword.value.length ===0){
+      await getAllSummarySalary()
+    }
   })
   watch(page, async (newPage, oldPage) => {
     await getAllSummarySalary()

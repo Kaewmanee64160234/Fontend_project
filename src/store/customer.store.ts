@@ -48,7 +48,12 @@ watch(page, async (newPage, oldPage) => {
   await getCustomers()
 })
 watch(keyword, async (newKey, oldKey) => {
-  await getCustomers()
+  if(keyword.value.length >=3){
+    await getCustomers()
+  }
+  if(keyword.value.length ===0){
+    await getCustomers()
+  }
 })
 
 watch(lastPage, async (newlastPage, oldlastPage) => {
