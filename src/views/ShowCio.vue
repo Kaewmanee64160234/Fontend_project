@@ -38,7 +38,7 @@ onMounted(async () => {
                     <v-avatar size="100"
                       ><v-img :src="`${url}/employees/image/${employee.image}`"></v-img
                     ></v-avatar>
-                    <div class="text-subtitle-2 mt-3">{{ employee.name }}</div></v-container
+                    <div class="text-subtitle-2 mt-3">{{employeeStore.summary_salary.employee?.name }}</div></v-container
                   >
                 </v-col>
               </v-row>
@@ -47,16 +47,26 @@ onMounted(async () => {
                 <v-col class="detail-emp">
                   <v-card variant="outlined">
                     <v-card-text  style="text-align: left">
-                        <p>📛 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}</p>
-                        <p>📨 Email : {{ employeeStore.summary_salary.checkInOut[0].employee?.email}}</p>
-                        <p>🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}</p>
-                        <p>🗃️ hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly}} ฿</p>
+                        <p>📛 Name : {{ employeeStore.summary_salary.employee?.name }}</p>
+                        <p>📨 Email : {{ employeeStore.summary_salary.employee?.email}}</p>
+                        <p>🗃️ Position : {{ employeeStore.summary_salary.employee?.position }}</p>
+                        <p>🗃️ hourly : {{ employeeStore.summary_salary.employee?.hourly}} ฿</p>
                     </v-card-text>
                   </v-card>
                   
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
+                <v-row class="text-center">
+                  <v-col class="detail-emp">
+                    <v-card height="80px" width="250px">
+                      <v-card-title class="text-left" >
+                        <h7> {{ employeeStore.summary_salary.salary}} ฿ </h7> <br />
+                        <h7 style="font-size: 15px; color: #30e3df">🕒 Your Salary </h7>
+                      </v-card-title>
+                    </v-card>
+                  </v-col>
+                </v-row>
                 <v-row>
                   <v-col class="detail-emp">
                     <v-card height="80px" width="250px">

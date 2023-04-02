@@ -7,7 +7,7 @@ const route = useRoute()
 const id = route.params.id
 const orderStore = useOrderStore()
 onMounted(() => {
-  orderStore.getOneOrder(id + '')
+  orderStore.getOneOrder(id+'')
 })
 </script>
 <template >
@@ -33,7 +33,7 @@ onMounted(() => {
                             <table class="invoice">
                               <tbody>
                                 <tr>
-                                  <td>customer: {{ orderStore.tempOrder.customer.id! }}<br /> orderId: {{ orderStore.tempOrder.id }}:{{ orderStore.tempOrder.createdDate }}<br />Date :{{ orderStore.tempOrder.createdDate }}<br /> payment: {{ orderStore.tempOrder.payment }}</td>
+                                  <td>customer: {{ orderStore.tempOrder.customer?.id }}<br /> orderId: {{ orderStore.tempOrder.id }}:{{ orderStore.tempOrder.createdDate }}<br />Date :{{ orderStore.tempOrder.createdDate }}<br /> payment: {{ orderStore.tempOrder.payment }}</td>
                                 </tr>
                                 <tr>
                                   <td>
