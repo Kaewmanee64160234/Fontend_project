@@ -124,7 +124,7 @@ onMounted(async () => {
 </template>
 <style scoped>
 .title {
-  background-color: #FFF5E4;
+  background-color: #FFF5E1;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
   height: 100vh;
 }
