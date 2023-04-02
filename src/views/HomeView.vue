@@ -198,32 +198,32 @@ onMounted(() => {
                 <div class="d-flex justify-content-between">
                   <v-btn
                   style="background-color: #607EAA; color: white; margin-right: 50px;"
-                    class="mt-5" width="150px"
+                    class="mt-5 pa-2 ma-2" width="150px"
                     @click="pointOfSaleStore.dialogPromotion = true"
                     v-if="pointOfSaleStore.order.customerId !== 0"
                     >Promotion</v-btn
                   >
                   <v-btn
                   style="background-color: #607EAA; color: white; margin-right: 50px;"  
-                    class="mt-5" width="150px"
+                    class="mt-5" width="150px pa-2 ma-2"
                     v-else 
                     :disabled="true"
                     >Promotion</v-btn
                   >
-                  <v-btn style="background-color: #FF2442; color: white ; margin-right: 100px;" class="mt-5" width="150px" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
+                  <v-btn style="background-color: #FF2442; color: white ; margin-right: 100px;" class="mt-5 pa-2 ma-2" width="150px" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
                 </div>
                 <br />
                 <div class="d-flex justify-content-between">
-                  <v-btn style="background-color: #FFCB42; color: white; margin-right: 50px;" class="mt-5" width="150px" @click="customerStore.dialog = true"
+                  <v-btn style="background-color: #FFCB42; color: white; margin-right: 50px;" class="mt-5 pa-2 ma-2" width="150px" @click="customerStore.dialog = true"
                     >Find Member</v-btn
                   >
-                  <v-btn  style="background-color: #AACB73; color: white; margin-right: 100px;" class="mt-5" width="150px" @click="pointOfSaleStore.openOrder"
+                  <v-btn  style="background-color: #AACB73; color: white; margin-right: 100px;" class="mt-5 " width="150px" @click="pointOfSaleStore.openOrder"
                     >Save</v-btn
                   >
                 </div>
                 <br />
                 <div class="d-flex justify-content-center">
-                  <v-btn style="background-color: #7DB9B6; color: white; margin-left: 20px;" class="mt-5" width="150px" @click="customerStore.addCustomerDialog = true"
+                  <v-btn style="background-color: #7DB9B6; color: white; margin-left: 20px;" class="mt-5 pa-2 ma-2" width="150px" @click="customerStore.addCustomerDialog = true"
                     >Add Customer</v-btn
                   >      
                 </div>
