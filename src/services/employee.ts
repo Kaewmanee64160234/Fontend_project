@@ -46,9 +46,10 @@ const employeeCheckIn = (checkInCheckOut:CheckInOut)=>{
     return http.post("/check-in-outs",checkInCheckOut);
 }
 
-const employeeCheckOut = (id:number)=>{
-    return http.patch("/check-out-outs/"+id);
+const employeeCheckOut = (id:string)=>{
+    return http.patch("/check-in-outs/"+id);
 }
+
 
 const getOneEmployee = (id:string)=>{
    return http.get(`/employees/${id}`);

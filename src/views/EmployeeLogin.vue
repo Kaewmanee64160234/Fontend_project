@@ -8,21 +8,14 @@ import { useRoute } from 'vue-router'
 import type { VForm } from 'vuetify/components'
 const url = import.meta.env.VITE_URL_PORT
 const employeeStore = useEmployeeStore()
-const valid = ref(true)
-const form = ref<InstanceType<typeof VForm> | null>(null)
-const email = ref('')
-const name = ref('')
-const loading = ref(false)
+
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
-const route = useRoute()
-const id = ref(route.params.id)
 
 onMounted(async () => {
   await employeeStore.getOneEmployee(employee.value.id + '')
   await employeeStore.getOneSummarySalaryEmp(employee.value.id + '')
-  await employeeStore.getCioByIdEmp(employee.value.id+'')
-  console.log(employeeStore.editEmployee)
+  // console.log(employeeStore.editEmployee)
 })
 </script>
 
@@ -55,7 +48,6 @@ onMounted(async () => {
                         <p>🗃️ hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
                     </v-card-text>
                   </v-card>
-                  
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
@@ -63,6 +55,7 @@ onMounted(async () => {
                   <v-col class="detail-emp">
                     <v-card height="80px" width="250px">
                       <v-card-title class="text-left">
+                        <!-- {{ employeeStore.summary_salary }} -->
                         <h7> {{ employeeStore.summary_salary.salary}} ฿ </h7> <br />
                         <h7 style="font-size: 15px; color: #30e3df">🕒 Your Salary </h7>
                       </v-card-title>
@@ -82,22 +75,23 @@ onMounted(async () => {
               </v-row>
               <v-row class="button" style="height: 10%">
                 <v-col>
-                  <v-btn
-                    class="mdi mr-2 mdi-close-circle"
-                    style="float: right; color: white"
-                    color="red"
-                    @click="employeeStore.empCheckOut"
-                  >
-                    Checkin</v-btn
-                  >
-
-                  <v-btn
+                  
+                  <v-btn v-if="employeeStore.checkIn === true"
                     class="mdi mr-2 mdi-checkbox-marked-circle"
                     style="float: right; color: white"
                     color="green"
-                    @click="employeeStore.empCheckIn"
-                    >Checkin</v-btn
+                    @click="employeeStore.empCheckIn(employeeStore.editEmployee.id!)"
+                    >Checkin </v-btn
                   >
+                  <v-btn v-else
+                    class="mdi mr-2 mdi-close-circle"
+                    style="float: right; color: white"
+                    color="red"
+                    @click="employeeStore.empCheckOut(employee.id+'')"
+                  >
+                    Checkout</v-btn
+                  >
+
                 </v-col>
               </v-row>
             </v-container>
@@ -105,7 +99,7 @@ onMounted(async () => {
 
           <v-col class="detail">
             <v-container>
-              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto;">
+              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto">
                 <thead style="justify-content: center; overflow-y: auto">
                   <tr>
                     <th>Time in</th>
@@ -117,7 +111,7 @@ onMounted(async () => {
                   <tr
                     class="text-center mr-5"
                     style="justify-content: center"
-                    v-for="(item, index) in employeeStore.checkInOuts"
+                    v-for="(item, index) in employeeStore.editEmployee.check_in_outs"
                     :key="index"
                   >
                     <td>{{ item.time_in }}</td>
@@ -126,11 +120,6 @@ onMounted(async () => {
                   </tr>
                 </tbody>
               </VTable>
-              <v-container width="100%" justify="center" >
-       
-       <v-pagination  justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage" rounded="circle"></v-pagination>
-
-     </v-container>
             </v-container>
           </v-col>
         </v-row>

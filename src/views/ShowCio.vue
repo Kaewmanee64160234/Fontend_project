@@ -15,15 +15,16 @@ const name = ref('')
 const loading = ref(false)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
-const route = useRoute()
-const id = ref(route.params.id)
+
+
+const route = useRoute();
+const id = ref(route.params.id);
 
 onMounted(async () => {
-  await employeeStore.getOneEmployee(employee.value.id + '')
-  await employeeStore.getOneSummarySalaryEmp(employee.value.id + '')
-  await employeeStore.getCioByIdEmp(employee.value.id+'')
-  console.log(employeeStore.editEmployee)
+    await employeeStore.getOneSummarySalaryEmp(id.value+'')
+  
 })
+
 </script>
 
 <template>
@@ -40,7 +41,7 @@ onMounted(async () => {
                     <v-avatar size="100"
                       ><v-img :src="`${url}/employees/image/${employee.image}`"></v-img
                     ></v-avatar>
-                    <div class="text-subtitle-2 mt-3">{{ employee.name }}</div></v-container
+                    <div class="text-subtitle-2 mt-3">{{employeeStore.summary_salary.employee?.name }}</div></v-container
                   >
                 </v-col>
               </v-row>
@@ -49,16 +50,26 @@ onMounted(async () => {
                 <v-col class="detail-emp">
                   <v-card variant="outlined">
                     <v-card-text  style="text-align: left">
-                        <p>📛 Name : {{ employeeStore.editEmployee.name }}</p>
-                        <p>📨 Email : {{ employeeStore.editEmployee.email }}</p>
-                        <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                        <p>🗃️ hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                        <p>📛 Name : {{ employeeStore.summary_salary.employee?.name }}</p>
+                        <p>📨 Email : {{ employeeStore.summary_salary.employee?.email}}</p>
+                        <p>🗃️ Position : {{ employeeStore.summary_salary.employee?.position }}</p>
+                        <p>🗃️ hourly : {{ employeeStore.summary_salary.employee?.hourly}} ฿</p>
                     </v-card-text>
                   </v-card>
                   
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
+                <v-row class="text-center">
+                  <v-col class="detail-emp">
+                    <v-card height="80px" width="250px">
+                      <v-card-title class="text-left" >
+                        <h7> {{ employeeStore.summary_salary.salary}} ฿ </h7> <br />
+                        <h7 style="font-size: 15px; color: #30e3df">🕒 Your Salary </h7>
+                      </v-card-title>
+                    </v-card>
+                  </v-col>
+                </v-row>
                 <v-row>
                   <v-col class="detail-emp">
                     <v-card height="80px" width="250px">
@@ -87,7 +98,7 @@ onMounted(async () => {
                   <tr
                     class="text-center mr-5"
                     style="justify-content: center"
-                    v-for="(item, index) in employeeStore.checkInOuts"
+                    v-for="(item, index) in employeeStore.summary_salary.checkInOut"
                     :key="index"
                   >
                     <td>{{ item.time_in }}</td>

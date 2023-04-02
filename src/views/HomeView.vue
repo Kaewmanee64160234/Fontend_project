@@ -46,6 +46,10 @@ onMounted(() => {
 </script>
 
 <template>
+   <v-row class="ml-5" style="float:left">
+    <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="Home" value="home" to="/main">
+    </v-btn>
+  </v-row>
   <div class="content-area">
     <DialogPayment></DialogPayment>
     <DialogCompleteOrder></DialogCompleteOrder>
@@ -53,7 +57,6 @@ onMounted(() => {
       <FindMemberDialog></FindMemberDialog>
       <PromotionDialog></PromotionDialog>
       <TestDialog></TestDialog>
-
       <div class="row">
         <div class="col-md-6 item-side">
           <div class="row-md-6">
@@ -175,7 +178,7 @@ onMounted(() => {
                   v-model="pointOfSaleStore.recive_mon"
                 />
                 <v-btn
-                  color="#E9A178"
+                style="background-color: #FF7B54; color: white"
                   width="inherit"
                   class="mt-5"
                   @click="pointOfSaleStore.dialogPayment = true"
@@ -185,31 +188,31 @@ onMounted(() => {
             </div>
           </div>
           <div class="summary mt-4" style="height: 30vh">
-            <div class="row">
+            <div class="row justify-center" >
               <div class="col-md-6">
                 <div class="d-flex justify-content-between">
                   <v-btn
-                    color="#E9A178"
-                    class="mt-5"
+                  style="background-color: #607EAA; color: white; margin-right: 50px;"
+                    class="mt-5" width="150px"
                     @click="pointOfSaleStore.dialogPromotion = true"
                     v-if="pointOfSaleStore.order.customerId !== 0"
                     >Promotion</v-btn
                   >
                   <v-btn
-                    color="#E9A178"
-                    class="mt-5"
+                  style="background-color: #607EAA; color: white; margin-right: 50px;"  
+                    class="mt-5" width="150px"
                     v-else 
                     :disabled="true"
                     >Promotion</v-btn
                   >
-                  <v-btn color="#E9A178" class="mt-5" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
+                  <v-btn style="background-color: #FF2442; color: white ; margin-right: 100px;" class="mt-5" width="150px" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
                 </div>
                 <br />
                 <div class="d-flex justify-content-between">
-                  <v-btn color="#E9A178" class="mt-5" @click="customerStore.dialog = true"
+                  <v-btn style="background-color: #FFCB42; color: white; margin-right: 50px;" class="mt-5" width="150px" @click="customerStore.dialog = true"
                     >Find Member</v-btn
                   >
-                  <v-btn color="#E9A178" class="mt-5" @click="pointOfSaleStore.openOrder"
+                  <v-btn  style="background-color: #AACB73; color: white; margin-right: 100px;" class="mt-5" width="150px" @click="pointOfSaleStore.openOrder"
                     >Save</v-btn
                   >
                 </div>

@@ -27,7 +27,20 @@ const router = createRouter({
       meta: {
         layout: "FullLayout"
       }
+    }, 
+    {
+      path: '/main',
+      name: 'homes',
+      components: {
+        default: () => import('../views/HomeView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: "MainLayout"
+      }
     },
+    
     {
       path: '/about',
       name: 'about',

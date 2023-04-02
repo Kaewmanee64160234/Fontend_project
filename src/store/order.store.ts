@@ -30,7 +30,7 @@ watch(page, async (newPage, oldPage) => {
   await getOrders()
 })
 watch(keyword, async (newKey, oldKey) => {
-  await getOneOrder()
+  await getOneOrder(keyword.value)
 })
 watch(lastPage, async (newlastPage, oldlastPage) => {
   if (newlastPage < page.value) {
@@ -60,10 +60,10 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     loadingStore.isLoading = false
   }
 
-  const getOneOrder = async () => {
+  const getOneOrder = async (id:string) => {
     loadingStore.isLoading = true
     try {
-      const response = await orderService.getOneOrder(keyword.value);
+      const response = await orderService.getOneOrder(id);
       tempOrder.value = response.data.data
       orders.value = [];
       orders.value.push(tempOrder.value);

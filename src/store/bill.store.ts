@@ -4,12 +4,14 @@ import type BILL from "./types/bill";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
 import { useEmployeeStore } from "./employee.store";
+import { useMaterialStore } from '@/store/material.store.js';
 import billServices from "@/services/bill";
 import type BILL_DETAIL from "./types/billdetail";
 
 
 export const useBillStore = defineStore("bill", () => {
   const dialog = ref(false)
+  const materialStore = useMaterialStore();
   const loadingStore = useLoadingStore()
   const messageStore = useMessageStore();
   const employeeStore = useEmployeeStore();
@@ -18,7 +20,6 @@ export const useBillStore = defineStore("bill", () => {
   const bill_list = ref<BILL>({ 
     name: '', 
     date: new Date(), 
-    time:new Date(), 
     total: 0 , 
     buy: 0, 
     change: 0 ,
@@ -41,15 +42,14 @@ export const useBillStore = defineStore("bill", () => {
   async function saveBill() {
     loadingStore.isLoading = true
     try {
-      if (bill_list.value.bill_detail!) {
-        console.log(bill_list.value)
+      if (bill_list.value.id) {
         await billServices.updateBill(bill_list.value.id+'', bill_list.value)
       } else {
-        console.log(bill_list.value)
         const res = await billServices.saveBill(bill_list.value)
         console.log(res.data);
+        console.log("complete")
       }
-      await getBills()
+      // await getBills()
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถบันทึกข้อมูล Bill ได้')
@@ -66,7 +66,7 @@ export const useBillStore = defineStore("bill", () => {
       // console.log(index);
     }
     const sumBill = () => {
-      bill_list.value.buy = bill_Dettail_List.value[0].price * bill_Dettail_List.value[0].amount
+      bill_list.value.buy = bill_list.value.total;
       bill_list.value.total = bill_list.value.buy - bill_list.value.change;
 
     }
@@ -123,7 +123,11 @@ export const useBillStore = defineStore("bill", () => {
         messageStore.showError('ไม่สามารถบันทึกข้อมูล Bill ได้')
       }
       loadingStore.isLoading = false
-  
     }
+    // const checkName = () => {
+    //   if(materialStore.editedMaterial.name === bill_list.value.name) {
+
+    //   }
+    // }
     return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Dettail_List,sumBill,openBill};  
   });
