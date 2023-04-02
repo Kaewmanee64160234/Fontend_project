@@ -16,7 +16,8 @@ export const useCustomerStore = defineStore('customer', () => {
   const messageStore = useMessageStore()
   const customerId = ref('');
   const loading = ref(false)
-const loaded = ref(false);
+  const loaded = ref(false);
+  const addCustomerDialog = ref(false)
   const editCustomer = ref<Customer & { files: File[] }>({
     name: '',
     tel: '',
@@ -209,5 +210,6 @@ const getCustomerByTel = async () => {
     customerService,
     loaded,
     loading,
+    addCustomerDialog,
   }
 })
