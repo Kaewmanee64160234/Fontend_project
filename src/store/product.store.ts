@@ -54,7 +54,13 @@ export const useProductStore = defineStore('Product', () => {
     await getProducts()
   })
   watch(keyword,async (newKey, oldKey) => {
-    await getProducts()
+    if(keyword.value.length >=3){
+      await getProducts()
+    }if(keyword.value.length ===0){
+      await getProducts()
+
+    }
+  
   })
   watch(lastPage,async (newlastPage, oldlastPage) => {
     if(newlastPage <page.value){
@@ -133,6 +139,7 @@ export const useProductStore = defineStore('Product', () => {
       }
       dialog.value = false
       await getProductByCatagory('2')
+      await getProducts()
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถบันทึกข้อมูล Product ได้')

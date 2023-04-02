@@ -1,7 +1,17 @@
 import LoginView from '@/views/LoginView.vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteLocationNormalized, type Router } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import type User from '@/store/types/user.type'
+import { ref } from 'vue'
+const user = ref<any | null>(localStorage.getItem('user'))
+const user_ = JSON.parse(user.value)
+const ezAutorized = (to: RouteLocationNormalized) => {
+  if (user_.role.toLowerCase() === 'employee') {
+    return router.push('/pageNotFound')
+  } else {
+    return true;
+  }
+}
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -13,8 +23,8 @@ const router = createRouter({
         header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: "FullLayout",
-      },
+        layout: 'FullLayout'
+      }
     },
     {
       path: '/home',
@@ -25,9 +35,9 @@ const router = createRouter({
         header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: "FullLayout"
+        layout: 'FullLayout'
       }
-    }, 
+    },
     {
       path: '/main',
       name: 'homes',
@@ -37,10 +47,10 @@ const router = createRouter({
         header: () => import('@/components/headers/MainHeader.vue')
       },
       meta: {
-        layout: "MainLayout"
+        layout: 'MainLayout'
       }
     },
-    
+
     {
       path: '/about',
       name: 'about',
@@ -135,7 +145,9 @@ const router = createRouter({
       meta: {
         layout: 'MainLayout',
         requiresAuth: true
-      }
+      },
+      beforeEnter:[ ezAutorized]
+      
     },
     {
       path: '/material',
@@ -177,7 +189,8 @@ const router = createRouter({
       meta: {
         layout: 'MainLayout',
         requiresAuth: true
-      }
+      },
+      beforeEnter: [ezAutorized]
     },
     {
       path: '/order/:id',
@@ -191,7 +204,8 @@ const router = createRouter({
       meta: {
         layout: 'MainLayout',
         requiresAuth: true
-      }
+      },
+      beforeEnter: [ezAutorized]
     },
     {
       path: '/employee/login',
@@ -219,7 +233,8 @@ const router = createRouter({
       meta: {
         layout: 'MainLayout',
         requiresAuth: true
-      }
+      },
+      beforeEnter: [ezAutorized]
     },
     {
       path: '/manager/login/:id',
@@ -230,6 +245,7 @@ const router = createRouter({
         menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },
+      beforeEnter: [ezAutorized],
       meta: {
         layout: 'MainLayout',
         requiresAuth: true

@@ -8,7 +8,7 @@ function getProductByCatagory(id: string){
   return http.get("/products/catagory/" + id);
 }
 
-function saveProduct(product: Product & { files: File[] }) {
+async function saveProduct(product: Product & { files: File[] }) {
     const formData = new FormData();
     formData.append("name", product.name);
     formData.append("type", `${product.type}`);
@@ -21,6 +21,7 @@ function saveProduct(product: Product & { files: File[] }) {
         'Content-Type': 'multipart/form-data'
       }
     });
+    
 }
 
 async function updateProduct(id: number, product: Product & { files: File[] }) {

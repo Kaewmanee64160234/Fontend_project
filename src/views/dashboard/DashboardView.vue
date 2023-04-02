@@ -5,6 +5,7 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
 </script>
 
 <template>
+
   <v-row class="ml-5" style="float:left">
     <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="Home" value="home" to="/home">
     </v-btn>
