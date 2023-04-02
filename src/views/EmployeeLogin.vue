@@ -39,24 +39,24 @@ onMounted(async () => {
                 <v-col>
                   <v-card style="background-color: white">
                     <v-card-text style="text-align: center">
-                      <p>📛 Name : {{ employeeStore.editEmployee.name }}</p>
+                      <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
                       <br />
-                      <p>📨 Email : {{ employeeStore.editEmployee.email }}</p>
+                      <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
                       <br />
                       <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
                       <br />
-                      <p>🗃️ hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                      <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
                     </v-card-text>
                   </v-card>
                 </v-col>
               </v-row>
 
-              <v-row class="button" style="height: 50%">
+              <v-row class="button" style="height: 50%; ">
                 <v-col>
-                  <v-btn v-if="employeeStore.checkIn === true" class="mdi mr-2 mdi-checkbox-marked-circle"
+                  <v-btn v-if="employeeStore.checkIn === true" class="mdi mr-2 mdi-checkbox-marked-circle" width="310px" height="50px"
                     style="float: right; color: white" color="green"
                     @click="employeeStore.empCheckIn(employeeStore.editEmployee.id!)">Checkin </v-btn>
-                  <v-btn v-else class="mdi mr-2 mdi-close-circle" style="float: right; color: white" color="red"
+                  <v-btn v-else class="mdi mr-2 mdi-close-circle" width="310px" height="50px" style="float: right; color: white" color="red"
                     @click="employeeStore.empCheckOut(employee.id + '')">
                     Checkout</v-btn>
 
@@ -73,7 +73,7 @@ onMounted(async () => {
                     <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #DEF5E5;">
                       <v-card-title class="text-left">
                         <h7> {{ employeeStore.summary_salary.salary }} ฿ </h7> <br />
-                        <h7 style="font-size: 15px; color: #6D9886">🕒 Your Salary </h7>
+                        <h7 style="font-size: 15px; color: #6D9886">💸 Your Salary </h7>
                       </v-card-title>
                     </v-card>
                   </v-col>
@@ -124,7 +124,7 @@ onMounted(async () => {
 </template>
 <style scoped>
 .title {
-  background-color: #FFF5E4;
+  background-color: #FFF5E1;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
   height: 100vh;
 }
