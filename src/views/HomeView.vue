@@ -12,6 +12,7 @@ import type Product from '@/store/types/product.type'
 import type { OrderItem } from '@/store/types/orderItem.type'
 import { computed } from 'vue'
 import DialogCompleteOrder from '@/components/pos/DialogCompleteOrder.vue'
+import AddCustomerDialog from '@/components/customer/AddCustomerDialog.vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()
@@ -56,6 +57,7 @@ onMounted(() => {
     <DialogCompleteOrder></DialogCompleteOrder>
     <div class="content">
       <FindMemberDialog></FindMemberDialog>
+      <AddCustomerDialog></AddCustomerDialog>
       <PromotionDialog></PromotionDialog>
       <TestDialog></TestDialog>
       <div class="row">
@@ -192,6 +194,11 @@ onMounted(() => {
           <div class="summary mt-4" style="height: 30vh">
             <div class="row justify-center" >
               <div class="col-md-6">
+                <div class="d-flex justify-content-between">
+                  <v-btn style="background-color: #7DB9B6; color: white; margin-right: 50px;" class="mt-5" width="150px" @click="customerStore.addCustomerDialog = true"
+                    >Add Customer</v-btn
+                  >      
+                </div>
                 <div class="d-flex justify-content-between">
                   <v-btn
                   style="background-color: #607EAA; color: white; margin-right: 50px;"
