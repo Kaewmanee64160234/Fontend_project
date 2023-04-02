@@ -42,6 +42,10 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
     
         loadingStore.isLoading = false
       }
-    return {checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial};  
+      const getCheckByMatId = async (id: string) => {
+        const data = await checkmaterialService.getCheckByMatId(id)
+        checkmeterials.value = data.data
+      }
+    return {checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial, getCheckByMatId};  
     
   });
