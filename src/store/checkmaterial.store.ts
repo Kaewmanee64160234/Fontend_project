@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import type CheckMaterial
- from "./types/checkmaterial";
+import { ref, watch } from "vue";
+import type CheckMaterial from "./types/checkmaterial";
  import checkmaterialService from '@/services/checkmaterial'
 import { useMessageStore } from "./message";
 import { useLoadingStore } from "./loading";
@@ -15,6 +14,7 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
         date: new Date(),
         time: new Date(),
       })
+
       const getCheckMaterail = async () => {
         loadingStore.isLoading = true
         try {
@@ -42,6 +42,6 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
     
         loadingStore.isLoading = false
       }
-    return { checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial};  
+    return {checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial};  
     
   });
