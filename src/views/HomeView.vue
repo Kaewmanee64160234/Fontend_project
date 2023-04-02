@@ -15,6 +15,7 @@ import DialogCompleteOrder from '@/components/pos/DialogCompleteOrder.vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()
+const url = import.meta.env.VITE_URL_PORT
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
   pointOfSaleStore.dialogTopping = true
@@ -82,25 +83,26 @@ onMounted(() => {
         </div>
 
         <div class="col-md-6 mt-2">
-          <div class="table-responsive cart-table" style="height: 50vh; overflow-y: auto">
-            <table class="table">
-              <thead>
+          <div class="table-responsive cart-table shadow-md sm:rounded-lg" style="height: 50vh; overflow-y: auto">
+            <table class="table w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                  <th scope="col" class="text-center">ลำดับ</th>
-                  <th scope="col" class="text-center">รายการ</th>
-                  <th scope="col" class="text-center">จำนวน</th>
-                  <th scope="col" class="text-center">ราคา</th>
-                  <th scope="col" class="text-center">ราคารวม</th>
-
-                  <th></th>
+                <th scope="col" class="px-6 py-3">ลำดับ</th>
+                <th scope="col" class="px-6 py-3">รูปภาพ<span class="sr-only"></span></th>
+                <th scope="col" class="px-6 py-3">รายการ</th>
+                <th scope="col" class="px-6 py-3">จำนวน</th>
+                <th scope="col" class="px-6 py-3">ราคา</th>
+                <th scope="col" class="px-6 py-3">ราคารวม</th>
+                <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-if="pointOfSaleStore.orderItemList.length === 0">
-                  <td style="text-align: center" colspan="6">No data</td>
+                  <td style="text-align: center" colspan="7">No data</td>
                 </tr>
-                <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index">
+                <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index" class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td style="text-align: center">{{ index + 1 }}</td>
+                  <td scope="col" class="text-center"><img class="w-20 h-20 rounded-full" :src="`${url}/products/image/${item.image}`"></td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
                   <td class="text-center">
                     <v-btn
@@ -123,7 +125,7 @@ onMounted(() => {
                     {{ item.price }}
                   </td>
                   <td class="text-center">{{ item.total }}</td>
-                  <td>
+                  <td class="text-center">
                     <v-btn
                       color="red"
                       icon="mdi-delete"

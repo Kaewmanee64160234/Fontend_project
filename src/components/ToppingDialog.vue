@@ -23,7 +23,9 @@ const save = () => {
       amount: 1,
       productId: product_.value.id!,
       price: product_.value.price,
-      total: product_.value.price * 1
+      total: product_.value.price * 1,
+      image: product_.value.image
+
     })
     pointOfSaleStore.addToOrder(orderItem.value)
   }
