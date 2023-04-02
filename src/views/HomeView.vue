@@ -128,7 +128,14 @@ onMounted(() => {
                 <input class="form-control" id="amount" type="text" placeholder="Amount"
                   v-model="pointOfSaleStore.recive_mon" />
 
-                  <v-btn class="mt-5" width="300px">Promotion</v-btn>
+                  <v-btn style="background-color: #FFCB42; color: white;" class="mt-5" width="300px"
+                    @click="customerStore.dialog = true">Find Member</v-btn>
+
+                  <v-btn style="background-color: #607EAA; color: white;" class="mt-5" width="300px"
+                    @click="pointOfSaleStore.dialogPromotion = true"
+                    v-if="pointOfSaleStore.order.customerId !== 0">Promotion</v-btn>
+                    <v-btn style="background-color: #607EAA; color: white;" class="mt-5" width="300px"
+                    v-else :disabled="true">Promotion</v-btn>
               </div>
 
               <div class="col-md-7">
@@ -177,18 +184,18 @@ onMounted(() => {
                     @click="customerStore.addCustomerDialog = true">Add Customer</v-btn>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <v-btn style="background-color: #607EAA; color: white; margin-right: 50px;" class="mt-5" width="150px"
+                  <!-- <v-btn style="background-color: #607EAA; color: white; margin-right: 50px;" class="mt-5" width="150px"
                     @click="pointOfSaleStore.dialogPromotion = true"
                     v-if="pointOfSaleStore.order.customerId !== 0">Promotion</v-btn>
                   <v-btn style="background-color: #607EAA; color: white; margin-right: 50px;" class="mt-5" width="150px"
-                    v-else :disabled="true">Promotion</v-btn>
+                    v-else :disabled="true">Promotion</v-btn> -->
                   <v-btn style="background-color: #FF2442; color: white ; margin-right: 100px;" class="mt-5" width="150px"
                     @click="pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
                 </div>
                 <br />
                 <div class="d-flex justify-content-between">
-                  <v-btn style="background-color: #FFCB42; color: white; margin-right: 50px;" class="mt-5" width="150px"
-                    @click="customerStore.dialog = true">Find Member</v-btn>
+                  <!-- <v-btn style="background-color: #FFCB42; color: white; margin-right: 50px;" class="mt-5" width="150px"
+                    @click="customerStore.dialog = true">Find Member</v-btn> -->
                 </div>
               </div>
             </div>
