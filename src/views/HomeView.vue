@@ -48,7 +48,7 @@ onMounted(() => {
 </script>
 
 <template>
-   <v-row class="ml-5" style="float:left">
+  <v-row class="ml-5" style="float:left">
     <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="Home" value="home" to="/main">
     </v-btn>
   </v-row>
@@ -71,15 +71,8 @@ onMounted(() => {
           </div>
           <div class="row">
             <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
-              <MenuCard
-                :name="item.name"
-                :cost="item.price"
-                :type="item.type + ''"
-                :img="item.image!"
-                :price="item.price"
-                :catagory-id="item.catagoryId + ''"
-                @click="addToCart(item)"
-              ></MenuCard>
+              <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
+                :catagory-id="item.catagoryId + ''" @click="addToCart(item)"></MenuCard>
             </div>
           </div>
         </div>
@@ -89,59 +82,53 @@ onMounted(() => {
             <table class="table w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                <th scope="col" class="px-6 py-3">ลำดับ</th>
-                <th scope="col" class="px-6 py-3">รูปภาพ<span class="sr-only"></span></th>
-                <th scope="col" class="px-6 py-3">รายการ</th>
-                <th scope="col" class="px-6 py-3">จำนวน</th>
-                <th scope="col" class="px-6 py-3">ราคา</th>
-                <th scope="col" class="px-6 py-3">ราคารวม</th>
-                <th scope="col" class="px-6 py-3">Action</th>
+                  <th scope="col" class="px-6 py-3">ลำดับ</th>
+                  <th scope="col" class="px-6 py-3">รูปภาพ<span class="sr-only"></span></th>
+                  <th scope="col" class="px-6 py-3">รายการ</th>
+                  <th scope="col" class="px-6 py-3">จำนวน</th>
+                  <th scope="col" class="px-6 py-3">ราคา</th>
+                  <th scope="col" class="px-6 py-3">ราคารวม</th>
+                  <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-if="pointOfSaleStore.orderItemList.length === 0">
                   <td style="text-align: center" colspan="7">No data</td>
                 </tr>
-                <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index" class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index"
+                  class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td style="text-align: center">{{ index + 1 }}</td>
-                  <td scope="col" class="text-center"><img class="w-20 h-20 rounded-full" :src="`${url}/products/image/${item.image}`"></td>
+                  <td scope="col" class="text-center"><img class="w-20 h-20 rounded-full"
+                      :src="`${url}/products/image/${item.image}`"></td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
                   <td class="text-center">
-                    <v-btn
-                      color="secondary"
-                      icon="mdi-plus"
-                      size="x-small"
-                      variant="text"
-                      @click="addAmoutProduct(index)"
-                    ></v-btn
-                    ><span class="pa-2">{{ item.amount }}</span>
-                    <v-btn
-                      color="warning"
-                      variant="text"
-                      icon="mdi-minus-thick"
-                      size="x-small"
-                      @click="reduceAmoutProduct(index)"
-                    ></v-btn>
+                    <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
+                      @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
+                    <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
+                      @click="reduceAmoutProduct(index)"></v-btn>
                   </td>
                   <td class="text-center">
                     {{ item.price }}
                   </td>
                   <td class="text-center">{{ item.total }}</td>
                   <td class="text-center">
-                    <v-btn
-                      color="red"
-                      icon="mdi-delete"
-                      size="x-small"
-                      @click="deleteOrderItem(index)"
-                    ></v-btn>
+                    <v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
 
+          
           <div class="summary mt-2" style="height: 20vh">
             <div class="row">
+
+              <div class="col-md-5">
+                <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
+                <input class="form-control" id="amount" type="text" placeholder="Amount"
+                  v-model="pointOfSaleStore.recive_mon" />
+              </div>
+
               <div class="col-md-7">
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">ราคารวม :</p>
@@ -161,71 +148,45 @@ onMounted(() => {
                 </div>
                 <div class="d-flex justify-content-between">
                   <p class="fw-bold mb-0">จำนวนเงินที่ทอน :</p>
-                  <p
-                    class="fw-bold mb-0"
-                    v-if="aboutCal?.change_money?.value! <0"
-                    style="color: red"
-                  >
+                  <p class="fw-bold mb-0" v-if="aboutCal?.change_money?.value! < 0" style="color: red">
                     {{ aboutCal?.change_money }} บาท
                   </p>
                   <p class="fw-bold mb-0" v-else>{{ aboutCal?.change_money }} บาท</p>
                 </div>
-              </div>
-
-              <div class="col-md-5">
-                <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
-                <input
-                  class="form-control"
-                  id="amount"
-                  type="text"
-                  placeholder="Amount"
-                  v-model="pointOfSaleStore.recive_mon"
-                />
-                <v-btn
-                style="background-color: #FF7B54; color: white"
-                  width="inherit"
-                  class="mt-5"
-                  @click="pointOfSaleStore.dialogPayment = true"
-                  >Payment</v-btn
-                >
+                <div class="mt-2">Select Payment Menthod</div>
+                  <v-row dense>
+                    <v-col><v-btn width="inherit" height="65px" prepend-icon="mdi mdi-barcode-scan" stacked variant="tonal" @click="DialogPayment.Paypromptpay">Promt Pay</v-btn></v-col>
+                  </v-row>
+                  <v-row dense>
+                    <v-col><v-btn width="inherit" height="65px" prepend-icon="mdi mdi-cash" stacked variant="tonal" @click="DialogPayment.Paycash">Cash</v-btn></v-col>
+                  </v-row>
+                  <v-row dense>
+                    <v-col><v-btn block rounded="xl" width="inherit" height="40px" style="background-color: #AACB73; color: white;"
+                    @click="pointOfSaleStore.openOrder">Save</v-btn></v-col>
+                  </v-row>
               </div>
             </div>
           </div>
           <div class="summary mt-4" style="height: 30vh">
-            <div class="row justify-center" >
-              <div class="col-md-6">
-                
+            <div class="row justify-center">
+              <div class="col-md-7">
                 <div class="d-flex justify-content-between">
-                  <v-btn
-                  style="background-color: #607EAA; color: white; margin-right: 50px;"
-                    class="mt-5" width="150px"
+                  <v-btn style="background-color: #7DB9B6; color: white; margin-right: 50px;" class="mt-5" width="150px"
+                    @click="customerStore.addCustomerDialog = true">Add Customer</v-btn>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <v-btn style="background-color: #607EAA; color: white; margin-right: 50px;" class="mt-5" width="150px"
                     @click="pointOfSaleStore.dialogPromotion = true"
-                    v-if="pointOfSaleStore.order.customerId !== 0"
-                    >Promotion</v-btn
-                  >
-                  <v-btn
-                  style="background-color: #607EAA; color: white; margin-right: 50px;"  
-                    class="mt-5" width="150px"
-                    v-else 
-                    :disabled="true"
-                    >Promotion</v-btn
-                  >
-                  <v-btn style="background-color: #FF2442; color: white ; margin-right: 100px;" class="mt-5" width="150px" @click = "pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
+                    v-if="pointOfSaleStore.order.customerId !== 0">Promotion</v-btn>
+                  <v-btn style="background-color: #607EAA; color: white; margin-right: 50px;" class="mt-5" width="150px"
+                    v-else :disabled="true">Promotion</v-btn>
+                  <v-btn style="background-color: #FF2442; color: white ; margin-right: 100px;" class="mt-5" width="150px"
+                    @click="pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
                 </div>
                 <br />
                 <div class="d-flex justify-content-between">
-                  <v-btn style="background-color: #FFCB42; color: white; margin-right: 50px;" class="mt-5" width="150px" @click="customerStore.dialog = true"
-                    >Find Member</v-btn
-                  >
-                  <v-btn  style="background-color: #AACB73; color: white; margin-right: 100px;" class="mt-5" width="150px" @click="pointOfSaleStore.openOrder"
-                    >Save</v-btn
-                  >
-                </div>
-                <br />
-                <div class="d-flex justify-content-center">
-                  <v-btn style="background-color: #7DB9B6; color: white; margin-left: 20px;" class="mt-5" width="150px" @click="customerStore.addCustomerDialog = true"
-                    >Add Customer</v-btn
-                  >      
+                  <v-btn style="background-color: #FFCB42; color: white; margin-right: 50px;" class="mt-5" width="150px"
+                    @click="customerStore.dialog = true">Find Member</v-btn>
                 </div>
               </div>
             </div>
