@@ -21,21 +21,21 @@ const customerStore = useCustomerStore()
                 <v-col
                   cols="12"
                   sm="6"
-                  md="4"
                 >
                   <v-text-field
                     label="First name*"
                     required
-                  ></v-text-field>
+                    :rules="[(v) => !!v || 'First name is required']">
+                  </v-text-field>
                 </v-col>
                 <v-col
                   cols="12"
                   sm="6"
-                  md="4"
                 >
                   <v-text-field
                     label="Last name*"
                     required
+                    :rules="[(v) => !!v || 'Last name is required']"
                   ></v-text-field>
                 </v-col>
 
@@ -43,11 +43,12 @@ const customerStore = useCustomerStore()
                 <v-col
                   cols="12"
                   sm="6"
-                  md="4"
                 >
                   <v-text-field
                     label="Tel."
                     required
+                    :rules="[(v) => !!v || 'tel is required']"
+                    
                   ></v-text-field>
                 </v-col>
                 <v-col
