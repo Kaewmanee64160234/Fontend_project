@@ -73,7 +73,7 @@ const deleteAllMaterials = async () => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item,index) in materialStore.materials" :key="index" style="text-align:center">
+r            <tr v-for="(item,index) in materialStore.materials" :key="index" style="text-align:center">
                
 
                 <td>{{ index+1 }}</td>
