@@ -42,8 +42,10 @@ export const useBillStore = defineStore("bill", () => {
   async function saveBill() {
     loadingStore.isLoading = true
     try {
-      await billServices.saveBill(bill_list.value);
+      await billServices.saveBill(bill_list.value)
       const res =  await billServices.updateBill(bill_list.value)
+      await getBills()
+      await materialStore.getMaterials()
       console.log(res)
       }
     catch (e) {

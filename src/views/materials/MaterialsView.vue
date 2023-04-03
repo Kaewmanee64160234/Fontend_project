@@ -16,8 +16,8 @@ const goTo = (index:string) => {
 
 
 onMounted(async() => {
-    await materialStore.getMaterials();
     await billStore.getBills();
+    await materialStore.getMaterials();
     console.log(billStore.getBills());
 });
 const deleteMaterial = async (id: string) => {
@@ -104,7 +104,7 @@ const deleteAllMaterials = async () => {
      </v-container>
 </v-card>
 </v-container>
-<v-table>
+<!-- <v-table>
   <v-row>
     <v-col>
       <tr v-for="item in billStore.bill" :key="item.id" class="ma-10">
@@ -117,5 +117,5 @@ const deleteAllMaterials = async () => {
       </tr>
     </v-col>
   </v-row>
-</v-table>
+</v-table> -->
 </template>
