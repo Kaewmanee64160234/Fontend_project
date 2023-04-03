@@ -272,6 +272,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     summary_salary.value = res.data
     console.log(summary_salary.value)
   }
+  
   return {
     getSummaryById,
     getCioByIdEmp,
