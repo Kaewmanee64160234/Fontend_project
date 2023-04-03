@@ -169,7 +169,7 @@ onMounted(() => {
                 </div>
                 <div class="mt-2">Select Payment Menthod</div>
                   <v-row dense>
-                    <v-col><v-btn width="inherit" height="65px" prepend-icon="mdi mdi-barcode-scan" stacked variant="tonal" @click="DialogPayment.Paypromptpay">Promt Pay</v-btn></v-col>
+                    <v-col><v-btn width="inherit" height="65px" prepend-icon="mdi mdi-barcode-scan" stacked variant="tonal"  @click="DialogPayment.Paypromptpay">Promt Pay</v-btn></v-col>
                   </v-row>
                   <v-row dense>
                     <v-col><v-btn width="inherit" height="65px" prepend-icon="mdi mdi-cash" stacked variant="tonal" @click="DialogPayment.Paycash">Cash</v-btn></v-col>
@@ -181,20 +181,7 @@ onMounted(() => {
               </div>
             </div>
           </div>
-          <div class="summary mt-4" style="height: 30vh">
-            <div class="row justify-center">
-              <div class="col-md-7">
-                
-                
-                
-                
-                <div class="d-flex justify-content-between">
-                  <!-- <v-btn style="background-color: #FFCB42; color: white; margin-right: 50px;" class="mt-5" width="150px"
-                    @click="customerStore.dialog = true">Find Member</v-btn> -->
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>

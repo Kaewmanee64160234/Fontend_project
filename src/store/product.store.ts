@@ -49,6 +49,7 @@ export const useProductStore = defineStore('Product', () => {
   const order = ref('ASC')
   const orderBy = ref('');
   const lastPage = ref(0);
+  const cat = ref(0);
 
   watch(page,async (newPage, oldPage) => {
     await getProducts()
@@ -60,6 +61,12 @@ export const useProductStore = defineStore('Product', () => {
       await getProducts()
 
     }
+  
+  })
+  watch(cat,async (newKey, oldKey) => {
+
+  await getProducts()
+
   
   })
   watch(lastPage,async (newlastPage, oldlastPage) => {
@@ -107,6 +114,7 @@ export const useProductStore = defineStore('Product', () => {
         page:page.value,
         take:take.value,
         keyword:keyword.value,
+        cat:cat.value,
         order:order.value,
         orderBy:orderBy.value
       })
@@ -194,8 +202,13 @@ export const useProductStore = defineStore('Product', () => {
       console.log(err)
     }
   }
+  const checngeMat = (id:number) => {
+    cat.value = id
+  }
 
   return {
+    checngeMat,
+  
     lastPage,
     order,
     orderBy,
@@ -219,6 +232,7 @@ export const useProductStore = defineStore('Product', () => {
     allSelected,
     search,
     typeProduct,
-    getProductByCatagory
+    getProductByCatagory,
+    cat
   }
 })
