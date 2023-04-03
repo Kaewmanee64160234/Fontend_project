@@ -13,6 +13,7 @@ import MessageDialog from './components/MessageDialog.vue';
   <!-- <main>
     <RouterView></RouterView>
   </main> -->
+  
   <LoadingDialog></LoadingDialog>
   <MessageDialog></MessageDialog>
 </template>
