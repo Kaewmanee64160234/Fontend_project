@@ -48,15 +48,6 @@ export const useEmployeeStore = defineStore('employee', () => {
     }
   })
 
-  // about pagination
-  const page = ref(1)
-  const take = ref(5)
-  const keyword = ref('')
-  const order = ref('ASC')
-  const orderBy = ref('')
-  const lastPage = ref(0)
-
-<<<<<<< HEAD
 // about pagination
 const page = ref(1)
 const take = ref(5)
@@ -84,10 +75,8 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     page.value = 1
   }
 })
-=======
   // about checkIn checkout
   const checkIn = ref(true)
->>>>>>> eb7b0835de64943c6fb77c7dfd13f7e3f014d1cf
 
   watch(page, async (newPage, oldPage) => {
     await getEmployees()

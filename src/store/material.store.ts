@@ -168,6 +168,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     allSelected,
     selected,
     search,
-    dialog2
+    dialog2,
+    materialService
   }
 })
