@@ -48,14 +48,33 @@ export const useEmployeeStore = defineStore('employee', () => {
     }
   })
 
-  // about pagination
-  const page = ref(1)
-  const take = ref(5)
-  const keyword = ref('')
-  const order = ref('ASC')
-  const orderBy = ref('')
-  const lastPage = ref(0)
+// about pagination
+const page = ref(1)
+const take = ref(5)
+const keyword = ref('')
+const order = ref('ASC')
+const orderBy = ref('')
+const lastPage = ref(0)
 
+watch(page, async (newPage, oldPage) => {
+  await getEmployees()
+
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getEmployees()
+})
+// watch(keyword, async (newKey, oldKey) => {
+//   await getAllSummarySalary()
+
+// })
+// watch(page, async (newPage, oldPage) => {
+//   await getAllSummarySalary()
+// })
+watch(lastPage, async (newlastPage, oldlastPage) => {
+  if (newlastPage < page.value) {
+    page.value = 1
+  }
+})
   // about checkIn checkout
   const checkIn = ref(true)
 
@@ -66,9 +85,10 @@ export const useEmployeeStore = defineStore('employee', () => {
     await getEmployees()
   })
   watch(keyword, async (newKey, oldKey) => {
-    if(keyword.value.length >=3){
+    if (keyword.value.length >= 3) {
       await getAllSummarySalary()
-    }if(keyword.value.length ===0){
+    }
+    if (keyword.value.length === 0) {
       await getAllSummarySalary()
     }
   })
@@ -172,7 +192,7 @@ export const useEmployeeStore = defineStore('employee', () => {
       const res = await employeeService.employeeCheckIn(checkInOut.value)
       console.log(res.data)
       await getOneEmployee(editEmployee.value.id + '')
-      checkIn.value = false;
+      checkIn.value = false
     } catch (err) {
       console.log(err)
     }
@@ -186,17 +206,17 @@ export const useEmployeeStore = defineStore('employee', () => {
       const res = await employeeService.employeeCheckOut(id)
       console.log(res.data)
       await getOneEmployee(editEmployee.value.id + '')
-      checkIn.value = true;
+      checkIn.value = true
     } catch (err) {
       console.log(err)
     }
     loadingStore.isLoading = false
   }
   const getOneSummarySalaryEmp = async (id: string) => {
-    const res = await employeeService.getOneSummaryByEmployeeId(id + '')
-    summary_salary.value = res.data[0]
+    const res = await employeeService.getSummaryByEmployeeId(id + '')
+    summary_salaries.value = [...res.data]
 
-    console.log(res.data);
+    console.log(summary_salaries.value)
   }
   const getOneEmployee = async (id: string) => {
     loadingStore.isLoading = true
@@ -266,7 +286,14 @@ export const useEmployeeStore = defineStore('employee', () => {
     }
     loadingStore.isLoading = false
   }
+  const getSummaryById = async (id: string) => {
+    const res = await employeeService.getSummarySalaryById(id)
+    summary_salary.value = res.data
+    console.log(summary_salary.value)
+  }
+  
   return {
+    getSummaryById,
     getCioByIdEmp,
     page,
     keyword,

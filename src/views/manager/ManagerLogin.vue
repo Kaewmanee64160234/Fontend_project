@@ -44,7 +44,6 @@ onMounted(async () => {
                             <th>Hour</th>
                             <th>Salary</th>
                             <th>CheckInOut</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +54,6 @@ onMounted(async () => {
                             <td>{{ item.ss_date }}</td>
                             <td>{{ item.hour }}</td>
                             <td>{{ item.salary }}</td>
-
                             <td>
                                 <v-btn class="mdi mr-2  mdi-eye" style=" color: white" color="blue-lighten-1"
                                 @click="goTo(item.id + '')">   History  </v-btn>

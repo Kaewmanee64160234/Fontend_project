@@ -16,7 +16,9 @@ const goTo = (index:string) => {
 
 
 onMounted(async() => {
+    await billStore.getBills();
     await materialStore.getMaterials();
+    console.log(billStore.getBills());
 });
 const deleteMaterial = async (id: string) => {
   await confirmDlg.value.openDialog(
@@ -73,10 +75,10 @@ const deleteAllMaterials = async () => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item of materialStore.materials" :key="item.id" style="text-align:center">
+r            <tr v-for="(item,index) in materialStore.materials" :key="index" style="text-align:center">
                
 
-                <td>{{ item.id }}</td>
+                <td>{{ index+1 }}</td>
                 <td v-if="item.min_quantity <= 5" style="color: red;">{{ item.name }}</td>
                 <td v-if="item.min_quantity > 5">{{ item.name }}</td>
                 <td>{{ item.min_quantity }}</td>
@@ -102,4 +104,18 @@ const deleteAllMaterials = async () => {
      </v-container>
 </v-card>
 </v-container>
+<!-- <v-table>
+  <v-row>
+    <v-col>
+      <tr v-for="item in billStore.bill" :key="item.id" class="ma-10">
+        <td>{{ item.id}}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.change }}</td>
+        <td>{{ item.buy  }}</td>
+        <td> {{ item.employeeId }}</td>
+        <td>{{ item.bill_detail }}</td>
+      </tr>
+    </v-col>
+  </v-row>
+</v-table> -->
 </template>
