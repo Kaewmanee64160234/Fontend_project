@@ -48,7 +48,12 @@ watch(page, async (newPage, oldPage) => {
   await getMaterials()
 })
 watch(keyword, async (newKey, oldKey) => {
-  await getMaterials()
+  if(keyword.value.length >=3){
+    await getMaterials()
+  }if(keyword.value.length ===0){
+    await getMaterials()
+
+  }
 })
 watch(lastPage, async (newlastPage, oldlastPage) => {
   if (newlastPage < page.value) {

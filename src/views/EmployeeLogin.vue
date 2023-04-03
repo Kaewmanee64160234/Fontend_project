@@ -24,73 +24,41 @@ onMounted(async () => {
   <v-container>
     <v-card>
       <v-card-text width="100vw" style="height: 90vh ;">
-        <v-row class="text-center" cols="12" >
+        <v-row class="text-center" cols="12">
           <v-col class="title" md="4">
             <v-container style="height: 100%">
-              <v-row class="profile" style="height: 25%">
+              <v-row class="profile" style="height: 25%;">
                 <v-col>
                   <v-container>
-                    <v-avatar size="100"
-                      ><v-img :src="`${url}/employees/image/${employee.image}`"></v-img
-                    ></v-avatar>
-                    <div class="text-subtitle-2 mt-3">{{ employee.name }}</div></v-container
-                  >
+                    <v-avatar size="100"><v-img :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
+                    <div class="text-subtitle-2 mt-3">{{ employee.name }}</div>
+                  </v-container>
                 </v-col>
               </v-row>
-              <hr style="border: 2px solid #e4dccf; border-radius: 50px" />
               <v-row style="height: 30%">
-                <v-col class="detail-emp">
-                  <v-card variant="outlined">
-                    <v-card-text  style="text-align: left">
-                        <p>📛 Name : {{ employeeStore.editEmployee.name }}</p>
-                        <p>📨 Email : {{ employeeStore.editEmployee.email }}</p>
-                        <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                        <p>🗃️ hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                <v-col>
+                  <v-card style="background-color: white">
+                    <v-card-text style="text-align: center">
+                      <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
+                      <br />
+                      <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
+                      <br />
+                      <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
+                      <br />
+                      <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
                     </v-card-text>
                   </v-card>
                 </v-col>
               </v-row>
-              <v-row style="height: 30%">
-                <v-row class="text-center">
-                  <v-col class="detail-emp">
-                    <v-card height="80px" width="250px">
-                      <v-card-title class="text-left">
-                        <!-- {{ employeeStore.summary_salary }} -->
-                        <h7> {{ employeeStore.summary_salary.salary}} ฿ </h7> <br />
-                        <h7 style="font-size: 15px; color: #30e3df">🕒 Your Salary </h7>
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col class="detail-emp">
-                    <v-card height="80px" width="250px">
-                      <v-card-title class="text-left">
-                        <h7> {{ employeeStore.summary_salary.hour }} hour </h7> <br />
-                        <h7 style="font-size: 15px; color: #ff9e9e">🕒 Total work </h7>
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-row>
-              <v-row class="button" style="height: 10%">
+
+              <v-row class="button" style="height: 50%; ">
                 <v-col>
-                  
-                  <v-btn v-if="employeeStore.checkIn === true"
-                    class="mdi mr-2 mdi-checkbox-marked-circle"
-                    style="float: right; color: white"
-                    color="green"
-                    @click="employeeStore.empCheckIn(employeeStore.editEmployee.id!)"
-                    >Checkin </v-btn
-                  >
-                  <v-btn v-else
-                    class="mdi mr-2 mdi-close-circle"
-                    style="float: right; color: white"
-                    color="red"
-                    @click="employeeStore.empCheckOut(employee.id+'')"
-                  >
-                    Checkout</v-btn
-                  >
+                  <v-btn v-if="employeeStore.checkIn === true" class="mdi mr-2 mdi-checkbox-marked-circle" width="310px" height="50px"
+                    style="float: right; color: white" color="green"
+                    @click="employeeStore.empCheckIn(employeeStore.editEmployee.id!)">Checkin </v-btn>
+                  <v-btn v-else class="mdi mr-2 mdi-close-circle" width="310px" height="50px" style="float: right; color: white" color="red"
+                    @click="employeeStore.empCheckOut(employee.id + '')">
+                    Checkout</v-btn>
 
                 </v-col>
               </v-row>
@@ -98,28 +66,55 @@ onMounted(async () => {
           </v-col>
 
           <v-col class="detail">
-            <v-container>
-              <VTable class="text-center mt-5" style="justify-content: center; overflow-y: auto">
-                <thead style="justify-content: center; overflow-y: auto">
-                  <tr>
-                    <th>Time in</th>
-                    <th>Time out</th>
-                    <th>Total hour</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    class="text-center mr-5"
-                    style="justify-content: center"
-                    v-for="(item, index) in employeeStore.editEmployee.check_in_outs"
-                    :key="index"
-                  >
-                    <td>{{ item.time_in }}</td>
-                    <td>{{ item.time_out }}</td>
-                    <td>{{ item.total_hour }}</td>
-                  </tr>
-                </tbody>
-              </VTable>
+            <v-container style="height: 100%; ">
+              <v-row style="height: 13%">
+                <v-row class="text-center">
+                  <v-col class="detail-emp">
+                    <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #DEF5E5;">
+                      <v-card-title class="text-left">
+                        <h7> {{ employeeStore.summary_salary.salary }} ฿ </h7> <br />
+                        <h7 style="font-size: 15px; color: #6D9886">💸 Your Salary </h7>
+                      </v-card-title>
+                    </v-card>
+                  </v-col>
+                  <v-col class="detail-emp">
+                    <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #FFE3E1;">
+                      <v-card-title class="text-left">
+                        <h7> {{ employeeStore.summary_salary.hour }} hour </h7> <br />
+                        <h7 style="font-size: 15px; color: #FF9494">🕒 Total work </h7>
+                      </v-card-title>
+                    </v-card>
+                  </v-col>
+
+                </v-row>
+              </v-row>
+              <v-col class="detail">
+                <v-container style="height: 60%; ">
+                  <VTable fixed-header height="600px" class="text-center mt-5;" style="justify-content: center; ">
+                    <thead style="justify-content: center;  ">
+                      <tr>
+                        <th>Time in</th>
+                        <th>Time out</th>
+                        <th>Total hour</th>
+                      </tr>
+                    </thead>
+                    <tbody style=" overflow-y: auto;">
+                      <tr class="text-center mr-5" style="justify-content: center;  overflow-y: auto;"
+                        v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
+                        <td>{{ item.time_in }}</td>
+                        <td>{{ item.time_out }}</td>
+                        <td>{{ item.total_hour }}</td>
+                      </tr>
+                    </tbody>
+                  </VTable>
+
+                </v-container>
+
+              </v-col>
+
+
+
+
             </v-container>
           </v-col>
         </v-row>
@@ -129,15 +124,18 @@ onMounted(async () => {
 </template>
 <style scoped>
 .title {
-  background-color: rgb(250, 235, 215, 0.5);
+  background-color: #FFF5E1;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
   height: 100vh;
 }
+
 .detail-emp {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .detail {
-  width: 70vw;
+  width: 70 vw;
 }
 </style>
