@@ -164,20 +164,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/material/:id',
-      name: 'materials',
-
-      components: {
-        default: () => import('../views/materials/ShowBillView.vue'),
-        menu: () => import('@/components/menus/MainMenu.vue'),
-        header: () => import('@/components/headers/MainHeader.vue')
-      },
-      meta: {
-        layout: 'MainLayout',
-        requiresAuth: true
-      }
-    },
-    {
       path: '/checkmaterial/:id',
       name: 'checkmaterials',
 

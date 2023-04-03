@@ -31,9 +31,11 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
       const getOneCheckMatrial = async (id: string) => {
         loadingStore.isLoading = true
         try {
+          checkmeterials.value = []
           const response = await checkmaterialService.getOneCheckMaterail(id);
-          checkMaterial.value = response.data
-          console.log(checkMaterial.value)
+          console.log(response.data)
+          checkmeterials.value.push(...response.data)
+           console.log(checkmeterials.value)
         } catch (err) {
           console.log(err)
           messageStore.showError("ไม่สามารถดึงข้อมูลได้");
@@ -42,10 +44,6 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
     
         loadingStore.isLoading = false
       }
-      const getCheckByMatId = async (id: string) => {
-        const data = await checkmaterialService.getCheckByMatId(id)
-        checkmeterials.value = data.data
-      }
-    return {checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial, getCheckByMatId};  
+    return {checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial};  
     
   });

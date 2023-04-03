@@ -9,14 +9,10 @@ function getCheckMaterail() {
 }
   
 function getOneCheckMaterail(id: string) {
-    return http.get(`/check-material-detail${id}`);
+    return http.get(`/check-material-detail/material/${id}`);
   }
-
-function getCheckByMatId(id: string) {
-  return http.get(`/check-material${id}`);
- }
 
 function deleteCheckMaterial(id: string) {
     return http.delete(`/check-material/${id}`);
 }
-export default {getCheckMaterail, saveCheckMaterail , deleteCheckMaterial, getOneCheckMaterail, getCheckByMatId}
+export default {getCheckMaterail, saveCheckMaterail , deleteCheckMaterial, getOneCheckMaterail}

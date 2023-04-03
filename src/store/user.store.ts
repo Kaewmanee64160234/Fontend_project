@@ -93,7 +93,6 @@ export const useUserStore = defineStore('User', () => {
     editedUser.value = JSON.parse(JSON.stringify(user))
     dialog.value = true
   }
-
   function selectUserAll() {
     if (!allSelected.value) {
       selected.value = users.value.map((user) => user.id + '')
