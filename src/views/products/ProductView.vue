@@ -51,7 +51,7 @@ onMounted(() => {
         Products
         <v-row>
           <v-col>
-            <v-btn class="mdi mdi-plus mt-2" style="float: right; background-color: #8ad879; color: white"
+            <v-btn class="mdi mdi-plus " style="float: right; background-color: #8ad879; color: white"
             @click="productStore.dialog = true">Add New Product</v-btn>
 
           </v-col>
