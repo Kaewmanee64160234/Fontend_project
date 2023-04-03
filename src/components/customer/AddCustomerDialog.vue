@@ -1,9 +1,21 @@
 <script lang="ts" setup>
 import { useCustomerStore } from '@/store/customer.store'
-
+import { ref } from 'vue'
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
+import type { VForm } from 'vuetify/components'
+const form = ref<VForm | null>(null)
+const confirmDlg = ref();
 const customerStore = useCustomerStore()
+async function save() {
+    const { valid } = await form.value!.validate()
+    if (valid) {
+        await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลพนักงานคนนี้ใช่หรือไม่?`, 'Accept', 'Cancel');
+        await customerStore.saveCustomer()
+    }
+}
 </script>
 <template>
+    <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
     <v-row justify="center">
       <v-dialog
         v-model="customerStore.addCustomerDialog"
@@ -21,21 +33,21 @@ const customerStore = useCustomerStore()
                 <v-col
                   cols="12"
                   sm="6"
-                  md="4"
                 >
                   <v-text-field
                     label="First name*"
                     required
-                  ></v-text-field>
+                    :rules="[(v) => !!v || 'First name is required']">
+                  </v-text-field>
                 </v-col>
                 <v-col
                   cols="12"
                   sm="6"
-                  md="4"
                 >
                   <v-text-field
                     label="Last name*"
                     required
+                    :rules="[(v) => !!v || 'Last name is required']"
                   ></v-text-field>
                 </v-col>
 
@@ -43,11 +55,12 @@ const customerStore = useCustomerStore()
                 <v-col
                   cols="12"
                   sm="6"
-                  md="4"
                 >
                   <v-text-field
                     label="Tel."
                     required
+                    :rules="[(v) => !!v || 'tel is required']"
+                    
                   ></v-text-field>
                 </v-col>
                 <v-col

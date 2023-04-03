@@ -9,5 +9,6 @@ export interface OrderItem {
   createdDate?: Date
   updatedDate?: Date
   deletedDate?: Date
+  image?: string
 }
 

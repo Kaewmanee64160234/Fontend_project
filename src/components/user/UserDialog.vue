@@ -1,17 +1,17 @@
 <script lang="ts" setup>
 import { useUserStore } from '@/store/user.store';
-import ConfirmDialog from "@/components/ConfirmDialog.vue";
+import ConfirmUserDialog from "@/components/ConfirmUserDialog.vue";
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components';
 const form = ref<VForm | null>(null);
 const url = import.meta.env.VITE_URL_PORT
 const userStore = useUserStore();
-const confirmDlg = ref();
+const confirmUserDlg = ref();
 
 async function save() {
   const { valid } = await form.value!.validate();
   if (valid) {
-    await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลผู้ใช้งานคนนี้ใช่หรือไม่?`, 'Accept', 'Cancel');
+    await confirmUserDlg.value.openDialog("ยืนยันการแก้ไข", `กรุณาใส่Passwordอีกครั้ง`, 'Save', 'Cancel');
     await userStore.saveUser()
   }
 
@@ -19,7 +19,7 @@ async function save() {
 </script>
 
 <template>
-  <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
+  <ConfirmUserDialog ref="confirmUserDlg"></ConfirmUserDialog>
   <v-dialog v-model="userStore.dialog" persistent width="1024">
     <v-card>
       <v-card-title>
@@ -43,6 +43,10 @@ async function save() {
               </v-col>
             </v-row>
             <v-row>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="Password*" required v-model="userStore.editedUser.password"
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></v-text-field>
+              </v-col>
               <v-col cols="12" sm="6" md="6">
                 <v-autocomplete label="Autocomplete" v-model="userStore.editedUser.role" :items="['Owner', 'Employee']"></v-autocomplete>
               </v-col>

@@ -107,6 +107,7 @@ const orderStore = useOrderStore()
         </table>
       </v-card-title>
       <v-card-actions class="justify-end">
+        <v-btn color="green" variant="text">Print</v-btn>
         <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogComplteOrder = false"
           >Close</v-btn
         >
