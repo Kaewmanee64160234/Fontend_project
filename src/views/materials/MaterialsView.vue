@@ -73,10 +73,10 @@ const deleteAllMaterials = async () => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item of materialStore.materials" :key="item.id" style="text-align:center">
+            <tr v-for="(item,index) in materialStore.materials" :key="index" style="text-align:center">
                
 
-                <td>{{ item.id }}</td>
+                <td>{{ index+1 }}</td>
                 <td v-if="item.min_quantity <= 5" style="color: red;">{{ item.name }}</td>
                 <td v-if="item.min_quantity > 5">{{ item.name }}</td>
                 <td>{{ item.min_quantity }}</td>

@@ -193,7 +193,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     loadingStore.isLoading = false
   }
   const getOneSummarySalaryEmp = async (id: string) => {
-    const res = await employeeService.getOneSummaryByEmployeeId(id + '')
+    const res = await employeeService.getSummaryByEmployeeId(id + '')
     summary_salary.value = res.data[0]
 
     console.log(res.data);
