@@ -22,9 +22,6 @@ const goTo = (index: string) => {
     router.push('/manager/login/' + index);
 }
 
-
-
-
 onMounted(async () => {
     await employeeStore.getAllSummarySalary();
     console.log(employeeStore.getAllSummarySalary);

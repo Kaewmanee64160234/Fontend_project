@@ -48,14 +48,33 @@ export const useEmployeeStore = defineStore('employee', () => {
     }
   })
 
-  // about pagination
-  const page = ref(1)
-  const take = ref(5)
-  const keyword = ref('')
-  const order = ref('ASC')
-  const orderBy = ref('')
-  const lastPage = ref(0)
+// about pagination
+const page = ref(1)
+const take = ref(5)
+const keyword = ref('')
+const order = ref('ASC')
+const orderBy = ref('')
+const lastPage = ref(0)
 
+watch(page, async (newPage, oldPage) => {
+  await getEmployees()
+
+})
+watch(keyword, async (newKey, oldKey) => {
+  await getEmployees()
+})
+// watch(keyword, async (newKey, oldKey) => {
+//   await getAllSummarySalary()
+
+// })
+// watch(page, async (newPage, oldPage) => {
+//   await getAllSummarySalary()
+// })
+watch(lastPage, async (newlastPage, oldlastPage) => {
+  if (newlastPage < page.value) {
+    page.value = 1
+  }
+})
   // about checkIn checkout
   const checkIn = ref(true)
 

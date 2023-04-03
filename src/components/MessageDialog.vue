@@ -4,14 +4,15 @@ import { useMessageStore } from "@/store/message";
 const messageStore = useMessageStore();
 </script>
 <template>
-  <v-snackbar v-model="messageStore.isShow" multi-line>
-    <v-icon size="32" color="red">mdi-alert-box-outline</v-icon
-    >{{ messageStore.message }}
+  <v-snackbar v-model="messageStore.isShow" multi-line color="black" rounded="pill" >
+    <div style="text-align: center; font-size: 14px;"><v-icon  class="mr-5" > mdi-bell-alert</v-icon>  {{ messageStore.message }}</div>
+   
 
     <template v-slot:actions>
-      <v-btn color="red" variant="text" @click="messageStore.isShow = false">
-        Close
+      <v-btn color="white" variant="text" @click="messageStore.isShow = false">
+        ยกเลิก
       </v-btn>
     </template>
   </v-snackbar>
 </template>
+

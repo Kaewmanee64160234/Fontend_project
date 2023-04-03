@@ -18,6 +18,7 @@ async function save() {
   }
 }
 
+
 </script>
 <template>
   <v-dialog persistent width="1024" v-model="billStore.dialog">
@@ -46,7 +47,7 @@ async function save() {
                   ]"
                 ></v-text-field>
                 </v-col>
-              <!-- <v-col
+              <v-col
                 cols="12"
                 sm="2"
                 md="3"
@@ -60,8 +61,8 @@ async function save() {
                   :rules="[(v) => !!v || 'Item is required',
                 (v) => v >= 0 || 'Min_quantity must more than 0']"
                 ></v-text-field>
-              </v-col> -->
-              <v-col
+              </v-col>
+              <!-- <v-col
                 cols="12"
                 sm="2"
                 md="3"
@@ -75,7 +76,7 @@ async function save() {
                   :rules="[(v) => !!v || 'Item is required',
                 (v) => v >= 0 || 'Min_quantity must more than 0']"
                 ></v-text-field>
-              </v-col>
+              </v-col> -->
                 </v-row>
                 </v-container>
             </v-form>
@@ -87,10 +88,11 @@ async function save() {
               <v-card-title style="text-align: center;">
                 <p>Bill detail {{ index + 1 }}</p>
               </v-card-title>
+              <v-card hidden>{{ item.id }}</v-card>
               <v-text-field v-model="item.name" label="Name"></v-text-field>
               <v-text-field v-model="item.price" label="price"></v-text-field>
               <v-text-field v-model="item.amount" label="amount"></v-text-field>
-              <v-card hidden>{{ item.total = item.amount*item.price }}</v-card>
+              <v-card>{{ item.total = item.amount*item.price }}</v-card>
               <v-card-actions class="justify-center">
                 <v-btn color="error" @click="billStore.deleteBillDetail(index)">Delete</v-btn>
               </v-card-actions>

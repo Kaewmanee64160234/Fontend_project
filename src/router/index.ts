@@ -252,6 +252,21 @@ const router = createRouter({
       }
     },
     {
+      path: '/manager/employee/:id/summary',
+      name: 'manager-employee-summary',
+
+      components: {
+        default: () => import('../views/ManagerSummary.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      beforeEnter: [ezAutorized],
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('@/views/NotFound.vue')
