@@ -34,14 +34,14 @@ const props = defineProps({
       <div class="card item-card mt-2">
 
         <img
-          class="card-img-top item-img"
+          class="rounded-bottom card-img-top item-img"
           :src="`${backendURL}/products/image/${props.img}`"
           width="120px"
         />
 
-        <div class="card-body text-center">
-          <h5 class="card-title">{{ props.name }}</h5>
-          <p class="card-text fontsm" style="color: peru;">฿{{ props.price }}</p>
+        <div class="text-center">
+          <h5 class="mt-4" style="font-size: 15;">{{ props.name }}</h5>
+          <p class="mt-1 fontsm" style="color: peru;">฿{{ props.price }}</p>
         </div>
       </div>
     </div>
@@ -52,18 +52,20 @@ const props = defineProps({
 .a-tag{
   cursor: pointer;
 }
-.card-title {
-  font-size: 16px !important;
+/* .card-title {
+  font-size: 15px !important;
   margin-bottom: 0;
-}
+} */
 .item-card .item-img {
   height: 115px !important;
   object-fit: cover;
+  border-radius: 15px;
 }
 .a-tag .item-card {
   /* width: 120px !important; */
   cursor: pointer;
   color: black !important;
+  height: 200px;
 }
 .a-tag:hover .item-card {
   color: #1f3611 !important;
@@ -73,6 +75,6 @@ const props = defineProps({
 }
 
 .fontsm {
-  font-size: small;
+  font-size: 12;
 }
 </style>

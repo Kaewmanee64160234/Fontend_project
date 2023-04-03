@@ -97,7 +97,7 @@ onMounted(() => {
                 </tr>
                 <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index"
                   class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
-                  <td style="text-align: center">{{ index + 1 }}</td>
+                  <td class="text-center" style="padding: 50px">{{ index + 1 }}</td>
                   <td scope="col" class="text-center"><img class="w-20 h-20 rounded-full"
                       :src="`${url}/products/image/${item.image}`"></td>
                   <td scope="col" class="text-center">{{ item.name }}</td>
@@ -119,7 +119,7 @@ onMounted(() => {
             </table>
           </div>
 
-          <div class="summary mt-2" style="height: 20vh">
+          <div class="summary mt-4" style="height: 20vh">
             <div class="row">
 
               <div class="col-md-5">
