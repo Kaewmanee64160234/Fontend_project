@@ -4,9 +4,11 @@ import type CheckMaterial from "./types/checkmaterial";
  import checkmaterialService from '@/services/checkmaterial'
 import { useMessageStore } from "./message";
 import { useLoadingStore } from "./loading";
+import type CheckMaterialDetail from "./types/checkmaterialdetail";
 
 export const useCheckMaterialStore = defineStore("checkmaterail", () => {
  const checkmeterials = ref<CheckMaterial[]>([])
+ const checkmeterialDetail = ref<CheckMaterialDetail[]>([])
   const loadingStore = useLoadingStore()
   const messageStore = useMessageStore();
     const checkMaterial = ref<CheckMaterial>({
@@ -31,11 +33,11 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
       const getOneCheckMatrial = async (id: string) => {
         loadingStore.isLoading = true
         try {
-          checkmeterials.value = []
+          checkmeterialDetail.value = []
           const response = await checkmaterialService.getOneCheckMaterail(id);
           console.log(response.data)
-          checkmeterials.value.push(...response.data)
-           console.log(checkmeterials.value)
+          checkmeterialDetail.value.push(...response.data)
+           console.log(checkmeterialDetail.value)
         } catch (err) {
           console.log(err)
           messageStore.showError("ไม่สามารถดึงข้อมูลได้");
@@ -44,6 +46,6 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
     
         loadingStore.isLoading = false
       }
-    return {checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial};  
+    return {checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial, checkmeterialDetail};  
     
   });

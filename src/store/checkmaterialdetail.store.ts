@@ -1,16 +1,16 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import type Check_Material_Detail
+import type CheckMaterialDetail
  from "./types/checkmaterialdetail";
  import checkmaterialdetailService from '@/services/checkmaterialdetail'
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
 
 export const useCheckMaterailDetailStore = defineStore("checkmaterialdetail", () => {
-    const CheckMaterialDetails = ref<Check_Material_Detail[]>([]);
+    const CheckMaterialDetails = ref<CheckMaterialDetail[]>([]);
     const loadingStore = useLoadingStore()
     const messageStore = useMessageStore();
-    const CheckMaterialDetail = ref<Check_Material_Detail>({
+    const CheckMaterialDetail = ref<CheckMaterialDetail>({
         materialId: 1,
         checkmaterialID: 1,
         name: '',
