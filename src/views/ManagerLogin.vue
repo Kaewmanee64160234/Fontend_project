@@ -14,7 +14,7 @@ const name = ref('')
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
 onMounted(() => {
-    if(employee.value.position === 'employee'){
+    if (employee.value.position === 'employee') {
         router.push('/employee/login')
     }
 });
@@ -52,8 +52,8 @@ onMounted(async () => {
                     <tbody>
                         <tr class="text-center mr-5 " style="justify-content: center"
                             v-for="(item, index) in employeeStore.summary_salaries" :key="index">
-                     
-                            <td>{{ index+1 }}</td>
+
+                            <td>{{ index + 1 }}</td>
                             <td>{{ item.checkInOut[0].employee?.name }}</td>
                             <td>{{ item.hour }}</td>
                             <td>{{ item.salary }}</td>
@@ -70,6 +70,12 @@ onMounted(async () => {
                     </tbody>
 
                 </v-table>
+                <v-container width="100%" justify="center">
+
+                    <v-pagination justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage"
+                        rounded="circle"></v-pagination>
+
+                </v-container>
             </v-card-title>
         </v-card>
     </v-container>
