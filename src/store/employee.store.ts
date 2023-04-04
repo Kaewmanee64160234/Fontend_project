@@ -26,7 +26,9 @@ export const useEmployeeStore = defineStore('employee', () => {
     hourly: 0,
     image: 'no_image.jpg',
     files: [],
-    check_in_outs: []
+    check_in_outs: [],
+    salary:9000,
+    fullTime: false,
   })
   const checkInOut = ref<CheckInOut>({})
   const checkInOuts = ref<CheckInOut[]>([])
@@ -43,38 +45,38 @@ export const useEmployeeStore = defineStore('employee', () => {
         hourly: 0,
         image: 'no_image.jpg',
         files: [],
-        check_in_outs: []
+        check_in_outs: [],  salary:9000,
+        fullTime: false,
       }
     }
   })
 
-// about pagination
-const page = ref(1)
-const take = ref(5)
-const keyword = ref('')
-const order = ref('ASC')
-const orderBy = ref('')
-const lastPage = ref(0)
+  // about pagination
+  const page = ref(1)
+  const take = ref(5)
+  const keyword = ref('')
+  const order = ref('ASC')
+  const orderBy = ref('')
+  const lastPage = ref(0)
 
-watch(page, async (newPage, oldPage) => {
-  await getEmployees()
+  watch(page, async (newPage, oldPage) => {
+    await getEmployees()
+  })
+  watch(keyword, async (newKey, oldKey) => {
+    await getEmployees()
+  })
+  // watch(keyword, async (newKey, oldKey) => {
+  //   await getAllSummarySalary()
 
-})
-watch(keyword, async (newKey, oldKey) => {
-  await getEmployees()
-})
-// watch(keyword, async (newKey, oldKey) => {
-//   await getAllSummarySalary()
-
-// })
-// watch(page, async (newPage, oldPage) => {
-//   await getAllSummarySalary()
-// })
-watch(lastPage, async (newlastPage, oldlastPage) => {
-  if (newlastPage < page.value) {
-    page.value = 1
-  }
-})
+  // })
+  // watch(page, async (newPage, oldPage) => {
+  //   await getAllSummarySalary()
+  // })
+  watch(lastPage, async (newlastPage, oldlastPage) => {
+    if (newlastPage < page.value) {
+      page.value = 1
+    }
+  })
   // about checkIn checkout
   const checkIn = ref(true)
 
@@ -291,8 +293,15 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     summary_salary.value = res.data
     console.log(summary_salary.value)
   }
-  
+  const updatePaidStatusSS = async (idSS: string) => {
+    await getSummaryById(idSS)
+    summary_salary.value.paid = true
+    await employeeService.updateSummarySalary(idSS, summary_salary.value)
+    await getAllSummarySalary()
+  }
+
   return {
+    updatePaidStatusSS,
     getSummaryById,
     getCioByIdEmp,
     page,

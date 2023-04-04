@@ -23,8 +23,7 @@ const goTo = (index: string) => {
 }
 
 onMounted(async () => {
-    await employeeStore.getAllSummarySalary();
-    console.log(employeeStore.getAllSummarySalary);
+    await employeeStore.getEmployees()
 
 });
 
@@ -51,16 +50,16 @@ onMounted(async () => {
                     </thead>
                     <tbody>
                         <tr class="text-center mr-5 " style="justify-content: center"
-                            v-for="(item, index) in employeeStore.summary_salaries" :key="index">
+                            v-for="(item, index) in employeeStore.employees" :key="index">
                      
                             <td>{{ index+1 }}</td>
-                            <td>{{ item.checkInOut[0].employee?.name }}</td>
-                            <td>{{ item.hour }}</td>
-                            <td>{{ item.salary }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.fullTime }}</td>
+                            <td>{{ item.position }}</td>
 
                             <td>
                                 <v-btn class="mdi mr-2  mdi-eye" style=" color: white" color="blue-lighten-1"
-                                    @click="goTo(item.checkInOut[0].employee?.id + '')"> History </v-btn>
+                                    @click="goTo(item.id + '')"> History </v-btn>
 
                             </td>
 
