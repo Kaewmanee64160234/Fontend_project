@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import { useEmployeeStore } from '@/store/employee.store'
-import { useManageTime } from '@/store/manageDate'
 import type Employee from '@/store/types/employee.type'
 import type User from '@/store/types/user.type'
 import { onMounted, ref } from 'vue'
@@ -9,91 +8,131 @@ import { useRoute } from 'vue-router'
 import type { VForm } from 'vuetify/components'
 const url = import.meta.env.VITE_URL_PORT
 const employeeStore = useEmployeeStore()
-const valid = ref(true)
-const form = ref<InstanceType<typeof VForm> | null>(null)
-const email = ref('')
-const name = ref('')
-const loading = ref(false)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
 const route = useRoute()
-const id = ref(route.params.id)
-const manageTime = useManageTime()
+const id = ref(route.params.idSS)
+// const idEmp = ref(route.path);
 
 onMounted(async () => {
-  await employeeStore.getOneSummarySalaryEmp(id.value + '')
+  await employeeStore.getOneSummaryBySSID(id.value + '')
 })
 </script>
 
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-container>
-    <!-- {{ employeeStore.summary_salaries }} -->
+    <v-card>
+      {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}
+      <v-card-text width="100vw" style="height: 90vh">
+        <v-row class="text-center" cols="12">
+          <v-col class="title" md="4">
+            <v-container style="height: 100%">
+              <v-row class="profile" style="height: 25%">
+                <v-col>
+                  <v-container>
+                    <v-avatar size="100"
+                      ><v-img :src="`${url}/employees/image/${employee.image}`"></v-img
+                    ></v-avatar>
+                    <div class="text-subtitle-2 mt-3">
+                      {{ employeeStore.summary_salary.employee?.name }}
+                    </div>
+                  </v-container>
+                </v-col>
+              </v-row>
+              <v-row style="height: 30%">
+                <v-col>
+                  <v-card style="background-color: white">
+                    <v-card-text style="text-align: center">
+                      <p>👤 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}</p>
+                      <br />
+                      <p>📩 Email: {{ employeeStore.summary_salary.checkInOut[0].employee?.email }}</p>
+                      <br />
+                      <p>🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}</p>
+                      <br />
+                      <p>🕐 hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly }} ฿</p>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-col>
 
-    <div v-for="(item, index) in employeeStore.summary_salaries" :key="index">
-      <v-container>
-        <div
-          class="summary stats shadow"
-          style="background-color: white; box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px"
-        >
+          <v-col class="detail">
+            <v-container style="height: 100%">
+              <v-row style="height: 13%">
+                <v-row class="text-center">
+                  <v-col class="detail-emp">
+                    <v-card
+                      height="100px"
+                      width="300px"
+                      style="border-radius: 15px; background-color: #def5e5"
+                    >
+                      <v-card-title class="text-left">
+                        <h7> {{ employeeStore.summary_salary.salary }} ฿ </h7> <br />
+                        <h7 style="font-size: 15px; color: #6d9886">💸 Your Salary </h7>
+                      </v-card-title>
+                    </v-card>
+                  </v-col>
 
-          <div class="stat">
-            <div
-              class="stat-value text-brown-lighten-1"
-              style="font-size: 29px; font-family: sans-serif"
-            >
-              {{
-                manageTime.month[parseInt(new Date(item.ss_date + '').getMonth().toString())] +
-                '/' +
-                new Date(item.ss_date + '').getFullYear()
-              }}
-            </div>
-            <br />
-            <div class="stat-desc" style="font-size: 15px">Month/Year</div>
-          </div>
-          <div class="salary stat">
-            <div
-              class="stat-value text-blue-grey-darken-2"
-              style="font-size: 29px; font-family: sans-serif"
-            >
-              {{ item.checkInOut[0]?.employee.fullTime ?  item.checkInOut[0]?.employee.salary :   item.salary}} ฿
-            </div>
-            <br />
-            <div class="stat-desc">SALARY</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value" style="font-size: 29px; font-family: sans-serif">
-              <span
-                :class="
-                  item.paid
-                    ? 'inline-flex items-center bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300'
-                    : 'inline-flex items-center bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300'
-                "
-              >
-                <span
-                  :class="
-                    item.paid
-                      ? 'w-2 h-2 mr-1 bg-green-500 rounded-full'
-                      : 'w-2 h-2 mr-1 bg-red-500 rounded-full'
-                  "
-                ></span>
-                {{ item.paid ? 'PAID' : 'NOT PAID' }}
-              </span>
-            </div>
-            <br />
-            <div class="stat-desc">Status Paid</div>
-          </div>
-          <div class="stat">
-            <v-btn v-if="!item.paid" @click="employeeStore.updatePaidStatusSS(item.id+'')" class="mdi mdi-hand-coin" style="background-color: #14c38e; color: white" >
-              Paid</v-btn
-            >
-            <v-btn v-if="item.paid" disabled class="mdi mdi-hand-coin" style="background-color: #14c38e; color: white" >
-              Paided</v-btn
-            >
-          </div>
-        </div>
-      </v-container>
-    </div>
+                  <v-col class="detail-emp">
+                    <v-card
+                      height="100px"
+                      width="300px"
+                      style="border-radius: 15px; background-color: #ffe3e1"
+                    >
+                      <v-card-title class="text-left">
+                        <h7> {{ employeeStore.summary_salary.hour }} hour </h7> <br />
+                        <h7 style="font-size: 15px; color: #ff9494">🕒 Total work </h7>
+                      </v-card-title>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-row>
+              <v-col class="detail">
+                <v-container style="height: 60%">
+                  <VTable
+                    fixed-header
+                    height="600px"
+                    class="text-center mt-5"
+                    style="justify-content: center; overflow-y: auto"
+                  >
+                    <thead style="justify-content: center">
+                      <tr>
+                        <th>Time in</th>
+                        <th>Time out</th>
+                        <th>Total hour</th>
+                      </tr>
+                    </thead>
+                    <tbody style="overflow-y: auto">
+                      <tr
+                        class="text-center mr-5"
+                        style="justify-content: center  overflow-y: auto;"
+                        v-for="(item, index) in employeeStore.summary_salary.checkInOut"
+                        :key="index"
+                      >
+                        <td>{{ item.time_in }}</td>
+                        <td>{{ item.time_out }}</td>
+                        <td>{{ item.total_hour }}</td>
+                      </tr>
+                    </tbody>
+                  </VTable>
+                </v-container>
+              </v-col>
+
+              <v-container width="100%" justify="center">
+                <v-pagination
+                  justify="center"
+                  v-model="employeeStore.page"
+                  :length="employeeStore.lastPage"
+                  rounded="circle"
+                ></v-pagination>
+              </v-container>
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 <style scoped>

@@ -85,7 +85,7 @@ const url = import.meta.env.VITE_URL_PORT
         prepend-icon="mdi-account-tie"
         title="Manager"
         value="Login Manager"
-        to="/manager/login"
+        to="/manager/employees"
       ></v-list-item>
 
       <v-list-item v-if="user_.role !=='Employee'" prepend-icon="mdi-book " title="Order" value="Order" to="/orders"></v-list-item>

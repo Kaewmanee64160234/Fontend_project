@@ -17,6 +17,8 @@ export const useEmployeeStore = defineStore('employee', () => {
   const allSelected = ref(false)
   const employees = ref<Employee[]>([])
   const messageStore = useMessageStore()
+  const ss_Last = ref<SummarySalary>()
+
   const editEmployee = ref<Employee & { files: File[] }>({
     name: '',
     address: '',
@@ -27,13 +29,85 @@ export const useEmployeeStore = defineStore('employee', () => {
     image: 'no_image.jpg',
     files: [],
     check_in_outs: [],
-    salary:9000,
-    fullTime: false,
+    salary: 9000,
+    fullTime: false
   })
-  const checkInOut = ref<CheckInOut>({})
+  const checkInOut = ref<CheckInOut>({
+    id: 0,
+    employeeId: 0,
+
+    total_hour: 0,
+
+    employee: {
+      name: '',
+      address: '',
+      tel: '',
+      email: '',
+      position: '',
+      hourly: 0,
+      image: 'no_image.jpg',
+      check_in_outs: [],
+      salary: 9000,
+      fullTime: false
+    }
+  })
   const checkInOuts = ref<CheckInOut[]>([])
-  const summary_salary = ref<SummarySalary>({})
-  const summary_salaries = ref<SummarySalary[]>([])
+  const summary_salary = ref<SummarySalary>({
+    id: 0,
+    hour: 0,
+    salary: 9000,
+    checkInOut: [
+      {
+        id: 0,
+        employeeId: 0,
+
+        total_hour: 0,
+
+        employee: {
+          name: '',
+          address: '',
+          tel: '',
+          email: '',
+          position: '',
+          hourly: 0,
+          image: 'no_image.jpg',
+          check_in_outs: [],
+          salary: 9000,
+          fullTime: false
+        }
+      }
+    ],
+    paid: false
+  })
+  const summary_salaries = ref<SummarySalary[]>([
+    {
+      id: 0,
+      hour: 0,
+      salary: 9000,
+      checkInOut: [
+        {
+          id: 0,
+          employeeId: 0,
+
+          total_hour: 0,
+
+          employee: {
+            name: '',
+            address: '',
+            tel: '',
+            email: '',
+            position: '',
+            hourly: 0,
+            image: 'no_image.jpg',
+            check_in_outs: [],
+            salary: 9000,
+            fullTime: false
+          }
+        }
+      ],
+      paid: false
+    }
+  ])
   watch(dialog, (newDialog, oldDialog) => {
     if (!newDialog) {
       editEmployee.value = {
@@ -45,8 +119,9 @@ export const useEmployeeStore = defineStore('employee', () => {
         hourly: 0,
         image: 'no_image.jpg',
         files: [],
-        check_in_outs: [],  salary:9000,
-        fullTime: false,
+        check_in_outs: [],
+        salary: 9000,
+        fullTime: false
       }
     }
   })
@@ -214,13 +289,18 @@ export const useEmployeeStore = defineStore('employee', () => {
     }
     loadingStore.isLoading = false
   }
-  const getOneSummarySalaryEmp = async (id: string) => {
+  const getSummarySalaryEmp = async (id: string) => {
     const res = await employeeService.getSummaryByEmployeeId(id + '')
     summary_salaries.value = [...res.data]
-
     console.log(summary_salaries.value)
   }
+  const getOneSummaryBySSID = async (id: string) => {
+    console.log(id)
+    const res = await employeeService.getSummarySalaryById(id)
+    summary_salary.value = res.data
+  }
   const getOneEmployee = async (id: string) => {
+    console.log(id)
     loadingStore.isLoading = true
     try {
       const res = await employeeService.getOneEmployee(id)
@@ -294,23 +374,23 @@ export const useEmployeeStore = defineStore('employee', () => {
     console.log(summary_salary.value)
   }
   const updatePaidStatusSS = async (idSS: string) => {
-    loadingStore.isLoading = true;
-    try{
+    loadingStore.isLoading = true
+    try {
       const ss = {
-        paid:true
+        paid: true
       }
       await employeeService.updateSummarySalary(idSS, ss)
       console.log('update summary status cpaid completed')
-      await getOneSummarySalaryEmp(idSS)
+      await getSummarySalaryEmp(idSS)
       window.location.reload()
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
-    loadingStore.isLoading = false;
-    
+    loadingStore.isLoading = false
   }
 
   return {
+    ss_Last,
     updatePaidStatusSS,
     getSummaryById,
     getCioByIdEmp,
@@ -320,7 +400,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     order,
     orderBy,
     lastPage,
-
+    getOneSummaryBySSID,
     getAllSummarySalary,
     loaded,
     loading,
@@ -345,7 +425,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     summary_salary,
     empCheckIn,
     empCheckOut,
-    getOneSummarySalaryEmp,
+    getSummarySalaryEmp,
     getOneEmployee,
     employeeId,
     checkIn

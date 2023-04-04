@@ -5,21 +5,10 @@ import type Employee from '@/store/types/employee.type'
 import type User from '@/store/types/user.type'
 import { onMounted, ref } from 'vue'
 import type { VForm } from 'vuetify/components'
-const url = import.meta.env.VITE_URL_PORT
 const employeeStore = useEmployeeStore()
-const valid = ref(true)
-const form = ref<InstanceType<typeof VForm> | null>(null)
-const email = ref('')
-const name = ref('')
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
-const employee = ref<Employee>(JSON.parse(data.value))
-onMounted(() => {
-    if(employee.value.position === 'employee'){
-        router.push('/employee/login')
-    }
-});
 const goTo = (index: string) => {
-    router.push('/manager/login/' + index);
+    router.push(`/manager/employee/${index}`);
 }
 
 onMounted(async () => {
