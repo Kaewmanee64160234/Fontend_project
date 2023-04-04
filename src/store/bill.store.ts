@@ -14,7 +14,13 @@ export const useBillStore = defineStore("bill", () => {
   const materialStore = useMaterialStore();
   const loadingStore = useLoadingStore()
   const messageStore = useMessageStore();
-  const bill = ref<BILL[]>([]);
+  const bill = ref<BILL[]>([{ name: '', 
+  date: new Date(), 
+  total: 0 , 
+  buy: 0, 
+  change: 0 ,
+  employeeId: 0,
+  bill_detail: [{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]}]);
   const bill_Detail_List = ref<BILL_DETAIL[]>([{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]);
   const bill_list = ref<BILL>({ 
     name: '', 
@@ -30,8 +36,8 @@ export const useBillStore = defineStore("bill", () => {
     loadingStore.isLoading = true
     try {
       const res = await billServices.getBill()
-      bill.value = res.data
-      console.log(bill.value)
+      bill_list.value = res.data
+      console.log(bill_list.value)
     } catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถดึงข้อมูล Bill ได้')
@@ -42,15 +48,14 @@ export const useBillStore = defineStore("bill", () => {
   async function saveBill() {
     loadingStore.isLoading = true
     try {
-      for(let i = 0; i < bill_Detail_List.value.length-1; i++) {
-        console.log(bill_Detail_List.value.length)
+      for(let i = 0; i <= bill_Detail_List.value.length - 1; i++) {
         await billServices.saveBill(bill_list.value)
         const res =  await billServices.updateBill(bill_list.value)
         await getBills()
         await materialStore.getMaterials()
         console.log(res)
-        }
-      }
+        } 
+    }
     catch (e) {
       console.log(e)
       messageStore.showError('ไม่สามารถบันทึกข้อมูล Bill ได้')
@@ -72,6 +77,7 @@ export const useBillStore = defineStore("bill", () => {
         bill_list.value.change = bill_list.value.buy - bill_list.value.total;
       }
     }
+
     // const checkName = () => {
     //   loadingStore.isLoading = true
     //   try {
@@ -142,5 +148,5 @@ export const useBillStore = defineStore("bill", () => {
     //   }
     //   loadingStore.isLoading = false
     // }
-    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Dettail_List: bill_Detail_List,sumBill};  
+    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill};  
   });

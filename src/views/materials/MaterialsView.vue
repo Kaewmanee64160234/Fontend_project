@@ -15,6 +15,7 @@ const goTo = (index:string) => {
 }
 
 
+
 onMounted(async() => {
     await billStore.getBills();
     await materialStore.getMaterials();
@@ -50,7 +51,8 @@ const deleteAllMaterials = async () => {
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
           <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
-      <v-spacer></v-spacer>
+          <v-btn class="mdi mdi-clipboard-list-outline mr-2" color="#C0DBEA" style="float: right; color: white" to="/material/showBills" value="showBills">Show Bill</v-btn>
+          <v-spacer></v-spacer>
       <v-text-field style="width: 30%;"
         :loading="materialStore.loading"
         density="compact"
