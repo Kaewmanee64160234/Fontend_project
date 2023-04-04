@@ -8,14 +8,20 @@ import { useRoute } from 'vue-router'
 import type { VForm } from 'vuetify/components'
 const url = import.meta.env.VITE_URL_PORT
 const employeeStore = useEmployeeStore()
-
+const valid = ref(true)
+const form = ref<InstanceType<typeof VForm> | null>(null)
+const email = ref('')
+const name = ref('')
+const loading = ref(false)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
 
+
+const route = useRoute();
+const id = ref(route.params.id);
+
 onMounted(async () => {
-    await employeeStore.getOneEmployee(employee.value.id + '')
-    await employeeStore.getOneSummarySalaryEmp(employee.value.id + '')
-    // console.log(employeeStore.editEmployee)
+    await employeeStore.getOneSummarySalaryEmp(id.value + '')
 })
 </script>
 <template>
@@ -58,50 +64,69 @@ onMounted(async () => {
                     </v-col>
 
                     <v-col class="detail">
-                        <v-container style="height: 100%; ">
+                        <v-container style="height: 70%; ">
                             <v-row style="height: 15%">
                                 <v-card-text style="text-align: left; font-size:25px; font-family: Georgia, serif;">
                                     Summary Salary
                                 </v-card-text>
-
                                 <v-row class="text-center" style="height: 10%;">
                                     <v-col>
-                                        <div class="stats shadow "
-                                            style="background-color:white; box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px;">
-                                            <div class="stat">
+                                        <div class="stats shadow"
+                                            style="background-color:white; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.20) 0px 3px 5px;;">
+                                            <div class="stat place-items-center">
+                                                <dl
+                                                    class="grid max-w-screen-xl grid-cols-2 gap-8 p-4  sm:grid-cols-3 xl:grid-cols-5 dark:text-white sm:p-8">
+                                                    <div class="flex flex-col items-center justify-center ">
+                                                        <dt class="mb-2 text-3xl font-extrabold text-brown-lighten-1"
+                                                            style="font-size: 25px; font-family: sans-serif; text-align: center; ">
+                                                            2023/04</dt>
+                                                        <dd class="text-gray-500 dark:text-gray-400"
+                                                            style="font-size: 15px;">YYYY/MM </dd>
 
-                                                <div class="stat-value text-brown-lighten-1 "
-                                                    style="font-size: 29px; font-family: sans-serif; text">2023 / 04</div>
-                                                <br />
-                                                <div class="stat-desc" style="font-size: 15px;">YYYY/MM </div>
+                                                    </div>
+                                                    <div class="flex flex-col items-center justify-center ">
+                                                        <dt class="mb-2 text-3xl font-extrabold text-blue-grey-darken-2"
+                                                            style="font-size: 25px; font-family: sans-serif;">{{
+                                                                employeeStore.summary_salary.salary }} 1222฿ </dt>
+                                                        <dd class="text-gray-500 dark:text-gray-400">SALARY</dd>
+                                                    </div>
+                                                    <div class="flex flex-col items-center justify-center">
+                                                        <dt class="mb-2 text-3xl font-extrabold"
+                                                            style="font-size: 29px; font-family: sans-serif;"><span
+                                                                class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                                                                <span class="w-2 h-2 mr-1 bg-green-500 rounded-full"></span>
+                                                                PAID
+                                                            </span></dt>
+                                                        <dd class="text-gray-500 dark:text-gray-400">STATUS
+                                                        </dd>
+                                                    </div>
+                                                    <div class="flex flex-col items-center justify-center">
+                                                        <v-btn class="mdi  mdi-eye"
+                                                            style="background-color: #0081C9; color: white; "> History
+                                                        </v-btn>
+
+                                                    </div>
+                                                    <div class="flex flex-col items-center justify-center">
+                                                        <v-btn class="mdi mdi-hand-coin "
+                                                            style="background-color: #14C38E; color: white; "> Paid</v-btn>
+
+                                                    </div>
+
+
+                                                </dl>
+
                                             </div>
-                                            <div class="stat">
 
-                                                <div class="stat-value text-blue-grey-darken-2"
-                                                    style="font-size: 29px; font-family: sans-serif;">96.455 ฿</div>
-                                                <br />
-                                                <div class="stat-desc">SALARY</div>
-                                            </div>
-                                            <div class="stat">
-
-                                                <div class="stat-value " style="font-size: 29px; font-family: sans-serif;">
-
-                                                    <v-chip class="ma-2" color="#DF2E38"   text-color="red">
-                                                        NOT PAID
-                                                    </v-chip>
-                                                </div>
-                                                <br />
-                                                <div class="stat-desc">Status Paid</div>
-                                            </div>
-                                            <div class="stat">
-                                                <v-btn class="mdi mdi-hand-coin " style="background-color: #14C38E; color: white; " > Paid</v-btn>
-
-                                            </div>
                                         </div>
+
                                     </v-col>
 
-
                                 </v-row>
+
+
+
+
+
                             </v-row>
                             <v-col class="detail">
                                 <v-container style="height: 60%; ">

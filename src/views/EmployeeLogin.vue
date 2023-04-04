@@ -53,11 +53,11 @@ onMounted(async () => {
 
               <v-row class="button" style="height: 50%; ">
                 <v-col>
-                  <v-btn v-if="employeeStore.checkIn === true" class="mdi mr-2 mdi-checkbox-marked-circle" width="310px" height="50px"
-                    style="float: right; color: white" color="green"
+                  <v-btn v-if="employeeStore.checkIn === true" class="mdi mr-2 mdi-checkbox-marked-circle" width="310px"
+                    height="50px" style="float: right; color: white" color="green"
                     @click="employeeStore.empCheckIn(employeeStore.editEmployee.id!)">Checkin </v-btn>
-                  <v-btn v-else class="mdi mr-2 mdi-close-circle" width="310px" height="50px" style="float: right; color: white" color="red"
-                    @click="employeeStore.empCheckOut(employee.id + '')">
+                  <v-btn v-else class="mdi mr-2 mdi-close-circle" width="310px" height="50px"
+                    style="float: right; color: white" color="red" @click="employeeStore.empCheckOut(employee.id + '')">
                     Checkout</v-btn>
 
                 </v-col>
@@ -107,16 +107,14 @@ onMounted(async () => {
                       </tr>
                     </tbody>
                   </VTable>
-
                 </v-container>
 
               </v-col>
 
-
-
-
             </v-container>
+
           </v-col>
+          
         </v-row>
       </v-card-text>
     </v-card>
