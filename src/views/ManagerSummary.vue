@@ -102,6 +102,14 @@ onMounted(async () => {
                                                             </span></dt>
                                                         <dd class="text-gray-500 dark:text-gray-400">STATUS
                                                         </dd>
+                                                        <!-- <dt class="mb-2 text-3xl font-extrabold"
+                                                            style="font-size: 29px; font-family: sans-serif;"><span
+                                                                class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                                                                <span class="w-2 h-2 mr-1 bg-red-500 rounded-full"></span>
+                                                                NO PAID
+                                                            </span></dt>
+                                                        <dd class="text-gray-500 dark:text-gray-400">STATUS
+                                                        </dd> -->
                                                     </div>
                                                     <div class="flex flex-col items-center justify-center">
                                                         <v-btn class="mdi  mdi-eye"
