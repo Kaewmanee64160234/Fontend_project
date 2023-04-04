@@ -33,10 +33,10 @@ const props = defineProps({
     <div class="a-tag" >
       <div class="card item-card mt-2">
 
-        <img
+        <v-img
           class="card-img-top item-img"
           :src="`${backendURL}/products/image/${props.img}`"
-          width="120px"
+          :lazy-src="`${backendURL}/products/image/${props.img}`"
         />
 
         <div class="card-body text-center">
@@ -52,14 +52,17 @@ const props = defineProps({
 .a-tag{
   cursor: pointer;
 }
+
 .card-title {
   font-size: 16px !important;
   margin-bottom: 0;
 }
+
 .item-card .item-img {
   height: 115px !important;
   object-fit: cover;
 }
+
 .a-tag .item-card {
   /* width: 120px !important; */
   cursor: pointer;

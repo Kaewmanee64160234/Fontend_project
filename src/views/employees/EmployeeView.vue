@@ -77,12 +77,12 @@ const deleteAllEmployees = async () => {
             </tr>
           </thead>
           <tbody v-if="employeeStore.employees.length >0">
-            <tr v-for="item of employeeStore.employees" :key="item.id" class="text-center">
+            <tr v-for="(item,index) in employeeStore.employees" :key="index" class="text-center">
 
               <td>
                 <v-avatar size="80"><v-img :src="`${url}/employees/image/${item.image}`"></v-img></v-avatar>
               </td>
-              <td>{{ item.id }}</td>
+              <td>{{ index+1 }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.address }}</td>
               <td>{{ item.tel }}</td>

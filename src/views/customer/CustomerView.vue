@@ -72,12 +72,12 @@ const deleteAllCustomers = async () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item of customerStore.customers" :key="item.id" class="text-center">
+            <tr v-for="(item,index) of customerStore.customers" :key="index" class="text-center">
 
               <td>
                 <v-avatar size="80"><v-img :src="`${url}/customers/image/${item.image}`"></v-img></v-avatar>
               </td>
-              <td>{{ item.id }}</td>
+              <td>{{ index+1 }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.tel }}</td>
               <td>{{ item.point }}</td>
