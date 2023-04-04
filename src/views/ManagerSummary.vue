@@ -52,6 +52,7 @@ onMounted(async () => {
                                             <li>
                                                 👤 Name : {{ employeeStore.editEmployee.name }}
                                             </li>
+                                            <br/>
                                             <li>
                                                 📩 Email : {{ employeeStore.editEmployee.email }}
                                             </li>
