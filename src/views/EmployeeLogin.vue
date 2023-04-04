@@ -21,33 +21,62 @@ onMounted(async () => {
 
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-  <v-container>
-    <v-card>
-      <v-card-text width="100vw" style="height: 90vh ;">
-        <v-row class="text-center" cols="12">
-          <v-col class="title" md="4">
-            <v-container style="height: 100%">
-              <v-row class="profile" style="height: 25%;">
-                <v-col>
-                  <v-container>
+<v-container>
+  <v-card>
+    <v-card-text width="100vw" style="height: 90vh ;">
+      <v-row class="text-center" cols="12">
+        <v-col class="title" md="4">
+          <v-container style="height: 100%">
+            <v-row class="profile" style="height: 25%;">
+              <v-col>
+                <v-container>
                     <v-avatar size="100"><v-img :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
                     <div class="text-subtitle-2 mt-3">{{ employee.name }}</div>
                   </v-container>
                 </v-col>
               </v-row>
+              <!-- <v-row style="height: 30%">
+                    <v-col>
+                      <v-card style="background-color: white">
+                        <v-card-text style="text-align: center">
+
+                          <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
+                          <br />
+                          <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
+                          <br />
+                          <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
+                          <br />
+                          <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row> -->
               <v-row style="height: 30%">
                 <v-col>
-                  <v-card style="background-color: white">
-                    <v-card-text style="text-align: center">
-                      <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
-                      <br />
-                      <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
-                      <br />
-                      <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                      <br />
-                      <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                  <v-card>
+                    <v-card-text style="text-align: left;">
+                      <ul class=" text-gray-500 list-disc list-inside dark:text-gray-400 ">
+                        <li>
+                          👤 Name : {{ employeeStore.editEmployee.name }}
+                        </li>
+                        <br/>
+                        <li>
+                          📩 Email : {{ employeeStore.editEmployee.email }}
+                        </li>
+                        <br/>
+                        <li>
+                          🗃️ Position : {{ employeeStore.editEmployee.position }}
+                        </li>
+                        <br/>
+                        <li>
+                          🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿
+                        </li>
+                      </ul>
+
                     </v-card-text>
                   </v-card>
+
+
                 </v-col>
               </v-row>
 
@@ -114,7 +143,7 @@ onMounted(async () => {
             </v-container>
 
           </v-col>
-          
+
         </v-row>
       </v-card-text>
     </v-card>
