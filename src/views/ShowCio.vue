@@ -84,8 +84,11 @@ onMounted(async () => {
             <div class="stat-desc">Status Paid</div>
           </div>
           <div class="stat">
-            <v-btn class="mdi mdi-hand-coin" style="background-color: #14c38e; color: white">
+            <v-btn v-if="!item.paid" @click="employeeStore.updatePaidStatusSS(item.id+'')" class="mdi mdi-hand-coin" style="background-color: #14c38e; color: white" >
               Paid</v-btn
+            >
+            <v-btn v-if="item.paid" disabled class="mdi mdi-hand-coin" style="background-color: #14c38e; color: white" >
+              Paided</v-btn
             >
           </div>
         </div>

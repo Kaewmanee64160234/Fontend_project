@@ -76,7 +76,7 @@ const getCioByIdEmp = (params:any)=>{
 const getSummarySalaryById = (id:string)=>{ 
     return http.get(`/summary-salary/${id}`);
 }
-const updateSummarySalary = (id:string,data:SummarySalary)=>{
+const updateSummarySalary = (id:string,data:any)=>{
     return http.patch(`/summary-salary/${id}`,data);
 }
 

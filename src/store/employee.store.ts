@@ -294,10 +294,20 @@ export const useEmployeeStore = defineStore('employee', () => {
     console.log(summary_salary.value)
   }
   const updatePaidStatusSS = async (idSS: string) => {
-    await getSummaryById(idSS)
-    summary_salary.value.paid = true
-    await employeeService.updateSummarySalary(idSS, summary_salary.value)
-    await getAllSummarySalary()
+    loadingStore.isLoading = true;
+    try{
+      const ss = {
+        paid:true
+      }
+      await employeeService.updateSummarySalary(idSS, ss)
+      console.log('update summary status cpaid completed')
+      await getOneSummarySalaryEmp(idSS)
+      window.location.reload()
+    }catch(err){
+      console.log(err)
+    }
+    loadingStore.isLoading = false;
+    
   }
 
   return {
