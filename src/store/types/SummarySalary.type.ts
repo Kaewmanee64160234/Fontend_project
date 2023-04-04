@@ -7,7 +7,7 @@ export interface SummarySalary {
   hour?: number;
   salary?: number;
   checkInOut?: CheckInOut[];
-
+paid?: boolean;
   createdAt?: Date;
 
   updatedAt?: Date;

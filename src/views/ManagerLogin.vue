@@ -41,7 +41,7 @@ onMounted(async () => {
                 <v-table class="text-center mt-5">
                     <thead>
                         <tr>
-                            <th>Employee ID</th>
+                            <th></th>
                             <th>Name</th>
                             <th>Hour</th>
                             <th>Salary</th>
@@ -52,8 +52,8 @@ onMounted(async () => {
                     <tbody>
                         <tr class="text-center mr-5 " style="justify-content: center"
                             v-for="(item, index) in employeeStore.summary_salaries" :key="index">
-
-                            <td>{{ item.checkInOut[0].employee?.id }}</td>
+                     
+                            <td>{{ index+1 }}</td>
                             <td>{{ item.checkInOut[0].employee?.name }}</td>
                             <td>{{ item.hour }}</td>
                             <td>{{ item.salary }}</td>

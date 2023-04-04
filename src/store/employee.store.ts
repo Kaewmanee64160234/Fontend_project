@@ -85,9 +85,10 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     await getEmployees()
   })
   watch(keyword, async (newKey, oldKey) => {
-    if(keyword.value.length >=3){
+    if (keyword.value.length >= 3) {
       await getAllSummarySalary()
-    }if(keyword.value.length ===0){
+    }
+    if (keyword.value.length === 0) {
       await getAllSummarySalary()
     }
   })
@@ -191,7 +192,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       const res = await employeeService.employeeCheckIn(checkInOut.value)
       console.log(res.data)
       await getOneEmployee(editEmployee.value.id + '')
-      checkIn.value = false;
+      checkIn.value = false
     } catch (err) {
       console.log(err)
     }
@@ -205,17 +206,17 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       const res = await employeeService.employeeCheckOut(id)
       console.log(res.data)
       await getOneEmployee(editEmployee.value.id + '')
-      checkIn.value = true;
+      checkIn.value = true
     } catch (err) {
       console.log(err)
     }
     loadingStore.isLoading = false
   }
   const getOneSummarySalaryEmp = async (id: string) => {
-    const res = await employeeService.getOneSummaryByEmployeeId(id + '')
-    summary_salary.value = res.data[0]
+    const res = await employeeService.getSummaryByEmployeeId(id + '')
+    summary_salaries.value = [...res.data]
 
-    console.log(res.data);
+    console.log(summary_salaries.value)
   }
   const getOneEmployee = async (id: string) => {
     loadingStore.isLoading = true
@@ -285,7 +286,14 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     }
     loadingStore.isLoading = false
   }
+  const getSummaryById = async (id: string) => {
+    const res = await employeeService.getSummarySalaryById(id)
+    summary_salary.value = res.data
+    console.log(summary_salary.value)
+  }
+  
   return {
+    getSummaryById,
     getCioByIdEmp,
     page,
     keyword,
