@@ -49,23 +49,41 @@ onMounted(() => {
     <v-card>
       <v-card-title>
         Products
-        <v-btn class="mdi mdi-plus mt-2" style="float: right; background-color: #8ad879; color: white"
-          @click="productStore.dialog = true">Add New Product</v-btn>
+        <v-row>
+          <v-col>
+            <v-btn class="mdi mdi-plus " style="float: right; background-color: #8ad879; color: white"
+            @click="productStore.dialog = true">Add New Product</v-btn>
 
-        <v-spacer> </v-spacer>
-        <v-text-field style="width: 30%" :loading="productStore.loading" density="compact" variant="solo"
-          v-model="productStore.keyword" label="Search templates" append-inner-icon="mdi-magnify"
-          hide-details></v-text-field>
-
-          <div class="mt-2" style="width: 30%">
-            <v-select v-model="productStore.cat"  label="Select" :items="['','Foods', 'Drinks', 'Desserts']" density="compact">
+          </v-col>
+          <v-col cols="3">
+            <v-select   v-model="productStore.cat"  label="Select" :items="['','Foods', 'Drinks', 'Desserts']" density="compact">
               <v-select   @click="productStore.cat = 0">  </v-select>
               <v-select  @click="productStore.cat = 1"> Drinks </v-select>
               <v-select  @click="productStore.cat = 2"> Foods </v-select>
               <v-select  @click="productStore.cat = 3"> Desserts </v-select>
             </v-select>
+
+          </v-col>
+         
+
+        </v-row>
+        
+
+        <v-spacer> </v-spacer>
+        <v-row>
+          <v-col cols="3">
+            <v-text-field  :loading="productStore.loading" density="compact" variant="solo"
+          v-model="productStore.keyword" label="Search templates" append-inner-icon="mdi-magnify"
+          hide-details></v-text-field>
+          </v-col>
+          
+        </v-row>
+       
+
+          
+           
             
-          </div>
+         
         
       </v-card-title>
 
