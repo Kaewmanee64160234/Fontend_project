@@ -8,8 +8,8 @@ function getCheckMaterail() {
     return http.post("/check-material", check_materail);
 }
   
-function getOneCheckMaterail(id: string) {
-    return http.get(`/check-material-detail/material/${id}`);
+function getOneCheckMaterail(id: string, params: any) {
+    return http.get(`/check-material-detail/material/${id}`,{params:params});
   }
 
 function deleteCheckMaterial(id: string) {
