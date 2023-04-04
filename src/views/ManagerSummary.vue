@@ -14,6 +14,7 @@ const goTo = (idSS:string)=>{
 }
 onMounted(async () => {
   await employeeStore.getSummarySalaryEmp(id.value + '')
+
 })
 </script>
 
@@ -95,6 +96,7 @@ onMounted(async () => {
       </v-container>
     </div>
   </v-container>
+
 </template>
 <style scoped>
 .title {

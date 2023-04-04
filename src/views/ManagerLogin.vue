@@ -7,6 +7,12 @@ import { onMounted, ref } from 'vue'
 import type { VForm } from 'vuetify/components'
 const employeeStore = useEmployeeStore()
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
+const employee = ref<Employee>(JSON.parse(data.value))
+onMounted(() => {
+    if (employee.value.position === 'employee') {
+        router.push('/employee/login')
+    }
+});
 const goTo = (index: string) => {
     router.push(`/manager/employee/${index}`);
 }
@@ -46,6 +52,7 @@ onMounted(async () => {
                             <td>{{ item.fullTime }}</td>
                             <td>{{ item.position }}</td>
 
+
                             <td>
                                 <v-btn class="mdi mr-2  mdi-eye" style=" color: white" color="blue-lighten-1"
                                     @click="goTo(item.id + '')"> History </v-btn>
@@ -58,6 +65,12 @@ onMounted(async () => {
                     </tbody>
 
                 </v-table>
+                <v-container width="100%" justify="center">
+
+                    <v-pagination justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage"
+                        rounded="circle"></v-pagination>
+
+                </v-container>
             </v-card-title>
         </v-card>
     </v-container>

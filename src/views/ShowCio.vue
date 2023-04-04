@@ -16,6 +16,7 @@ const id = ref(route.params.idSS)
 
 onMounted(async () => {
   await employeeStore.getOneSummaryBySSID(id.value + '')
+
 })
 </script>
 
@@ -23,8 +24,8 @@ onMounted(async () => {
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-container>
     <v-card>
-      {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}
-      <v-card-text width="100vw" style="height: 90vh">
+
+      <v-card-text width="100vw" style="height: 90vh ;">
         <v-row class="text-center" cols="12">
           <v-col class="title" md="4">
             <v-container style="height: 100%">
@@ -137,7 +138,7 @@ onMounted(async () => {
 </template>
 <style scoped>
 .title {
-  background-color: #fff5e1;
+  background-color: #FFF5E1;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
   height: 100vh;
 }
