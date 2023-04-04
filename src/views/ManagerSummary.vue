@@ -44,19 +44,21 @@ onMounted(async () => {
                                 </v-col>
                             </v-row>
                             <v-row>
-                                <v-col>
-                                    <v-col>
-                                        <v-card-text style="text-align: center; font-size: 16px;">
-                                            <p>👤 Name : {{ employeeStore.editEmployee.name }} </p>
-                                            <br />
-                                            <p>📩 Email : {{ employeeStore.editEmployee.email }} </p>
-                                            <br />
-                                            <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                                            <br />
-                                            <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
-                                        </v-card-text>
+                                <v-col >
 
-                                    </v-col>
+                                    <v-card-text style="text-align: left;">
+                                        <ul
+                                            class=" text-gray-500 list-disc list-inside dark:text-gray-400 ">
+                                            <li>
+                                                👤 Name : {{ employeeStore.editEmployee.name }}
+                                            </li>
+                                            <li>
+                                                📩 Email : {{ employeeStore.editEmployee.email }}
+                                            </li>
+                                        </ul>
+
+                                    </v-card-text>
+
 
                                 </v-col>
                             </v-row>
@@ -147,7 +149,7 @@ onMounted(async () => {
 </template>
 <style scoped>
 .title {
-    background-color: #FCF8E8;
+    background-color: #FAF8F1;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
     height: 100vh;
 }
