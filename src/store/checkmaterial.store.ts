@@ -27,24 +27,22 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
   const lastPage = ref(0)
 
   watch(page, async (newPage, oldPage) => {
-    await getCheckMaterail()
+    await getOneCheckMatrial(keyword.value)
   })
   watch(keyword, async (newKey, oldKey) => {
-    if (keyword.value.length >= 3) {
+    if(keyword.value.length >=3){
       await getOneCheckMatrial(keyword.value)
-    }
-    if (keyword.value.length === 0) {
+    }if(keyword.value.length ===0){
       await getOneCheckMatrial(keyword.value)
-
-
+  
     }
-
   })
   watch(lastPage, async (newlastPage, oldlastPage) => {
     if (newlastPage < page.value) {
       page.value = 1
     }
   })
+  
   const getCheckMaterail = async () => {
     loadingStore.isLoading = true
     try {
@@ -62,16 +60,10 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
   const getOneCheckMatrial = async (id: string) => {
     loadingStore.isLoading = true
     try {
-      checkmeterialDetail.value = []
-      const response = await checkmaterialService.getOneCheckMaterail(id,{ 
-        page: page.value,
-        take: take.value,
-        keyword: keyword.value,
-        order: order.value,
-        orderBy: orderBy.value});
-        lastPage.value = response.data.lastPage
+      console.log(page.value)
+      const response = await checkmaterialService.getOneCheckMaterail(id);
       console.log(response.data)
-      checkmeterialDetail.value.push(...response.data)
+      checkmeterialDetail.value = response.data
       console.log(checkmeterialDetail.value)
     } catch (err) {
       console.log(err)
