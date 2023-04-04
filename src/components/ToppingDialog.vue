@@ -71,7 +71,7 @@ const save = () => {
           </v-chip-group>
         </div>
       </v-card-text>
-      <v-card-text v-else> เพิ่มลงตระกร้า 🛒 </v-card-text>
+      <v-card-text v-else> Add to cart 🛒 </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="secondary" variant="text" @click="save()"> Save </v-btn>
