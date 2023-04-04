@@ -67,7 +67,7 @@ onMounted(() => {
             <v-tab @click="productStore.getProductByCatagory('2')"> เครื่องดื่ม </v-tab>
             <v-tab @click="productStore.getProductByCatagory('1')"> อาหาร </v-tab>
             <v-tab @click="productStore.getProductByCatagory('3')"> ของหวาน </v-tab>
-            </v-tabs>
+          </v-tabs>
           </div>
           <div class="row">
             <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
@@ -80,43 +80,43 @@ onMounted(() => {
         <div class="col-md-6 mt-2">
           <div class="table-responsive cart-table shadow-md sm:rounded-lg" style="height: 50vh; overflow-y: auto">
             <!-- <table class="table w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th scope="col" class="px-6 py-3">ลำดับ</th>
-                    <th scope="col" class="px-6 py-3">รูปภาพ<span class="sr-only"></span></th>
-                    <th scope="col" class="px-6 py-3">รายการ</th>
-                    <th scope="col" class="px-6 py-3">จำนวน</th>
-                    <th scope="col" class="px-6 py-3">ราคา</th>
-                    <th scope="col" class="px-6 py-3">ราคารวม</th>
-                    <th scope="col" class="px-6 py-3">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="pointOfSaleStore.orderItemList.length === 0">
-                    <td style="text-align: center" colspan="7">No data</td>
-                  </tr>
-                  <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index"
-                    class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="text-center" style="padding: 50px">{{ index + 1 }}</td>
-                    <td scope="col" class="text-center"><img class="w-20 h-20 rounded-full"
-                        :src="`${url}/products/image/${item.image}`"></td>
-                    <td scope="col" class="text-center">{{ item.name }}</td>
-                    <td class="text-center">
-                      <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
-                        @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
-                      <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
-                        @click="reduceAmoutProduct(index)"></v-btn>
-                    </td>
-                    <td class="text-center">
-                      {{ item.price }}
-                    </td>
-                    <td class="text-center">{{ item.total }}</td>
-                    <td class="text-center">
-                      <v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
+                              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                  <th scope="col" class="px-6 py-3">ลำดับ</th>
+                                  <th scope="col" class="px-6 py-3">รูปภาพ<span class="sr-only"></span></th>
+                                  <th scope="col" class="px-6 py-3">รายการ</th>
+                                  <th scope="col" class="px-6 py-3">จำนวน</th>
+                                  <th scope="col" class="px-6 py-3">ราคา</th>
+                                  <th scope="col" class="px-6 py-3">ราคารวม</th>
+                                  <th scope="col" class="px-6 py-3">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr v-if="pointOfSaleStore.orderItemList.length === 0">
+                                  <td style="text-align: center" colspan="7">No data</td>
+                                </tr>
+                                <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index"
+                                  class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
+                                  <td class="text-center" style="padding: 50px">{{ index + 1 }}</td>
+                                  <td scope="col" class="text-center"><img class="w-20 h-20 rounded-full"
+                                      :src="`${url}/products/image/${item.image}`"></td>
+                                  <td scope="col" class="text-center">{{ item.name }}</td>
+                                  <td class="text-center">
+                                    <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
+                                      @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
+                                    <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
+                                      @click="reduceAmoutProduct(index)"></v-btn>
+                                  </td>
+                                  <td class="text-center">
+                                    {{ item.price }}
+                                  </td>
+                                  <td class="text-center">{{ item.total }}</td>
+                                  <td class="text-center">
+                                    <v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table> -->
 
 
             <!-- ///// TEST -->
@@ -142,23 +142,37 @@ onMounted(() => {
                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                           {{ item.name }}
                         </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                        <p class="text-sm text-gray-500  dark:text-gray-400">
                           add:
                         </p>
-                        <div class="flex items-center justify-between">
-                          <div
-                            class="flex items-center mb-5 items-center text-base font-semibold text-gray-900 dark:text-white">
-                            ฿{{ item.price }}
-                            <p class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400">x {{ item.amount }}</p>
-                          </div>
-                        </div>
+                        <v-row>
+                          <v-col>
+                            <div class="flex items-center justify-between">
+                              <div
+                                class="flex items-center mb-5 items-center text-base font-semibold text-gray-900 dark:text-white">
+                                ฿{{ item.price }}
+                                <p class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400">x {{ item.amount }}
+                                </p>
+                              </div>
+                            </div>
+
+                          </v-col>
+
+                          <v-col style="text-align: center; ">
+                            <div class="inline-flex  items-center text-base font-semibold text-gray-900 dark:text-white"
+                              style="text-align: right; margin-left:15%;">
+                              {{ item.total }}
+                            </div>
+
+                          </v-col>
+
+
+
+                        </v-row>
+
                       </div>
-                      <div class="inline-flex mr-20 items-center text-base font-semibold text-gray-900 dark:text-white">
-                        {{ item.total }}
-                      </div>
-                      <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        X
-                      </div>
+
+
                     </div>
                   </li>
                 </ul>
@@ -273,4 +287,5 @@ onMounted(() => {
 .cart-table::-webkit-scrollbar-thumb {
   background-color: #ddd;
   border-radius: 999px;
-}</style>
+}
+</style>
