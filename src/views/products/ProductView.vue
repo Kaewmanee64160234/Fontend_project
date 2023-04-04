@@ -50,10 +50,9 @@ onMounted(() => {
       <v-card-title>
         Products
         <v-row>
-          <v-col>
+          <v-col >
             <v-btn class="mdi mdi-plus " style="float: right; background-color: #8ad879; color: white"
             @click="productStore.dialog = true">Add New Product</v-btn>
-
           </v-col>
           <v-col cols="3">
             <v-select   v-model="productStore.cat"  label="Select" :items="['','Foods', 'Drinks', 'Desserts']" density="compact">
