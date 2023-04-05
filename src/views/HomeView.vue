@@ -22,7 +22,7 @@ const product_ = computed(() => {
 })
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
-  if(item.catagoryId !==1 && item.catagoryId !==2){
+  if(item.catagoryId !==1 && item.catagoryId !==3 ){
     pointOfSaleStore.dialogTopping = true
   }else{
     const product = pointOfSaleStore.orderItemList.findIndex((item_) => {
