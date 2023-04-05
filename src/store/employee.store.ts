@@ -269,6 +269,7 @@ export const useEmployeeStore = defineStore('employee', () => {
       const res = await employeeService.employeeCheckIn(checkInOut.value)
       console.log(res.data)
       await getOneEmployee(editEmployee.value.id + '')
+      // await getSummarySalaryEmp(editEmployee.value.id + '')
       checkIn.value = false
     } catch (err) {
       console.log(err)
@@ -283,6 +284,8 @@ export const useEmployeeStore = defineStore('employee', () => {
       const res = await employeeService.employeeCheckOut(id)
       console.log(res.data)
       await getOneEmployee(editEmployee.value.id + '')
+      await getSummarySalaryEmp(editEmployee.value.id + '')
+
       checkIn.value = true
     } catch (err) {
       console.log(err)

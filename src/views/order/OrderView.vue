@@ -4,8 +4,7 @@ import router from '@/router';
 
 import ConfirmDialog from '@/components/ConfirmDialog.vue';
 import { useOrderStore } from '@/store/order.store';
-import { onMounted } from 'vue';
-
+import { onMounted, ref } from 'vue';
 const orderStore = useOrderStore();
 const goTo = (index: string) => {
   router.push('/order/' + index);
@@ -18,9 +17,13 @@ onMounted(() => {
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-container>
+    
     <v-card>
       <v-card-title>
-        Orders
+        Orders 
+        
+
+
        
         <VTable class="text-center mt-5">
           <thead>
@@ -65,4 +68,6 @@ onMounted(() => {
       </v-card-title>
     </v-card>
   </v-container>
+  
+
 </template>
