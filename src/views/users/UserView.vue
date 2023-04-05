@@ -5,7 +5,6 @@ import { useUserStore } from '@/store/user.store';
 import { onMounted, ref, computed } from 'vue';
 const confirmDlg = ref();
 const userStore = useUserStore();
-
 onMounted(async () => {
   await userStore.getUsers();
 });

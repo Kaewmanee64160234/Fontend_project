@@ -5,7 +5,7 @@ import type User from '@/store/types/user.type'
 import { ref } from 'vue'
 const user = ref<any | null>(localStorage.getItem('user'))
 const user_ = JSON.parse(user.value)
-const ezAutorized = (to: RouteLocationNormalized) => {
+const ezAutorized = () => {
   if (user_.role.toLowerCase() === 'employee') {
     return router.push('/pageNotFound')
   } else {
@@ -164,8 +164,8 @@ const router = createRouter({
       }
     },
     {
-      path: '/material/:id',
-      name: 'materials',
+      path: '/checkmaterial/:id',
+      name: 'checkmaterials',
 
       components: {
         default: () => import('../views/materials/CheckMaterialView.vue'),

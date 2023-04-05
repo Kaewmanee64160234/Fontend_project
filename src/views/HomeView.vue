@@ -64,9 +64,9 @@ onMounted(() => {
       <div class="col-md-6 item-side">
         <div class="row-md-6">
           <v-tabs fixed-tabs color="#9F8772" dark>
-            <v-tab @click="productStore.getProductByCatagory('2')"> เครื่องดื่ม </v-tab>
-            <v-tab @click="productStore.getProductByCatagory('1')"> อาหาร </v-tab>
-            <v-tab @click="productStore.getProductByCatagory('3')"> ของหวาน </v-tab>
+            <v-tab @click="productStore.getProductByCatagory('2')"> Drinks </v-tab>
+            <v-tab @click="productStore.getProductByCatagory('1')"> Foods </v-tab>
+            <v-tab @click="productStore.getProductByCatagory('3')"> Desserts </v-tab>
           </v-tabs>
           </div>
           <div class="row">
@@ -80,52 +80,52 @@ onMounted(() => {
         <div class="col-md-6 mt-2">
           <div class="table-responsive cart-table shadow-md sm:rounded-lg" style="height: 50vh; overflow-y: auto">
             <!-- <table class="table w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                  <th scope="col" class="px-6 py-3">ลำดับ</th>
-                                  <th scope="col" class="px-6 py-3">รูปภาพ<span class="sr-only"></span></th>
-                                  <th scope="col" class="px-6 py-3">รายการ</th>
-                                  <th scope="col" class="px-6 py-3">จำนวน</th>
-                                  <th scope="col" class="px-6 py-3">ราคา</th>
-                                  <th scope="col" class="px-6 py-3">ราคารวม</th>
-                                  <th scope="col" class="px-6 py-3">Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr v-if="pointOfSaleStore.orderItemList.length === 0">
-                                  <td style="text-align: center" colspan="7">No data</td>
-                                </tr>
-                                <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index"
-                                  class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
-                                  <td class="text-center" style="padding: 50px">{{ index + 1 }}</td>
-                                  <td scope="col" class="text-center"><img class="w-20 h-20 rounded-full"
-                                      :src="`${url}/products/image/${item.image}`"></td>
-                                  <td scope="col" class="text-center">{{ item.name }}</td>
-                                  <td class="text-center">
-                                    <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
-                                      @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
-                                    <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
-                                      @click="reduceAmoutProduct(index)"></v-btn>
-                                  </td>
-                                  <td class="text-center">
-                                    {{ item.price }}
-                                  </td>
-                                  <td class="text-center">{{ item.total }}</td>
-                                  <td class="text-center">
-                                    <v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table> -->
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                      <tr>
+                                        <th scope="col" class="px-6 py-3">ลำดับ</th>
+                                        <th scope="col" class="px-6 py-3">รูปภาพ<span class="sr-only"></span></th>
+                                        <th scope="col" class="px-6 py-3">รายการ</th>
+                                        <th scope="col" class="px-6 py-3">จำนวน</th>
+                                        <th scope="col" class="px-6 py-3">ราคา</th>
+                                        <th scope="col" class="px-6 py-3">ราคารวม</th>
+                                        <th scope="col" class="px-6 py-3">Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr v-if="pointOfSaleStore.orderItemList.length === 0">
+                                        <td style="text-align: center" colspan="7">No data</td>
+                                      </tr>
+                                      <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index"
+                                        class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <td class="text-center" style="padding: 50px">{{ index + 1 }}</td>
+                                        <td scope="col" class="text-center"><img class="w-20 h-20 rounded-full"
+                                            :src="`${url}/products/image/${item.image}`"></td>
+                                        <td scope="col" class="text-center">{{ item.name }}</td>
+                                        <td class="text-center">
+                                          <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
+                                            @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
+                                          <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
+                                            @click="reduceAmoutProduct(index)"></v-btn>
+                                        </td>
+                                        <td class="text-center">
+                                          {{ item.price }}
+                                        </td>
+                                        <td class="text-center">{{ item.total }}</td>
+                                        <td class="text-center">
+                                          <v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table> -->
 
 
             <!-- ///// TEST -->
-            <div class="w-90 md p-8">
-              <div class="flex items-center justify-between mb-4">
-                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Order ID</h5>
-                <a class="mr-20 text-sm font-medium text-gray-900 dark:text-white">
+            <div class="w-100 md p-8">
+              <div class="flex justify-between mb-4">
+                <h4 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Order</h4>
+                <!-- <a class="mr-20 text-sm font-medium text-gray-900 dark:text-white">
                   Total
-                </a>
+                </a> -->
               </div>
               <div class="flow-root">
                 <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -134,11 +134,11 @@ onMounted(() => {
                       <p style="text-align: center">No data</p>
                     </div>
                     <div v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index"
-                      class="flex items-center space-x-4">
+                      class="flex items-center space-x-4 mt-2">
                       <div class="flex-shrink-0">
                         <img class="rounded-full w-20 h-20" :src="`${url}/products/image/${item.image}`">
                       </div>
-                      <div class="flex-1 min-w-0 ">
+                      <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                           {{ item.name }}
                         </p>
@@ -155,24 +155,26 @@ onMounted(() => {
                                 </p>
                               </div>
                             </div>
-
                           </v-col>
 
+                          <v-col>
+                            <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
+                              @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
+                            <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
+                              @click="reduceAmoutProduct(index)"></v-btn>
+                          </v-col>
                           <v-col style="text-align: center; ">
                             <div class="inline-flex  items-center text-base font-semibold text-gray-900 dark:text-white"
                               style="text-align: right; margin-left:15%;">
                               {{ item.total }}
                             </div>
-
                           </v-col>
-
-
-
+                          <v-col>
+                              <v-btn class="text-center" style="text-align: right; margin-left:50%;" color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
+                          </v-col>
                         </v-row>
-
+                        <v-divider></v-divider>
                       </div>
-
-
                     </div>
                   </li>
                 </ul>
@@ -186,7 +188,7 @@ onMounted(() => {
             <div class="row">
 
               <div class="col-md-5">
-                <span class="fw-bold mt-2">ระบุจำนวนเงินที่ได้รับ</span>
+                <span class="fw-bold mt-2">Enter the amount received</span>
                 <input class="form-control mt-3" id="amount" type="text" placeholder="Amount"
                   v-model="pointOfSaleStore.recive_mon" />
 
@@ -199,7 +201,7 @@ onMounted(() => {
                 <v-btn block rounded="xl" tyle="background-color: #607EAA; color: white;" class="mt-7" width="300px"
                   v-else :disabled="true">Promotion</v-btn>
 
-                <v-btn block rounded="xl" style="background-color: #03C988; color: white" class="mt-7" width="300px"
+                <v-btn block rounded="xl" style="background-color: #6C4AB6; color: white" class="mt-7" width="300px"
                   @click="customerStore.addCustomerDialog = true">Add Customer</v-btn>
 
                 <v-btn block rounded="xl" style="background-color: #FF2442; color: white" class="mt-7" width="300px"
@@ -207,27 +209,27 @@ onMounted(() => {
               </div>
               <div class="col-md-7">
                 <div class="d-flex justify-content-between">
-                  <p class="fw-bold mb-0">ราคารวม :</p>
-                  <p class="fw-bold mb-0">{{ aboutCal?.total_ }} บาท</p>
+                  <p class="fw-bold mb-0">Total :</p>
+                  <p class="fw-bold mb-0">{{ aboutCal?.total_ }} Bath</p>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <p class="fw-bold mb-0">ส่วนลด :</p>
-                  <p class="fw-bold mb-0">{{ pointOfSaleStore.total_discount }} บาท</p>
+                  <p class="fw-bold mb-0">Discount :</p>
+                  <p class="fw-bold mb-0">{{ pointOfSaleStore.total_discount }} Bath</p>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <p class="fw-bold mb-0">ยอดที่ต้องชำระ :</p>
-                  <p class="fw-bold mb-0">{{ aboutCal?.totalAndDicount }} บาท</p>
+                  <p class="fw-bold mb-0">Payment amount :</p>
+                  <p class="fw-bold mb-0">{{ aboutCal?.totalAndDicount }} Bath</p>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <p class="fw-bold mb-0">ยอดรับชำระ :</p>
-                  <p class="fw-bold mb-0">{{ pointOfSaleStore.recive_mon }} บาท</p>
+                  <p class="fw-bold mb-0">Received :</p>
+                  <p class="fw-bold mb-0">{{ pointOfSaleStore.recive_mon }} Bath</p>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <p class="fw-bold mb-0">จำนวนเงินที่ทอน :</p>
+                  <p class="fw-bold mb-0">Change :</p>
                   <p class="fw-bold mb-0" v-if="aboutCal?.change_money?.value! < 0" style="color: red">
-                    {{ aboutCal?.change_money }} บาท
+                    {{ aboutCal?.change_money }} Bath
                   </p>
-                  <p class="fw-bold mb-0" v-else>{{ aboutCal?.change_money }} บาท</p>
+                  <p class="fw-bold mb-0" v-else>{{ aboutCal?.change_money }} Bath</p>
                 </div>
                 <div class="mt-2">Select Payment Menthod</div>
                 <v-row dense>
@@ -248,7 +250,7 @@ onMounted(() => {
                 <v-row dense>
                   <v-col class="mt-1">
                     <v-btn block rounded="xl" width="inherit" height="40px"
-                      style="background-color: #519259; color: white;"
+                      style="background-color: #03C988; color: white;"
                       @click="pointOfSaleStore.openOrder">Save</v-btn></v-col>
                 </v-row>
               </div>
