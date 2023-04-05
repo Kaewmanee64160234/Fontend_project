@@ -84,7 +84,6 @@ function Paycash() {
 
         <div class="col-md-6 mt-2">
           <div class="table-responsive cart-table shadow-md sm:rounded-lg" style="height: 50vh; overflow-y: auto">
-
             <div class="w-100 md p-8">
               <div class="flex justify-between mb-4">
                 <h4 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Order</h4>
@@ -148,6 +147,7 @@ function Paycash() {
 
           <div class="summary mt-4" style="height: 20vh">
             <div class="row">
+              {{ pointOfSaleStore.order }}
 
               <div class="col-md-5">
                 <span class="fw-bold mt-2">Enter the amount received</span>
