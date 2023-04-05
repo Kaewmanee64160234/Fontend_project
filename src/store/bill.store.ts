@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import type BILL from "./types/bill";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
@@ -21,7 +21,7 @@ export const useBillStore = defineStore("bill", () => {
   change: 0 ,
   employeeId: 0,
   bill_detail: [{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]}]);
-  const bill_Detail_List = ref<BILL_DETAIL[]>([{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]);
+  const bill_Detail_List = ref<BILL_DETAIL[]>([]);
   const bill_list = ref<BILL>({ 
     name: '', 
     date: new Date(), 
@@ -31,6 +31,31 @@ export const useBillStore = defineStore("bill", () => {
     employeeId: 0,
     bill_detail: bill_Detail_List.value
   });
+
+    // about pagination
+    const page = ref(1)
+    const take = ref(5)
+    const keyword = ref('')
+    const order = ref('ASC')
+    const orderBy = ref('')
+    const lastPage = ref(0)
+  
+    watch(page, async (newPage, oldPage) => {
+      await getOneBill(keyword.value)
+    })
+    watch(keyword, async (newKey, oldKey) => {
+      if(keyword.value.length >=3){
+        await getOneBill(keyword.value)
+      }if(keyword.value.length ===0){
+        await getOneBill(keyword.value)
+    
+      }
+    })
+    watch(lastPage, async (newlastPage, oldlastPage) => {
+      if (newlastPage < page.value) {
+        page.value = 1
+      }
+    })
 
   async function getBills() {
     loadingStore.isLoading = true
@@ -92,5 +117,5 @@ export const useBillStore = defineStore("bill", () => {
   
       loadingStore.isLoading = false
     }
-    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill};  
+    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill,page,keyword,take,order,orderBy,lastPage,};  
   });

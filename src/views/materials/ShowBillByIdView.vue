@@ -1,24 +1,26 @@
 
 <script setup lang="ts">
-import { useCheckMaterialStore } from '@/store/checkmaterial.store';
+import { useBillStore } from '@/store/bill.store';
 import type BILL from '@/store/types/bill';
 
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-const checkMaterialStore = useCheckMaterialStore();
 
 
 const route = useRoute()
 const id = route.params.id
-const checkMat = ref<BILL>();
-onMounted(() => {
-  checkMaterialStore.getOneCheckMatrial(id+'')
 
-})
+
+const showMat = ref<BILL>();
+const billStore = useBillStore();
+
+onMounted(async() => {
+    billStore.getOneBill(id+'');
+});
 const dialog = ref(false);
 const opendialog = (data:BILL) =>{
   dialog.value = true;
-  checkMat.value = data;
+  showMat.value = data;
 
 
 }
@@ -30,34 +32,23 @@ const opendialog = (data:BILL) =>{
 
         Check Material
         <VTable class="text-center mt-5">
-          <thead>
+            <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Total</th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Bill Detail</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item,index) of checkMaterialStore.checkmeterialDetail" :key="index" class="text-center">
-              <!-- <td>{{ index+1 }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{item.qty_last}}</td>
-              <td>{{item.qty_remain}}</td>
-              <td>{{item.qty_expire}}</td>
-              <td>{{item.createdAt}}</td>
-              <td>{{item.createdAt }}</td> -->
+            <tr v-for="(item,index) of billStore.bill_Detail_List" :key="index" class="text-center">
              <td>{{ index+1}}</td> 
-             <td>
-              {{  }}
-
-             </td> 
-             <td><v-btn >Click</v-btn></td>
-
-
+             <td>{{ item.bill.name }}</td>
+             <td>{{ new Date(item.bill.date+'').getDate()+'/'+new Date(item.bill.date+'').getMonth()+'/'+new Date(item.bill.date+'').getFullYear() }}</td>
+             <td><v-btn @click="opendialog(item.bill)">Click</v-btn></td>
             </tr>
           </tbody>
-          <tbody v-if="checkMaterialStore.checkmeterialDetail.length == 0" >
+          <tbody v-if="billStore.bill_Detail_List.length == 0" >
           <tr>
             <td colspan="7" class="text-center">No data</td>
           </tr>
@@ -66,15 +57,24 @@ const opendialog = (data:BILL) =>{
       </VCardTitle>
       <v-container width="100%" justify="center">
        
-       <v-pagination  justify="center" v-model="checkMaterialStore.page" :length="checkMaterialStore.lastPage" rounded="circle"></v-pagination>
+       <v-pagination  justify="center" v-model="billStore.page" :length="billStore.lastPage" rounded="circle"></v-pagination>
 
      </v-container>
     </VCard>
   </VContainer>
   <v-dialog v-model="dialog">
     <v-container style="background-color: aliceblue;">
-      {{ checkMat }}
-
+      <v-table class="text-center">
+        <thead>
+            <tr>BILL</tr>
+        </thead>
+        <tbody v-for="(item,index) of billStore.bill_Detail_List" :key="index">
+                <tr>Name: {{ item.name }}</tr>
+                <tr>Amount: {{ item.amount }}</tr>
+                <tr>Price: {{ item.price }}</tr>
+                <tr>Total: {{ item.total }}</tr>
+        </tbody>
+      </v-table>
     </v-container>
   </v-dialog>
 </template>
