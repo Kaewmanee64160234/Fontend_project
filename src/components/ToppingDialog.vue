@@ -8,25 +8,31 @@ const pointOfSaleStore = usePointOfSale()
 const product_ = computed(() => {
   return pointOfSaleStore.temProduct
 })
-
+let orderItem = ref<OrderItem>({
+  name: product_.value.name,
+  amount: 1,
+  productId: product_.value.id!,
+  price: product_.value.price,
+  total: product_.value.price * 1,
+  image: product_.value.image
+})
 const save = () => {
   const product = pointOfSaleStore.orderItemList.findIndex((item_) => {
     if (item_.productId === product_.value.id) {
-      item_.amount +=1;
-      item_.total = item_.amount * item_.price;
-      return item_;
+      item_.amount += 1
+      item_.total = item_.amount * item_.price
+      return item_
     }
   })
   if (product < 0) {
-    const orderItem = ref<OrderItem>({
+    orderItem.value = {
       name: product_.value.name,
       amount: 1,
       productId: product_.value.id!,
       price: product_.value.price,
       total: product_.value.price * 1,
       image: product_.value.image
-
-    })
+    }
     pointOfSaleStore.addToOrder(orderItem.value)
   }
   pointOfSaleStore.dialogTopping = false
@@ -41,26 +47,27 @@ const save = () => {
       <v-card-text v-if="product_.catagoryId === 2">
         <div class="d-flex align-left flex-column">
           <h5>Size</h5>
-          <v-btn-toggle v-model="pointOfSaleStore.toggle" variant="outlined" divided>
+          <v-btn-toggle v-model="pointOfSaleStore.toggle" variant="outlined" divided rounded="xl">
             <v-btn>S</v-btn>
             <v-btn>M</v-btn>
-            <v-btn>L</v-btn>
+            <v-btn>L +10</v-btn>
           </v-btn-toggle>
         </div>
         <div
           class="d-flex align-left flex-column"
-          v-if="product_.type === 'tea' && 'smoothies' && 'milkshakes' && 'hot chocolate'"
+          v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate' || 'coffee'"
         >
           <h5>Sweet</h5>
 
-          <v-btn-toggle v-model="pointOfSaleStore.toggle2" variant="outlined" divided>
+          <v-btn-toggle v-model="pointOfSaleStore.toggle2" variant="outlined" divided rounded="xl">
+            <v-btn>sweet 0%</v-btn>
+            <v-btn>sweet 25%</v-btn>
             <v-btn>sweet 50%</v-btn>
-            <v-btn>sweet 100%</v-btn>
             <v-btn>sweet 100% +10</v-btn>
             <v-btn>sweet 125% +15</v-btn>
           </v-btn-toggle>
         </div>
-        <div v-if="product_.type === 'tea' && 'smoothies' && 'milkshakes' && 'hot chocolate'">
+        <div v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate'">
           <h5>Topping</h5>
 
           <v-chip-group v-model="pointOfSaleStore.amenities" column multiple>
@@ -68,6 +75,7 @@ const save = () => {
             <v-chip filter variant="outlined"> cocoa +10 </v-chip>
             <v-chip filter variant="outlined"> konjac jelly +10 </v-chip>
             <v-chip filter variant="outlined"> whipped cream +10 </v-chip>
+            <v-chip filter variant="outlined"> whipped cream +15 </v-chip>
           </v-chip-group>
         </div>
       </v-card-text>
