@@ -10,6 +10,7 @@ const productStore = useProductStore()
 const confirmDlg = ref()
 const url = import.meta.env.VITE_URL_PORT
 onMounted(async () => {
+  productStore.cat = '';
   await productStore.getProducts()
 })
 const deleteProduct = async (id: number) => {
@@ -55,10 +56,11 @@ onMounted(() => {
             @click="productStore.dialog = true">Add New Product</v-btn>
           </v-col>
           <v-col cols="3">
-            <v-autocomplete   v-model="productStore.cat"  label="Select" :items="['Foods', 'Drinks', 'Desserts']" density="compact">
-              <v-autocomplete  @click="productStore.cat = 1"> Drinks </v-autocomplete>
-              <v-autocomplete  @click="productStore.cat = 2"> Foods </v-autocomplete>
-              <v-autocomplete  @click="productStore.cat = 3"> Desserts </v-autocomplete>
+            <v-autocomplete   v-model="productStore.cat"  label="Select" :items="['','Foods', 'Drinks', 'Desserts']" density="compact">
+              <v-autocomplete  @click="productStore.cat = ''"> Drinks </v-autocomplete>
+              <v-autocomplete  @click="productStore.cat = 1+''"> Drinks </v-autocomplete>
+              <v-autocomplete  @click="productStore.cat = 2+''"> Foods </v-autocomplete>
+              <v-autocomplete  @click="productStore.cat = 3+''"> Desserts </v-autocomplete>
             </v-autocomplete>
 
           </v-col>
@@ -76,13 +78,6 @@ onMounted(() => {
           </v-col>
           
         </v-row>
-       
-
-          
-           
-            
-         
-        
       </v-card-title>
 
       <v-table class="text-center mt-5">

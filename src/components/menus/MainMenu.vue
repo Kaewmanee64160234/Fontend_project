@@ -44,7 +44,7 @@ const url = import.meta.env.VITE_URL_PORT
         to="/product"
       ></v-list-item>
 
-      <v-list-item v-if="user_.role !=='Employee'"  
+      <v-list-item v-if="user_.role !=='employee'"  
         prepend-icon="mdi-account" 
         title="User" 
         value="user" 
@@ -57,7 +57,7 @@ const url = import.meta.env.VITE_URL_PORT
         to="/customer"
       ></v-list-item>
 
-      <v-list-item
+      <v-list-item 
         prepend-icon="mdi-face-agent"
         title="Employee"
         value="employee"
@@ -75,20 +75,20 @@ const url = import.meta.env.VITE_URL_PORT
         value="store"
         to="/store"
       ></v-list-item>
-      <v-list-item
+      <v-list-item v-if="user_.role !=='employee'" 
         prepend-icon="mdi-account-group-outline"
         title="Checkin-Checkout"
         value="Login employee"
         to="/employee/login"
       ></v-list-item>
-      <v-list-item v-if="user_.role !=='Employee'"
+      <v-list-item v-if="user_.role !=='employee'" 
         prepend-icon="mdi-account-tie"
         title="Manager"
         value="Login Manager"
         to="/manager/employees"
       ></v-list-item>
 
-      <v-list-item v-if="user_.role !=='Employee'" prepend-icon="mdi-book " title="Order" value="Order" to="/orders"></v-list-item>
+      <v-list-item v-if="user_.role !=='employee'"   prepend-icon="mdi-book " title="Order" value="Order" to="/orders"></v-list-item>
       <v-list-item
         prepend-icon="mdi-logout-variant"
         title="Logout"

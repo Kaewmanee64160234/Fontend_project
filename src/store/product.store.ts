@@ -49,7 +49,7 @@ export const useProductStore = defineStore('Product', () => {
   const order = ref('ASC')
   const orderBy = ref('');
   const lastPage = ref(0);
-  const cat = ref();
+  const cat = ref('');
 
   watch(page,async (newPage, oldPage) => {
     await getProducts()
@@ -64,9 +64,7 @@ export const useProductStore = defineStore('Product', () => {
   
   })
   watch(cat,async (newKey, oldKey) => {
-
   await getProducts()
-
   
   })
   watch(lastPage,async (newlastPage, oldlastPage) => {
@@ -202,7 +200,7 @@ export const useProductStore = defineStore('Product', () => {
     }
   }
   const checngeMat = (id:number) => {
-    cat.value = id
+    cat.value = id+''
   }
 
   return {
