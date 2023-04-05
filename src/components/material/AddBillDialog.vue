@@ -3,6 +3,7 @@ import { useBillStore } from '@/store/bill.store';
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components';
 import type Employee from '@/store/types/employee.type';
+import billdetail from '@/services/billdetail';
 const billStore = useBillStore();
 const form = ref<VForm | null>(null)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
@@ -84,7 +85,7 @@ async function save() {
       <v-card-text style="overflow-y: auto;">
         <v-form ref="form">
           <v-container width="80%">
-            <v-card class="pa-5 ma-2 dialog1;justify-center" v-for="(item, index) in billStore.bill_Detail_List" :key="index" >
+            <v-card class="pa-5 ma-2 dialog1;justify-center" v-for="(item, index) in billStore.bill_list.bill_detail" :key="index" >
               <v-card-title style="text-align: center;">
                 <p>Bill detail {{ index + 1 }}</p>
               </v-card-title>

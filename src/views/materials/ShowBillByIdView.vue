@@ -41,7 +41,7 @@ const opendialog = (data:BILL) =>{
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item,index) of billStore.bill_Detail_List" :key="index" class="text-center">
+            <tr v-for="(item,index) of billStore.bill_detail" :key="index" class="text-center">
              <td>{{ index+1}}</td> 
              <td>{{ item.bill.name }}</td>
              <td>{{ new Date(item.bill.date+'').getDate()+'/'+new Date(item.bill.date+'').getMonth()+'/'+new Date(item.bill.date+'').getFullYear() }}</td>
@@ -68,7 +68,7 @@ const opendialog = (data:BILL) =>{
         <thead>
             <tr>BILL</tr>
         </thead>
-        <tbody v-for="(item,index) of billStore.bill_Detail_List" :key="index">
+        <tbody v-for="(item,index) of billStore.bill_detail" :key="index">
                 <tr>Name: {{ item.name }}</tr>
                 <tr>Amount: {{ item.amount }}</tr>
                 <tr>Price: {{ item.price }}</tr>
