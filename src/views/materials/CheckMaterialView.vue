@@ -52,7 +52,8 @@ const opendialog = (data:BILL) =>{
               <td>{{item.createdAt }}</td> -->
              <td>{{ index+1}}</td> 
              <td>
-              {{ item.checkmaterial.date }}
+              {{  new Date(item.checkmaterial.date +'').getDate()+'/'+new Date( item.checkmaterial.date+'').getMonth()+'/'+new Date( item.checkmaterial.date+'').getFullYear()+'  '+new Date( item.checkmaterial.date+'').getHours()+':'+new Date(item.checkmaterial.date+'').getMinutes()+':'+new Date(item.checkmaterial.date+'').getSeconds()}}
+              
 
              </td> 
              <td><v-btn @click="opendialog(item.checkmaterial)">Click</v-btn></td>
