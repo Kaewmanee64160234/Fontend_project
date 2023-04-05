@@ -5,7 +5,7 @@ import type User from '@/store/types/user.type'
 import { ref } from 'vue'
 const user = ref<any | null>(localStorage.getItem('user'))
 const user_ = JSON.parse(user.value)
-const ezAutorized = (to: RouteLocationNormalized) => {
+const ezAutorized = () => {
   if (user_.role.toLowerCase() === 'employee') {
     return router.push('/pageNotFound')
   } else {
@@ -250,8 +250,8 @@ const router = createRouter({
       }
     },
     {
-      path: '/manager/login',
-      name: 'manager-login',
+      path: '/manager/employees',
+      name: 'manager-employees',
 
       components: {
         default: () => import('../views/ManagerLogin.vue'),
@@ -265,11 +265,11 @@ const router = createRouter({
       beforeEnter: [ezAutorized]
     },
     {
-      path: '/manager/login/:id',
-      name: 'show-cio',
+      path: '/manager/employee/:idEmp',
+      name: 'summary salary',
 
       components: {
-        default: () => import('../views/ShowCio.vue'),
+        default: () => import('../views/ManagerSummary.vue'),
         menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },
@@ -280,11 +280,11 @@ const router = createRouter({
       }
     },
     {
-      path: '/manager/employee/:id/summary',
-      name: 'manager-employee-summary',
+      path: '/manager/employee/:id/cio/:idSS',
+      name: 'show-cio',
 
       components: {
-        default: () => import('../views/ManagerSummary.vue'),
+        default: () => import('../views/ShowCio.vue'),
         menu: () => import('@/components/menus/MainMenu.vue'),
         header: () => import('@/components/headers/MainHeader.vue')
       },

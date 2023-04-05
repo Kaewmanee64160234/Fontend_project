@@ -11,10 +11,9 @@ const employeeStore = useEmployeeStore()
 
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
-
 onMounted(async () => {
   await employeeStore.getOneEmployee(employee.value.id + '')
-  await employeeStore.getOneSummarySalaryEmp(employee.value.id + '')
+  await employeeStore.getSummarySalaryEmp(employee.value.id + '')
   // console.log(employeeStore.editEmployee)
 })
 </script>
@@ -96,12 +95,12 @@ onMounted(async () => {
 
           <v-col class="detail">
             <v-container style="height: 100%; ">
-              <v-row style="height: 13%">
+              <v-row style="height: 18%">
                 <v-row class="text-center">
                   <v-col class="detail-emp">
                     <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #DEF5E5;">
                       <v-card-title class="text-left">
-                        <h7> {{ employeeStore.summary_salary.salary }} ฿ </h7> <br />
+                        <h7> {{ employeeStore.summary_salaries[0].salary }} ฿ </h7> <br />
                         <h7 style="font-size: 15px; color: #6D9886">💸 Your Salary </h7>
                       </v-card-title>
                     </v-card>
@@ -109,7 +108,7 @@ onMounted(async () => {
                   <v-col class="detail-emp">
                     <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #FFE3E1;">
                       <v-card-title class="text-left">
-                        <h7> {{ employeeStore.summary_salary.hour }} hour </h7> <br />
+                        <h7> {{ employeeStore.summary_salaries[0].hour }} hour </h7> <br />
                         <h7 style="font-size: 15px; color: #FF9494">🕒 Total work </h7>
                       </v-card-title>
                     </v-card>
@@ -119,19 +118,22 @@ onMounted(async () => {
               </v-row>
               <v-col class="detail">
                 <v-container style="height: 60%; ">
-                  <VTable fixed-header height="350px" class="text-center mt-5;" style="justify-content: center; ">
+                  <VTable fixed-header height="430px" class="text-center mt-5;" style="justify-content: center; ">
                     <thead style="justify-content: center;  ">
                       <tr>
+                        <th> Date </th>
                         <th>Time in</th>
                         <th>Time out</th>
                         <th>Total hour</th>
                       </tr>
                     </thead>
                     <tbody style=" overflow-y: auto;">
-                      <tr class="text-center mr-5" style="justify-content: center;  overflow-y: auto;"
+                      <tr class="text-center mr-5" style="justify-content: center;  overflow-y: auto; text-align: center;"
+
                         v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
                         <td>{{  new Date(item.time_in+'').getDate()+'/'+new Date(item.time_in+'').getMonth()+'/'+new Date(item.time_in+'').getFullYear() }}</td>
-                        <td>{{  new Date(item.time_out+'').getDate()+'/'+new Date(item.time_out+'').getMonth()+'/'+new Date(item.time_out+'').getFullYear()  }}</td>
+                        <td>{{  new Date(item.time_in+'').getHours()+':'+new Date(item.time_in+'').getMinutes()+':'+new Date(item.time_in+'').getSeconds() }}</td>
+                        <td>{{ new Date(item.time_out+'').getHours()+':'+new Date(item.time_out+'').getMinutes()+':'+new Date(item.time_out+'').getSeconds()}}</td>
                         <td>{{ item.total_hour }}</td>
                       </tr>
                     </tbody>

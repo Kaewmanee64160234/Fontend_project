@@ -45,6 +45,7 @@ async function save() {
             </v-row>
             <v-row>
               <v-col cols="12" sm="6" md="6">
+
                 <v-text-field label="Password*" required v-model="userStore.editedUser.password"
                   :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></v-text-field>
               </v-col>
