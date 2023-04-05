@@ -44,6 +44,7 @@ const opendialog = (data: BILL) => {
           <tbody>
             <tr v-for="(item, index) of checkMaterialStore.checkmeterialDetail" :key="index" class="text-center">
               <!-- <td>{{ index+1 }}</td>
+<<<<<<< HEAD
                 <td>{{ item.name }}</td>
                 <td>{{item.qty_last}}</td>
                 <td>{{item.qty_remain}}</td>
@@ -52,6 +53,18 @@ const opendialog = (data: BILL) => {
                 <td>{{item.createdAt }}</td> -->
               <td>{{ index + 1 }}</td>
               <td>
+=======
+              <td>{{ item.name }}</td>
+              <td>{{item.qty_last}}</td>
+              <td>{{item.qty_remain}}</td>
+              <td>{{item.qty_expire}}</td>
+              <td>{{item.createdAt}}</td>
+              <td>{{item.createdAt }}</td> -->
+             <td>{{ index+1}}</td> 
+             <td>
+              {{  new Date(item.checkmaterial.date +'').getDate()+'/'+new Date( item.checkmaterial.date+'').getMonth()+'/'+new Date( item.checkmaterial.date+'').getFullYear()+'  '+new Date( item.checkmaterial.date+'').getHours()+':'+new Date(item.checkmaterial.date+'').getMinutes()+':'+new Date(item.checkmaterial.date+'').getSeconds()}}
+              
+>>>>>>> 22975d0fb4cd783c422d01541b8c47270aaec241
 
                 {{ new Date(item.checkmaterial.date+'').getDate()+'/'+new Date(item.checkmaterial.date+'').getMonth()+'/'+new Date(item.checkmaterial.date+'').getFullYear() }}
 

@@ -4,8 +4,8 @@ import http from "./axios";
 function getBill() {
     return http.get("/bills");
   }
-function getOneBill(id: string) {
-  return http.get(`/bills/${id}`);
+function getOneBill( id:string ) {
+    return http.get(`/bills/show/${id}`);
   }
 function saveBill(bill: BILL) {
   return http.post("/bills", bill);

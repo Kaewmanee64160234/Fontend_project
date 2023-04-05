@@ -10,6 +10,7 @@ export default interface User {
     role: string;
     telEmployee?:string;
     addressEmployee?: string;
+    address?:string;
     hourly?:number;
     image?:string;
     employee?: Employee;
