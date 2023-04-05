@@ -21,43 +21,72 @@ onMounted(async () => {
 
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-  <v-container>
-    <v-card>
-      <v-card-text width="100vw" style="height: 90vh ;">
-        <v-row class="text-center" cols="12">
-          <v-col class="title" md="4">
-            <v-container style="height: 100%">
-              <v-row class="profile" style="height: 25%;">
-                <v-col>
-                  <v-container>
+<v-container>
+  <v-card>
+    <v-card-text width="100vw" style="height: 90vh ;">
+      <v-row class="text-center" cols="12">
+        <v-col class="title" md="4">
+          <v-container style="height: 100%">
+            <v-row class="profile" style="height: 25%;">
+              <v-col>
+                <v-container>
                     <v-avatar size="100"><v-img :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
                     <div class="text-subtitle-2 mt-3">{{ employee.name }}</div>
                   </v-container>
                 </v-col>
               </v-row>
+              <!-- <v-row style="height: 30%">
+                    <v-col>
+                      <v-card style="background-color: white">
+                        <v-card-text style="text-align: center">
+
+                          <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
+                          <br />
+                          <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
+                          <br />
+                          <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
+                          <br />
+                          <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row> -->
               <v-row style="height: 30%">
                 <v-col>
-                  <v-card style="background-color: white">
-                    <v-card-text style="text-align: center">
-                      <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
-                      <br />
-                      <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
-                      <br />
-                      <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                      <br />
-                      <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                  <v-card>
+                    <v-card-text style="text-align: left;">
+                      <ul class=" text-gray-500 list-disc list-inside dark:text-gray-400 ">
+                        <li>
+                          👤 Name : {{ employeeStore.editEmployee.name }}
+                        </li>
+                        <br/>
+                        <li>
+                          📩 Email : {{ employeeStore.editEmployee.email }}
+                        </li>
+                        <br/>
+                        <li>
+                          🗃️ Position : {{ employeeStore.editEmployee.position }}
+                        </li>
+                        <br/>
+                        <li>
+                          🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿
+                        </li>
+                      </ul>
+
                     </v-card-text>
                   </v-card>
+
+
                 </v-col>
               </v-row>
 
               <v-row class="button" style="height: 50%; ">
                 <v-col>
-                  <v-btn v-if="employeeStore.checkIn === true" class="mdi mr-2 mdi-checkbox-marked-circle" width="310px" height="50px"
-                    style="float: right; color: white" color="green"
+                  <v-btn v-if="employeeStore.checkIn === true" class="mdi mr-2 mdi-checkbox-marked-circle" width="310px"
+                    height="50px" style="float: right; color: white" color="green"
                     @click="employeeStore.empCheckIn(employeeStore.editEmployee.id!)">Checkin </v-btn>
-                  <v-btn v-else class="mdi mr-2 mdi-close-circle" width="310px" height="50px" style="float: right; color: white" color="red"
-                    @click="employeeStore.empCheckOut(employee.id + '')">
+                  <v-btn v-else class="mdi mr-2 mdi-close-circle" width="310px" height="50px"
+                    style="float: right; color: white" color="red" @click="employeeStore.empCheckOut(employee.id + '')">
                     Checkout</v-btn>
 
                 </v-col>
@@ -107,16 +136,14 @@ onMounted(async () => {
                       </tr>
                     </tbody>
                   </VTable>
-
                 </v-container>
 
               </v-col>
 
-
-
-
             </v-container>
+
           </v-col>
+
         </v-row>
       </v-card-text>
     </v-card>
