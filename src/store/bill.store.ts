@@ -75,11 +75,14 @@ export const useBillStore = defineStore("bill", () => {
     loadingStore.isLoading = true
     try {
       for(let i = 0; i <= bill_Detail_List.value.length - 1; i++) {
-        await billServices.saveBill(bill_list.value)
-        const res =  await billServices.updateBill(bill_list.value)
-        await getBills()
-        await materialStore.getMaterials()
-        console.log(res)
+        if(bill_list.value.buy > bill_list.value.total) {
+          await billServices.saveBill(bill_list.value)
+          const res =  await billServices.updateBill(bill_list.value)
+          await getBills()
+          await materialStore.getMaterials()
+          console.log(res)
+          }
+          messageStore.showError('ไม่สามารถบันทึกข้อมูล Bill ได้ เนื่องจากข้อมูลไม่ถูกต้อง')
         } 
     }
     catch (e) {
@@ -110,6 +113,7 @@ export const useBillStore = defineStore("bill", () => {
         console.log(res.data)
         bill_detail.value = res.data
         console.log( bill_detail.value)
+        lastPage.value = res.data.lastPage
       } catch (err) {
         console.log(err)
         messageStore.showError("ไม่สามารถดึงข้อมูล Bill ได้");

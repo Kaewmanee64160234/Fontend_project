@@ -1,6 +1,7 @@
 
 <script setup lang="ts">
 import { useBillStore } from '@/store/bill.store';
+import { useMaterialStore } from '@/store/material.store';
 import type BILL from '@/store/types/bill';
 
 import { onMounted, ref } from 'vue';
@@ -26,11 +27,12 @@ const opendialog = (data:BILL) =>{
 }
 </script>
 <template>
+   <v-row class="ml-5" style="float:left">
+  <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="material" value="material" to="/material"></v-btn></v-row>
     <VContainer>
     <VCard>
       <VCardTitle>
-
-        Check Material
+        Show Bill
         <VTable class="text-center mt-5">
             <thead>
             <tr>

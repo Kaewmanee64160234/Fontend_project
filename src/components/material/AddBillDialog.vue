@@ -15,10 +15,16 @@ async function save() {
   billStore.bill_list.employeeId = employee.value.id;
   billStore.sumBill();
   await billStore.saveBill();
+  reCode()
   billStore.dialog = false
   }
 }
 
+const reCode = () => {
+  billStore.bill_list.name = '';
+  billStore.bill_list.buy = 0;
+  billStore.bill_list.bill_detail = [{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}];
+}
 
 </script>
 <template>
@@ -117,7 +123,7 @@ async function save() {
                 </v-btn>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="billStore.dialog = false">
+                <v-btn color="blue-darken-1" variant="text" @click="billStore.dialog = false,reCode()">
                   Close
                 </v-btn>
                 <v-btn color="blue-darken-1" variant="text" @click="save()"> Save </v-btn>
