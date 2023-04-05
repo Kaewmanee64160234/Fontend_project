@@ -119,7 +119,7 @@ onMounted(async () => {
               </v-row>
               <v-col class="detail">
                 <v-container style="height: 60%; ">
-                  <VTable fixed-header height="350px" class="text-center mt-5;" style="justify-content: center; ">
+                  <VTable fixed-header height="370px" class="text-center mt-5;" style="justify-content: center; ">
                     <thead style="justify-content: center;  ">
                       <tr>
                         <th>Time in</th>
