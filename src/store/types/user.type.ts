@@ -6,6 +6,7 @@ export default interface User {
     login: string;
     password: string;
     role: string;
+    image?:string;
     employee?: Employee;
     createdAt?: Date;
     updatedAt?: Date;

@@ -44,19 +44,22 @@ onMounted(async () => {
                                 </v-col>
                             </v-row>
                             <v-row>
-                                <v-col>
-                                    <v-col>
-                                        <v-card-text style="text-align: center; font-size: 16px;">
-                                            <p>👤 Name : {{ employeeStore.editEmployee.name }} </p>
-                                            <br />
-                                            <p>📩 Email : {{ employeeStore.editEmployee.email }} </p>
-                                            <br />
-                                            <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                                            <br />
-                                            <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
-                                        </v-card-text>
+                                <v-col >
 
-                                    </v-col>
+                                    <v-card-text style="text-align: left;">
+                                        <ul
+                                            class=" text-gray-500 list-disc list-inside dark:text-gray-400 ">
+                                            <li>
+                                                👤 Name : {{ employeeStore.editEmployee.name }}
+                                            </li>
+                                            <br/>
+                                            <li>
+                                                📩 Email : {{ employeeStore.editEmployee.email }}
+                                            </li>
+                                        </ul>
+
+                                    </v-card-text>
+
 
                                 </v-col>
                             </v-row>
@@ -99,6 +102,14 @@ onMounted(async () => {
                                                             </span></dt>
                                                         <dd class="text-gray-500 dark:text-gray-400">STATUS
                                                         </dd>
+                                                        <!-- <dt class="mb-2 text-3xl font-extrabold"
+                                                            style="font-size: 29px; font-family: sans-serif;"><span
+                                                                class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                                                                <span class="w-2 h-2 mr-1 bg-red-500 rounded-full"></span>
+                                                                NO PAID
+                                                            </span></dt>
+                                                        <dd class="text-gray-500 dark:text-gray-400">STATUS
+                                                        </dd> -->
                                                     </div>
                                                     <div class="flex flex-col items-center justify-center">
                                                         <v-btn class="mdi  mdi-eye"
@@ -147,7 +158,7 @@ onMounted(async () => {
 </template>
 <style scoped>
 .title {
-    background-color: #FCF8E8;
+    background-color: #FAF8F1;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
     height: 100vh;
 }

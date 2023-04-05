@@ -14,13 +14,13 @@ export const useUserStore = defineStore('User', () => {
   const allSelected = ref(false)
   const loadingStore = useLoadingStore()
   const search = ref('')
-  const editedUser = ref<User>({ username: '', login: '', password: '', role: '' })
+  const editedUser = ref<User & { files: File[] }>({ username: '', login: '', password: '', role: '', files: [] })
   const loaded = ref(false)
   const loading = ref(false)
   watch(dialog, (newDialog, oldDialog) => {
     console.log(newDialog)
     if (!newDialog) {
-      editedUser.value = { username: '', login: '', password: '', role: '' }
+      editedUser.value = { username: '', login: '', password: '', role: '', files: [] }
     }
   })
 
@@ -93,7 +93,6 @@ export const useUserStore = defineStore('User', () => {
     editedUser.value = JSON.parse(JSON.stringify(user))
     dialog.value = true
   }
-
   function selectUserAll() {
     if (!allSelected.value) {
       selected.value = users.value.map((user) => user.id + '')

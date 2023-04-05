@@ -164,8 +164,8 @@ const router = createRouter({
       }
     },
     {
-      path: '/material/:id',
-      name: 'materials',
+      path: '/checkmaterial/:id',
+      name: 'checkmaterials',
 
       components: {
         default: () => import('../views/materials/CheckMaterialView.vue'),
