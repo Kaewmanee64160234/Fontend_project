@@ -58,6 +58,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
         orderBy: orderBy.value
       })
       lastPage.value = response.data.lastPage
+      console.log(response.data)
       orders.value = response.data.data
     } catch (err) {
       console.log(err)
