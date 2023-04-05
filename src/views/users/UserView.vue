@@ -30,13 +30,27 @@ const deleteAllUsers = async () => {
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <UserDialog></UserDialog>
-  <VContainer>
-    <VCard>
-      <VCardTitle>
+  <v-container>
+    <v-card>
+      <v-card-title>
         User
-        <VBtn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
-          @click="userStore.dialog = true">Add new user</VBtn>
-        <VSpacer> </VSpacer>
+        <v-row>
+          <v-col>
+            <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
+            @click="userStore.dialog = true">Add new user</v-btn>
+          </v-col>
+          
+            <v-col cols="3">
+              <v-autocomplete   v-model="userStore.order"  label="Select" :items="['A-Z','Z-A' ]" density="compact">
+                <v-autocomplete  @click="userStore.order = 'A-Z'"> A-Z</v-autocomplete>
+                <v-autocomplete  @click="userStore.order = 'Z-A'"> Z-A</v-autocomplete>
+               
+              </v-autocomplete>
+  
+            </v-col>
+        </v-row>
+        
+        <v-spacer> </v-spacer>
         <v-text-field style="width: 30%;"
         :loading="userStore.loading"
         density="compact"
@@ -81,7 +95,7 @@ const deleteAllUsers = async () => {
        <v-pagination  justify="center" v-model="userStore.page" :length="userStore.lastPage" rounded="circle"></v-pagination>
 
      </v-container>
-      </VCardTitle>
-    </VCard>
-  </VContainer>
+      </v-card-title>
+    </v-card>
+  </v-container>
 </template>

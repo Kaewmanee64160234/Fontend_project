@@ -55,12 +55,11 @@ onMounted(() => {
             @click="productStore.dialog = true">Add New Product</v-btn>
           </v-col>
           <v-col cols="3">
-            <v-select   v-model="productStore.cat"  label="Select" :items="['','Foods', 'Drinks', 'Desserts']" density="compact">
-              <v-select   @click="productStore.cat = 0">  </v-select>
-              <v-select  @click="productStore.cat = 1"> Drinks </v-select>
-              <v-select  @click="productStore.cat = 2"> Foods </v-select>
-              <v-select  @click="productStore.cat = 3"> Desserts </v-select>
-            </v-select>
+            <v-autocomplete   v-model="productStore.cat"  label="Select" :items="['Foods', 'Drinks', 'Desserts']" density="compact">
+              <v-autocomplete  @click="productStore.cat = 1"> Drinks </v-autocomplete>
+              <v-autocomplete  @click="productStore.cat = 2"> Foods </v-autocomplete>
+              <v-autocomplete  @click="productStore.cat = 3"> Desserts </v-autocomplete>
+            </v-autocomplete>
 
           </v-col>
          

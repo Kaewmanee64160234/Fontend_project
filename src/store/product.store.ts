@@ -49,7 +49,7 @@ export const useProductStore = defineStore('Product', () => {
   const order = ref('ASC')
   const orderBy = ref('');
   const lastPage = ref(0);
-  const cat = ref(0);
+  const cat = ref();
 
   watch(page,async (newPage, oldPage) => {
     await getProducts()
@@ -132,7 +132,6 @@ export const useProductStore = defineStore('Product', () => {
     loadingStore.isLoading = true
     try {
       if (editedProduct.value.category === 'Foods') {
-        //*
         editedProduct.value.category = 1
       } else if (editedProduct.value.category === 'Drinks') {
         editedProduct.value.category = 2
