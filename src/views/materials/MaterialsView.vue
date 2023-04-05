@@ -10,18 +10,22 @@ const billStore = useBillStore();
 const materialStore = useMaterialStore();
 const confirmDlg = ref();
 
-const goTo = (index:string) => { 
-    router.push('/material/' + index);
-}
+// const goTo = (index:string) => { 
+//     router.push('/material/' + index);
+// }
 const ToCheckMaterial = (index:string) => { 
     router.push('/checkmaterial/' + index);
 }
+
+const ToShowBill = (index:string) => { 
+    router.push('/showBillById/' + index);
+}
+
 
 
 onMounted(async() => {
     await billStore.getBills();
     await materialStore.getMaterials();
-    console.log(billStore.getBills());
 });
 const deleteMaterial = async (id: string) => {
   await confirmDlg.value.openDialog(
@@ -53,7 +57,8 @@ const deleteAllMaterials = async () => {
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
           <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
-      <v-spacer></v-spacer>
+          <v-btn class="mdi mdi-clipboard-list-outline mr-2" color="#FFA559" style="float: right; color: white" to="/material/showBills" value="showBills">Show Bill</v-btn>
+          <v-spacer></v-spacer>
       <v-text-field style="width: 30%;"
         :loading="materialStore.loading"
         density="compact"
@@ -90,7 +95,7 @@ const deleteAllMaterials = async () => {
                 <td>{{ item.price_per_unit }}</td>
                 <td><v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="materialStore.editMaterial(item)"></v-btn>
                 <v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteMaterial(item.id + '')"></v-btn>
-                <v-btn color="#98DFD6" class="mr-5" icon="mdi-clipboard-check-outline" @click="goTo(item.id+'')" ></v-btn>
+                <v-btn color="#98DFD6" class="mr-5" icon="mdi-clipboard-check-outline" @click="ToShowBill(item.id+'')" ></v-btn>
                 <v-btn color="#A1887F" icon="mdi-text-box-check-outline" @click="ToCheckMaterial(item.id+'')" ></v-btn>
               </td>
             </tr>

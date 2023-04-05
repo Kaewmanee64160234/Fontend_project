@@ -118,7 +118,7 @@ onMounted(async () => {
               </v-row>
               <v-col class="detail">
                 <v-container style="height: 60%; ">
-                  <VTable fixed-header height="600px" class="text-center mt-5;" style="justify-content: center; ">
+                  <VTable fixed-header height="370px" class="text-center mt-5;" style="justify-content: center; ">
                     <thead style="justify-content: center;  ">
                       <tr>
                         <th>Time in</th>
@@ -128,9 +128,10 @@ onMounted(async () => {
                     </thead>
                     <tbody style=" overflow-y: auto;">
                       <tr class="text-center mr-5" style="justify-content: center;  overflow-y: auto;"
-                        v-for="(item, index) in employeeStore.summary_salaries[0].checkInOut" :key="index">
-                        <td>{{ item.time_in }}</td>
-                        <td>{{ item.time_out }}</td>
+
+                        v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
+                        <td>{{  new Date(item.time_in+'').getDate()+'/'+new Date(item.time_in+'').getMonth()+'/'+new Date(item.time_in+'').getFullYear() }}</td>
+                        <td>{{  new Date(item.time_out+'').getDate()+'/'+new Date(item.time_out+'').getMonth()+'/'+new Date(item.time_out+'').getFullYear()  }}</td>
                         <td>{{ item.total_hour }}</td>
                       </tr>
                     </tbody>
