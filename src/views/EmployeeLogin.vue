@@ -95,7 +95,7 @@ onMounted(async () => {
 
           <v-col class="detail">
             <v-container style="height: 100%; ">
-              <v-row style="height: 13%">
+              <v-row style="height: 18%">
                 <v-row class="text-center">
                   <v-col class="detail-emp">
                     <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #DEF5E5;">
@@ -118,7 +118,7 @@ onMounted(async () => {
               </v-row>
               <v-col class="detail">
                 <v-container style="height: 60%; ">
-                  <VTable fixed-header height="400px" class="text-center mt-5;" style="justify-content: center; ">
+                  <VTable fixed-header height="430px" class="text-center mt-5;" style="justify-content: center; ">
                     <thead style="justify-content: center;  ">
                       <tr>
                         <th> Date </th>

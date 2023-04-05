@@ -39,7 +39,7 @@ onMounted(async () => {
                 ></v-avatar>
                 <br />
                 <br />
-                <div class="text-subtitle-2 md-2 mr-16" style="text-align: right; font-size: 20px">
+                <div class="text-subtitle-2 md-2 mr-20" style="text-align: right; font-size: 20px">
                   {{ employeeStore.summary_salaries[0].checkInOut[0].employee?.name }}
                 </div>
               </v-col>
