@@ -121,7 +121,7 @@ onMounted(() => {
 
             <!-- ///// TEST -->
             <div class="w-100 md p-8">
-              <div class="flex items-center justify-between mb-4">
+              <div class="flex justify-between mb-4">
                 <h4 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Order</h4>
                 <!-- <a class="mr-20 text-sm font-medium text-gray-900 dark:text-white">
                   Total
@@ -170,13 +170,11 @@ onMounted(() => {
                             </div>
                           </v-col>
                           <v-col>
-                              <v-btn class="text-center" color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
+                              <v-btn class="text-center" style="text-align: right; margin-left:50%;" color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
                           </v-col>
                         </v-row>
-
+                        <v-divider></v-divider>
                       </div>
-
-
                     </div>
                   </li>
                 </ul>

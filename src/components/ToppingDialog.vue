@@ -54,20 +54,20 @@ const save = () => {
           <h5>Sweet</h5>
 
           <v-btn-toggle v-model="pointOfSaleStore.toggle2" variant="outlined" divided>
-            <v-btn>หวานน้อย</v-btn>
-            <v-btn>หวานปกติ</v-btn>
-            <v-btn>หวานมาก +10</v-btn>
-            <v-btn>หวาน125% +15</v-btn>
+            <v-btn>sweet 50%</v-btn>
+            <v-btn>sweet 100%</v-btn>
+            <v-btn>sweet 100% +10</v-btn>
+            <v-btn>sweet 125% +15</v-btn>
           </v-btn-toggle>
         </div>
         <div v-if="product_.type === 'tea' && 'smoothies' && 'milkshakes' && 'hot chocolate'">
           <h5>Topping</h5>
 
           <v-chip-group v-model="pointOfSaleStore.amenities" column multiple>
-            <v-chip filter variant="outlined"> ไข่มุกบราวชูก้า +10 </v-chip>
-            <v-chip filter variant="outlined"> ไข่มุกโกโก้ +10 </v-chip>
-            <v-chip filter variant="outlined"> บุก +10 </v-chip>
-            <v-chip filter variant="outlined"> วิปครีม +10 </v-chip>
+            <v-chip filter variant="outlined"> brown Sugar Bubble +10 </v-chip>
+            <v-chip filter variant="outlined"> cocoa +10 </v-chip>
+            <v-chip filter variant="outlined"> konjac jelly +10 </v-chip>
+            <v-chip filter variant="outlined"> whipped cream +10 </v-chip>
           </v-chip-group>
         </div>
       </v-card-text>
