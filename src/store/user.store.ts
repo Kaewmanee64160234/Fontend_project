@@ -28,9 +28,10 @@ export const useUserStore = defineStore('User', () => {
   const page = ref(1)
   const take = ref(5)
   const keyword = ref('')
-  const order = ref('ASC')
+  const order = ref('A-Z')
   const orderBy = ref('')
   const lastPage = ref(0)
+  const user = ref();
 
   watch(page, async (newPage, oldPage) => {
     await getUsers()
@@ -44,6 +45,14 @@ export const useUserStore = defineStore('User', () => {
     }
   })
 
+  watch(user,async (newKey, oldKey) => {
+    await getUsers()
+    })
+    watch(order,async (newOrder, oldOder) => {
+      console.log(newOrder)
+      await getUsers()
+      })
+
   async function getUsers() {
     loadingStore.isLoading = true
     try {
@@ -51,6 +60,7 @@ export const useUserStore = defineStore('User', () => {
         page: page.value,
         take: take.value,
         keyword: keyword.value,
+        user:user.value,
         order: order.value,
         orderBy: orderBy.value
       })
@@ -65,6 +75,14 @@ export const useUserStore = defineStore('User', () => {
   const saveUser = async () => {
     loadingStore.isLoading = true
     try {
+      if (editedUser.value.username === 'a') {
+        editedUser.value.username = "a"
+      } else if (editedUser.value.username === 'b') {
+        editedUser.value.username = "b"
+      } else if (editedUser.value.username === 'c') {
+        editedUser.value.username = "c"
+      }
+
       if (editedUser.value.id) {
         const res = await userService.updateUser(editedUser.value.id, editedUser.value)
       } else {
@@ -130,6 +148,10 @@ export const useUserStore = defineStore('User', () => {
     }
   }
 
+  const changeMat = (id:number) => {
+    user.value = id
+  }
+
   return {
     page,
     keyword,
@@ -153,6 +175,8 @@ export const useUserStore = defineStore('User', () => {
     allSelected,
     selected,
     deleteAllUser,
-    search
+    search,
+    changeMat,
+    user
   }
 })
