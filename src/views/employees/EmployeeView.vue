@@ -43,25 +43,13 @@ const deleteAllEmployees = async () => {
     <v-card>
       <v-card-title>
         Employee
-        <v-btn
-          class="mdi mdi-plus"
-          style="float: right; color: white"
-          color="#8ad879"
-          @click="employeeStore.dialog = !employeeStore.dialog"
-          >Add new employee</v-btn
-        >
+        <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
+          @click="employeeStore.dialog = !employeeStore.dialog">Add new employee</v-btn>
         <v-spacer> </v-spacer>
-          <v-text-field style="width: 30%;"
-        :loading="employeeStore.loading"
-        density="compact"
-        variant="solo"
-        v-model="employeeStore.keyword"
-        label="Search templates"
-        append-inner-icon="mdi-magnify"
-        hide-details
-        @click:append-inner="employeeStore.getEmployeeByName"
-      ></v-text-field>
-       
+        <v-text-field style="width: 30%;" :loading="employeeStore.loading" density="compact" variant="solo"
+          v-model="employeeStore.keyword" label="Search templates" append-inner-icon="mdi-magnify" hide-details
+          @click:append-inner="employeeStore.getEmployeeByName"></v-text-field>
+
         <v-table class="text-center mt-5">
           <thead>
             <tr>
@@ -76,13 +64,13 @@ const deleteAllEmployees = async () => {
               <th>Operations</th>
             </tr>
           </thead>
-          <tbody v-if="employeeStore.employees.length >0">
-            <tr v-for="(item,index) in employeeStore.employees" :key="index" class="text-center">
+          <tbody v-if="employeeStore.employees.length > 0">
+            <tr v-for="(item, index) in employeeStore.employees" :key="index" class="text-center">
 
               <td>
                 <v-avatar size="80"><v-img :src="`${url}/employees/image/${item.image}`"></v-img></v-avatar>
               </td>
-              <td>{{ index+1 }}</td>
+              <td>{{ index + 1 }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.address }}</td>
               <td>{{ item.tel }}</td>
@@ -90,27 +78,28 @@ const deleteAllEmployees = async () => {
               <td>{{ item.position }}</td>
               <td>{{ item.hourly }}</td>
 
-              
+
 
               <td>
-                <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="employeeStore.editedEmployee(item)"
-                  ></v-btn
-                ><v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteEmployee(item.id + '')"></v-btn>
+                <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil"
+                  @click="employeeStore.editedEmployee(item)"></v-btn><v-btn color="#F55050" class="mr-5"
+                  icon="mdi-delete" @click="deleteEmployee(item.id + '')"></v-btn>
               </td>
             </tr>
-           
+
           </tbody>
-          <tbody v-else >
-          <tr >
-            <td colspan="10" class="text-center">No data</td>
-          </tr>
-        </tbody>
+          <tbody v-else>
+            <tr>
+              <td colspan="10" class="text-center">No data</td>
+            </tr>
+          </tbody>
         </v-table>
         <v-container width="100%" justify="center">
-       
-       <v-pagination  justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage" rounded="circle"></v-pagination>
 
-     </v-container>
+          <v-pagination justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage"
+            rounded="circle"></v-pagination>
+
+        </v-container>
       </v-card-title>
     </v-card>
   </v-container>
