@@ -14,13 +14,13 @@ export const useUserStore = defineStore('User', () => {
   const allSelected = ref(false)
   const loadingStore = useLoadingStore()
   const search = ref('')
-  const editedUser = ref<User & { files: File[] }>({ username: '', login: '', password: '', role: '', files: [] })
+  const editedUser = ref<User & { files: File[] }>({ username: '', login: '', password: '', role: '', fullTime: false, salary: 0,  files: [] ,tel:''})
   const loaded = ref(false)
   const loading = ref(false)
   watch(dialog, (newDialog, oldDialog) => {
     console.log(newDialog)
     if (!newDialog) {
-      editedUser.value = { username: '', login: '', password: '', role: '', files: [] }
+      editedUser.value = { username: '', login: '', password: '', role: '', fullTime: false, salary: 0,  files: [] ,tel:''}
     }
   })
 
@@ -64,10 +64,16 @@ export const useUserStore = defineStore('User', () => {
   }
   const saveUser = async () => {
     loadingStore.isLoading = true
+    console.log(editedUser.value);
     try {
       if (editedUser.value.id) {
+        editedUser.value.name_employee = editedUser.value.username;
+        editedUser.value.tel  = editedUser.value.telEmployee+'';
         const res = await userService.updateUser(editedUser.value.id, editedUser.value)
       } else {
+        editedUser.value.name_employee = editedUser.value.username;
+        editedUser.value.tel  = editedUser.value.telEmployee+'';
+
         const res = await userService.saveUser(editedUser.value)
       }
       dialog.value = false

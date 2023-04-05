@@ -5,9 +5,17 @@ export default interface User {
     username: string;
     login: string;
     password: string;
+    fullTime?: false;
+    salary:number;
     role: string;
+    telEmployee?:string;
+    addressEmployee?: string;
+    hourly?:number;
     image?:string;
     employee?: Employee;
+    name_employee?:string;
+    tel:string;
+    position?:string;
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;

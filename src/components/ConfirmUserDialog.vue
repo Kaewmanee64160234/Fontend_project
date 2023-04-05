@@ -55,7 +55,7 @@ defineExpose({ openDialog });
           <div class="text-overline mb-1">{{ title }}</div>
           <div class="text-h7 mb-1">{{ detail }} </div>
           <div>
-                <v-text-field label="New Password*" required v-model="userStore.editedUser.password"
+                <v-text-field label="New Password*" required v-model="userStore.editedUser.password" v-if="userStore.editedUser.password"
                   :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></v-text-field>
           </div>
         </div>
