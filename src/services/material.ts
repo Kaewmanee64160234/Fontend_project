@@ -19,4 +19,7 @@ function deleteMaterial(id: string) {
 const findMatByName = (name: string) => {
   return http.get(`/materials/search/name/${name}`);
 }
-export default {findMatByName,getMaterials, saveMaterial , updateMaterial , deleteMaterial}
+const viewMaterial = () => {
+  return http.get(`/reports/material/view`);
+}
+export default {findMatByName,getMaterials, saveMaterial , updateMaterial , deleteMaterial,viewMaterial}
