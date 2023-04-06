@@ -1,3 +1,6 @@
+import type DetailProduct from "./detailProducr";
+import type detailProduct from "./detailProducr";
+
 export default interface Product {
     files: any;
     id?: number;

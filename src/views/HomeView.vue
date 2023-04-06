@@ -17,9 +17,35 @@ const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()
 const url = import.meta.env.VITE_URL_PORT
+const product_ = computed(() => {
+  return pointOfSaleStore.temProduct
+})
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
-  pointOfSaleStore.dialogTopping = true
+  if(item.catagoryId !==1 && item.catagoryId !==3 ){
+    pointOfSaleStore.dialogTopping = true
+  }else{
+    const product = pointOfSaleStore.orderItemList.findIndex((item_) => {
+    if (item_.productId === product_.value.id) {
+      item_.amount += 1
+      item_.total = item_.amount * item_.price
+      return item_
+    }
+  })
+  if (product < 0) {
+    let orderItem = ref<OrderItem>({
+        name: product_.value.name,
+      amount: 1,
+      productId: product_.value.id!,
+      price: product_.value.price,
+      total: product_.value.price * 1,
+      image: product_.value.image
+      })
+    pointOfSaleStore.addToOrder(orderItem.value)
+  }
+  
+    
+  }
 }
 const deleteOrderItem = (index: number) => {
   pointOfSaleStore.orderItemList.splice(index, 1)
@@ -104,9 +130,7 @@ function Paycash() {
                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                           {{ item.name }}
                         </p>
-                        <p class="text-sm text-gray-500  dark:text-gray-400">
-                          add:
-                        </p>
+                      
                         <v-row>
                           <v-col>
                             <div class="flex items-center justify-between">
@@ -148,7 +172,7 @@ function Paycash() {
 
           <div class="summary mt-4" style="height: 20vh">
             <div class="row">
-              {{ pointOfSaleStore.order }}
+              <!-- {{ pointOfSaleStore.order }} -->
 
               <div class="col-md-5">
                 <span class="fw-bold mt-2">Enter the amount received</span>

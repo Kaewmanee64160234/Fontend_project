@@ -37,7 +37,7 @@ const deleteAllCustomers = async () => {
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
 
-  <customer-dialog></customer-dialog>
+  <CustomerDialog></CustomerDialog>
   <v-container>
     <v-card>
       <v-card-title>
@@ -46,7 +46,7 @@ const deleteAllCustomers = async () => {
           class="mdi mdi-plus"
           style="float: right; color: white"
           color="#8ad879"
-          @click="customerStore.dialog = !customerStore.dialog"
+          @click="customerStore.addCustomerDialog = true"
           >Add new customer</v-btn
         >
         <v-spacer> </v-spacer>
