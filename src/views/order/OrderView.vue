@@ -8,6 +8,7 @@ import { onMounted, ref } from 'vue';
 const orderStore = useOrderStore();
 const goTo = (index: string) => {
   router.push('/order/' + index);
+  router.push(`/order/${index}`  );
 }
 onMounted(() => {
   orderStore.getOrders();
@@ -21,10 +22,6 @@ onMounted(() => {
     <v-card>
       <v-card-title>
         Orders 
-        
-
-
-       
         <VTable class="text-center mt-5">
           <thead>
             <tr>
@@ -34,7 +31,6 @@ onMounted(() => {
               <th>Total</th>
               <th>Payment</th>
               <th>Operations</th>
-
             </tr>
           </thead>
           <tbody>
