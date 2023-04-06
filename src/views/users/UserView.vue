@@ -33,38 +33,34 @@ const deleteAllUsers = async () => {
   <v-container>
     <v-card>
       <v-card-title>
-        User
-        <v-row>
-          <v-col>
-            <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
-            @click="userStore.dialog = true">Add new user</v-btn>
-          </v-col>
-          
-            <v-col cols="3">
-              <v-autocomplete   v-model="userStore.order"  label="Select" :items="['A-Z','Z-A' ]" density="compact">
-                <v-autocomplete  @click="userStore.order = 'A-Z'"> A-Z</v-autocomplete>
-                <v-autocomplete  @click="userStore.order = 'Z-A'"> Z-A</v-autocomplete>
-               
-              </v-autocomplete>
-  
-            </v-col>
-        </v-row>
+        <div class="row">
+          <div class="col-md-9">
+            User
+          </div>
+        </div>
         
+        <v-row class="mt-2">
+          <v-col cols="3">
+            <v-text-field :loading="userStore.loading" density="compact" variant="solo"
+              v-model="userStore.keyword" label="Search templates" append-inner-icon="mdi-magnify" hide-details
+              @click:append-inner="userStore.getUserByUsername"></v-text-field>
+            </v-col>
+            <v-col>
+              <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
+                @click="userStore.dialog = true">Add new user</v-btn>
+          </v-col>
+          <v-col cols="3">
+            <v-autocomplete v-model="userStore.order" label="Select" :items="['A-Z', 'Z-A']" density="compact">
+              <v-autocomplete @click="userStore.order = 'A-Z'"> A-Z</v-autocomplete>
+              <v-autocomplete @click="userStore.order = 'Z-A'"> Z-A</v-autocomplete>
+            </v-autocomplete>
+          </v-col>
+        </v-row>
         <v-spacer> </v-spacer>
-        <v-text-field style="width: 30%;"
-        :loading="userStore.loading"
-        density="compact"
-        variant="solo"
-        v-model="userStore.keyword"
-        label="Search templates"
-        append-inner-icon="mdi-magnify"
-        hide-details
-        @click:append-inner="userStore.getUserByUsername"
-      ></v-text-field>
+
         <VTable class="text-center mt-5">
           <thead>
             <tr>
-              
               <th>ID</th>
               <th>Username</th>
               <th>Login</th>
@@ -73,8 +69,8 @@ const deleteAllUsers = async () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item,index) of userStore.users" :key="index" class="text-center">
-              <td>{{ index+1 }}</td>
+            <tr v-for="(item, index) of userStore.users" :key="index" class="text-center">
+              <td>{{ index + 1 }}</td>
               <td>{{ item.username }}</td>
               <td>{{ item.login }}</td>
               <td>{{ item.role }}</td>
@@ -84,17 +80,16 @@ const deleteAllUsers = async () => {
               </td>
             </tr>
           </tbody>
-          <tbody v-if="userStore.users.length == 0" >
-          <tr>
-            <td colspan="7" class="text-center">No data</td>
-          </tr>
-        </tbody>
+          <tbody v-if="userStore.users.length == 0">
+            <tr>
+              <td colspan="7" class="text-center">No data</td>
+            </tr>
+          </tbody>
         </VTable>
         <v-container width="100%" justify="center">
-       
-       <v-pagination  justify="center" v-model="userStore.page" :length="userStore.lastPage" rounded="circle"></v-pagination>
-
-     </v-container>
+          <v-pagination justify="center" v-model="userStore.page" :length="userStore.lastPage"
+            rounded="circle"></v-pagination>
+        </v-container>
       </v-card-title>
     </v-card>
   </v-container>
