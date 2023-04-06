@@ -32,26 +32,42 @@ onMounted(async () => {
               <v-row class="profile" style="height: 25%">
                 <v-col>
                   <v-container>
-                    <v-avatar size="100"
-                      ><v-img :src="`${url}/employees/image/${employee.image}`"></v-img
-                    ></v-avatar>
+                    <v-avatar size="100"><v-img :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
                     <div class="text-subtitle-2 mt-3">
                       {{ employeeStore.summary_salary.employee?.name }}
-                    </div>
+                    </div>       
                   </v-container>
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
-                <v-col>
-                  <v-card style="background-color: white">
-                    <v-card-text style="text-align: center">
-                      <p>👤 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}</p>
-                      <br />
-                      <p>📩 Email: {{ employeeStore.summary_salary.checkInOut[0].employee?.email }}</p>
-                      <br />
-                      <p>🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}</p>
-                      <br />
-                      <p>🕐 hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly }} ฿</p>
+              <v-col>
+                <v-card style="background-color: white">
+                  <v-card-text style="text-align: left">
+                    <ul class=" text-gray-500 list-disc list-inside dark:text-gray-400 ">
+                      <li>
+                        👤 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}
+                        </li>
+                        <br />
+                        <li>
+                          📩 Email : {{ employeeStore.summary_salary.checkInOut[0].employee?.email }}
+                        </li>
+                        <br />
+                        <li>
+                          🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}
+                        </li>
+                        <br />
+                        <li>
+                          🕐 hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly }} ฿
+                        </li>
+                      </ul>
+
+                      <!-- <p>👤 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}</p>
+                        <br />
+                        <p>📩 Email: {{ employeeStore.summary_salary.checkInOut[0].employee?.email }}</p>
+                        <br />
+                        <p>🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}</p>
+                        <br />
+                        <p>🕐 hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly }} ฿</p> -->
                     </v-card-text>
                   </v-card>
                 </v-col>
@@ -64,11 +80,7 @@ onMounted(async () => {
               <v-row style="height: 13%">
                 <v-row class="text-center">
                   <v-col class="detail-emp">
-                    <v-card
-                      height="100px"
-                      width="300px"
-                      style="border-radius: 15px; background-color: #def5e5"
-                    >
+                    <v-card height="100px" width="300px" style="border-radius: 15px; background-color: #def5e5">
                       <v-card-title class="text-left">
                         <h7> {{ employeeStore.summary_salary.salary }} ฿ </h7> <br />
                         <h7 style="font-size: 15px; color: #6d9886">💸 Your Salary </h7>
@@ -77,11 +89,7 @@ onMounted(async () => {
                   </v-col>
 
                   <v-col class="detail-emp">
-                    <v-card
-                      height="100px"
-                      width="300px"
-                      style="border-radius: 15px; background-color: #ffe3e1"
-                    >
+                    <v-card height="100px" width="300px" style="border-radius: 15px; background-color: #ffe3e1">
                       <v-card-title class="text-left">
                         <h7> {{ employeeStore.summary_salary.hour }} hour </h7> <br />
                         <h7 style="font-size: 15px; color: #ff9494">🕒 Total work </h7>
@@ -92,13 +100,8 @@ onMounted(async () => {
               </v-row>
               <v-col class="detail">
                 <v-container style="height: 60%">
-                  <VTable
-                    fixed-header
-                    height="350px"
-
-                    class="text-center mt-5"
-                    style="justify-content: center; overflow-y: auto"
-                  >
+                  <VTable fixed-header height="350px" class="text-center mt-5"
+                    style="justify-content: center; overflow-y: auto">
                     <thead style="justify-content: center">
                       <tr>
                         <th>Date</th>
@@ -108,14 +111,14 @@ onMounted(async () => {
                       </tr>
                     </thead>
                     <tbody style="overflow-y: auto">
-                      <tr
-                        class="text-center mr-5"
-                        style="justify-content: center  overflow-y: auto;"
-                        v-for="(item, index) in employeeStore.summary_salary.checkInOut"
-                        :key="index"
-                      > <td>{{  new Date(item.time_in+'').getDate()+'/'+new Date(item.time_in+'').getMonth()+'/'+new Date(item.time_in+'').getFullYear() }}</td>
-                        <td>{{  new Date(item.time_in+'').getHours()+':'+new Date(item.time_in+'').getMinutes()+':'+new Date(item.time_in+'').getSeconds() }}</td>
-                        <td>{{  new Date(item.time_out+'').getHours()+':'+new Date(item.time_out+'').getMinutes()+':'+new Date(item.time_out+'').getSeconds() }}</td>
+                      <tr class="text-center mr-5" style="justify-content: center  overflow-y: auto;"
+                        v-for="(item, index) in employeeStore.summary_salary.checkInOut" :key="index">
+                        <td>{{ new Date(item.time_in + '').getDate() + '/' + new Date(item.time_in + '').getMonth() + '/' + new
+                          Date(item.time_in + '').getFullYear() }}</td>
+                        <td>{{ new Date(item.time_in + '').getHours() + ':' + new Date(item.time_in + '').getMinutes() + ':' + new
+                          Date(item.time_in + '').getSeconds() }}</td>
+                        <td>{{ new Date(item.time_out + '').getHours() + ':' + new Date(item.time_out + '').getMinutes() + ':' + new
+                          Date(item.time_out + '').getSeconds() }}</td>
                         <td>{{ item.total_hour }}</td>
                       </tr>
                     </tbody>
@@ -124,12 +127,8 @@ onMounted(async () => {
               </v-col>
 
               <v-container width="100%" justify="center">
-                <v-pagination
-                  justify="center"
-                  v-model="employeeStore.page"
-                  :length="employeeStore.lastPage"
-                  rounded="circle"
-                ></v-pagination>
+                <v-pagination justify="center" v-model="employeeStore.page" :length="employeeStore.lastPage"
+                  rounded="circle"></v-pagination>
               </v-container>
             </v-container>
           </v-col>
