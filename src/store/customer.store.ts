@@ -56,6 +56,32 @@ watch(keyword, async (newKey, oldKey) => {
     await getCustomers()
   }
 })
+watch(dialog, (newDialog, oldDialog) => {
+  console.log(newDialog)
+  if (!newDialog) {
+    editCustomer.value = { 
+      name: '',
+      tel: '',
+      point: 0,
+      image: 'no_image.jpg',
+      files: []
+    }
+  }
+})
+
+watch(addCustomerDialog, (newDialog, oldDialog) => {
+  console.log(newDialog)
+  if (!newDialog) {
+    editCustomer.value = { 
+      name: '',
+      tel: '',
+      point: 0,
+      image: 'no_image.jpg',
+      files: []
+    }
+  }
+})
+
 
 watch(lastPage, async (newlastPage, oldlastPage) => {
   if (newlastPage < page.value) {
@@ -91,11 +117,14 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
 
       if (!editCustomer.value.id) {
         await customerService.createCustomer(editCustomer.value)
-        //   console.log(editCustomer.value)
+          console.log(editCustomer.value)
       } else {
+        console.log(editCustomer.value)
+
         await customerService.updateCustomer(editCustomer.value.id + '', editCustomer.value)
       }
       dialog.value = false
+      addCustomerDialog.value = false
 
       await getCustomers()
     } catch (err) {

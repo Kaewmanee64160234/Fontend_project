@@ -80,5 +80,7 @@ const updateSummarySalary = (id:string,data:any)=>{
     return http.patch(`/summary-salary/${id}`,data);
 }
 
-export default {updateSummarySalary,getSummarySalaryById,getCioByIdEmp,getAllCheckInOut,getAllSummarySalary,getSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin,findEmployeeByName }
+export default {updateSummarySalary,getSummarySalaryById,getCioByIdEmp,getAllCheckInOut,getAllSummarySalary,getSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee
+    ,updateEmployee,deleteEmployee
+    ,employeeLogin,findEmployeeByName }
 

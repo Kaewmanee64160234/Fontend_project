@@ -46,7 +46,7 @@ const deleteAllCustomers = async () => {
           class="mdi mdi-plus"
           style="float: right; color: white"
           color="#8ad879"
-          @click="customerStore.addCustomerDialog = true"
+          @click="customerStore.dialog = true"
           >Add new customer</v-btn
         >
         <v-spacer> </v-spacer>

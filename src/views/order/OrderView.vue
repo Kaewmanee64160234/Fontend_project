@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import router from '@/router';
-import 'flowbite-datepicker';
 import ConfirmDialog from '@/components/ConfirmDialog.vue';
 import { useOrderStore } from '@/store/order.store';
 import { onMounted, ref } from 'vue';

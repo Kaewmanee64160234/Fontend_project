@@ -308,6 +308,8 @@ export const useEmployeeStore = defineStore('employee', () => {
     try {
       const res = await employeeService.getOneEmployee(id)
       editEmployee.value = res.data
+      console.log(editEmployee.value)
+
       if (editEmployee.value.check_in_outs[0].time_out === null) {
         checkIn.value = false
       } else {
