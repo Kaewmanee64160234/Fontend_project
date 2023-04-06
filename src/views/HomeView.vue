@@ -191,7 +191,7 @@ function Paycash() {
                 <v-btn block rounded="xl" style="background-color: #6C4AB6; color: white" class="mt-7" width="300px"
                   @click="customerStore.addCustomerDialog = true">Add Customer</v-btn>
 
-                <v-btn block rounded="xl" style="background-color: #FF2442; color: white" class="mt-7" width="300px"
+1                <v-btn block rounded="xl" style="background-color: #FF2442; color: white" class="mt-7" width="300px"
                   @click="pointOfSaleStore.deleteAllOrder">Clear All</v-btn>
               </div>
               <div class="col-md-7">
