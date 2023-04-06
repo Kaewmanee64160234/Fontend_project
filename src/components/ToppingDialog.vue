@@ -39,7 +39,7 @@ const save = () => {
 }
 </script>
 <template>
-  <v-dialog v-model="pointOfSaleStore.dialogTopping" width="35vw" min-width="500px">
+  <v-dialog v-model="pointOfSaleStore.dialogTopping" width="30vw" min-width="500px">
     <v-card>
       <v-card-title>
         {{ product_.name }}
@@ -67,7 +67,7 @@ const save = () => {
             <v-btn>sweet 125% +15</v-btn>
           </v-btn-toggle>
         </div>
-        <div v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate'">
+        <div class="ml-3" v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate'">
           <h5>Topping</h5>
 
           <v-chip-group v-model="pointOfSaleStore.amenities" column multiple>

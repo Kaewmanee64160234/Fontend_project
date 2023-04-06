@@ -168,7 +168,6 @@ export const usePointOfSale = defineStore('point of sale', () => {
 
   async function openOrder() {
     loadingStore.isLoading = true
-    console.log(order.value);
     try {
       if (order.value.orderItems?.length === 0 && order.value.customerId === 0) {
         messageStore.showError('ไม่สามารถบันทึกข้อมูล Orders ได้')
@@ -232,7 +231,6 @@ export const usePointOfSale = defineStore('point of sale', () => {
       console.log(e)
       messageStore.showError('ไม่สามารถบันทึกข้อมูล Orders ได้')
     }
-    console.log(order);
     loadingStore.isLoading = false
   }
   const selectCode = (idCode: number) => {
