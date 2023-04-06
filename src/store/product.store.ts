@@ -203,9 +203,17 @@ export const useProductStore = defineStore('Product', () => {
     cat.value = id+''
   }
   const getAllProductNotPageinate = async ()=>{
-    const res = await productService.getAllProductNotPageinate()
-    products.value = [...res.data]
-    console.log(res.data)
+    loadingStore.isLoading = true;
+    try{
+      const res = await productService.getAllProductNotPageinate()
+      products.value = [...res.data]
+    }catch (err) {
+      console.log(err)
+
+    }
+    loadingStore.isLoading = false;
+   
+    // console.log(res.data)
   }
 
   return {

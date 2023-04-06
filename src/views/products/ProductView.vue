@@ -60,15 +60,15 @@ watch(paginate, async (newPage, oldPage) => {
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <ProductDialog></ProductDialog>
-  <v-container>
-    Show All Data
-    <v-switch v-model="paginate" hide-details inset></v-switch>
-  </v-container>
+  
   <v-container v-if="paginate">
     <v-card>
       <v-card-title>
         Products
-
+        <v-container>
+          
+    <v-switch v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show some Data': 'Show All Data'"></v-switch>
+  </v-container>
         <v-row>
           <v-col>
             <v-btn
@@ -172,6 +172,12 @@ watch(paginate, async (newPage, oldPage) => {
   </v-container>
   <v-container v-else>
     <v-card>
+      <v-container>
+        Products
+       
+
+    <v-switch v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show some Data': 'Show All Data'"></v-switch>
+  </v-container>
       <v-table class="text-center mt-5">
         <thead>
           <tr>
