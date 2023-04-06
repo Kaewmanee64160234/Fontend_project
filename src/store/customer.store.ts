@@ -91,8 +91,10 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
 
       if (!editCustomer.value.id) {
         await customerService.createCustomer(editCustomer.value)
-        //   console.log(editCustomer.value)
+          console.log(editCustomer.value)
       } else {
+        console.log(editCustomer.value)
+
         await customerService.updateCustomer(editCustomer.value.id + '', editCustomer.value)
       }
       dialog.value = false
