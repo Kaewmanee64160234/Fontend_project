@@ -13,12 +13,15 @@ export const useMessageStore = defineStore("message", () => {
   const type = ref<DialogType>(DialogType.info);
 
   function showError(text: string) {
-    Swal.fire({
-      iconHtml: '<span class="mdi mdi-bell-alert-outline mdi-48px"></span>',
-      background: "white",
-      confirmButtonText: "Close",
-      text: text,
-    });
+    type.value = DialogType.error;
+    message.value = text;
+    isShow.value = true;
+    // Swal.fire({
+    //   iconHtml: '<span class="mdi mdi-bell-alert-outline mdi-48px"></span>',
+    //   background: "white",
+    //   confirmButtonText: "Close",
+    //   text: text,
+    // });
   }
 
   function showInfo(text: string) {

@@ -7,11 +7,12 @@ const form = ref<VForm | null>(null);
 const url = import.meta.env.VITE_URL_PORT
 const userStore = useUserStore();
 const confirmDlg = ref();
+
 async function save() {
  
   const { valid } = await form.value!.validate();
   if (valid) {
-    await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลผู้ใช้คนนี้ใช่หรือไม่?`, 'Accept', 'Cancel');
+    await confirmDlg.value.openDialog("Please Confirm", `Do you want to save this user?`, 'Accept', 'Cancel');
     await userStore.saveUser()
   }
 

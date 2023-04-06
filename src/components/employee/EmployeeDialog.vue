@@ -10,7 +10,7 @@ const employeeStore = useEmployeeStore()
 async function save() {
     const { valid } = await form.value!.validate()
     if (valid) {
-        await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลพนักงานคนนี้ใช่หรือไม่?`, 'Accept', 'Cancel');
+        await confirmDlg.value.openDialog("Confirm", `Do you want to save this employee?`, 'Accept', 'Cancel');
         await employeeStore.saveEmployee()
     }
 }

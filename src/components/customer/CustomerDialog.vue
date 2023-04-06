@@ -6,6 +6,7 @@ import type { VForm } from 'vuetify/components'
 const form = ref<VForm | null>(null)
 const confirmDlg = ref();
 const customerStore = useCustomerStore()
+
 async function save() {
     const { valid } = await form.value!.validate()
     if (valid) {

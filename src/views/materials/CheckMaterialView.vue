@@ -89,6 +89,9 @@ const opendialog = (data: BILL) => {
             <v-list><li>Date: {{ new Date(item.checkmaterial.date + '').getDate() + '/' + new
               Date(item.checkmaterial.date + '').getMonth() + '/' + new Date(item.checkmaterial.date + '').getFullYear()
             }}</li></v-list> <br>
+         <div style="text-align: right; padding-right: 0px;">
+  <VBtn style="background-color: #E53935; color: white;" variant="text" @click="dialog = false">Close</VBtn>
+</div>
           </v-list-item>
         </v-list>
       </v-card>
