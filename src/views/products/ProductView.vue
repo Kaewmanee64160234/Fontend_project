@@ -172,12 +172,53 @@ watch(paginate, async (newPage, oldPage) => {
   </v-container>
   <v-container v-else>
     <v-card>
-      <v-container>
-        Products
-       
+      <v-card-title>
+      <div class="row">
+          <div class="col-md-9">
+            Products
+      </div>
+      <div class="col-md-3">
+    <v-switch style="float: right;" v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show some Data': 'Show All Data'"></v-switch>
+  </div> 
+  <v-row>
+            <v-col cols="3">
+            <v-text-field
+              :loading="productStore.loading"
+              density="compact"
+              variant="solo"
+              v-model="productStore.keyword"
+              label="Search templates"
+              append-inner-icon="mdi-magnify"
+              hide-details
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-btn
+              class="mdi mdi-plus"
+              style="float: right; background-color: #8ad879; color: white"
+              @click="productStore.dialog = true"
+              >Add New Product</v-btn
+            >
+          </v-col>
+          <v-col cols="3">
+            <v-autocomplete
+              v-model="productStore.cat"
+              label="Select"
+              :items="['', 'Foods', 'Drinks', 'Desserts']"
+              density="compact"
+            >
+              <v-autocomplete @click="productStore.cat = ''"> Drinks </v-autocomplete>
+              <v-autocomplete @click="productStore.cat = 1 + ''"> Drinks </v-autocomplete>
+              <v-autocomplete @click="productStore.cat = 2 + ''"> Foods </v-autocomplete>
+              <v-autocomplete @click="productStore.cat = 3 + ''"> Desserts </v-autocomplete>
+            </v-autocomplete>
+          </v-col>
+        </v-row>
 
-    <v-switch v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show some Data': 'Show All Data'"></v-switch>
-  </v-container>
+        <v-spacer> </v-spacer>
+      </div>
+      </v-card-title>
+
       <v-table class="text-center mt-5">
         <thead>
           <tr>

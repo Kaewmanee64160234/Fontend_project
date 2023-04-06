@@ -74,10 +74,14 @@ watch(paginate, async (newPage, oldPage) => {
     <v-container v-if="paginate">
     <v-card>
      <v-card-title>
-      Material
-      <v-container>
-        <v-switch v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show Data': 'Show View'"></v-switch>
-      </v-container>
+      <div class="row">
+          <div class="col-md-9">
+            Material
+      </div>
+      <div class="col-md-3">
+        <v-switch style="float: right;" v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show Data': 'Show View'"></v-switch>
+      </div>
+    </div>
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
           <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
@@ -108,8 +112,6 @@ watch(paginate, async (newPage, oldPage) => {
         </thead>
         <tbody>
             <tr v-for="(item,index) in materialStore.materials" :key="index" style="text-align:center">
-               
-
                 <td>{{ index+1 }}</td>
                 <td v-if="item.min_quantity <= 5" style="color: red;">{{ item.name }}</td>
                 <td v-if="item.min_quantity > 5">{{ item.name }}</td>
@@ -141,11 +143,15 @@ watch(paginate, async (newPage, oldPage) => {
 
 <v-container v-else>
     <v-card>
-     <v-card-title>
-      Material
-      <v-container>
-        <v-switch v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show Data': 'Show View'"></v-switch>
-      </v-container>
+      <v-card-title>
+      <div class="row">
+          <div class="col-md-9">
+            Material
+      </div>
+      <div class="col-md-3">
+    <v-switch style="float: right;" v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show Data': 'Show View'"></v-switch>
+  </div> 
+</div>
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
           <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>

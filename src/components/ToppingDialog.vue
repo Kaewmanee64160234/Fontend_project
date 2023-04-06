@@ -44,7 +44,7 @@ const save = () => {
       <v-card-title>
         {{ product_.name }}
       </v-card-title>
-      <!-- <v-card-text v-if="product_.catagoryId === 2">
+      <v-card-text v-if="product_.catagoryId === 2">
         <div class="d-flex align-left flex-column">
           <h5>Size</h5>
           <v-btn-toggle v-model="pointOfSaleStore.toggle" variant="outlined" divided rounded="xl">
@@ -66,7 +66,7 @@ const save = () => {
             <v-btn>sweet 100% +10</v-btn>
             <v-btn>sweet 125% +15</v-btn>
           </v-btn-toggle>
-        </div> -->
+        </div>
         <div class="ml-3" v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate'">
           <h5>Topping</h5>
 
@@ -78,7 +78,7 @@ const save = () => {
             <v-chip filter variant="outlined"> whipped cream +15 </v-chip>
           </v-chip-group>
         </div>
-      <!-- </v-card-text> -->
+      </v-card-text>
       <v-card-text v-else> Add to cart 🛒 </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
