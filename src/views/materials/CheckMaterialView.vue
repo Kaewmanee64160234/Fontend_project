@@ -56,7 +56,7 @@ const opendialog = (data: BILL) => {
                   Date(item.checkmaterial.date + '').getMonth() + '/' + new Date(item.checkmaterial.date + '').getFullYear() }}
 
               </td>
-              <td><v-btn @click="opendialog(item.checkmaterial)">Click</v-btn></td>
+              <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.checkmaterial)">Click</v-btn></td>
 
 
             </tr>
@@ -78,19 +78,19 @@ const opendialog = (data: BILL) => {
   </VContainer>
   <v-dialog v-model="dialog">
     <v-container>
-      <v-card class="mx-auto" max-width="700" style="background-color: #4E342E; color: white;"><br>
-        <h1 text-color="primary" class="text-center">Details</h1><br>
-        <v-list lines="one" color="#A1887F">
-          <v-list-item v-for="(item, index) of checkMaterialStore.checkmeterialDetail" :key="index">
-            <v-list><li>Materail Name: {{ item.name }}</li></v-list> <br>
-            <v-list><li>Last Quantity: {{ item.qty_last }} </li></v-list><br>
-            <v-list><li>Expire Quantity: {{ item.qty_expire }} </li></v-list><br>
-            <v-list><li>Remain Quantity: {{ item.qty_remain }} </li></v-list><br>
-            <v-list><li>Date: {{ new Date(item.checkmaterial.date + '').getDate() + '/' + new
+      <v-card rounded="xl" class="mx-auto" max-width="700" style="background-color: #4E342E; color: white;"><br>
+        <h1 text-color="primary" class="text-center" style="font-size: large ;">Details</h1><br>
+        <v-list lines="one" style="background-color: #EFEBE9">
+          <v-list-item rounded="xl" v-for="(item, index) of checkMaterialStore.checkmeterialDetail" :key="index">
+            <v-list style="background-color: #EFEBE9"><li>Materail Name: {{ item.name }}</li></v-list> <br>
+            <v-list style="background-color: #EFEBE9"><li>Last Quantity: {{ item.qty_last }} </li></v-list><br>
+            <v-list style="background-color: #EFEBE9"><li>Expire Quantity: {{ item.qty_expire }} </li></v-list><br>
+            <v-list style="background-color: #EFEBE9"><li>Remain Quantity: {{ item.qty_remain }} </li></v-list><br>
+            <v-list style="background-color: #EFEBE9"><li>Date: {{ new Date(item.checkmaterial.date + '').getDate() + '/' + new
               Date(item.checkmaterial.date + '').getMonth() + '/' + new Date(item.checkmaterial.date + '').getFullYear()
             }}</li></v-list> <br>
          <div style="text-align: right; padding-right: 0px;">
-  <VBtn style="background-color: #E53935; color: white;" variant="text" @click="dialog = false">Close</VBtn>
+  <VBtn style="background-color: #E53935; color: white;" variant="text" rounded="xl" @click="dialog = false">Close</VBtn>
 </div>
           </v-list-item>
         </v-list>

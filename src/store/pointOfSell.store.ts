@@ -118,7 +118,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       }
       if (recive_mon.value > 0) {
         if (change_money.value < 0) {
-          messageStore.showError(`Money not enough : ${change_money.value} Bath`)
+          messageStore.CalshowError(`Money not enough : ${change_money.value} Bath`)
         }
       }
 

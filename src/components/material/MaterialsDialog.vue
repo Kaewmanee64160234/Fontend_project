@@ -10,7 +10,7 @@ const confirmDlg = ref();
 async function save() {
   const { valid } = await form.value!.validate()
   if (valid) {
-  await confirmDlg.value.openDialog("Confirm", `Do you want to save this material?`,'Accept','Cancel');
+  await confirmDlg.value.openDialog("Please Confirm", `Do you want to save this material?`,'Accept','Cancel');
   await materialStore.saveMaterial();
   materialStore.dialog = false;
   }

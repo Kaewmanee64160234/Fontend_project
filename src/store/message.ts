@@ -12,16 +12,19 @@ export const useMessageStore = defineStore("message", () => {
   const message = ref("");
   const type = ref<DialogType>(DialogType.info);
 
-  function showError(text: string) {
+  function CalshowError(text: string) {
     type.value = DialogType.error;
     message.value = text;
     isShow.value = true;
-    // Swal.fire({
-    //   iconHtml: '<span class="mdi mdi-bell-alert-outline mdi-48px"></span>',
-    //   background: "white",
-    //   confirmButtonText: "Close",
-    //   text: text,
-    // });
+  }
+  function showError(text: string) {
+
+    Swal.fire({
+      iconHtml: '<span class="mdi mdi-bell-alert-outline mdi-48px"></span>',
+      background: "white",
+      confirmButtonText: "Close",
+      text: text,
+    });
   }
 
   function showInfo(text: string) {
@@ -34,5 +37,5 @@ export const useMessageStore = defineStore("message", () => {
     message.value = text;
     isShow.value = true;
   }
-  return { isShow, message, showError, showInfo };
+  return { isShow, message, showError, showInfo, CalshowError };
 });
