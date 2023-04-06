@@ -69,15 +69,12 @@ export const useUserStore = defineStore('User', () => {
       if (editedUser.value.id) {
         editedUser.value.name_employee = editedUser.value.username;
         editedUser.value.tel  = editedUser.value.telEmployee+'';
-<<<<<<< HEAD
-        const res = await userService.updateUser(editedUser.value.id, editedUser.value)
-      } else {
-=======
+
         editedUser.value.address = editedUser.value.addressEmployee+'';
         const res = await userService.updateUser(editedUser.value.id, editedUser.value)
       } else {
         editedUser.value.address = editedUser.value.addressEmployee+'';
->>>>>>> 22975d0fb4cd783c422d01541b8c47270aaec241
+
         editedUser.value.name_employee = editedUser.value.username;
         editedUser.value.tel  = editedUser.value.telEmployee+'';
 
