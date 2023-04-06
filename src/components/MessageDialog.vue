@@ -2,6 +2,7 @@
 import { useMessageStore } from "@/store/message";
 
 const messageStore = useMessageStore();
+
 </script>
 <template>
   <v-snackbar v-model="messageStore.isShow" multi-line color="black" rounded="pill" >
