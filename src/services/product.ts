@@ -44,5 +44,8 @@ function deleteProduct(id: number) {
 const findProductByName = (name: string) => {
   return http.get(`/products/search/name/${name}`);
 }
+const getAllProductNotPageinate = () => {
+  return http.get(`/reports/products`);
+}
 
-export default { findProductByName,getProducts, saveProduct, updateProduct, deleteProduct, getProductByCatagory };
+export default { getAllProductNotPageinate,findProductByName,getProducts, saveProduct, updateProduct, deleteProduct, getProductByCatagory };

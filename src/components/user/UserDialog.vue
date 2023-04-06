@@ -3,7 +3,6 @@ import { useUserStore } from '@/store/user.store';
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components';
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
-import user from '@/services/user';
 const form = ref<VForm | null>(null);
 const url = import.meta.env.VITE_URL_PORT
 const userStore = useUserStore();

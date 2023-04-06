@@ -8,6 +8,7 @@ import { onMounted, ref } from 'vue';
 const orderStore = useOrderStore();
 const goTo = (index: string) => {
   router.push('/order/' + index);
+  router.push(`/order/${index}`  );
 }
 onMounted(() => {
   orderStore.getOrders();
@@ -21,10 +22,6 @@ onMounted(() => {
     <v-card>
       <v-card-title>
         Orders 
-        
-
-
-       
         <VTable class="text-center mt-5">
           <thead>
             <tr>
@@ -34,14 +31,14 @@ onMounted(() => {
               <th>Total</th>
               <th>Payment</th>
               <th>Operations</th>
-
             </tr>
           </thead>
           <tbody>
             <tr v-for="(item, index) in orderStore.orders" :key="index" class="text-center">
 
               <td>{{ item.id }}</td>
-              <td>{{ item.createdDate }}</td>
+              <!-- <td>{{ item.createdDate }}</td> -->
+              <td>{{  new Date(item.createdDate+'').getDate()+'/'+new Date(item.createdDate+'').getMonth()+'/'+new Date(item.createdDate+'').getFullYear()+'  '+new Date( item.createdDate+'').getHours()+':'+new Date(item.createdDate+'').getMinutes()+':'+new Date(item.createdDate+'').getSeconds() }}</td>
               <td>{{ item.discount }}</td>
               <td>{{ item.total }}</td>
               <td>{{ item.payment }}</td>
