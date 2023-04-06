@@ -149,7 +149,7 @@ function Paycash() {
                             <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
                               @click="reduceAmoutProduct(index)"></v-btn>
                           </v-col>
-                          <v-col style="text-align: center; ">
+                          <v-col style="text-align: center;">
                             <div class="inline-flex  items-center text-base font-semibold text-gray-900 dark:text-white"
                               style="text-align: right; margin-left:15%;">
                               {{ item.total }}

@@ -64,12 +64,25 @@ watch(paginate, async (newPage, oldPage) => {
   <v-container v-if="paginate">
     <v-card>
       <v-card-title>
-        Products
-        <v-container>
-          
-    <v-switch v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show some Data': 'Show All Data'"></v-switch>
-  </v-container>
-        <v-row>
+        <div class="row">
+          <div class="col-md-9">
+            Products
+      </div>
+      <div class="col-md-3">
+    <v-switch style="float: right;" v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show some Data': 'Show All Data'"></v-switch>
+  </div>    
+    <v-row>
+            <v-col cols="3">
+            <v-text-field
+              :loading="productStore.loading"
+              density="compact"
+              variant="solo"
+              v-model="productStore.keyword"
+              label="Search templates"
+              append-inner-icon="mdi-magnify"
+              hide-details
+            ></v-text-field>
+          </v-col>
           <v-col>
             <v-btn
               class="mdi mdi-plus"
@@ -94,21 +107,8 @@ watch(paginate, async (newPage, oldPage) => {
         </v-row>
 
         <v-spacer> </v-spacer>
-        <v-row>
-          <v-col cols="3">
-            <v-text-field
-              :loading="productStore.loading"
-              density="compact"
-              variant="solo"
-              v-model="productStore.keyword"
-              label="Search templates"
-              append-inner-icon="mdi-magnify"
-              hide-details
-            ></v-text-field>
-          </v-col>
-        </v-row>
+      </div>
       </v-card-title>
-
       <v-table class="text-center mt-5">
         <thead>
           <tr>

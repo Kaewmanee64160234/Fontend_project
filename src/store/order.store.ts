@@ -94,6 +94,6 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     take,
     order,
     orderBy,
-    lastPage, getOrders, orders, getOneOrder, tempOrder ,  search }
+    lastPage, getOrders, orders, getOneOrder, tempOrder ,  search ,startDate,endDate}
 })
 
