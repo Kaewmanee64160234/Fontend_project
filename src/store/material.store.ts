@@ -43,6 +43,7 @@ const keyword = ref('')
 const order = ref('ASC')
 const orderBy = ref('')
 const lastPage = ref(0)
+const cat = ref('');
 
 watch(page, async (newPage, oldPage) => {
   await getMaterials()
@@ -149,6 +150,23 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
   
     }catch(err){console.log(err);}
   }
+  const checngeMat = (id:number) => {
+    cat.value = id+''
+  }
+
+  const getViewMaterial = async ()=>{
+    loadingStore.isLoading = true;
+    try{
+      const res = await materialService.viewMaterial()
+      materials.value = [...res.data]
+    }catch (err) {
+      console.log(err)
+
+    }
+    loadingStore.isLoading = false;
+   
+    // console.log(res.data)
+  }
   return {
     page,
     keyword,
@@ -174,6 +192,9 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     selected,
     search,
     dialog2,
-    materialService
+    materialService,
+    getViewMaterial,
+    cat,
+    checngeMat
   }
 })

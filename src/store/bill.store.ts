@@ -13,7 +13,7 @@ export const useBillStore = defineStore("bill", () => {
   const dialog = ref(false)
   const materialStore = useMaterialStore();
   const loadingStore = useLoadingStore()
-  const messageStore = useMessageStore();
+  const messageStore = useMessageStore(); 
   const bill = ref<BILL[]>([{ name: '', 
   date: new Date(), 
   total: 0 , 
@@ -21,7 +21,8 @@ export const useBillStore = defineStore("bill", () => {
   change: 0 ,
   employeeId: 0,
   bill_detail: [{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]}]);
-  const bill_Detail_List = ref<BILL_DETAIL[]>([]);
+  const bill_Detail_List = ref<BILL_DETAIL[]>([{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]);
+  const bill_detail = ref<BILL_DETAIL[]>([]);
   const bill_list = ref<BILL>({ 
     name: '', 
     date: new Date(), 
@@ -74,11 +75,14 @@ export const useBillStore = defineStore("bill", () => {
     loadingStore.isLoading = true
     try {
       for(let i = 0; i <= bill_Detail_List.value.length - 1; i++) {
-        await billServices.saveBill(bill_list.value)
-        const res =  await billServices.updateBill(bill_list.value)
-        await getBills()
-        await materialStore.getMaterials()
-        console.log(res)
+        if(bill_list.value.buy > bill_list.value.total) {
+          await billServices.saveBill(bill_list.value)
+          const res =  await billServices.updateBill(bill_list.value)
+          await getBills()
+          await materialStore.getMaterials()
+          console.log(res)
+          }
+          messageStore.showError('ไม่สามารถบันทึกข้อมูล Bill ได้ เนื่องจากข้อมูลไม่ถูกต้อง')
         } 
     }
     catch (e) {
@@ -107,8 +111,9 @@ export const useBillStore = defineStore("bill", () => {
       try {
         const res = await billServices.getOneBill(id);
         console.log(res.data)
-        bill_Detail_List.value = res.data
-        console.log(bill_Detail_List.value)
+        bill_detail.value = res.data
+        console.log( bill_detail.value)
+        lastPage.value = res.data.lastPage
       } catch (err) {
         console.log(err)
         messageStore.showError("ไม่สามารถดึงข้อมูล Bill ได้");
@@ -117,5 +122,5 @@ export const useBillStore = defineStore("bill", () => {
   
       loadingStore.isLoading = false
     }
-    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill,page,keyword,take,order,orderBy,lastPage,};  
+    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill,page,keyword,take,order,orderBy,lastPage,bill_detail};  
   });
