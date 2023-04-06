@@ -22,9 +22,11 @@ export const useOrderStore = defineStore('order', () => {
 const page = ref(1)
 const take = ref(5)
 const keyword = ref('')
-const order = ref('ASC')
+const order = ref('DESC')
 const orderBy = ref('')
 const lastPage = ref(0)
+const startDate = ref('')
+const endDate = ref('')
 
 watch(page, async (newPage, oldPage) => {
   await getOrders()
@@ -55,10 +57,12 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
         take: take.value,
         keyword: keyword.value,
         order: order.value,
-        orderBy: orderBy.value
+        orderBy: orderBy.value,
+        startDate: startDate.value,
+        endDate: endDate.value
       })
       lastPage.value = response.data.lastPage
-      console.log(response.data)
+      console.log(response.data.data)
       orders.value = response.data.data
     } catch (err) {
       console.log(err)
@@ -73,7 +77,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     loadingStore.isLoading = true
     try {
       const response = await orderService.getOneOrder(id);
-      tempOrder.value = response.data.data
+      tempOrder.value = response.data
       orders.value = [];
       orders.value.push(tempOrder.value);
       console.log(tempOrder.value)
@@ -90,6 +94,6 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     take,
     order,
     orderBy,
-    lastPage, getOrders, orders, getOneOrder, tempOrder ,  search }
+    lastPage, getOrders, orders, getOneOrder, tempOrder ,  search ,startDate,endDate}
 })
 

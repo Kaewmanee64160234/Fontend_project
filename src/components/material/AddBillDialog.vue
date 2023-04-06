@@ -3,6 +3,7 @@ import { useBillStore } from '@/store/bill.store';
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components';
 import type Employee from '@/store/types/employee.type';
+import billdetail from '@/services/billdetail';
 const billStore = useBillStore();
 const form = ref<VForm | null>(null)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
@@ -14,10 +15,16 @@ async function save() {
   billStore.bill_list.employeeId = employee.value.id;
   billStore.sumBill();
   await billStore.saveBill();
+  reCode()
   billStore.dialog = false
   }
 }
 
+const reCode = () => {
+  billStore.bill_list.name = '';
+  billStore.bill_list.buy = 0;
+  billStore.bill_list.bill_detail = [{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}];
+}
 
 </script>
 <template>
@@ -84,7 +91,7 @@ async function save() {
       <v-card-text style="overflow-y: auto;">
         <v-form ref="form">
           <v-container width="80%">
-            <v-card class="pa-5 ma-2 dialog1;justify-center" v-for="(item, index) in billStore.bill_Detail_List" :key="index" >
+            <v-card class="pa-5 ma-2 dialog1;justify-center" v-for="(item, index) in billStore.bill_list.bill_detail" :key="index" >
               <v-card-title style="text-align: center;">
                 <p>Bill detail {{ index + 1 }}</p>
               </v-card-title>
@@ -116,7 +123,7 @@ async function save() {
                 </v-btn>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="billStore.dialog = false">
+                <v-btn color="blue-darken-1" variant="text" @click="billStore.dialog = false,reCode()">
                   Close
                 </v-btn>
                 <v-btn color="blue-darken-1" variant="text" @click="save()"> Save </v-btn>

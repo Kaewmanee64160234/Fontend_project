@@ -103,7 +103,8 @@ function Paycash() {
           <div class="row">
             <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
               <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
-                :catagory-id="item.catagoryId + ''" @click="addToCart(item)"></MenuCard>
+                :catagory-id="item.catagoryId + ''" @click="addToCart(item)">
+              </MenuCard>
             </div>
           </div>
         </div>
@@ -148,7 +149,7 @@ function Paycash() {
                             <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
                               @click="reduceAmoutProduct(index)"></v-btn>
                           </v-col>
-                          <v-col style="text-align: center; ">
+                          <v-col style="text-align: center;">
                             <div class="inline-flex  items-center text-base font-semibold text-gray-900 dark:text-white"
                               style="text-align: right; margin-left:15%;">
                               {{ item.total }}
