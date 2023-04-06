@@ -35,6 +35,7 @@ onMounted(async () => {
               <th></th>
               <th>Name</th>
               <th>Full Time</th>
+              <th>Position</th>
               <th>Operations</th>
             </tr>
           </thead>
