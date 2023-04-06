@@ -17,9 +17,35 @@ const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()
 const url = import.meta.env.VITE_URL_PORT
+const product_ = computed(() => {
+  return pointOfSaleStore.temProduct
+})
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
-  pointOfSaleStore.dialogTopping = true
+  if(item.catagoryId !==1 && item.catagoryId !==3 ){
+    pointOfSaleStore.dialogTopping = true
+  }else{
+    const product = pointOfSaleStore.orderItemList.findIndex((item_) => {
+    if (item_.productId === product_.value.id) {
+      item_.amount += 1
+      item_.total = item_.amount * item_.price
+      return item_
+    }
+  })
+  if (product < 0) {
+    let orderItem = ref<OrderItem>({
+        name: product_.value.name,
+      amount: 1,
+      productId: product_.value.id!,
+      price: product_.value.price,
+      total: product_.value.price * 1,
+      image: product_.value.image
+      })
+    pointOfSaleStore.addToOrder(orderItem.value)
+  }
+  
+    
+  }
 }
 const deleteOrderItem = (index: number) => {
   pointOfSaleStore.orderItemList.splice(index, 1)
@@ -45,6 +71,11 @@ onMounted(() => {
   productStore.getProductByCatagory('2')
   pointOfSaleStore.total_discount;
 })
+
+function Paycash() {
+  pointOfSaleStore.dialogPayment = false;
+  pointOfSaleStore.order.payment = 'Cash'
+}
 </script>
 
 <template>
@@ -79,53 +110,9 @@ onMounted(() => {
 
         <div class="col-md-6 mt-2">
           <div class="table-responsive cart-table shadow-md sm:rounded-lg" style="height: 50vh; overflow-y: auto">
-            <!-- <table class="table w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                      <tr>
-                                        <th scope="col" class="px-6 py-3">ลำดับ</th>
-                                        <th scope="col" class="px-6 py-3">รูปภาพ<span class="sr-only"></span></th>
-                                        <th scope="col" class="px-6 py-3">รายการ</th>
-                                        <th scope="col" class="px-6 py-3">จำนวน</th>
-                                        <th scope="col" class="px-6 py-3">ราคา</th>
-                                        <th scope="col" class="px-6 py-3">ราคารวม</th>
-                                        <th scope="col" class="px-6 py-3">Action</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr v-if="pointOfSaleStore.orderItemList.length === 0">
-                                        <td style="text-align: center" colspan="7">No data</td>
-                                      </tr>
-                                      <tr v-else v-for="(item, index) of pointOfSaleStore.orderItemList" :key="index"
-                                        class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <td class="text-center" style="padding: 50px">{{ index + 1 }}</td>
-                                        <td scope="col" class="text-center"><img class="w-20 h-20 rounded-full"
-                                            :src="`${url}/products/image/${item.image}`"></td>
-                                        <td scope="col" class="text-center">{{ item.name }}</td>
-                                        <td class="text-center">
-                                          <v-btn color="secondary" icon="mdi-plus" size="x-small" variant="text"
-                                            @click="addAmoutProduct(index)"></v-btn><span class="pa-2">{{ item.amount }}</span>
-                                          <v-btn color="warning" variant="text" icon="mdi-minus-thick" size="x-small"
-                                            @click="reduceAmoutProduct(index)"></v-btn>
-                                        </td>
-                                        <td class="text-center">
-                                          {{ item.price }}
-                                        </td>
-                                        <td class="text-center">{{ item.total }}</td>
-                                        <td class="text-center">
-                                          <v-btn color="red" icon="mdi-delete" size="x-small" @click="deleteOrderItem(index)"></v-btn>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table> -->
-
-
-            <!-- ///// TEST -->
             <div class="w-100 md p-8">
               <div class="flex justify-between mb-4">
                 <h4 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Order</h4>
-                <!-- <a class="mr-20 text-sm font-medium text-gray-900 dark:text-white">
-                  Total
-                </a> -->
               </div>
               <div class="flow-root">
                 <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -142,9 +129,7 @@ onMounted(() => {
                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                           {{ item.name }}
                         </p>
-                        <p class="text-sm text-gray-500  dark:text-gray-400">
-                          add:
-                        </p>
+                      
                         <v-row>
                           <v-col>
                             <div class="flex items-center justify-between">
@@ -180,12 +165,13 @@ onMounted(() => {
                 </ul>
               </div>
             </div>
-            <!-- //// TEST -->
+
 
           </div>
 
           <div class="summary mt-4" style="height: 20vh">
             <div class="row">
+              <!-- {{ pointOfSaleStore.order }} -->
 
               <div class="col-md-5">
                 <span class="fw-bold mt-2">Enter the amount received</span>
@@ -237,11 +223,11 @@ onMounted(() => {
                     <v-col class="mt-2" col="2.5">
                       <v-btn style="background-color: #A2DBFA; color: #1A374D;" height="130px" width="180"
                         prepend-icon="mdi mdi-barcode-scan" stacked variant="outlined"
-                        @click="DialogPayment.Paypromptpay">Promt Pay</v-btn>
+                        @click="pointOfSaleStore.dialogPayment = true">Promt Pay</v-btn>
                     </v-col>
                     <v-col class="mt-2" col="2.5">
                       <v-btn style="background-color: #C1F8CF; color: #1A374D;" height="130px" width="180"
-                        prepend-icon="mdi mdi-cash" stacked variant="outlined" @click="DialogPayment.Paycash">Cash</v-btn>
+                        prepend-icon="mdi mdi-cash" stacked variant="outlined" @click="Paycash">Cash</v-btn>
                     </v-col>
                     <v-row>
                     </v-row>

@@ -2,6 +2,7 @@
 import http from "./axios";
 import type Employee from "@/store/types/employee.type";
 import type { CheckInOut } from "@/store/types/CheckInOut";
+import type { SummarySalary } from "@/store/types/SummarySalary.type";
 
 const getEmployees = (params:any)=>{
     return http.get("/employees",{params:params});
@@ -75,6 +76,9 @@ const getCioByIdEmp = (params:any)=>{
 const getSummarySalaryById = (id:string)=>{ 
     return http.get(`/summary-salary/${id}`);
 }
+const updateSummarySalary = (id:string,data:any)=>{
+    return http.patch(`/summary-salary/${id}`,data);
+}
 
-export default {getSummarySalaryById,getCioByIdEmp,getAllCheckInOut,getAllSummarySalary,getSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin,findEmployeeByName }
+export default {updateSummarySalary,getSummarySalaryById,getCioByIdEmp,getAllCheckInOut,getAllSummarySalary,getSummaryByEmployeeId,getOneEmployee,employeeCheckOut,employeeCheckIn,getEmployees,createEmployee,updateEmployee,deleteEmployee,employeeLogin,findEmployeeByName }
 

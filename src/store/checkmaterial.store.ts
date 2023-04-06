@@ -6,6 +6,7 @@ import { useMessageStore } from "./message";
 import { useLoadingStore } from "./loading";
 import type CheckMaterialDetail from "./types/checkmaterialdetail";
 
+
 export const useCheckMaterialStore = defineStore("checkmaterail", () => {
   const checkmeterials = ref<CheckMaterial[]>([])
   const checkmeterialDetail = ref<CheckMaterialDetail[]>([])

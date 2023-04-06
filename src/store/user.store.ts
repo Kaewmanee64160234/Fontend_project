@@ -14,13 +14,13 @@ export const useUserStore = defineStore('User', () => {
   const allSelected = ref(false)
   const loadingStore = useLoadingStore()
   const search = ref('')
-  const editedUser = ref<User & { files: File[] }>({ username: '', login: '', password: '', role: '', files: [] })
+  const editedUser = ref<User & { files: File[] }>({ username: '', login: '', password: '', role: '', fullTime: false, salary: 0,  files: [] ,tel:''})
   const loaded = ref(false)
   const loading = ref(false)
   watch(dialog, (newDialog, oldDialog) => {
     console.log(newDialog)
     if (!newDialog) {
-      editedUser.value = { username: '', login: '', password: '', role: '', files: [] }
+      editedUser.value = { username: '', login: '', password: '', role: '', fullTime: false, salary: 0,  files: [] ,tel:''}
     }
   })
 
@@ -28,10 +28,9 @@ export const useUserStore = defineStore('User', () => {
   const page = ref(1)
   const take = ref(5)
   const keyword = ref('')
-  const order = ref('A-Z')
+  const order = ref('ASC')
   const orderBy = ref('')
   const lastPage = ref(0)
-  const user = ref();
 
   watch(page, async (newPage, oldPage) => {
     await getUsers()
@@ -45,14 +44,6 @@ export const useUserStore = defineStore('User', () => {
     }
   })
 
-  watch(user,async (newKey, oldKey) => {
-    await getUsers()
-    })
-    watch(order,async (newOrder, oldOder) => {
-      console.log(newOrder)
-      await getUsers()
-      })
-
   async function getUsers() {
     loadingStore.isLoading = true
     try {
@@ -60,7 +51,6 @@ export const useUserStore = defineStore('User', () => {
         page: page.value,
         take: take.value,
         keyword: keyword.value,
-        user:user.value,
         order: order.value,
         orderBy: orderBy.value
       })
@@ -74,18 +64,20 @@ export const useUserStore = defineStore('User', () => {
   }
   const saveUser = async () => {
     loadingStore.isLoading = true
+    console.log(editedUser.value);
     try {
-      if (editedUser.value.username === 'a') {
-        editedUser.value.username = "a"
-      } else if (editedUser.value.username === 'b') {
-        editedUser.value.username = "b"
-      } else if (editedUser.value.username === 'c') {
-        editedUser.value.username = "c"
-      }
-
       if (editedUser.value.id) {
+        editedUser.value.name_employee = editedUser.value.username;
+        editedUser.value.tel  = editedUser.value.telEmployee+'';
+
+        editedUser.value.address = editedUser.value.addressEmployee+'';
         const res = await userService.updateUser(editedUser.value.id, editedUser.value)
       } else {
+        editedUser.value.address = editedUser.value.addressEmployee+'';
+
+        editedUser.value.name_employee = editedUser.value.username;
+        editedUser.value.tel  = editedUser.value.telEmployee+'';
+
         const res = await userService.saveUser(editedUser.value)
       }
       dialog.value = false
@@ -148,10 +140,6 @@ export const useUserStore = defineStore('User', () => {
     }
   }
 
-  const changeMat = (id:number) => {
-    user.value = id
-  }
-
   return {
     page,
     keyword,
@@ -175,8 +163,6 @@ export const useUserStore = defineStore('User', () => {
     allSelected,
     selected,
     deleteAllUser,
-    search,
-    changeMat,
-    user
+    search
   }
 })

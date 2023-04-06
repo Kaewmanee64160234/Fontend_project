@@ -70,7 +70,6 @@ async function save() {
                   <v-autocomplete
                     :items="['Male', 'Female']"
                     label="Gender"
-                    multiple
                   ></v-autocomplete>
                 </v-col>
               </v-row>

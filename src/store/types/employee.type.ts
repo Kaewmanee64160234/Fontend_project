@@ -10,6 +10,7 @@ export default interface  Employee{
     hourly:number;
     image?:string;
     fullTime?:boolean;
+    salary:number;
     check_in_outs:CheckInOut[];
     createdAt?:Date;
     updateAt?:Date;

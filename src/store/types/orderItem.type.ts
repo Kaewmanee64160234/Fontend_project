@@ -1,3 +1,4 @@
+import type DetailProduct from './detailProducr'
 import type Product from './product.type'
 
 export interface OrderItem {
@@ -9,6 +10,7 @@ export interface OrderItem {
   createdDate?: Date
   updatedDate?: Date
   deletedDate?: Date
-  image?: string
+  image?: string;
+
 }
 
