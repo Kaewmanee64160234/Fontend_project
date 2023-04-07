@@ -16,8 +16,8 @@ onMounted(() => {
 })
 const deleteCustomer = async (id: string) => {
   await confirmDlg.value.openDialog(
-    'ยืนยันการลบ',
-    `คุณต้องการลบลูกค้าคนนี้ใช่หรือไม่?`,
+    'Please Confirm',
+    `Do you want to delete this customer?`,
     'Accept',
     'Cancel'
   )
