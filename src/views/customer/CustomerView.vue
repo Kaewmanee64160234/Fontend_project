@@ -36,37 +36,30 @@ const deleteAllCustomers = async () => {
 </script>
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-  <v-card>
-    <v-row>
-      <v-col>
-        <CustomerDialog></CustomerDialog>
-      </v-col>
-    </v-row>
-  </v-card>
-    
+
+  <CustomerDialog></CustomerDialog>
   <v-container>
     <v-card>
       <v-card-title>
-        <div class="row">
-          <div class="col-md-9">
-            Customers
-          </div>
-        </div>
-
-        <v-row class="mt-2">
-          <v-col cols="3">
-            <v-text-field :loading="customerStore.loading" density="compact" variant="solo"
-              v-model="customerStore.keyword" label="Search " append-inner-icon="mdi-magnify" hide-details
-              @click:append-inner="customerStore.getCustomerByTel"></v-text-field>
-          </v-col>
-          <v-col>
-            <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
-              @click="customerStore.addCustomerDialog = true">Add new customer</v-btn>
-          </v-col>
-        </v-row>
-
+        Customers
+        <v-btn
+          class="mdi mdi-plus"
+          style="float: right; color: white"
+          color="#8ad879"
+          @click="customerStore.dialog = true"
+          >Add new customer</v-btn
+        >
         <v-spacer> </v-spacer>
-
+        <v-text-field style="width: 30%;"
+        :loading="customerStore.loading"
+        density="compact"
+        variant="solo"
+        v-model="customerStore.keyword"
+        label="Search templates"
+        append-inner-icon="mdi-magnify"
+        hide-details
+        @click:append-inner="customerStore.getCustomerByTel"
+      ></v-text-field>
         <v-table class="text-center mt-5">
           <thead>
             <tr>
@@ -79,36 +72,35 @@ const deleteAllCustomers = async () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) of customerStore.customers" :key="index" class="text-center">
+            <tr v-for="(item,index) of customerStore.customers" :key="index" class="text-center">
 
               <td>
                 <v-avatar size="80"><v-img :src="`${url}/customers/image/${item.image}`"></v-img></v-avatar>
               </td>
-              <td>{{ index + 1 }}</td>
+              <td>{{ index+1 }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.tel }}</td>
               <td>{{ item.point }}</td>
 
               <td>
-                <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil"
-                  @click="customerStore.editedCustomer(item)"></v-btn><v-btn color="#F55050" class="mr-5"
-                  icon="mdi-delete" @click="deleteCustomer(item.id + '')"></v-btn>
+                <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="customerStore.editedCustomer(item)"
+                  ></v-btn
+                ><v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteCustomer(item.id + '')"></v-btn>
               </td>
             </tr>
-
+           
           </tbody>
-          <tbody v-if="customerStore.customers.length == 0">
-            <tr>
-              <td colspan="7" class="text-center">No data</td>
-            </tr>
-          </tbody>
+          <tbody v-if="customerStore.customers.length == 0" >
+          <tr >
+            <td colspan="7" class="text-center">No data</td>
+          </tr>
+        </tbody>
         </v-table>
         <v-container width="100%" justify="center">
+       
+       <v-pagination  justify="center" v-model="customerStore.page" :length="customerStore.lastPage" rounded="circle"></v-pagination>
 
-          <v-pagination justify="center" v-model="customerStore.page" :length="customerStore.lastPage"
-            rounded="circle"></v-pagination>
-
-        </v-container>
+     </v-container>
       </v-card-title>
     </v-card>
   </v-container>

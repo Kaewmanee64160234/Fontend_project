@@ -9,7 +9,7 @@ const userStore = useUserStore();
 const confirmDlg = ref();
 
 async function save() {
- 
+
   const { valid } = await form.value!.validate();
   if (valid) {
     await confirmDlg.value.openDialog("Please Confirm", `Do you want to save this user?`, 'Accept', 'Cancel');
@@ -30,26 +30,32 @@ async function save() {
         <VForm ref="form">
           <VContainer>
             <VRow justify="center">
-              <VAvatar size="80"><VImg :src="`${url}/employees/image/${userStore.editedUser.image}`"></VImg></VAvatar>
+              <VAvatar size="80">
+                <VImg :src="`${url}/employees/image/${userStore.editedUser.image}`"></VImg>
+              </VAvatar>
             </VRow>
             <VRow>
               <VCol cols="12" sm="6" md="6">
                 <VTextField label="Username*" required v-model="userStore.editedUser.username"
-                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></VTextField>
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]">
+                </VTextField>
               </VCol>
               <VCol cols="12" sm="6" md="6">
                 <VTextField label="Login*" required v-model="userStore.editedUser.login"
-                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></VTextField>
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]">
+                </VTextField>
               </VCol>
             </VRow>
             <VRow>
               <VCol cols="12" sm="6" md="6">
                 <VTextField label="telephone*" required v-model="userStore.editedUser.telEmployee"
-                  :rules="[(v) => !!v || 'Item is required', (v) => v.length == 10 || 'Length must equle than 10',]"></VTextField>
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length == 10 || 'Length must equle than 10',]">
+                </VTextField>
               </VCol>
               <VCol cols="12" sm="6" md="6">
                 <VTextField label="address*" required v-model="userStore.editedUser.addressEmployee"
-                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></VTextField>
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]">
+                </VTextField>
               </VCol>
             </VRow>
 
@@ -58,13 +64,16 @@ async function save() {
               <VCol cols="12" sm="6" md="6">
                 <VTextField label="Password*" required v-model="userStore.editedUser.password"
                   v-if="!userStore.editedUser.id"
-                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></VTextField>
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]">
+                </VTextField>
                 <VTextField label="Password*" required v-model="userStore.editedUser.password" v-else disabled
-                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></VTextField>
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]">
+                </VTextField>
               </VCol>
               <VCol cols="12" sm="6" md="6">
                 <VTextField label="Salary*" required v-model.number="userStore.editedUser.salary"
-                  :rules="[(v) => !!v || 'Item is required', (v) => v >= 9000 || 'Must more than 9000 bath',]"></VTextField>
+                  :rules="[(v) => !!v || 'Item is required', (v) => v >= 9000 || 'Must more than 9000 bath',]">
+                </VTextField>
               </VCol>
 
             </VRow>
@@ -73,8 +82,8 @@ async function save() {
                 <VCheckbox label="FullTime Employee" v-model="userStore.editedUser.fullTime"></VCheckbox>
               </VCol>
               <VCol cols="12" sm="6" md="6">
-                <VAutocomplete label="Role" required v-model="userStore.editedUser.role"
-                  :items="['Owner', 'Employee']"></VAutocomplete>
+                <VAutocomplete label="Role" required v-model="userStore.editedUser.role" :items="['Owner', 'Employee']">
+                </VAutocomplete>
               </VCol>
             </Vrow>
             <v-row>
@@ -83,8 +92,9 @@ async function save() {
                   :rules="[(v) => !!v || 'Item is required', (v) => v >= 30 || 'Length must equle than 30',]"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="6">
-                <v-text-field label="position*" required v-model="userStore.editedUser.position"
-                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must equle than 3',]"></v-text-field>
+                <v-autocomplete label="position*" v-model="userStore.editedUser.position"
+                  :items="['Barista', 'Cashier', 'Manager', 'Baker', 'Server', 'Cleaner']">
+                </v-autocomplete>
               </v-col>
             </v-row>
             <VFileInput color="deep-purple-accent-4" counter multiple placeholder="Select your files"
@@ -95,12 +105,12 @@ async function save() {
         <small>*indicates required field</small>
       </VCardText>
       <VCardActions>
-        <VBtn color="red" variant="text" @click="userStore.dialog = false">
-          Close
-        </VBtn>
-        <VSpacer></VSpacer>
-        <VBtn color="green" variant="text" @click="save"> Save </VBtn>
-      </VCardActions>
-    </VCard>
-  </VDialog>
-</template>
+       
+      <VBtn color="red" variant="text" @click="userStore.dialog = false">
+        Close
+      </VBtn>
+      <VSpacer></VSpacer>
+      <VBtn color="green" variant="text" @click="save"> Save </VBtn>
+    </VCardActions>
+  </VCard>
+</VDialog></template>
