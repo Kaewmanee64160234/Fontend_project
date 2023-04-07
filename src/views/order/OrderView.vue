@@ -11,6 +11,8 @@ const goTo = (index: string) => {
   router.push(`/order/${index}`)
 }
 onMounted(() => {
+  orderStore.endDate = '';
+  orderStore.startDate = '';
   orderStore.getOrders()
 })
 const date = (index: string) => {
@@ -60,12 +62,13 @@ const date = (index: string) => {
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-container>
-    {{ orderStore.startDate }}
+   
     <v-card>
       <v-card-title>
         <div class="row">
           <div class="col-md-6">
             Orders
+     
           </div>
           <div class="col-md-2">
             <v-card class="ml-15" width="170px" style="float: right;">
@@ -98,7 +101,7 @@ const date = (index: string) => {
           </thead>
           <tbody>
             <tr v-for="(item, index) in orderStore.orders" :key="index" class="text-center">
-              <td>{{ item.id }}</td>
+              <td>{{ index+1 }}</td>
               <!-- <td>{{ item.createdDate }}</td> -->
 
               <td>

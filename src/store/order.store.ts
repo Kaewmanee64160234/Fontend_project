@@ -27,6 +27,13 @@ const orderBy = ref('')
 const lastPage = ref(0)
 const startDate = ref('')
 const endDate = ref('')
+watch(startDate, async (newPage, oldPage) => {
+  if(startDate.value && endDate.value){
+    await getOrders()
+  }
+
+})
+
 
 watch(page, async (newPage, oldPage) => {
   await getOrders()
@@ -37,9 +44,8 @@ watch(keyword, async (newKey, oldKey) => {
   }
   if(keyword.value.length ===0){
     await getOneOrder(keyword.value)
-
-
   }
+  
   
 })
 watch(lastPage, async (newlastPage, oldlastPage) => {
@@ -52,18 +58,30 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
   const getOrders = async () => {
     loadingStore.isLoading = true
     try {
-      const response = await orderService.getOrders({
-        page: page.value,
-        take: take.value,
-        keyword: keyword.value,
-        order: order.value,
-        orderBy: orderBy.value,
-        dateMin: new Date(startDate.value),
-        dateMax: new Date(endDate.value)
-      })
-      lastPage.value = response.data.lastPage
-      console.log(response.data.data)
-      orders.value = response.data.data
+      if(startDate.value === '' || endDate.value === ''){
+        const response = await orderService.getOrders({
+          page: page.value,
+          take: take.value,
+          keyword: keyword.value,
+          order: order.value,
+          orderBy: orderBy.value,
+        })
+        lastPage.value = response.data.lastPage
+        orders.value = response.data.data
+      }else{
+        const response = await orderService.getOrders({
+          page: page.value,
+          take: take.value,
+          keyword: keyword.value,
+          order: order.value,
+          orderBy: orderBy.value,
+          dateMin:  new Date(startDate.value) ,
+          dateMax: new Date(endDate.value)
+        })
+        lastPage.value = response.data.lastPage
+        orders.value = response.data.data
+      }
+     
     } catch (err) {
       console.log(err)
       messageStore.showError("ไม่สามารถดึงข้อมูลได้");
