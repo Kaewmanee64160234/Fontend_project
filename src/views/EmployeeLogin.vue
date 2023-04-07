@@ -118,6 +118,7 @@ onMounted(async () => {
               </v-row>
               <v-col class="detail">
                 <v-container style="height: 60%; ">
+                  <div style="height: 50vh; overflow-y: auto" class="scroll ">
                   <VTable fixed-header height="430px" class="text-center mt-5;" style="justify-content: center; ">
                     <thead style="justify-content: center;  ">
                       <tr>
@@ -138,11 +139,13 @@ onMounted(async () => {
                       </tr>
                     </tbody>
                   </VTable>
+                </div>
                 </v-container>
-
+              
               </v-col>
 
             </v-container>
+        
 
           </v-col>
 
@@ -166,5 +169,19 @@ onMounted(async () => {
 
 .detail {
   width: 70 vw;
+}
+.scroll {
+  max-height: 90vh;
+  overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 999px;
 }
 </style>

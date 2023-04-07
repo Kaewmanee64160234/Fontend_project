@@ -41,6 +41,7 @@ const deleteAllCustomers = async () => {
   <v-container>
     <v-card>
       <v-card-title>
+<<<<<<< HEAD
         <div class="row">
           <div class="col-md-9">
             Customers
@@ -58,6 +59,16 @@ const deleteAllCustomers = async () => {
               @click="customerStore.addCustomerDialog = true">Add new customer</v-btn>
           </v-col>
         </v-row>
+=======
+        Customers
+        <v-btn
+          class="mdi mdi-plus"
+          style="float: right; color: white"
+          color="#8ad879"
+          @click="customerStore.dialog = true"
+          >Add new customer</v-btn
+        >
+>>>>>>> 922e7b6a869abf30a3151cb738199e6b038a2389
         <v-spacer> </v-spacer>
 
         <v-table class="text-center mt-5">
