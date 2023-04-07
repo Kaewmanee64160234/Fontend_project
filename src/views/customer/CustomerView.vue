@@ -50,7 +50,7 @@ const deleteAllCustomers = async () => {
         <v-row class="mt-2">
           <v-col cols="3">
             <v-text-field :loading="customerStore.loading" density="compact" variant="solo"
-              v-model="customerStore.keyword" label="Search templates" append-inner-icon="mdi-magnify" hide-details
+              v-model="customerStore.keyword" label="Search " append-inner-icon="mdi-magnify" hide-details
               @click:append-inner="customerStore.getCustomerByTel"></v-text-field>
           </v-col>
           <v-col>
