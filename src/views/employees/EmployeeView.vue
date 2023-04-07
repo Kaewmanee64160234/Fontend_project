@@ -51,9 +51,10 @@ const deleteAllEmployees = async () => {
         <v-row class="mt-2">
           <v-col cols="3">
             <v-text-field :loading="employeeStore.loading" density="compact" variant="solo"
-              v-model="employeeStore.keyword" label="Search templates" append-inner-icon="mdi-magnify" hide-details
+              v-model="employeeStore.keyword" label="Search" append-inner-icon="mdi-magnify" hide-details
               @click:append-inner="employeeStore.getEmployeeByName"></v-text-field>
           </v-col>
+
           <v-col>
             <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
               @click="employeeStore.dialog = !employeeStore.dialog">Add new employee</v-btn>

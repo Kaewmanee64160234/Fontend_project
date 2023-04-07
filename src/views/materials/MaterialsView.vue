@@ -93,7 +93,7 @@ watch(paginate, async (newPage, oldPage) => {
         density="compact"
         variant="solo"
         v-model="materialStore.keyword"
-        label="Search templates"
+        label="Search"
         append-inner-icon="mdi-magnify"
         hide-details
         @click:append-inner="materialStore.getMatByName"
