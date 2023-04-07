@@ -78,7 +78,7 @@ watch(paginate, async (newPage, oldPage) => {
               density="compact"
               variant="solo"
               v-model="productStore.keyword"
-              label="Search templates"
+              label="Search"
               append-inner-icon="mdi-magnify"
               hide-details
             ></v-text-field>

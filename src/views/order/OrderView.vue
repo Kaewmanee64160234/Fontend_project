@@ -14,6 +14,7 @@ onMounted(() => {
   orderStore.getOrders()
 })
 const date = (index: string) => {
+
   let dd = new Date(index)
   let date = { date: '', mouth: '', year: '', hour: '', minute: '', second: '' }
   date.year = dd.getFullYear() + ''
@@ -24,6 +25,7 @@ const date = (index: string) => {
   date.second = '' + dd.getSeconds()
   if (dd.getDate() < 10) {
     date.date = '0' + dd.getDate()
+
   }
   if (dd.getMonth() < 10) {
     date.mouth = '0' + dd.getMonth()
@@ -36,8 +38,23 @@ const date = (index: string) => {
   }
   if (dd.getSeconds() < 10) {
     date.second = dd.getSeconds() + '0'
+  
+
+
+  } if (dd.getMonth() < 10) {
+    date.mouth = '0' + dd.getMonth()
   }
-  return date
+  if (dd.getHours() < 10) {
+    date.hour = '0' + dd.getHours()
+  }
+  if (dd.getMinutes() < 10) {
+    date.minute = '0' + dd.getHours()
+  }
+  if (dd.getSeconds() < 10) {
+    date.second = dd.getSeconds() + '0'
+  }
+  return date;
+
 }
 </script>
 <template>
@@ -47,22 +64,24 @@ const date = (index: string) => {
     <v-card>
       <v-card-title>
         <div class="row">
-          <div class="col-md-6">Orders</div>
+          <div class="col-md-6">
+            Orders
+          </div>
           <div class="col-md-2">
-            <v-card class="ml-15" width="170px" style="float: right">
-              <input v-model="orderStore.startDate" type="date" style="cursor: pointer" />
+            <v-card class="ml-15" width="170px" style="float: right;">
+              <input v-model="orderStore.startDate" type="date" style="cursor: pointer;">
+
             </v-card>
           </div>
           <div class="col-md-1 text-center">To</div>
           <div class="col-md-2">
-            <v-card width="170px" style="float: right">
-              <input v-model="orderStore.endDate" type="date" style="cursor: pointer" />
+
+            <v-card width="170px" style="float: right;">
+              <input v-model="orderStore.endDate" type="date" style="cursor: pointer;">
             </v-card>
           </div>
           <div class="col-md-1">
-            <v-btn style="background-color: #8ad879; color: white" @click="orderStore.getOrders"
-              >Submit</v-btn
-            >
+            <v-btn style="background-color: #8ad879; color: white" @click="orderStore.getOrders">Submit</v-btn>
             <v-spacer></v-spacer>
           </div>
         </div>
@@ -81,6 +100,7 @@ const date = (index: string) => {
             <tr v-for="(item, index) in orderStore.orders" :key="index" class="text-center">
               <td>{{ item.id }}</td>
               <!-- <td>{{ item.createdDate }}</td> -->
+
               <td>
                 {{
                   date(item.createdDate + '').date +
@@ -96,9 +116,11 @@ const date = (index: string) => {
                   date(item.createdDate + '').second
                 }}
               </td>
+
               <td>{{ item.discount }}</td>
               <td>{{ item.total }}</td>
               <td>{{ item.payment }}</td>
+
 
               <td>
                 <v-btn
