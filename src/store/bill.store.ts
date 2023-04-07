@@ -3,10 +3,10 @@ import { ref, watch } from "vue";
 import type BILL from "./types/bill";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
-import { useEmployeeStore } from "./employee.store";
 import { useMaterialStore } from '@/store/material.store.js';
 import billServices from "@/services/bill";
 import type BILL_DETAIL from "./types/billdetail";
+import billdetail from "@/services/billdetail";
 
 
 export const useBillStore = defineStore("bill", () => {
@@ -92,7 +92,7 @@ export const useBillStore = defineStore("bill", () => {
     loadingStore.isLoading = false
   }
   const addBillDetail = () => {
-      const newdetail = ref<BILL_DETAIL>({ id:0, name: '', amount: 0, price: 0, total: 0 });
+      const newdetail = ref<BILL_DETAIL>({ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0});
       bill_Detail_List.value.push(newdetail.value);
     
     }
@@ -122,5 +122,12 @@ export const useBillStore = defineStore("bill", () => {
   
       loadingStore.isLoading = false
     }
-    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill,page,keyword,take,order,orderBy,lastPage,bill_detail};  
+    const isDuplicateName = (name: string,index: number) => {
+      if (index > 0 && bill_detail.value[index].name === name) {
+        return true;
+      }
+      return false;
+    }
+
+    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill,page,keyword,take,order,orderBy,lastPage,bill_detail,isDuplicateName};  
   });
