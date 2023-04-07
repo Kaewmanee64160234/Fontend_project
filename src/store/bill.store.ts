@@ -66,7 +66,7 @@ export const useBillStore = defineStore("bill", () => {
       console.log(bill.value)
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถดึงข้อมูล Bill ได้')
+      messageStore.showError('Cannot get data bills')
     }
     loadingStore.isLoading = false
   }
@@ -82,12 +82,12 @@ export const useBillStore = defineStore("bill", () => {
           await materialStore.getMaterials()
           console.log(res)
           }
-          messageStore.showError('ไม่สามารถบันทึกข้อมูล Bill ได้ เนื่องจากข้อมูลไม่ถูกต้อง')
+          messageStore.showError('Unable to save bill due to invalid information.')
         } 
     }
     catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถบันทึกข้อมูล Bill ได้')
+      messageStore.showError('Cannot save bill')
     }
     loadingStore.isLoading = false
   }
@@ -116,7 +116,7 @@ export const useBillStore = defineStore("bill", () => {
         lastPage.value = res.data.lastPage
       } catch (err) {
         console.log(err)
-        messageStore.showError("ไม่สามารถดึงข้อมูล Bill ได้");
+        messageStore.showError("Oops!, cannot get data bills.");
   
       }
   

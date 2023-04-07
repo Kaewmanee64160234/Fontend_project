@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
+import Swal from "sweetalert2";
 import { ref, defineExpose } from "vue";
-const dialog = ref(false);
+const sweet = ref(false);
 const detail = ref("");
 const title = ref("");
 const agree = ref("Agree");
@@ -11,7 +12,7 @@ let onOk: (value:unknown) => void;
 let onCancel: (value:unknown) => void;
 const cancelBtn = () => {
   try{
-    dialog.value = false;
+    sweet.value = false;
   onCancel("cancel");
   }catch(e){
     console.log(e);
@@ -19,34 +20,56 @@ const cancelBtn = () => {
 
 }
 const okBtn = () => {
-  dialog.value = false;
+  sweet.value = false;
   onOk("Ok");
 }
-const openDialog = (
-  title_: string,
-  desc: string,
-  okBtn: string,
-  cancel_: string
-) => {
-  title.value = title_;
-  detail.value = desc;
-  agree.value = okBtn;
-  cancel.value = cancel_;
-  dialog.value = true;
-  return new Promise((resolve, reject) => {
-    onOk = resolve;
-    onCancel = reject;
+
+// const openDialog = (
+//   title_: string,
+//   desc: string,
+//   okBtn: string,
+//   cancel_: string
+// ) => {
+//   title.value = title_;
+//   detail.value = desc;
+//   agree.value = okBtn;
+//   cancel.value = cancel_;
+//   sweet.value = true;
+//   return new Promise((resolve, reject) => {
+//     onOk = resolve;
+//     onCancel = reject;
+//   });
+// };
+// defineExpose({ openDialog });
+
+const openDialog = (title: string, desc: string, okBtn: string, cancel: string) => {
+  return Swal.fire({
+    title: title,
+    text: desc,
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: okBtn,
+    cancelButtonText: cancel,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+      'Done!',
+      'Everything done.',
+      'success'
+    )
+      return Promise.resolve();
+    } else if (result.isDismissed) {
+      return Promise.reject();
+    }
   });
-
-
-
-
 };
+
 defineExpose({ openDialog });
 </script>
 <template>
 
-  <v-dialog v-model="dialog">
+  <v-dialog v-model="sweet" style="z-index: 99999999; ">
     <v-card class="mx-auto" max-width="344">
       <v-card-item>
         <div>
@@ -65,3 +88,4 @@ defineExpose({ openDialog });
     </v-card>
   </v-dialog>
 </template>
+

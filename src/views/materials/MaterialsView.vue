@@ -41,8 +41,8 @@ onMounted(async () => {
 
 const deleteMaterial = async (id: string) => {
   await confirmDlg.value.openDialog(
-    'ยืนยันการลบ',
-    `คุณต้องการลบสินค้านี้ใช่หรือไม่?`,
+    'Please Confirm',
+    `Do you want to delete this material?`,
     'Accept',
     'Cancel'
   )
@@ -181,8 +181,7 @@ watch(paginate, async (newPage, oldPage) => {
             </tr>
         </thead>
         <tbody>
-          <div class="mt-10">
-            <tr v-for="(item,index) in materialStore.materials" :key="index" style="text-align:center">
+            <tr v-for="(item,index) in materialStore.materials" :key="index" class="text-center">
                 <td>{{ index+1 }}</td>
                 <td v-if="item.min_quantity <= 5" style="color: red;">{{ item.name }}</td>
                 <td v-if="item.min_quantity > 5">{{ item.name }}</td>
@@ -196,7 +195,6 @@ watch(paginate, async (newPage, oldPage) => {
                 <v-btn color="#A1887F" icon="mdi-text-box-check-outline" @click="ToCheckMaterial(item.id+'')" ></v-btn>
               </td>
             </tr>
-          </div>
         </tbody>
         <tbody v-if="materialStore.materials.length == 0" >
           <tr >

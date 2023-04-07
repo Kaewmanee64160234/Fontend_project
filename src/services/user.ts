@@ -21,4 +21,7 @@ const getUserByEmail = (email:string) => {
 const findUserByName = (name:string) => {
   return http.get(`/users/search/name/${name}`)
 }
-export default { findUserByName,getUsers ,saveUser, updateUser, deleteUser,getUserByEmail};
+const confirmWithPassword = (user:User)=>{
+  return http.post(`/users/confirm`)
+}
+export default {confirmWithPassword, findUserByName,getUsers ,saveUser, updateUser, deleteUser,getUserByEmail};

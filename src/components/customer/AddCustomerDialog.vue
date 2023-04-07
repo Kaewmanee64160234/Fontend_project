@@ -9,7 +9,7 @@ const customerStore = useCustomerStore()
 async function save() {
     const { valid } = await form.value!.validate()
     if (valid) {
-        await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลพนักงานคนนี้ใช่หรือไม่?`, 'Accept', 'Cancel');
+        await confirmDlg.value.openDialog("Please Confirm", `Do you want to add this customer?`, 'Accept', 'Cancel');
         await customerStore.saveCustomer()
     }
 }
@@ -78,11 +78,11 @@ async function save() {
           <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue-darken-1" variant="text" @click="customerStore.dialog = false,customerStore.addCustomerDialog = false">
+          <v-btn color="red" variant="text" @click="customerStore.dialog = false,customerStore.addCustomerDialog = false">
             Close
           </v-btn>
-          <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn color="green" variant="text" @click="save"> Save </v-btn>
         </v-card-actions>
         </v-card>
       </v-dialog>

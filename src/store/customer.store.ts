@@ -104,7 +104,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       lastPage.value = res.data.lastPage
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถดึงข้อมูลลูกค้าได้");
+      messageStore.showError("Oops!, cannot get data customers.");
       
     }
     loadingStore.isLoading = false
@@ -129,7 +129,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       await getCustomers()
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถsaveข้อมูลลูกค้าได้");
+      messageStore.showError("Cannot save customer");
 
     }
     loadingStore.isLoading = false
@@ -150,7 +150,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       await customerService.deleteCustomer(id)
       await getCustomers()
     }catch (err) {
-      messageStore.showError("ไม่สามารถdeleteข้อมูลลูกค้าได้");
+      messageStore.showError("Cannot delete customer");
     }
     loadingStore.isLoading = false
    
@@ -178,7 +178,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       }
       loadingStore.isLoading = false
     }catch(err){
-      messageStore.showError("ไม่สามารถdeleteข้อมูลลูกค้าได้");
+      messageStore.showError("Cannot delete customer");
 
     }
 
@@ -192,7 +192,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       customerId.value = customers.value[customer].id+''
       pointofsellStore.order.customerId = customers.value[customer].id
     } catch (e) {
-      messageStore.showError("ไม่สามารถเพิ่มPoinของลูกค้าได้");
+      messageStore.showError("Unable to add customer point");
       console.log(e);
     }
     loadingStore.isLoading = false

@@ -84,7 +84,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
      
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถดึงข้อมูลได้");
+      messageStore.showError("Oops!, cannot get orders.");
 
     }
 
@@ -101,7 +101,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       console.log(tempOrder.value)
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถดึงข้อมูลได้");
+      messageStore.showError("Oops!, cannot get orders.");
 
     }
 

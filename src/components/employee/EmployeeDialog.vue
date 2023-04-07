@@ -10,7 +10,7 @@ const employeeStore = useEmployeeStore()
 async function save() {
     const { valid } = await form.value!.validate()
     if (valid) {
-        await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลพนักงานคนนี้ใช่หรือไม่?`, 'Accept', 'Cancel');
+        await confirmDlg.value.openDialog("Please Confirm", `Do you want to save this employee?`, 'Accept', 'Cancel');
         await employeeStore.saveEmployee()
     }
 }
@@ -70,11 +70,11 @@ async function save() {
                     <small>*indicates required field</small>
                 </v-card-text>
                 <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue-darken-1" variant="text" @click="employeeStore.dialog = false">
+                    <v-btn color="red" variant="text" @click="employeeStore.dialog = false">
                         Close
                     </v-btn>
-                    <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green" variant="text" @click="save"> Save </v-btn>
                 </v-card-actions>
             </v-container>
         </v-card>

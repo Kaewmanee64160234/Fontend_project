@@ -78,7 +78,7 @@ onMounted(async () => {
                 <v-btn
                   class="mdi mr-2 mdi-eye"
                   style="color: white"
-                  color="blue-lighten-1"
+                  color="#5DA7DB"
                   @click="goTo(item.id + '')"
                 >
                   History

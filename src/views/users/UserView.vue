@@ -8,10 +8,11 @@ const userStore = useUserStore();
 onMounted(async () => {
   await userStore.getUsers();
 });
+
 const deleteUser = async (id: number) => {
   await confirmDlg.value.openDialog(
-    'ยืนยันการลบ',
-    `คุณต้องการลบผู้ใช้งานคนนี้ใช่หรือไม่?`,
+    'Please Confirm',
+    `Do you want to delete this user?`,
     'Accept',
     'Cancel'
   )
@@ -19,8 +20,8 @@ const deleteUser = async (id: number) => {
 }
 const deleteAllUsers = async () => {
   await confirmDlg.value.openDialog(
-    'ยืนยันการลบ',
-    `คุณต้องการลบข้อมูลของผู้ใช้งานทั้งหมดใช่หรือไม่?`,
+    'Please Confirm',
+    `Do you want to delete all of these users?`,
     'Accept',
     'Cancel'
   )
@@ -70,7 +71,7 @@ const deleteAllUsers = async () => {
             </tr>
           </thead>
           <tbody>
-            <tr style="height: 200px;" v-for="(item, index) of userStore.users" :key="index" class="text-center">
+            <tr style="height: 65px;" v-for="(item, index) of userStore.users" :key="index" class="text-center">
               <td>{{ index + 1 }}</td>
               <td>{{ item.username }}</td>
               <td>{{ item.login }}</td>
