@@ -58,8 +58,8 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
         keyword: keyword.value,
         order: order.value,
         orderBy: orderBy.value,
-        dateMin: startDate.value,
-        dateMax: endDate.value
+        dateMin: new Date(startDate.value),
+        dateMax: new Date(endDate.value)
       })
       lastPage.value = response.data.lastPage
       console.log(response.data.data)
