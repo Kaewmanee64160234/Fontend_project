@@ -1,17 +1,62 @@
 <script lang="ts" setup>
+import { useManageTime } from '@/store/manageDate';
 import { useOrderStore } from '@/store/order.store'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
+const manageTimeStore = useManageTime()
 const route = useRoute()
 const id = route.params.id
 const orderStore = useOrderStore()
 onMounted(async () => {
- await orderStore.getOneOrder(id+'')
+  await orderStore.getOneOrder(id + '')
 })
+const date = (index: string) => {
+
+  let dd = new Date(index)
+  let date = { date: '', mouth: '', year: '', hour: '', minute: '', second: '' }
+  date.year = dd.getFullYear() + ''
+  date.date = dd.getDate() + ''
+  date.mouth = dd.getMonth() + ''
+  date.minute = '' + dd.getMinutes()
+  date.hour = '' + dd.getHours()
+  date.second = '' + dd.getSeconds()
+  if (dd.getDate() < 10) {
+    date.date = '0' + dd.getDate()
+
+  }
+  if (dd.getMonth() < 10) {
+    date.mouth = '0' + dd.getMonth()
+  }
+  if (dd.getHours() < 10) {
+    date.hour = '0' + dd.getHours()
+  }
+  if (dd.getMinutes() < 10) {
+    date.minute = '0' + dd.getHours()
+  }
+  if (dd.getSeconds() < 10) {
+    date.second = dd.getSeconds() + '0'
+
+
+
+  } if (dd.getMonth() < 10) {
+    date.mouth = '0' + dd.getMonth()
+  }
+  if (dd.getHours() < 10) {
+    date.hour = '0' + dd.getHours()
+  }
+  if (dd.getMinutes() < 10) {
+    date.minute = '0' + dd.getHours()
+  }
+  if (dd.getSeconds() < 10) {
+    date.second = dd.getSeconds() + '0'
+  }
+  return date;
+
+}
 </script>
 <template >
-  <table class="body-wrap">
+  <table class="body-wrap scroll " >
     <tbody>
       <tr>
         <td></td>
@@ -21,11 +66,11 @@ onMounted(async () => {
               <tbody>
                 <tr>
                   <td class="content-wrap aligncenter">
-                    <table width="100%" cellpadding="0" cellspacing="0">
+                    <table width="100%" cellpadding="0" cellspacing="0" >
                       <tbody>
                         <tr>
                           <td class="content-block">
-                            <h2>☕ Thanks You ☕</h2>
+                            <h2  style="font-size: 20px; font-family: Georgia, serif; ">  ☕  Thanks You   ☕  </h2>
                           </td>
                         </tr>
                         <tr>
@@ -33,33 +78,59 @@ onMounted(async () => {
                             <table class="invoice">
                               <tbody>
                                 <tr>
-                                  <td>customer: {{ orderStore.tempOrder.customer?.id }}<br /> orderId: {{ orderStore.tempOrder.id }}:{{ orderStore.tempOrder.createdDate }}<br />Date :{{ orderStore.tempOrder.createdDate }}<br /> payment: {{ orderStore.tempOrder.payment }}</td>
+                                  <td>Customer : {{ orderStore.tempOrder.customer?.id }}<br /> OrderID : {{
+                                    orderStore.tempOrder.id }} | {{
+                                    date(orderStore.tempOrder.createdDate + '').date +
+                                    '-' +
+                                    manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate + '').getMonth()] +
+                                    '-' +
+                                    new Date(orderStore.tempOrder.createdDate + '').getFullYear() +
+                                    ' | ' +
+                                    new Date(orderStore.tempOrder.createdDate + '').getHours() +
+                                    ':' +
+                                    new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
+                                    ':' +
+                                    new Date(orderStore.tempOrder.createdDate + '').getSeconds()
+                                  }}<br />Date : {{
+                                    date(orderStore.tempOrder.createdDate + '').date +
+                                    '-' +
+                                    manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate  + '').getMonth()] +
+                                    '-' +
+                                    new Date(orderStore.tempOrder.createdDate  + '').getFullYear() +
+                                    ' | ' +
+                                    new Date(orderStore.tempOrder.createdDate  + '').getHours() +
+                                    ':' +
+                                    new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
+                                    ':' +
+                                    new Date(orderStore.tempOrder.createdDate  + '').getSeconds()
+                                  }}<br /> Payment : {{
+                                  orderStore.tempOrder.payment }}</td>
                                 </tr>
                                 <tr>
                                   <td>
                                     <table class="invoice-items" cellpadding="0" cellspacing="0">
-                                      <tbody >
+                                      <tbody>
                                         <tr v-for="item in orderStore.tempOrder.orderItems" :key="item.name">
                                           <td>{{ item.name }}</td>
                                           <td class="alignright">{{ item.total }} ฿</td>
                                         </tr>
-                                        <tr class="finishOrder" >
+                                        <tr class="finishOrder">
                                           <td>Discount</td>
-                                          <td class="alignright">{{orderStore.tempOrder.discount }} ฿</td>
+                                          <td class="alignright">{{ orderStore.tempOrder.discount }} ฿</td>
                                         </tr>
-                                        <tr >
+                                        <tr>
                                           <td>Recieve</td>
-                                          <td class="alignright">{{orderStore.tempOrder.recieved }} ฿</td>
+                                          <td class="alignright">{{ orderStore.tempOrder.recieved }} ฿</td>
                                         </tr>
-                                        <tr >
+                                        <tr>
                                           <td>Change</td>
-                                          <td class="alignright">{{orderStore.tempOrder.change }} ฿</td>
+                                          <td class="alignright">{{ orderStore.tempOrder.change }} ฿</td>
                                         </tr>
-                                        
+
                                         <tr class="total">
                                           <td class="alignright" width="80%">Total</td>
-                                          <td class="alignright">{{orderStore.tempOrder.total}} ฿</td>
-                                          
+                                          <td class="alignright">{{ orderStore.tempOrder.total }} ฿</td>
+
                                         </tr>
                                       </tbody>
                                     </table>
@@ -69,10 +140,10 @@ onMounted(async () => {
                             </table>
                           </td>
                         </tr>
-                       
+
                         <tr>
                           <td class="content-block">
-                           All For One Company Inc. Buu section 2 .
+                            All For One Company Inc. Buu section 2 .
                           </td>
                         </tr>
                       </tbody>
@@ -81,7 +152,7 @@ onMounted(async () => {
                 </tr>
               </tbody>
             </table>
-            
+
           </div>
         </td>
         <td></td>
@@ -202,6 +273,7 @@ ol {
   margin-bottom: 10px;
   font-weight: normal;
 }
+
 p li,
 ul li,
 ol li {
@@ -271,18 +343,22 @@ a {
   text-align: center;
   border-radius: 3px 3px 0 0;
 }
+
 .alert a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
   font-size: 16px;
 }
+
 .alert.alert-warning {
   background: #f8ac59;
 }
+
 .alert.alert-bad {
   background: #ed5565;
 }
+
 .alert.alert-good {
   background: #1ab394;
 }
@@ -296,28 +372,34 @@ a {
   text-align: left;
   width: 80%;
 }
+
 .invoice td {
   padding: 5px 0;
 }
+
 .invoice .invoice-items {
   width: 100%;
 }
+
 .invoice .invoice-items td {
   border-top: #eee 1px solid;
 }
+
 .invoice .invoice-items .total td {
   border-top: 2px solid #333;
   border-bottom: 2px solid #333;
   font-weight: 700;
 }
-.finishOrder{
-    border-top: 2px solid #333;
+
+.finishOrder {
+  border-top: 2px solid #333;
 }
 
 /* -------------------------------------
     RESPONSIVE AND MOBILE FRIENDLY STYLES
 ------------------------------------- */
 @media only screen and (max-width: 640px) {
+
   h1,
   h2,
   h3,
@@ -350,5 +432,17 @@ a {
   .invoice {
     width: 100% !important;
   }
+  .scroll {
+  overflow: scroll;
 }
-</style>
+
+.scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 999px;
+}
+}</style>
