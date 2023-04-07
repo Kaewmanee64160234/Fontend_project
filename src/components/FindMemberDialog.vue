@@ -42,6 +42,7 @@ onMounted(() => {
            </v-card>
         </v-card-text>
         <v-card-actions>
+          <v-spacer></v-spacer>
             <v-btn color="red" variant="text" @click="customerStore.dialog = false">Close
             </v-btn>
           </v-card-actions>

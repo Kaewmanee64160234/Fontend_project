@@ -70,7 +70,7 @@ const deleteAllUsers = async () => {
             </tr>
           </thead>
           <tbody>
-            <tr style="height: 200px;" v-for="(item, index) of userStore.users" :key="index" class="text-center">
+            <tr style="height: 65px;" v-for="(item, index) of userStore.users" :key="index" class="text-center">
               <td>{{ index + 1 }}</td>
               <td>{{ item.username }}</td>
               <td>{{ item.login }}</td>

@@ -85,7 +85,7 @@ async function save() {
                   :rules="[(v) => !!v || 'Item is required', (v) => v >= 30 || 'Length must equle than 30',]"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="6">
-                 <v-text-field label="position*" required v-model="userStore.editedUser.position"
+                <v-text-field label="position*" required v-model="userStore.editedUser.position"
                   :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must equle than 3',]"></v-text-field>
               </v-col>
             </v-row>
@@ -97,11 +97,11 @@ async function save() {
         <small>*indicates required field</small>
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue-darken-1" variant="text" @click="userStore.dialog = false">
+        <v-btn color="red" variant="text" @click="userStore.dialog = false">
           Close
         </v-btn>
-        <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn color="green" variant="text" @click="save"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

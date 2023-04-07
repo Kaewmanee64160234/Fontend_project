@@ -169,8 +169,11 @@ const date = (index: string) => {
         </table>
       </v-card-title>
       <v-card-actions class="justify-end">
-        <v-btn color="green" variant="text">Print</v-btn>
-        <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogComplteOrder = false">Close</v-btn>
+        <v-btn color="red" variant="text"
+          @click="pointOfSaleStore.dialogComplteOrder = false">Close</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn color="green" variant="text">Print</v-btn>
+
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -448,5 +451,4 @@ a {
   .invoice {
     width: 100% !important;
   }
-}
-</style>
+}</style>

@@ -70,11 +70,11 @@ async function save() {
                     <small>*indicates required field</small>
                 </v-card-text>
                 <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue-darken-1" variant="text" @click="employeeStore.dialog = false">
+                    <v-btn color="red" variant="text" @click="employeeStore.dialog = false">
                         Close
                     </v-btn>
-                    <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green" variant="text" @click="save"> Save </v-btn>
                 </v-card-actions>
             </v-container>
         </v-card>
