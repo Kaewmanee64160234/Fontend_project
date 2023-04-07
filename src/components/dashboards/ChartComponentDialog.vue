@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LineChart } from 'vue-chart-3'
+import { BarChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
 import { ref} from 'vue'
 Chart.register(...registerables)
@@ -14,8 +14,10 @@ const props = defineProps<{
 const options = {
   responsive: true,
   maintainAspectRatio: false,
+  
 
 }
+
 const data = ref({
   labels: props.dataLabels,
   datasets: [
@@ -33,14 +35,17 @@ const data = ref({
       
     }
   ],
+  
  
 }
+
 )
 </script>
 
 <template>
+  
   <div>
-    <LineChart :chart-data="data" :options="options"></LineChart>
+    <BarChart :chart-data="data" :options="options" ></BarChart>
   </div>
 </template>
 
