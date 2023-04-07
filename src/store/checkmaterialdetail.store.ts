@@ -25,7 +25,7 @@ export const useCheckMaterailDetailStore = defineStore("checkmaterialdetail", ()
           CheckMaterialDetails.value = response.data
         } catch (err) {
           console.log(err)
-          messageStore.showError("ไม่สามารถดึงข้อมูลได้");
+          messageStore.showError("Cannot get data");
     
         }
     
@@ -39,7 +39,7 @@ export const useCheckMaterailDetailStore = defineStore("checkmaterialdetail", ()
           console.log(CheckMaterialDetail.value)
         } catch (err) {
           console.log(err)
-          messageStore.showError("ไม่สามารถดึงข้อมูลได้");
+          messageStore.showError("Cannot get data");
     
         }
     

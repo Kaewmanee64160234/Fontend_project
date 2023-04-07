@@ -77,7 +77,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
  lastPage.value = res.data.lastPage
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถดึงข้อมูล Material ได้')
+      messageStore.showError('Cannot get data materials')
     }
     loadingStore.isLoading = false
   }
@@ -95,7 +95,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       await getMaterials()
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถบันทึกข้อมูล Material ได้')
+      messageStore.showError('Cannot save material')
     }
     loadingStore.isLoading = false
   }
@@ -111,7 +111,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       await getMaterials()
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถลบข้อมูล Material ได้')
+      messageStore.showError('Cannot delete material')
     }
     loadingStore.isLoading = false
   }

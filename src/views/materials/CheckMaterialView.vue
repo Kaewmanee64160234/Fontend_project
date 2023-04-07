@@ -78,7 +78,7 @@ const opendialog = (data: BILL) => {
   </VContainer>
   <v-dialog v-model="dialog">
     <v-container>
-      <v-card rounded="xl" class="mx-auto" max-width="700" style="background-color: #4E342E; color: white;"><br>
+      <v-card rounded="xl" class="mx-auto" max-width="500" style="background-color: #4E342E; color: white;"><br>
         <h1 text-color="primary" class="text-center" style="font-size: large ;">Details</h1><br>
         <v-list lines="one" style="background-color: #EFEBE9">
           <v-list-item rounded="xl" v-for="(item, index) of checkMaterialStore.checkmeterialDetail" :key="index">

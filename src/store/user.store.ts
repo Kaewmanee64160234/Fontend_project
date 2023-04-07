@@ -58,19 +58,19 @@ export const useUserStore = defineStore('User', () => {
       lastPage.value = res.data.lastPage
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถดึงข้อมูล Users ได้')
+      messageStore.showError('Cannot get data users')
     }
     loadingStore.isLoading = false
   }
   const saveUser = async () => {
     loadingStore.isLoading = true
-    console.log(editedUser.value);
     try {
       if (editedUser.value.id) {
         editedUser.value.name_employee = editedUser.value.username;
         editedUser.value.tel  = editedUser.value.telEmployee+'';
 
         editedUser.value.address = editedUser.value.addressEmployee+'';
+        console.log(editedUser.value)
         const res = await userService.updateUser(editedUser.value.id, editedUser.value)
       } else {
         editedUser.value.address = editedUser.value.addressEmployee+'';
@@ -84,7 +84,7 @@ export const useUserStore = defineStore('User', () => {
       await getUsers()
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถบันทึกข้อมูล Users ได้')
+      messageStore.showError('Cannot save user')
     }
     loadingStore.isLoading = false
   }
@@ -95,7 +95,7 @@ export const useUserStore = defineStore('User', () => {
       await getUsers()
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถลบข้อมูล Users ได้')
+      messageStore.showError('Cannot delete user')
     }
     loadingStore.isLoading = false
   }

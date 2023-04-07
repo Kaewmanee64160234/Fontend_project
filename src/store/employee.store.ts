@@ -193,7 +193,7 @@ export const useEmployeeStore = defineStore('employee', () => {
       lastPage.value = res.data.lastPage
     } catch (err) {
       console.log(err)
-      messageStore.showError('ไม่สามารถดึงข้อมูลพนักงานได้')
+      messageStore.showError('Cannot get data employee')
     }
     loadingStore.isLoading = false
   }
@@ -212,7 +212,7 @@ export const useEmployeeStore = defineStore('employee', () => {
       await getEmployees()
     } catch (err) {
       console.log(err)
-      messageStore.showError('ไม่สามารถsaveข้อมูลพนักงานได้')
+      messageStore.showError('Cannot save employee')
     }
     loadingStore.isLoading = false
   }
@@ -230,7 +230,7 @@ export const useEmployeeStore = defineStore('employee', () => {
       await employeeService.deleteEmployee(id)
       await getEmployees()
     } catch (err) {
-      messageStore.showError('ไม่สามารถdeleteข้อมูลพนักงานได้')
+      messageStore.showError('Cannot delete employee')
     }
     loadingStore.isLoading = false
   }
@@ -255,7 +255,7 @@ export const useEmployeeStore = defineStore('employee', () => {
       }
       loadingStore.isLoading = false
     } catch (err) {
-      messageStore.showError('ไม่สามารถdeleteข้อมูลพนักงานได้')
+      messageStore.showError('Cannot delete employee')
     }
   }
   const loginEmployee = async (name: string, email: string) => {

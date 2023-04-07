@@ -64,7 +64,7 @@ defineExpose({ openDialog });
 </script>
 <template>
 
-  <v-dialog v-model="sweet" style="z-index: 99999999;">
+  <v-dialog v-model="sweet" style="z-index: 99999999; ">
     <v-card class="mx-auto" max-width="344">
       <v-card-item>
         <div>

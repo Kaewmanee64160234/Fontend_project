@@ -10,7 +10,7 @@ const messageStore = useMessageStore();
    
     <template v-slot:actions>
       <v-btn color="white" variant="text" @click="messageStore.isShow = false">
-        ยกเลิก
+        Cancel
       </v-btn>
     </template>
   </v-snackbar>

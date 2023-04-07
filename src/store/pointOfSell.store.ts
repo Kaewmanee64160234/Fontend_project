@@ -170,7 +170,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     loadingStore.isLoading = true
     try {
       if (order.value.orderItems?.length === 0 && order.value.customerId === 0) {
-        messageStore.showError('ไม่สามารถบันทึกข้อมูล Orders ได้')
+        messageStore.showError('Cannot save orders')
         loadingStore.isLoading = false
         total_.value = 0
         total_discount.value = 0
@@ -180,7 +180,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
         return
       }
       if(order.value.change <0 && order.value.payment === '' && !order.value.orderItems){
-        messageStore.showInfo('ไม่สามารถบันทึกข้อมูลได้เนื่องจาดใส่ข้อมูลไม่ครบ');
+        messageStore.showInfo('Unable to save data due to incomplete data entry.');
         return false;
       }
       if (order.value.payment === 'promptpay') {
@@ -229,7 +229,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       orderItemList.value = []
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถบันทึกข้อมูล Orders ได้')
+      messageStore.showError('Cannot save orders')
     }
     loadingStore.isLoading = false
   }
@@ -255,10 +255,10 @@ export const usePointOfSale = defineStore('point of sale', () => {
           files: []
         })
       } else if (cusPoint < codePoint.value) {
-        messageStore.showError('ไม่สามารถบันทึกข้อมูล Promotion ได้ เนื่องจาก Point ไม่เพียงพอ')
+        messageStore.showError('Unable to save promotion data due to insufficient points.')
       }
     } else{
-      messageStore.showError('ไม่สามารถบันทึกข้อมูล Promotion ได้ ')
+      messageStore.showError('Cannot save promotion')
     }
   }
 

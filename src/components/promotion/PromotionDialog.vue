@@ -48,7 +48,7 @@ onMounted(() => {
             <v-row >
              <v-col cols="12">
               <v-text-field
-            label="กรุณากรอก Code ⭐"
+            label="Please wait for code ⭐"
             required
             v-model="CodeInput"
             :rules="[
