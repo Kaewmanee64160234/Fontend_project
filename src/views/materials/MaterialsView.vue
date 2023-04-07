@@ -87,7 +87,8 @@ watch(paginate, async (newPage, oldPage) => {
           <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
           <v-btn class="mdi mdi-clipboard-list-outline mr-2" color="#FFA559" style="float: right; color: white" to="/material/showBills" value="showBills">Show Bill</v-btn>
           <v-spacer></v-spacer>
-      <v-text-field style="width: 30%;"
+      <v-text-field style="width: 23%;"
+
         :loading="materialStore.loading"
         density="compact"
         variant="solo"
