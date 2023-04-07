@@ -146,36 +146,6 @@ const date = (index: string) => {
               </v-row>
               <v-col class="detail">
                 <v-container style="height: 60%; ">
-<<<<<<< HEAD
-                  <div style="height: 50vh;" class="scroll ">
-                  <VTable class="text-center mt-5;" style="justify-content: center; ">
-                    <thead style="justify-content: center;  ">
-                      <tr fixed-header>
-                        <th> Date </th>
-                        <th>Time in</th>
-                        <th>Time out</th>
-                        <th>Total hour</th>
-                      </tr>
-                    </thead>
-                    <tbody style=" overflow-y: auto;">
-                      <tr class="text-center mr-5" style="justify-content: center; text-align: center;"
-                        v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
-                        <td>{{ date(item.time_in + '').date + '/' + manageTimeStore.monthNum[new Date(item.time_in
-                          +
-                          '').getMonth()] + '/' +
-                          new
-                            Date(item.time_in+ '').getFullYear() }}</td>
-                        <!-- <td>{{  new Date(item.time_in+'').getDate()+'/'+new Date(item.time_in+'').getMonth()+'/'+new Date(item.time_in+'').getFullYear() }}</td> -->
-                        <td>{{ new Date(item.time_in + '').getHours() + ':' + new Date(item.time_in + '').getMinutes() + ':' + new
-                          Date(item.time_in + '').getSeconds() }}</td>
-                        <td>{{ new Date(item.time_out + '').getHours() + ':' + new Date(item.time_out + '').getMinutes() + ':' + new
-                          Date(item.time_out + '').getSeconds() }}</td>
-                        <td>{{ item.total_hour }}</td>
-                      </tr>
-                    </tbody>
-                  </VTable>
-                </div>
-=======
                   <div style="height: 63vh; overflow-y: auto" class="scroll ">
                     <v-table fixed-header class="text-center mt-5;" style="justify-content: center; overflow-y: auto; ">
                       <thead fixed-header height="50px" style="justify-content: center;  ">
@@ -206,7 +176,6 @@ const date = (index: string) => {
                       </tbody>
                     </v-table>
                   </div>
->>>>>>> a050e83dbc818f018bea2842e26be85053b7775d
                 </v-container>
 
               </v-col>
