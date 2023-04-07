@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import { useEmployeeStore } from '@/store/employee.store'
+import { useManageTime } from '@/store/manageDate'
 import type Employee from '@/store/types/employee.type'
 import type User from '@/store/types/user.type'
 import { onMounted, ref } from 'vue'
@@ -8,6 +9,7 @@ import { useRoute } from 'vue-router'
 import type { VForm } from 'vuetify/components'
 const url = import.meta.env.VITE_URL_PORT
 const employeeStore = useEmployeeStore()
+const manageTimeStore = useManageTime()
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
 const route = useRoute()
@@ -18,6 +20,32 @@ onMounted(async () => {
   await employeeStore.getOneSummaryBySSID(id.value + '')
 
 })
+const date = (index: string) => {
+  let dd = new Date(index);
+  let date = { date: '', mouth: '', year: '', hour: '', minute: '', second: '' }
+  date.year = dd.getFullYear() + ''
+  date.date = dd.getDate() + ''
+  date.mouth = dd.getMonth() + ''
+  date.minute = '' + dd.getMinutes()
+  date.hour = '' + dd.getHours()
+  date.second = '' + dd.getSeconds()
+  if (dd.getDate() < 10) {
+    date.date = '0' + dd.getDate()
+  } if (dd.getMonth() < 10) {
+    date.mouth = '0' + dd.getMonth()
+  }
+  if (dd.getHours() < 10) {
+    date.hour = '0' + dd.getHours()
+  }
+  if (dd.getMinutes() < 10) {
+    date.minute = '0' + dd.getHours()
+  }
+  if (dd.getSeconds() < 10) {
+    date.second = dd.getSeconds() + '0'
+  }
+  return date;
+
+}
 </script>
 
 <template>
@@ -35,17 +63,17 @@ onMounted(async () => {
                     <v-avatar size="100"><v-img :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
                     <div class="text-subtitle-2 mt-3">
                       {{ employeeStore.summary_salary.employee?.name }}
-                    </div>       
+                    </div>
                   </v-container>
                 </v-col>
               </v-row>
               <v-row style="height: 30%">
-              <v-col>
-                <v-card style="background-color: white">
-                  <v-card-text style="text-align: left">
-                    <ul class=" text-gray-500 list-disc list-inside dark:text-gray-400 ">
-                      <li>
-                        👤 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}
+                <v-col>
+                  <v-card style="background-color: white">
+                    <v-card-text style="text-align: left">
+                      <ul class=" text-gray-500 list-disc list-inside dark:text-gray-400 ">
+                        <li>
+                          👤 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}
                         </li>
                         <br />
                         <li>
@@ -62,14 +90,14 @@ onMounted(async () => {
                       </ul>
 
                       <!-- <p>👤 Name : {{ employeeStore.summary_salary.checkInOut[0].employee?.name }}</p>
-                        <br />
-                        <p>📩 Email: {{ employeeStore.summary_salary.checkInOut[0].employee?.email }}</p>
-                        <br />
-                        <p>🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}</p>
-                        <br />
-                        <p>🕐 hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly }} ฿</p> -->
+                          <br />
+                          <p>📩 Email: {{ employeeStore.summary_salary.checkInOut[0].employee?.email }}</p>
+                          <br />
+                          <p>🗃️ Position : {{ employeeStore.summary_salary.checkInOut[0].employee?.position }}</p>
+                          <br />
+                          <p>🕐 hourly : {{ employeeStore.summary_salary.checkInOut[0].employee?.hourly }} ฿</p> -->
                     </v-card-text>
-                  </v-card>
+                </v-card>
                 </v-col>
               </v-row>
             </v-container>
@@ -113,12 +141,19 @@ onMounted(async () => {
                     <tbody style="overflow-y: auto">
                       <tr class="text-center mr-5" style="justify-content: center  overflow-y: auto;"
                         v-for="(item, index) in employeeStore.summary_salary.checkInOut" :key="index">
-                        <td>{{ new Date(item.time_in + '').getDate() + '/' + new Date(item.time_in + '').getMonth() + '/' + new
-                          Date(item.time_in + '').getFullYear() }}</td>
-                        <td>{{ new Date(item.time_in + '').getHours() + ':' + new Date(item.time_in + '').getMinutes() + ':' + new
-                          Date(item.time_in + '').getSeconds() }}</td>
-                        <td>{{ new Date(item.time_out + '').getHours() + ':' + new Date(item.time_out + '').getMinutes() + ':' + new
-                          Date(item.time_out + '').getSeconds() }}</td>
+                        <td>{{ date(item.time_in + '').date + '/' + manageTimeStore.monthNum[new Date(item.time_in
+                          +
+                          '').getMonth()] + '/' +
+                          new
+                            Date(item.time_in + '').getFullYear() }}</td>
+                        <!-- <td>{{ new Date(item.time_in + '').getDate() + '/' + new Date(item.time_in + '').getMonth() + '/' + new
+                            Date(item.time_in + '').getFullYear() }}</td> -->
+                        <td>{{ new Date(item.time_in + '').getHours() + ':' + new Date(item.time_in + '').getMinutes() +
+                          ':' + new
+                            Date(item.time_in + '').getSeconds() }}</td>
+                        <td>{{ new Date(item.time_out + '').getHours() + ':' + new Date(item.time_out + '').getMinutes() +
+                          ':' + new
+                            Date(item.time_out + '').getSeconds() }}</td>
                         <td>{{ item.total_hour }}</td>
                       </tr>
                     </tbody>
