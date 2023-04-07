@@ -38,6 +38,7 @@ const date = (index: string) => {
     date.second = dd.getSeconds() + '0'
 
 
+
   } if (dd.getMonth() < 10) {
     date.mouth = '0' + dd.getMonth()
   }
@@ -54,7 +55,10 @@ const date = (index: string) => {
 
 }
 </script>
-<template>
+<template >
+    <v-container>
+        <img src="./logocoffee.png">
+    </v-container>
   <table class="body-wrap scroll ">
     <tbody>
       <tr>
@@ -64,15 +68,14 @@ const date = (index: string) => {
             <table class="main" width="100%" cellpadding="0" cellspacing="0">
               <tbody>
                 <tr>
-                  <td class="content-wrap">
+                  <td class="content-wrap aligncenter">
                     <table width="100%" cellpadding="0" cellspacing="0">
                       <tbody>
                         <tr>
-                          <td class="text-center">
-                            <div>Picture</div>
-                            <h1 style="font-size: 15px;">D-COFFEE</h1>
-                            <h1 style="font-size: 15px;"> WELCOME TO D-COFFEE </h1>
-                            <h1 style="font-size: 15px;"> ================================= </h1>
+                          <td class="content-block">
+                            <h2 style="font-size: 15px;"> ☕ D-COFFEE ☕ </h2>
+                            <h2 style="font-size: 15px;"> WELCOME TO D-COFFEE </h2>
+                            <h2 style="font-size: 15px;"> ==================================== </h2>
                           </td>
                         </tr>
                         <tr>
@@ -80,29 +83,34 @@ const date = (index: string) => {
                             <table class="invoice">
                               <tbody>
                                 <tr>
-                                  <td>Customer : {{ orderStore.tempOrder.customer?.name }}<br />
-                                    -----------------------------------------------------------------------------------------------
-                                    <br /> OrderID : {{
-                                      orderStore.tempOrder.id }}
-                                    <div style="float: right;">Date : {{
-                                      date(orderStore.tempOrder.createdDate + '').date +
-                                      '-' +
-                                      manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate + '').getMonth()]
-                                      +
-                                      '-' +
-                                      new Date(orderStore.tempOrder.createdDate + '').getFullYear() +
-                                      ' | ' +
-                                      new Date(orderStore.tempOrder.createdDate + '').getHours() +
-                                      ':' +
-                                      new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
-                                      ':' +
-                                      new Date(orderStore.tempOrder.createdDate + '').getSeconds()
-                                    }}
-                                    </div><br /> Payment : {{
-                                      orderStore.tempOrder.payment }}
-                                  </td>
+                                  <td>Customer : {{ orderStore.tempOrder.customer?.id }}<br /> OrderID : {{
+                                    orderStore.tempOrder.id }} | {{
+    date(orderStore.tempOrder.createdDate + '').date +
+    '-' +
+    manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate + '').getMonth()] +
+    '-' +
+    new Date(orderStore.tempOrder.createdDate + '').getFullYear() +
+    ' | ' +
+    new Date(orderStore.tempOrder.createdDate + '').getHours() +
+    ':' +
+    new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
+    ':' +
+    new Date(orderStore.tempOrder.createdDate + '').getSeconds()
+  }}<br />Date : {{
+  date(orderStore.tempOrder.createdDate + '').date +
+  '-' +
+  manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate + '').getMonth()] +
+  '-' +
+  new Date(orderStore.tempOrder.createdDate + '').getFullYear() +
+  ' | ' +
+  new Date(orderStore.tempOrder.createdDate + '').getHours() +
+  ':' +
+  new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
+  ':' +
+  new Date(orderStore.tempOrder.createdDate + '').getSeconds()
+}}<br /> Payment : {{
+  orderStore.tempOrder.payment }}</td>
                                 </tr>
-                                -----------------------------------------------------------------------------------------------
                                 <tr>
                                   <td>
                                     <table class="invoice-items" cellpadding="0" cellspacing="0">
@@ -139,7 +147,7 @@ const date = (index: string) => {
                         </tr>
 
                         <tr>
-                          <td class="content-block text-center">
+                          <td class="content-block">
                             All For One Company Inc. Buu section 2 .
                           </td>
                         </tr>
@@ -156,6 +164,7 @@ const date = (index: string) => {
       </tr>
     </tbody>
   </table>
+
 </template>
 <style scoped>
 * {
@@ -241,7 +250,7 @@ h2,
 h3 {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   color: #000;
-  margin: 10px 0 0;
+  margin: 40px 0 0;
   line-height: 1.2;
   font-weight: 400;
 }
@@ -371,7 +380,7 @@ a {
 }
 
 .invoice td {
-  padding: 2px 0;
+  padding: 5px 0;
 }
 
 .invoice .invoice-items {

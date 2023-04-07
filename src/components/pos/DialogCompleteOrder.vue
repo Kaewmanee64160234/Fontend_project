@@ -50,130 +50,116 @@ const date = (index: string) => {
 }
 </script>
 <template>
-  <v-dialog width="auto" height="auto" v-model="pointOfSaleStore.dialogComplteOrder">
+  <v-dialog width="auto" v-model="pointOfSaleStore.dialogComplteOrder">
     <v-card>
-      <v-card-title>
-        <table class="body-wrap">
-          <tbody>
-            <tr>
-              <td></td>
-              <td class="container" width="600">
-                <div class="content">
-                  <table class="main" width="100%" cellpadding="0" cellspacing="0">
-                    <tbody>
-                      <tr>
-                        <td class="content-wrap aligncenter">
-                          <table width="100%" cellpadding="0" cellspacing="0">
-                            <tbody>
-                              <tr>
-                                <td class="content-block">
-                                  <h2  style="font-size: 20px; font-family: Georgia, serif; ">☕ Thanks You ☕</h2>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="content-block">
-                                  <table class="invoice">
-                                    <tbody>
-                                      <tr>
-                                        <td>
-                                          <!-- customer: {{ orderStore.tempOrder.customer?.id! }}<br /> -->
-                                          OrderId: {{ orderStore.tempOrder.id }} | {{
-                                            date(orderStore.tempOrder.createdDate + '').date +
-                                            '-' +
-                                            manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate +
-                                              '').getMonth()] +
-                                            '-' +
-                                            new Date(orderStore.tempOrder.createdDate + '').getFullYear() +
-                                            ' | ' +
-                                            new Date(orderStore.tempOrder.createdDate + '').getHours() +
-                                            ':' +
-                                            new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
-                                            ':' +
-                                            new Date(orderStore.tempOrder.createdDate + '').getSeconds()
-                                          }}<br /> Date : {{
-                                            date(orderStore.tempOrder.createdDate + '').date +
-                                            '-' +
-                                            manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate +
-                                              '').getMonth()] +
-                                            '-' +
-                                            new Date(orderStore.tempOrder.createdDate + '').getFullYear() +
-                                            ' | ' +
-                                            new Date(orderStore.tempOrder.createdDate + '').getHours() +
-                                            ':' +
-                                            new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
-                                            ':' +
-                                            new Date(orderStore.tempOrder.createdDate + '').getSeconds()
-                                          }}<br />
-                                          Payment : {{ orderStore.tempOrder.payment }}
-                                        </td>
-                                      </tr>
+      
+  <table class="body-wrap scroll ">
+    <tbody>
+      <tr>
+        <td></td>
+        <td class="container" width="600">
+          <div class="content">
+            <table class="main" width="100%" cellpadding="0" cellspacing="0">
+              <tbody>
+                <tr>
+                  <td class="content-wrap">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="text-center">
+                            <div>Picture</div>
+                            <h1 style="font-size: 15px;">D-COFFEE</h1>
+                            <h1 style="font-size: 15px;"> WELCOME TO D-COFFEE </h1>
+                            <h1 style="font-size: 15px;"> ====================================== </h1>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="content-block">
+                            <table class="invoice">
+                              <tbody>
+                                <tr>
+                                  <td>Customer : {{ orderStore.tempOrder.customer?.name }}<br />
+                                    -------------------------------------------------------------------------------------
+                                    <br /> OrderID : {{
+                                      orderStore.tempOrder.id }}
+                                    <div style="float: right;">Date : {{
+                                      date(orderStore.tempOrder.createdDate + '').date +
+                                      '-' +
+                                      manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate + '').getMonth()]
+                                      +
+                                      '-' +
+                                      new Date(orderStore.tempOrder.createdDate + '').getFullYear() +
+                                      ' | ' +
+                                      new Date(orderStore.tempOrder.createdDate + '').getHours() +
+                                      ':' +
+                                      new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
+                                      ':' +
+                                      new Date(orderStore.tempOrder.createdDate + '').getSeconds()
+                                    }}
+                                    </div><br /> Payment : {{
+                                      orderStore.tempOrder.payment }}
+                                  </td>
+                                </tr>
+                                -------------------------------------------------------------------------------------
+                                <tr>
+                                  <td>
+                                    <table class="invoice-items" cellpadding="0" cellspacing="0">
+                                      <tbody>
+                                        <tr v-for="item in orderStore.tempOrder.orderItems" :key="item.name">
+                                          <td>{{ item.name }}</td>
+                                          <td class="alignright">{{ item.total }} ฿</td>
+                                        </tr>
+                                        <tr class="finishOrder">
+                                          <td>Discount</td>
+                                          <td class="alignright">{{ orderStore.tempOrder.discount }} ฿</td>
+                                        </tr>
+                                        <tr>
+                                          <td>Recieve</td>
+                                          <td class="alignright">{{ orderStore.tempOrder.recieved }} ฿</td>
+                                        </tr>
+                                        <tr>
+                                          <td>Change</td>
+                                          <td class="alignright">{{ orderStore.tempOrder.change }} ฿</td>
+                                        </tr>
 
-                                      <tr>
-                                        <td>
-                                          <table class="invoice-items" cellpadding="0" cellspacing="0">
-                                            <tbody>
-                                              <tr v-for="item in orderStore.tempOrder.orderItems" :key="item.name">
-                                                <td>{{ item.name }}</td>
-                                                <td class="alignright">{{ item.total }} ฿</td>
-                                              </tr>
-                                              <tr class="finishOrder">
-                                                <td>Discount</td>
-                                                <td class="alignright">
-                                                  {{ orderStore.tempOrder.discount }} ฿
-                                                </td>
-                                              </tr>
-                                              <tr>
-                                                <td>Recieve</td>
-                                                <td class="alignright">
-                                                  {{ orderStore.tempOrder.recieved }} ฿
-                                                </td>
-                                              </tr>
-                                              <tr>
-                                                <td>Change</td>
-                                                <td class="alignright">
-                                                  {{ orderStore.tempOrder.change }} ฿
-                                                </td>
-                                              </tr>
+                                        <tr class="total">
+                                          <td class="alignright" width="80%">Total</td>
+                                          <td class="alignright">{{ orderStore.tempOrder.total }} ฿</td>
 
-                                              <tr class="total">
-                                                <td class="alignright" width="80%">Total</td>
-                                                <td class="alignright">
-                                                  {{ orderStore.tempOrder.total }} ฿
-                                                </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </td>
-                              </tr>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td class="content-block">
-                                  All For One Company Inc. Buu section 2 .
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </v-card-title>
+                        <tr>
+                          <td class="content-block text-center">
+                            All For One Company Inc. Buu section 2 .
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+      
       <v-card-actions class="justify-end">
         <v-btn color="red" variant="text"
           @click="pointOfSaleStore.dialogComplteOrder = false">Close</v-btn>
           <v-spacer></v-spacer>
           <v-btn color="green" variant="text">Print</v-btn>
-
       </v-card-actions>
     </v-card>
   </v-dialog>
