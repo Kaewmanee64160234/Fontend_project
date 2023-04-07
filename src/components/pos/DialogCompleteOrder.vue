@@ -41,16 +41,9 @@ const orderStore = useOrderStore()
                                       </tr>
                                       <tr>
                                         <td>
-                                          <table
-                                            class="invoice-items"
-                                            cellpadding="0"
-                                            cellspacing="0"
-                                          >
+                                          <table class="invoice-items" cellpadding="0" cellspacing="0">
                                             <tbody>
-                                              <tr
-                                                v-for="item in orderStore.tempOrder.orderItems"
-                                                :key="item.name"
-                                              >
+                                              <tr v-for="item in orderStore.tempOrder.orderItems" :key="item.name">
                                                 <td>{{ item.name }}</td>
                                                 <td class="alignright">{{ item.total }} ฿</td>
                                               </tr>
@@ -107,10 +100,10 @@ const orderStore = useOrderStore()
         </table>
       </v-card-title>
       <v-card-actions class="justify-end">
-        <v-btn color="green" variant="text">Print</v-btn>
-        <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogComplteOrder = false"
-          >Close</v-btn
-        >
+        <v-btn color="red" variant="text"
+          @click="pointOfSaleStore.dialogComplteOrder = false">Close</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn color="green" variant="text">Print</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -229,6 +222,7 @@ ol {
   margin-bottom: 10px;
   font-weight: normal;
 }
+
 p li,
 ul li,
 ol li {
@@ -298,18 +292,22 @@ a {
   text-align: center;
   border-radius: 3px 3px 0 0;
 }
+
 .alert a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
   font-size: 16px;
 }
+
 .alert.alert-warning {
   background: #f8ac59;
 }
+
 .alert.alert-bad {
   background: #ed5565;
 }
+
 .alert.alert-good {
   background: #1ab394;
 }
@@ -323,20 +321,25 @@ a {
   text-align: left;
   width: 80%;
 }
+
 .invoice td {
   padding: 5px 0;
 }
+
 .invoice .invoice-items {
   width: 100%;
 }
+
 .invoice .invoice-items td {
   border-top: #eee 1px solid;
 }
+
 .invoice .invoice-items .total td {
   border-top: 2px solid #333;
   border-bottom: 2px solid #333;
   font-weight: 700;
 }
+
 .finishOrder {
   border-top: 2px solid #333;
 }
@@ -345,6 +348,7 @@ a {
     RESPONSIVE AND MOBILE FRIENDLY STYLES
 ------------------------------------- */
 @media only screen and (max-width: 640px) {
+
   h1,
   h2,
   h3,
@@ -377,5 +381,4 @@ a {
   .invoice {
     width: 100% !important;
   }
-}
-</style>
+}</style>

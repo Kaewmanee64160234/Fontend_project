@@ -53,10 +53,8 @@ const save = () => {
             <v-btn>L +10</v-btn>
           </v-btn-toggle>
         </div>
-        <div
-          class="d-flex align-left flex-column"
-          v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate' || 'coffee'"
-        >
+        <div class="d-flex align-left flex-column"
+          v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate' || 'coffee'">
           <h5>Sweet</h5>
 
           <v-btn-toggle v-model="pointOfSaleStore.toggle2" variant="outlined" divided rounded="xl">
@@ -81,11 +79,9 @@ const save = () => {
       </v-card-text>
       <v-card-text v-else> Add to cart 🛒 </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
+        <v-btn color="primary" variant="text" @click="pointOfSaleStore.dialogTopping = false">Close</v-btn>
         <v-btn color="secondary" variant="text" @click="save()"> Save </v-btn>
-        <v-btn color="primary" variant="text" @click="pointOfSaleStore.dialogTopping = false">
-          Close
-        </v-btn>
+        <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>
   </v-dialog>
