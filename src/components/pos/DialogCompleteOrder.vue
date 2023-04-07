@@ -1,9 +1,53 @@
 <script lang="ts" setup>
+import { useManageTime } from '@/store/manageDate';
 import { useOrderStore } from '@/store/order.store'
 import { usePointOfSale } from '@/store/pointOfSell.store'
-
+const manageTimeStore = useManageTime()
 const pointOfSaleStore = usePointOfSale()
 const orderStore = useOrderStore()
+const date = (index: string) => {
+
+  let dd = new Date(index)
+  let date = { date: '', mouth: '', year: '', hour: '', minute: '', second: '' }
+  date.year = dd.getFullYear() + ''
+  date.date = dd.getDate() + ''
+  date.mouth = dd.getMonth() + ''
+  date.minute = '' + dd.getMinutes()
+  date.hour = '' + dd.getHours()
+  date.second = '' + dd.getSeconds()
+  if (dd.getDate() < 10) {
+    date.date = '0' + dd.getDate()
+
+  }
+  if (dd.getMonth() < 10) {
+    date.mouth = '0' + dd.getMonth()
+  }
+  if (dd.getHours() < 10) {
+    date.hour = '0' + dd.getHours()
+  }
+  if (dd.getMinutes() < 10) {
+    date.minute = '0' + dd.getHours()
+  }
+  if (dd.getSeconds() < 10) {
+    date.second = dd.getSeconds() + '0'
+
+
+
+  } if (dd.getMonth() < 10) {
+    date.mouth = '0' + dd.getMonth()
+  }
+  if (dd.getHours() < 10) {
+    date.hour = '0' + dd.getHours()
+  }
+  if (dd.getMinutes() < 10) {
+    date.minute = '0' + dd.getHours()
+  }
+  if (dd.getSeconds() < 10) {
+    date.second = dd.getSeconds() + '0'
+  }
+  return date;
+
+}
 </script>
 <template>
   <v-dialog width="auto" height="auto" v-model="pointOfSaleStore.dialogComplteOrder">
@@ -23,7 +67,7 @@ const orderStore = useOrderStore()
                             <tbody>
                               <tr>
                                 <td class="content-block">
-                                  <h2>☕ Thanks You ☕</h2>
+                                  <h2  style="font-size: 20px; font-family: Georgia, serif; ">☕ Thanks You ☕</h2>
                                 </td>
                               </tr>
                               <tr>
@@ -33,12 +77,37 @@ const orderStore = useOrderStore()
                                       <tr>
                                         <td>
                                           <!-- customer: {{ orderStore.tempOrder.customer?.id! }}<br /> -->
-                                          orderId: {{ orderStore.tempOrder.id }}:{{
-                                            orderStore.tempOrder.createdDate
-                                          }}<br />Date :{{ orderStore.tempOrder.createdDate }}<br />
-                                          payment: {{ orderStore.tempOrder.payment }}
+                                          OrderId: {{ orderStore.tempOrder.id }} | {{
+                                            date(orderStore.tempOrder.createdDate + '').date +
+                                            '-' +
+                                            manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate +
+                                              '').getMonth()] +
+                                            '-' +
+                                            new Date(orderStore.tempOrder.createdDate + '').getFullYear() +
+                                            ' | ' +
+                                            new Date(orderStore.tempOrder.createdDate + '').getHours() +
+                                            ':' +
+                                            new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
+                                            ':' +
+                                            new Date(orderStore.tempOrder.createdDate + '').getSeconds()
+                                          }}<br /> Date : {{
+                                            date(orderStore.tempOrder.createdDate + '').date +
+                                            '-' +
+                                            manageTimeStore.monthNum[new Date(orderStore.tempOrder.createdDate +
+                                              '').getMonth()] +
+                                            '-' +
+                                            new Date(orderStore.tempOrder.createdDate + '').getFullYear() +
+                                            ' | ' +
+                                            new Date(orderStore.tempOrder.createdDate + '').getHours() +
+                                            ':' +
+                                            new Date(orderStore.tempOrder.createdDate + '').getMinutes() +
+                                            ':' +
+                                            new Date(orderStore.tempOrder.createdDate + '').getSeconds()
+                                          }}<br />
+                                          Payment : {{ orderStore.tempOrder.payment }}
                                         </td>
                                       </tr>
+
                                       <tr>
                                         <td>
                                           <table class="invoice-items" cellpadding="0" cellspacing="0">
@@ -100,10 +169,15 @@ const orderStore = useOrderStore()
         </table>
       </v-card-title>
       <v-card-actions class="justify-end">
+<<<<<<< HEAD
         <v-btn color="red" variant="text"
           @click="pointOfSaleStore.dialogComplteOrder = false">Close</v-btn>
           <v-spacer></v-spacer>
           <v-btn color="green" variant="text">Print</v-btn>
+=======
+        <v-btn color="green" variant="text">Print</v-btn>
+        <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogComplteOrder = false">Close</v-btn>
+>>>>>>> 7467735a05cba908e0cca55b23f2641d2679b78d
       </v-card-actions>
     </v-card>
   </v-dialog>
