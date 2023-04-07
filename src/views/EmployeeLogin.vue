@@ -146,10 +146,10 @@ const date = (index: string) => {
               </v-row>
               <v-col class="detail">
                 <v-container style="height: 60%; ">
-                  <div style="height: 50vh; overflow-y: auto" class="scroll ">
-                  <VTable fixed-header height="430px" class="text-center mt-5;" style="justify-content: center; ">
+                  <div style="height: 50vh;" class="scroll ">
+                  <VTable class="text-center mt-5;" style="justify-content: center; ">
                     <thead style="justify-content: center;  ">
-                      <tr>
+                      <tr fixed-header>
                         <th> Date </th>
                         <th>Time in</th>
                         <th>Time out</th>
@@ -157,7 +157,7 @@ const date = (index: string) => {
                       </tr>
                     </thead>
                     <tbody style=" overflow-y: auto;">
-                      <tr class="text-center mr-5" style="justify-content: center;  overflow-y: auto; text-align: center;"
+                      <tr class="text-center mr-5" style="justify-content: center; text-align: center;"
                         v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
                         <td>{{ date(item.time_in + '').date + '/' + manageTimeStore.monthNum[new Date(item.time_in
                           +

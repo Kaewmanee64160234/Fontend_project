@@ -42,11 +42,7 @@ async function save() {
                   ]"
                 ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
+              <v-col cols="md-4">
                 <v-text-field
                   label="Min_quantity*"
                   required
@@ -55,11 +51,7 @@ async function save() {
                 (v) => v >= 0 || 'Min_quantity must more than 0']"
                 ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
+              <v-col cols="md-4">
                 <v-text-field
                   label="Quantity*"
                   required
@@ -68,11 +60,7 @@ async function save() {
                 (v) => v > 0 || 'Quantity must more than 0']"
                 ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
+              <v-col cols="md-4">
               <v-autocomplete
                   label="Unit*"
                 v-model.number="materialStore.editedMaterial.unit"
@@ -80,7 +68,7 @@ async function save() {
               >
               </v-autocomplete>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="md-4">
                 <v-text-field
                   label="Price_per_unit*"
                   required

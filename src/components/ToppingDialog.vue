@@ -39,7 +39,7 @@ const save = () => {
 }
 </script>
 <template>
-  <v-dialog v-model="pointOfSaleStore.dialogTopping" width="30vw" min-width="500px">
+  <v-dialog v-model="pointOfSaleStore.dialogTopping" width="40vw" min-width="700px">
     <v-card>
       <v-card-title>
         {{ product_.name }}

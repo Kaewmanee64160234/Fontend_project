@@ -27,7 +27,8 @@ onMounted(() => {
         append-inner-icon="mdi-magnify"
         @click:append-inner="customerStore.getCustomerByTel"></v-text-field>
            <v-card class="mx-auto" style="margin-top: 10px;">
-            <v-list lines="two" v-if="customerStore.customers.length > 0">
+            <div style="height: 45vh;" class="scroll ">
+            <v-list class="scroll" lines="two" v-if="customerStore.customers.length > 0">
               <v-list-item v-for="item in customerStore.customers" :value="item.id" :key="item.id" prepend-icon="mdi-account-star"
               :title="item.name" :subtitle="item.point + ` Point`" style="font-size: 15px" :type="item.name">
               <template v-slot:append>
@@ -37,12 +38,30 @@ onMounted(() => {
               </template>
             </v-list-item>
             </v-list>
+            </div>
            </v-card>
         </v-card-text>
         <v-card-actions>
-            <v-btn color="primary" variant="text" @click="customerStore.dialog = false">Close
+            <v-btn color="red" variant="text" @click="customerStore.dialog = false">Close
             </v-btn>
           </v-card-actions>
       </v-card>
     </v-dialog>
 </template>
+
+<style>
+.scroll {
+  max-height: 90vh;
+  overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 999px;
+}
+</style>
