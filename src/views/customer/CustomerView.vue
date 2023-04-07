@@ -36,10 +36,7 @@ const deleteAllCustomers = async () => {
 </script>
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-<<<<<<< HEAD
-
   <CustomerDialog></CustomerDialog>
-=======
   <v-card>
     <v-row>
       <v-col>
@@ -47,8 +44,6 @@ const deleteAllCustomers = async () => {
       </v-col>
     </v-row>
   </v-card>
-    
->>>>>>> 176ee1c06ae792e1e867ecc826e9ce7beb6ea5fb
   <v-container>
     <v-card>
       <v-card-title>
