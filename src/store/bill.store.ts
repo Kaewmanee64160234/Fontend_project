@@ -116,7 +116,7 @@ export const useBillStore = defineStore("bill", () => {
         lastPage.value = res.data.lastPage
       } catch (err) {
         console.log(err)
-        messageStore.showError("Cannot get data bills");
+        messageStore.showError("Oops!, cannot get data bills.");
   
       }
   

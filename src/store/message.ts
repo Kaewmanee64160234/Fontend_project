@@ -22,6 +22,8 @@ export const useMessageStore = defineStore("message", () => {
     Swal.fire({
       iconHtml: '<span class="mdi mdi-bell-ring-outline mdi-48px"></span>',
       background: "white",
+      iconColor: "black",
+      color: "red",
       confirmButtonText: "Close",
       text: text,
     });

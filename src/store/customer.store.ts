@@ -104,7 +104,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       lastPage.value = res.data.lastPage
     } catch (err) {
       console.log(err)
-      messageStore.showError("Cannot get data customers");
+      messageStore.showError("Oops!, cannot get data customers.");
       
     }
     loadingStore.isLoading = false

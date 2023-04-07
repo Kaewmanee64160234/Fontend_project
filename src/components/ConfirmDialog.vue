@@ -53,6 +53,11 @@ const openDialog = (title: string, desc: string, okBtn: string, cancel: string) 
     cancelButtonText: cancel,
   }).then((result) => {
     if (result.isConfirmed) {
+      Swal.fire(
+      'Done!',
+      'Everything done.',
+      'success'
+    )
       return Promise.resolve();
     } else if (result.isDismissed) {
       return Promise.reject();

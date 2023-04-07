@@ -59,7 +59,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       stores.value = res.data.data
     } catch (e) {
       console.log(e);
-      messageStore.showError("Cannot get data stores");
+      messageStore.showError("Oops!, cannot get stores.");
     }
     loadingStore.isLoading = false;
   }

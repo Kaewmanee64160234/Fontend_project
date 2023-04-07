@@ -77,7 +77,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
  lastPage.value = res.data.lastPage
     } catch (e) {
       console.log(e)
-      messageStore.showError('Cannot get data materials')
+      messageStore.showError('Oops!, cannot get materials.')
     }
     loadingStore.isLoading = false
   }

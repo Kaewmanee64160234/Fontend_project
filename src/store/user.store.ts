@@ -58,7 +58,7 @@ export const useUserStore = defineStore('User', () => {
       lastPage.value = res.data.lastPage
     } catch (e) {
       console.log(e)
-      messageStore.showError('Cannot get data users')
+      messageStore.showError('Oops!, cannot get users.')
     }
     loadingStore.isLoading = false
   }
@@ -84,7 +84,7 @@ export const useUserStore = defineStore('User', () => {
       await getUsers()
     } catch (e) {
       console.log(e)
-      messageStore.showError('Cannot save user')
+      messageStore.showError('Cannot save user.')
     }
     loadingStore.isLoading = false
   }

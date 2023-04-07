@@ -193,7 +193,7 @@ export const useEmployeeStore = defineStore('employee', () => {
       lastPage.value = res.data.lastPage
     } catch (err) {
       console.log(err)
-      messageStore.showError('Cannot get data employee')
+      messageStore.showError('Oops!, cannot get employees.')
     }
     loadingStore.isLoading = false
   }

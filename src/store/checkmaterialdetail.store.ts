@@ -25,7 +25,7 @@ export const useCheckMaterailDetailStore = defineStore("checkmaterialdetail", ()
           CheckMaterialDetails.value = response.data
         } catch (err) {
           console.log(err)
-          messageStore.showError("Cannot get data");
+          messageStore.showError("Oops!, cannot get details.");
     
         }
     
@@ -39,7 +39,7 @@ export const useCheckMaterailDetailStore = defineStore("checkmaterialdetail", ()
           console.log(CheckMaterialDetail.value)
         } catch (err) {
           console.log(err)
-          messageStore.showError("Cannot get data");
+          messageStore.showError("Oops!, cannot get details.");
     
         }
     

@@ -99,7 +99,7 @@ export const useProductStore = defineStore('Product', () => {
       loadingStore.isLoading = false
       return products.value
     } catch (e) {
-      messageStore.showError('Cannot get data products')
+      messageStore.showError('Oops!, cannot get products')
     }
 
     loadingStore.isLoading = false
@@ -121,7 +121,7 @@ export const useProductStore = defineStore('Product', () => {
       console.log(products.value)
     } catch (e) {
       console.log(e)
-      messageStore.showError('Cannot get data products')
+      messageStore.showError('Oops!, cannot get data products.')
     }
     loadingStore.isLoading = false
   }

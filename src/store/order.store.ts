@@ -66,7 +66,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       orders.value = response.data.data
     } catch (err) {
       console.log(err)
-      messageStore.showError("Cannot get data");
+      messageStore.showError("Oops!, cannot get orders.");
 
     }
 
@@ -83,7 +83,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       console.log(tempOrder.value)
     } catch (err) {
       console.log(err)
-      messageStore.showError("Cannot get data");
+      messageStore.showError("Oops!, cannot get orders.");
 
     }
 
