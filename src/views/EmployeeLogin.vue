@@ -123,7 +123,7 @@ const date = (index: string) => {
 
           <v-col class="detail">
             <v-container style="height: 100%; ">
-              <v-row style="height: 14%">
+              <v-row style="height: 18%">
                 <v-row class="text-center">
                   <v-col class="detail-emp">
                     <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #DEF5E5;">
