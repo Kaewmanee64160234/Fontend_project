@@ -169,15 +169,11 @@ const date = (index: string) => {
         </table>
       </v-card-title>
       <v-card-actions class="justify-end">
-<<<<<<< HEAD
         <v-btn color="red" variant="text"
           @click="pointOfSaleStore.dialogComplteOrder = false">Close</v-btn>
           <v-spacer></v-spacer>
           <v-btn color="green" variant="text">Print</v-btn>
-=======
-        <v-btn color="green" variant="text">Print</v-btn>
-        <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogComplteOrder = false">Close</v-btn>
->>>>>>> 7467735a05cba908e0cca55b23f2641d2679b78d
+
       </v-card-actions>
     </v-card>
   </v-dialog>

@@ -79,9 +79,9 @@ const save = () => {
       </v-card-text>
       <v-card-text v-else> Add to cart 🛒 </v-card-text>
       <v-card-actions>
-        <v-btn color="primary" variant="text" @click="pointOfSaleStore.dialogTopping = false">Close</v-btn>
-        <v-btn color="secondary" variant="text" @click="save()"> Save </v-btn>
+        <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogTopping = false">Close</v-btn>
         <v-spacer></v-spacer>
+        <v-btn color="green" variant="text" @click="save()"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
