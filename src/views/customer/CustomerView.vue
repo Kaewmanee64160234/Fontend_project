@@ -44,6 +44,7 @@ const deleteAllCustomers = async () => {
       </v-col>
     </v-row>
   </v-card>
+  <CustomerDialog></CustomerDialog>
   <v-container>
     <v-card>
       <v-card-title>
