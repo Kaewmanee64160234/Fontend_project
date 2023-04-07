@@ -35,25 +35,25 @@ async function save() {
                                     <v-text-field label="name*" required v-model="employeeStore.editEmployee.name"
                                         :rules="[(v) => !!v || 'name is required']"></v-text-field>
                                 </v-col>
-                                <v-col cols="12">
+                                <v-col cols="md-8">
                                     <v-text-field label="address*" required v-model="employeeStore.editEmployee.address"
                                         :rules="[(v) => !!v || 'address is required']"></v-text-field>
                                 </v-col>
-                                <v-col cols="12">
+                                <v-col cols="md-4">
                                     <v-text-field label="tel*" required v-model="employeeStore.editEmployee.tel"
                                         :rules="[(v) => !!v || 'tel is required']"></v-text-field>
                                 </v-col>
-                                <v-col cols="12">
+                                <v-col cols="md-4">
                                     <v-text-field label="email*" required v-model="employeeStore.editEmployee.email"
                                         :rules="[(v) => !!v || 'email is required']"></v-text-field>
                                 </v-col>
-                                <v-col cols="12">
+                                <v-col cols="md-4">
                                     <v-autocomplete label="position*" v-model="employeeStore.editEmployee.position"
                                         :items="['Barista', 'Cashier', 'Manager', 'Baker', 'Server', 'Cleaner']">
                                     </v-autocomplete>
 
                                 </v-col>
-                                <v-col cols="12">
+                                <v-col cols="md-4">
                                     <v-text-field label="hourly*" required
                                         v-model.number="employeeStore.editEmployee.hourly"
                                         :rules="[(v) => !!v || 'Hourly is required']"></v-text-field>
@@ -70,11 +70,11 @@ async function save() {
                     <small>*indicates required field</small>
                 </v-card-text>
                 <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue-darken-1" variant="text" @click="employeeStore.dialog = false">
+                    <v-btn color="red" variant="text" @click="employeeStore.dialog = false">
                         Close
                     </v-btn>
-                    <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green" variant="text" @click="save"> Save </v-btn>
                 </v-card-actions>
             </v-container>
         </v-card>

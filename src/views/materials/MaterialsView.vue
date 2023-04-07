@@ -87,12 +87,12 @@ watch(paginate, async (newPage, oldPage) => {
           <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
           <v-btn class="mdi mdi-clipboard-list-outline mr-2" color="#FFA559" style="float: right; color: white" to="/material/showBills" value="showBills">Show Bill</v-btn>
           <v-spacer></v-spacer>
-      <v-text-field style="width: 30%;"
+      <v-text-field style="width: 23%;"
         :loading="materialStore.loading"
         density="compact"
         variant="solo"
         v-model="materialStore.keyword"
-        label="Search templates"
+        label="Search"
         append-inner-icon="mdi-magnify"
         hide-details
         @click:append-inner="materialStore.getMatByName"
@@ -157,12 +157,12 @@ watch(paginate, async (newPage, oldPage) => {
           <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
           <v-btn class="mdi mdi-clipboard-list-outline mr-2" color="#FFA559" style="float: right; color: white" to="/material/showBills" value="showBills">Show Bill</v-btn>
           <v-spacer></v-spacer>
-      <v-text-field style="width: 30%;"
+      <v-text-field style="width: 23%;"
         :loading="materialStore.loading"
         density="compact"
         variant="solo"
         v-model="materialStore.keyword"
-        label="Search templates"
+        label="Search"
         append-inner-icon="mdi-magnify"
         hide-details
         @click:append-inner="materialStore.getMatByName"
@@ -181,9 +181,7 @@ watch(paginate, async (newPage, oldPage) => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item,index) in materialStore.materials" :key="index" style="text-align:center">
-               
-
+            <tr v-for="(item,index) in materialStore.materials" :key="index" class="text-center">
                 <td>{{ index+1 }}</td>
                 <td v-if="item.min_quantity <= 5" style="color: red;">{{ item.name }}</td>
                 <td v-if="item.min_quantity > 5">{{ item.name }}</td>

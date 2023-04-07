@@ -73,12 +73,12 @@ watch(paginate, async (newPage, oldPage) => {
   </div>    
     <v-row>
             <v-col cols="3">
-            <v-text-field
+            <v-text-field 
               :loading="productStore.loading"
               density="compact"
               variant="solo"
               v-model="productStore.keyword"
-              label="Search templates"
+              label="Search"
               append-inner-icon="mdi-magnify"
               hide-details
             ></v-text-field>
@@ -182,7 +182,7 @@ watch(paginate, async (newPage, oldPage) => {
   </div> 
   <v-row>
             <v-col cols="3">
-            <v-text-field
+            <v-text-field 
               :loading="productStore.loading"
               density="compact"
               variant="solo"

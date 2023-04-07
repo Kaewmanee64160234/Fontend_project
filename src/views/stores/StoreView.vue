@@ -43,13 +43,24 @@ const deleteAllStores = async () => {
     <VContainer>
         <VCard>
             <VCardTitle>
-                Store
-                <VBtn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
-                    @click="storeStore.dialog = true">Add new store</VBtn>
+                <div class="row">
+                    <div class="col-md-9">
+                        Store
+                    </div>
+                </div>
+                <v-row class="mt-2">
+                    <v-col cols="3">
+                        <VTextField variant="solo" color="deep-purple-accent-4" density="compact"
+                            append-inner-icon="mdi-magnify" label="Search" single-line hide-details
+                            v-model="storeStore.keyword">
+                        </VTextField>
+                    </v-col>
+                    <v-col>
+                        <VBtn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
+                            @click="storeStore.dialog = true">Add new store</VBtn>
+                    </v-col>
+                </v-row>
                 <VSpacer> </VSpacer>
-                <VTextField style="width: 20%" variant="solo" color="deep-purple-accent-4" class="mt-7" density="compact"
-                    append-inner-icon="mdi-magnify" label="Search" single-line hide-details v-model="storeStore.keyword">
-                </VTextField>
                 <VTable class="text-center mt-5">
                     <thead>
                         <tr>
@@ -62,9 +73,9 @@ const deleteAllStores = async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item,index) of stores" :key="index" class="text-center">
+                        <tr v-for="(item, index) of stores" :key="index" class="text-center">
 
-                            <td>{{ index+1 }}</td>
+                            <td>{{ index + 1 }}</td>
                             <td>{{ item.name }}</td>
                             <td>{{ item.address }}</td>
                             <td>{{ item.tel }}</td>
@@ -81,11 +92,13 @@ const deleteAllStores = async () => {
                         </tr>
                     </tbody>
                 </VTable>
-                
- <v-container width="100%" justify="center">
-       
-       <v-pagination  justify="center" v-model="storeStore.page" :length="storeStore.lastPage" rounded="circle"></v-pagination>
-    </v-container>        
-    </VCardTitle>
+
+                <v-container width="100%" justify="center">
+
+                    <v-pagination justify="center" v-model="storeStore.page" :length="storeStore.lastPage"
+                        rounded="circle"></v-pagination>
+                </v-container>
+            </VCardTitle>
         </VCard>
-</VContainer></template>
+    </VContainer>
+</template>

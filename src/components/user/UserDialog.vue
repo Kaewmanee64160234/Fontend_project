@@ -76,19 +76,17 @@ async function save() {
                 <VAutocomplete label="Role" required v-model="userStore.editedUser.role"
                   :items="['Owner', 'Employee']"></VAutocomplete>
               </VCol>
-
-
-            </VRow>
-            <VRow>
-              <VCol cols="12" sm="6" md="6">
-                <VTextField label="hour*" required v-model.number="userStore.editedUser.hourly"
-                  :rules="[(v) => !!v || 'Item is required', (v) => v >= 30 || 'Length must equle than 30',]"></VTextField>
-              </VCol>
-              <VCol cols="12" sm="6" md="6">
-                 <VTextField label="position*" required v-model="userStore.editedUser.position"
-                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must equle than 3',]"></VTextField>
-              </VCol>
-            </VRow>
+            </Vrow>
+            <v-row>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="hour*" required v-model.number="userStore.editedUser.hourly"
+                  :rules="[(v) => !!v || 'Item is required', (v) => v >= 30 || 'Length must equle than 30',]"></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field label="position*" required v-model="userStore.editedUser.position"
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must equle than 3',]"></v-text-field>
+              </v-col>
+            </v-row>
             <VFileInput color="deep-purple-accent-4" counter multiple placeholder="Select your files"
               prepend-icon="mdi-paperclip" variant="outlined" :show-size="1000" label="File input"
               accept="image/png, image/jpeg, image/bmp" v-model="userStore.editedUser.files"></VFileInput>
@@ -97,11 +95,11 @@ async function save() {
         <small>*indicates required field</small>
       </VCardText>
       <VCardActions>
-        <VSpacer></VSpacer>
-        <VBtn color="blue-darken-1" variant="text" @click="userStore.dialog = false">
+        <VBtn color="red" variant="text" @click="userStore.dialog = false">
           Close
         </VBtn>
-        <VBtn color="blue-darken-1" variant="text" @click="save"> Save </VBtn>
+        <VSpacer></VSpacer>
+        <VBtn color="green" variant="text" @click="save"> Save </VBtn>
       </VCardActions>
     </VCard>
   </VDialog>

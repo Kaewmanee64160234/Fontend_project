@@ -29,7 +29,7 @@ export const useCatagoryStore = defineStore('Catagory', () => {
       catagories.value = res.data;
     } catch (e) {
       console.log(e);
-      messageStore.showError("Ccannot get data categories");
+      messageStore.showError("Oops!, cannot get data categories.");
     }
     loadingStore.isLoading = false;
   }

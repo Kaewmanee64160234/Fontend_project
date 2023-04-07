@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import { useEmployeeStore } from '@/store/employee.store'
+import { useManageTime } from '@/store/manageDate'
 import type Employee from '@/store/types/employee.type'
 import type User from '@/store/types/user.type'
 import { onMounted, ref } from 'vue'
@@ -8,6 +9,7 @@ import { useRoute } from 'vue-router'
 import type { VForm } from 'vuetify/components'
 const url = import.meta.env.VITE_URL_PORT
 const employeeStore = useEmployeeStore()
+const manageTimeStore = useManageTime()
 
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
@@ -16,40 +18,66 @@ onMounted(async () => {
   await employeeStore.getSummarySalaryEmp(employee.value.id + '')
   // console.log(employeeStore.editEmployee)
 })
+const date = (index: string) => {
+  let dd = new Date(index);
+  let date = { date: '', mouth: '', year: '', hour: '', minute: '', second: '' }
+  date.year = dd.getFullYear() + ''
+  date.date = dd.getDate() + ''
+  date.mouth = dd.getMonth() + ''
+  date.minute = '' + dd.getMinutes()
+  date.hour = '' + dd.getHours()
+  date.second = '' + dd.getSeconds()
+  if (dd.getDate() < 10) {
+    date.date = '0' + dd.getDate()
+  } if (dd.getMonth() < 10) {
+    date.mouth = '0' + dd.getMonth()
+  }
+  if (dd.getHours() < 10) {
+    date.hour = '0' + dd.getHours()
+  }
+  if (dd.getMinutes() < 10) {
+    date.minute = '0' + dd.getHours()
+  }
+  if (dd.getSeconds() < 10) {
+    date.second = dd.getSeconds() + '0'
+  }
+  return date;
+
+}
 </script>
 
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-<v-container>
-  <v-card>
-    <v-card-text width="100vw" style="height: 90vh ;">
-      <v-row class="text-center" cols="12">
-        <v-col class="title" md="4">
-          <v-container style="height: 100%">
-            <v-row class="profile" style="height: 25%;">
-              <v-col>
-                <v-container>
+  <v-container>
+    <v-card>
+      <v-card-text width="100vw" style="height: 90vh ;">
+        <v-row class="text-center" cols="12">
+          <v-col class="title" md="4">
+            <v-container style="height: 100%">
+              <v-row class="profile" style="height: 25%;">
+                <v-col>
+                  <v-container>
                     <v-avatar size="100"><v-img :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
                     <div class="text-subtitle-2 mt-3">{{ employee.name }}</div>
                   </v-container>
                 </v-col>
               </v-row>
               <!-- <v-row style="height: 30%">
-                    <v-col>
-                      <v-card style="background-color: white">
-                        <v-card-text style="text-align: center">
+                        <v-col>
+                          <v-card style="background-color: white">
+                            <v-card-text style="text-align: center">
 
-                          <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
-                          <br />
-                          <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
-                          <br />
-                          <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                          <br />
-                          <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                  </v-row> -->
+                              <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
+                              <br />
+                              <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
+                              <br />
+                              <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
+                              <br />
+                              <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                            </v-card-text>
+                          </v-card>
+                        </v-col>
+                      </v-row> -->
               <v-row style="height: 30%">
                 <v-col>
                   <v-card>
@@ -58,15 +86,15 @@ onMounted(async () => {
                         <li>
                           👤 Name : {{ employeeStore.editEmployee.name }}
                         </li>
-                        <br/>
+                        <br />
                         <li>
                           📩 Email : {{ employeeStore.editEmployee.email }}
                         </li>
-                        <br/>
+                        <br />
                         <li>
                           🗃️ Position : {{ employeeStore.editEmployee.position }}
                         </li>
-                        <br/>
+                        <br />
                         <li>
                           🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿
                         </li>
@@ -118,31 +146,42 @@ onMounted(async () => {
               </v-row>
               <v-col class="detail">
                 <v-container style="height: 60%; ">
-                  <VTable fixed-header height="430px" class="text-center mt-5;" style="justify-content: center; ">
-                    <thead style="justify-content: center;  ">
-                      <tr>
-                        <th> Date </th>
-                        <th>Time in</th>
-                        <th>Time out</th>
-                        <th>Total hour</th>
-                      </tr>
-                    </thead>
-                    <tbody style=" overflow-y: auto;">
-                      <tr class="text-center mr-5" style="justify-content: center;  overflow-y: auto; text-align: center;"
-
-                        v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
-                        <td>{{  new Date(item.time_in+'').getDate()+'/'+new Date(item.time_in+'').getMonth()+'/'+new Date(item.time_in+'').getFullYear() }}</td>
-                        <td>{{  new Date(item.time_in+'').getHours()+':'+new Date(item.time_in+'').getMinutes()+':'+new Date(item.time_in+'').getSeconds() }}</td>
-                        <td>{{ new Date(item.time_out+'').getHours()+':'+new Date(item.time_out+'').getMinutes()+':'+new Date(item.time_out+'').getSeconds()}}</td>
-                        <td>{{ item.total_hour }}</td>
-                      </tr>
-                    </tbody>
-                  </VTable>
+                  <div style="height: 63vh; overflow-y: auto" class="scroll ">
+                    <v-table fixed-header class="text-center mt-5;" style="justify-content: center; overflow-y: auto; ">
+                      <thead fixed-header height="50px" style="justify-content: center;  ">
+                        <tr>
+                          <th> Date </th>
+                          <th>Time in</th>
+                          <th>Time out</th>
+                          <th>Total hour</th>
+                        </tr>
+                      </thead>
+                      <tbody style=" overflow-y: auto;">
+                        <tr class="text-center mr-5" style="justify-content: center;  text-align: center;"
+                          v-for="(item, index) in employeeStore.editEmployee.check_in_outs" :key="index">
+                          <td>{{ date(item.time_in + '').date + '/' + manageTimeStore.monthNum[new Date(item.time_in
+                            +
+                            '').getMonth()] + '/' +
+                            new
+                              Date(item.time_in + '').getFullYear() }}</td>
+                          <!-- <td>{{  new Date(item.time_in+'').getDate()+'/'+new Date(item.time_in+'').getMonth()+'/'+new Date(item.time_in+'').getFullYear() }}</td> -->
+                          <td>{{ new Date(item.time_in + '').getHours() + ':' + new Date(item.time_in + '').getMinutes() +
+                            ':' + new
+                              Date(item.time_in + '').getSeconds() }}</td>
+                          <td>{{ new Date(item.time_out + '').getHours() + ':' + new Date(item.time_out + '').getMinutes()
+                            + ':' + new
+                              Date(item.time_out + '').getSeconds() }}</td>
+                          <td>{{ item.total_hour }}</td>
+                        </tr>
+                      </tbody>
+                    </v-table>
+                  </div>
                 </v-container>
 
               </v-col>
 
             </v-container>
+
 
           </v-col>
 
@@ -153,7 +192,7 @@ onMounted(async () => {
 </template>
 <style scoped>
 .title {
-  background-color: #FFF5E1;
+  background-color: #F9F5E7;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
   height: 100vh;
 }
@@ -167,4 +206,17 @@ onMounted(async () => {
 .detail {
   width: 70 vw;
 }
-</style>
+
+.scroll {
+  overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 999px;
+}</style>

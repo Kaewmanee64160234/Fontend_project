@@ -42,14 +42,25 @@ const deleteAllEmployees = async () => {
   <v-container>
     <v-card>
       <v-card-title>
-        Employee
-        <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
-          @click="employeeStore.dialog = !employeeStore.dialog">Add new employee</v-btn>
-        <v-spacer> </v-spacer>
-        <v-text-field style="width: 30%;" :loading="employeeStore.loading" density="compact" variant="solo"
-          v-model="employeeStore.keyword" label="Search templates" append-inner-icon="mdi-magnify" hide-details
-          @click:append-inner="employeeStore.getEmployeeByName"></v-text-field>
+        <div class="row">
+          <div class="col-md-9">
+            Employee
+          </div>
+        </div>
 
+        <v-row class="mt-2">
+          <v-col cols="3">
+            <v-text-field :loading="employeeStore.loading" density="compact" variant="solo"
+              v-model="employeeStore.keyword" label="Search" append-inner-icon="mdi-magnify" hide-details
+              @click:append-inner="employeeStore.getEmployeeByName"></v-text-field>
+          </v-col>
+
+          <v-col>
+            <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
+              @click="employeeStore.dialog = !employeeStore.dialog">Add new employee</v-btn>
+          </v-col>
+        </v-row>
+        <v-spacer> </v-spacer>
         <v-table class="text-center mt-5">
           <thead>
             <tr>
