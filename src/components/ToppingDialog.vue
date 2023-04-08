@@ -67,13 +67,11 @@ const save = () => {
         </div>
         <div class="ml-3" v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate'">
           <h5>Topping</h5>
-
           <v-chip-group v-model="pointOfSaleStore.amenities" column multiple>
             <v-chip filter variant="outlined"> brown Sugar Bubble +10 </v-chip>
             <v-chip filter variant="outlined"> cocoa +10 </v-chip>
             <v-chip filter variant="outlined"> konjac jelly +10 </v-chip>
             <v-chip filter variant="outlined"> whipped cream +10 </v-chip>
-            <v-chip filter variant="outlined"> whipped cream +15 </v-chip>
           </v-chip-group>
         </div>
       </v-card-text>
