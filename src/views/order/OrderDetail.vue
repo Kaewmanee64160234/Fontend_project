@@ -82,7 +82,7 @@ const date = (index: string) => {
                             <table class="invoice">
                               <tbody>
                                 <tr>
-                                  <td>Customer : {{ orderStore.tempOrder.customer?.name }}<br />
+                                  <td>Customer : {{ orderStore.tempOrder.customer?.name ? orderStore.tempOrder.customer?.name : 'anonymous'  }}<br />
                                     --------------------------------------------------------------------
                                     <br /> OrderID : {{
                                       orderStore.tempOrder.id }}
