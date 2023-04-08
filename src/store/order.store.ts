@@ -10,7 +10,7 @@ export const useOrderStore = defineStore('order', () => {
   const messageStore = useMessageStore();
   const search = ref('');
   const tempOrder = ref<Order>({
-    customerId: 1,
+    customerId: '',
     discount: 0,
     total: 0,
     recieved: 0,
