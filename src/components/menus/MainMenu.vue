@@ -31,12 +31,12 @@ const url = import.meta.env.VITE_URL_PORT
     <v-divider></v-divider>
     <v-list density="compact" nav>
       <v-list-item
-        prepend-icon="mdi-monitor-dashboard"
+        prepend-icon="mdi mdi-chart-line"
         title="Dashboard"
         value="dashboard"
         to="/"
       ></v-list-item>
-      <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="/home"></v-list-item>
+      <v-list-item prepend-icon="mdi-network-pos" title="Point of sell" value="home" to="/home"></v-list-item>
       <v-list-item
         prepend-icon="mdi-inbox-multiple "
         title="Product"

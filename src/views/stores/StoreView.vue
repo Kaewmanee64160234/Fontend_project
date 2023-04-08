@@ -20,8 +20,8 @@ onMounted(async () => {
 });
 const deleteStore = async (id: number) => {
     await confirmDlg.value.openDialog(
-        'ยืนยันการลบ',
-        `คุณต้องการลบสาขานี้ใช่หรือไม่?`,
+        'Please Confirm',
+        `Do you want to delete this store?`,
         'Accept',
         'Cancel'
     )

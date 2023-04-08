@@ -27,6 +27,7 @@ onMounted(() => {
       <v-card-title >
         <span class="text-h5">Promotion</span>
       </v-card-title>
+      <div style="height: 70vh;" class="scroll ">
       <v-card-text>
           <v-container>
             <v-row>
@@ -48,7 +49,7 @@ onMounted(() => {
             <v-row >
              <v-col cols="12">
               <v-text-field
-            label="กรุณากรอก Code ⭐"
+            label="Please wait for code ⭐"
             required
             v-model="CodeInput"
             :rules="[
@@ -57,13 +58,31 @@ onMounted(() => {
           </v-text-field></v-col>
             </v-row>
           </v-container>
+        </div>
       <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="primary" variant="text" @click="pointOfSaleStore.dialogPromotion = false,reCode()">
-          Close
+        <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogPromotion = false,reCode()">
+          close
         </v-btn>
-        <v-btn color="primary" variant="text" @click="pointOfSaleStore.checkCode(CodeInput),reCode()"> Save </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn color="green" variant="text" @click="pointOfSaleStore.checkCode(CodeInput),reCode()"> save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
+
+<style>
+.scroll {
+  max-height: 90vh;
+  overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 999px;
+}
+</style>

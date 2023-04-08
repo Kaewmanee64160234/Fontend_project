@@ -10,7 +10,7 @@ const confirmDlg = ref();
 async function save() {
   const { valid } = await form.value!.validate()
   if (valid) {
-  await confirmDlg.value.openDialog("ยืนยันการเพิ่มข้อมูล", `คุณต้องการเพิ่มข้อมูลสินค้านี้ใช่หรือไม่?`,'Accept','Cancel');
+  await confirmDlg.value.openDialog("Please Confirm", `Do you want to save this material?`,'Accept','Cancel');
   await materialStore.saveMaterial();
   materialStore.dialog = false;
   }
@@ -42,11 +42,7 @@ async function save() {
                   ]"
                 ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
+              <v-col cols="md-4">
                 <v-text-field
                   label="Min_quantity*"
                   required
@@ -55,11 +51,7 @@ async function save() {
                 (v) => v >= 0 || 'Min_quantity must more than 0']"
                 ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
+              <v-col cols="md-4">
                 <v-text-field
                   label="Quantity*"
                   required
@@ -68,11 +60,7 @@ async function save() {
                 (v) => v > 0 || 'Quantity must more than 0']"
                 ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="6"
-              >
+              <v-col cols="md-4">
               <v-autocomplete
                   label="Unit*"
                 v-model.number="materialStore.editedMaterial.unit"
@@ -80,7 +68,7 @@ async function save() {
               >
               </v-autocomplete>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="md-4">
                 <v-text-field
                   label="Price_per_unit*"
                   required
@@ -95,15 +83,15 @@ async function save() {
         <small>*indicates required field</small>
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
         <v-btn
-          color="blue-darken-1"
+          color="red"
           variant="text"
           @click="materialStore.dialog=false"
         >
           Close
         </v-btn>
-        <v-btn color="blue-darken-1" variant="text" @click ="save" > Save </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn color="green" variant="text" @click ="save" > Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

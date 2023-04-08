@@ -2,6 +2,7 @@
 import { useMessageStore } from "@/store/message";
 
 const messageStore = useMessageStore();
+
 </script>
 <template>
   <v-snackbar v-model="messageStore.isShow" multi-line color="black" rounded="pill" >
@@ -9,7 +10,7 @@ const messageStore = useMessageStore();
    
     <template v-slot:actions>
       <v-btn color="white" variant="text" @click="messageStore.isShow = false">
-        ยกเลิก
+        Cancel
       </v-btn>
     </template>
   </v-snackbar>

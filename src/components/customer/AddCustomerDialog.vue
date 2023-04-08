@@ -9,7 +9,7 @@ const customerStore = useCustomerStore()
 async function save() {
     const { valid } = await form.value!.validate()
     if (valid) {
-        await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลพนักงานคนนี้ใช่หรือไม่?`, 'Accept', 'Cancel');
+        await confirmDlg.value.openDialog("Please Confirm", `Do you want to add this customer?`, 'Accept', 'Cancel');
         await customerStore.saveCustomer()
     }
 }
@@ -20,7 +20,7 @@ async function save() {
       <v-dialog
         v-model="customerStore.addCustomerDialog"
         persistent
-        width="1024"
+        width="800"
       >
         
         <v-card>
@@ -32,7 +32,7 @@ async function save() {
             <v-container>
               
               <v-row>
-                <v-col cols="12">
+                <v-col cols="md-4">
                   <v-text-field
                     label="name*"
                     required
@@ -40,7 +40,7 @@ async function save() {
                     :rules="[(v) => !!v || 'name is required']"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12">
+                <v-col cols="md-4">
                   <v-text-field
                     label="tel*"
                     required
@@ -49,7 +49,7 @@ async function save() {
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="12">
+                <v-col cols="md-4">
                   <v-text-field
                     label="Point*"
                     required
@@ -78,11 +78,11 @@ async function save() {
           <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue-darken-1" variant="text" @click="customerStore.dialog = false,customerStore.addCustomerDialog = false">
+          <v-btn color="red" variant="text" @click="customerStore.dialog = false,customerStore.addCustomerDialog = false">
             Close
           </v-btn>
-          <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn color="green" variant="text" @click="save"> Save </v-btn>
         </v-card-actions>
         </v-card>
       </v-dialog>

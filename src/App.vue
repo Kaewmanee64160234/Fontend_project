@@ -23,4 +23,7 @@ import MessageDialog from './components/MessageDialog.vue';
 * {
   font-family: 'Kanit', sans-serif;
 }
+.swal2-container {
+  z-index: 99999;
+}
 </style>

@@ -10,16 +10,16 @@ const confirmDlg = ref();
 async function save(){
   const {valid} = await form.value!.validate();
   if(valid){
-    await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลสาขานี้ใช่หรือไม่?`,'Accept','Cancel');
+    await confirmDlg.value.openDialog("Please Confirm", `Do you want to save this store?`,'Accept','Cancel');
     await storeStore.saveStore()
-}
+  }
 
 }
 </script>
 
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-   <v-dialog v-model="storeStore.dialog" persistent width="1024">
+  <v-dialog v-model="storeStore.dialog" persistent width="1024">
     <v-card>
       <v-card-title>
         <span class="text-h5">Store</span>
@@ -28,50 +28,33 @@ async function save(){
         <v-form ref="form">
           <v-container>
             <v-row>
-                <v-col cols="12">
-                <v-text-field
-                  label="StoreName*"
-                  required
-                  v-model="storeStore.editedStore.name"
-                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 3 || 'Length must more than 3',]"
-                ></v-text-field>
+              <v-col cols="12">
+                <v-text-field label="StoreName*" required v-model="storeStore.editedStore.name"
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 3 || 'Length must more than 3',]"></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-textarea 
-                  label="Address*"
-                  required
-                  v-model="storeStore.editedStore.address"
-                  :rules="[(v) => !!v || 'Item is required',(v) => v.length >= 30 || 'Length must more than 30',]"
-                ></v-textarea>
+                <v-textarea label="Address*" required v-model="storeStore.editedStore.address"
+                  :rules="[(v) => !!v || 'Item is required', (v) => v.length >= 30 || 'Length must more than 30',]"></v-textarea>
               </v-col>
             </v-row>
             <v-row>
-                <v-col cols="12">
-              <v-text-field
-              label="tel*"
-              required
-              v-model="storeStore.editedStore.tel"
-              :rules="[(v) => !!v || 'tel is required']"
-            ></v-text-field>
+              <v-col cols="12">
+                <v-text-field label="tel*" required v-model="storeStore.editedStore.tel"
+                  :rules="[(v) => !!v || 'tel is required']"></v-text-field>
               </v-col>
-              
+
             </v-row>
           </v-container>
         </v-form>
         <small>*indicates required field</small>
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn
-          color="blue-darken-1"
-          variant="text"
-          @click ="storeStore.dialog = false"
-        >
+        <v-btn color="red" variant="text" @click="storeStore.dialog = false">
           Close
         </v-btn>
-        <v-btn color="blue-darken-1" variant="text" @click ="save"> Save </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn color="green" variant="text" @click="save"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
-
 </template>

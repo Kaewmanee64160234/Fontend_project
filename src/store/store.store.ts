@@ -59,7 +59,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       stores.value = res.data.data
     } catch (e) {
       console.log(e);
-      messageStore.showError("ไม่สามารถดึงข้อมูล Stores ได้");
+      messageStore.showError("Oops!, cannot get stores.");
     }
     loadingStore.isLoading = false;
   }
@@ -76,7 +76,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       await getStores();
     }catch(e){
       console.log(e);
-      messageStore.showError("ไม่สามารถบันทึกข้อมูล Stores ได้");
+      messageStore.showError("Cannot save stores");
     }
     loadingStore.isLoading = false;
   }
@@ -87,7 +87,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
         await getStores();
     }catch(e){
       console.log(e);
-      messageStore.showError("ไม่สามารถลบข้อมูล Stores ได้");
+      messageStore.showError("Cannot delete store");
     }
     loadingStore.isLoading = false;
   }

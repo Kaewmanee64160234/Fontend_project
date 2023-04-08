@@ -58,7 +58,7 @@ export const useUserStore = defineStore('User', () => {
       lastPage.value = res.data.lastPage
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถดึงข้อมูล Users ได้')
+      messageStore.showError('Oops!, cannot get users.')
     }
     loadingStore.isLoading = false
   }
@@ -84,7 +84,7 @@ export const useUserStore = defineStore('User', () => {
       await getUsers()
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถบันทึกข้อมูล Users ได้')
+      messageStore.showError('Cannot save user.')
     }
     loadingStore.isLoading = false
   }
@@ -95,7 +95,7 @@ export const useUserStore = defineStore('User', () => {
       await getUsers()
     } catch (e) {
       console.log(e)
-      messageStore.showError('ไม่สามารถลบข้อมูล Users ได้')
+      messageStore.showError('Cannot delete user')
     }
     loadingStore.isLoading = false
   }

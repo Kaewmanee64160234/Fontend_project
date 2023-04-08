@@ -76,7 +76,7 @@ const date = (index: string) => {
 
             </v-card>
           </div>
-          <div class="col-md-1 text-center">To</div>
+          <div class="col-md-1 text-center" style="font-size: 21px;">To</div>
           <div class="col-md-2">
 
             <v-card width="170px" style="float: right;">
@@ -84,7 +84,7 @@ const date = (index: string) => {
             </v-card>
           </div>
           <div class="col-md-1">
-            <v-btn style="background-color: #8ad879; color: white" @click="orderStore.getOrders">Submit</v-btn>
+            <v-btn style="background-color: #609966; color: white; " @click="orderStore.getOrders">Submit</v-btn>
             <v-spacer></v-spacer>
           </div>
         </div>
@@ -127,8 +127,8 @@ const date = (index: string) => {
 
               <td>
                 <v-btn
-                  color="blue-lighten-1"
-                  variant="outlined"
+                  style="color:white"
+                  color="#7DB9B6"
                   class="mdi mdi-receipt-text"
                   @click="goTo(item.id + '')"
                 >

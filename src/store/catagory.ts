@@ -29,7 +29,7 @@ export const useCatagoryStore = defineStore('Catagory', () => {
       catagories.value = res.data;
     } catch (e) {
       console.log(e);
-      messageStore.showError("ไม่สามารถดึงข้อมูล Catagories ได้");
+      messageStore.showError("Oops!, cannot get data categories.");
     }
     loadingStore.isLoading = false;
   }
@@ -46,7 +46,7 @@ export const useCatagoryStore = defineStore('Catagory', () => {
       await getCatagories();
     } catch (e) {
       console.log(e);
-      messageStore.showError("ไม่สามารถบันทึกข้อมูล Catagories ได้");
+      messageStore.showError("Cannot save catagory");
     }
     loadingStore.isLoading = false;
   }
@@ -57,7 +57,7 @@ export const useCatagoryStore = defineStore('Catagory', () => {
       await getCatagories();
     } catch (e) {
       console.log(e);
-      messageStore.showError("ไม่สามารถลบข้อมูล Catagories ได้");
+      messageStore.showError("Cannot delete catagory");
     }
     loadingStore.isLoading = false;
   }

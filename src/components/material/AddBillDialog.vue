@@ -118,7 +118,7 @@ const reCode = () => {
           </v-container>
         </v-form>
       </v-card-text>
-      <v-btn  color="#8ad879" class="ma-4" @click="billStore.addBillDetail">
+      <v-btn  color="#8ad879" class="ma-4" @click="billStore.addBillDetail()">
                   Add Bill Detail
                 </v-btn>
             <v-card-actions>

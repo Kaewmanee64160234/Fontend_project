@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
       authName.value = JSON.parse(JSON.stringify(localStorage.getItem('user')))
     } catch (e) {
       console.log(e)
-      messageStore.showError('Username หรือ Password ไม่ถูกต้อง')
+      messageStore.showError('Username or Password is incorrect')
     }
     loadingStore.isLoading = false
     router.push('/')
