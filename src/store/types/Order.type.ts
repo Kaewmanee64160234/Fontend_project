@@ -3,7 +3,7 @@ import type { OrderItem } from "./orderItem.type";
 
 export interface Order{
     id?:number;
-    customerId?: number;
+    customerId?: string;
     discount: number;
     total: number;
     recieved:number;

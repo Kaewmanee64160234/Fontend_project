@@ -4,6 +4,7 @@ const pointOfSaleStore = usePointOfSale()
 const close2Dialog = () => {
   pointOfSaleStore.dialogPayment = false;
   pointOfSaleStore.order.payment = 'promptpay'
+  // pointOfSaleStore.order.recieved = pointOfSaleStore.order.total;
 }
 </script>
 <template>
