@@ -37,14 +37,6 @@ const deleteAllCustomers = async () => {
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <CustomerDialog></CustomerDialog>
-  <v-card>
-    <v-row>
-      <v-col>
-        <CustomerDialog></CustomerDialog>
-      </v-col>
-    </v-row>
-  </v-card>
-  <CustomerDialog></CustomerDialog>
   <v-container>
     <v-card>
       <v-card-title>

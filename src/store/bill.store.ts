@@ -31,6 +31,7 @@ export const useBillStore = defineStore("bill", () => {
     employeeId: 0,
     bill_detail: bill_Detail_List.value
   });
+  const billItem = ref<{}>
 
     // about pagination
     const page = ref(1)
@@ -79,10 +80,13 @@ export const useBillStore = defineStore("bill", () => {
           const res =  await billServices.updateBill(bill_list.value)
           await getBills()
           await materialStore.getMaterials()
-        } else {
-          messageStore.showError('Cannot save bill please try again')
-        }
-      }
+          console.log(res)
+          }else{
+            messageStore.showError('Unable to save bill due to invalid information.')
+          }
+          
+        } 
+
     }
     catch (e) {
       console.log(e)

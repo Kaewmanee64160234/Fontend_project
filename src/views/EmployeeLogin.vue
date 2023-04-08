@@ -4,9 +4,10 @@ import { useEmployeeStore } from '@/store/employee.store'
 import { useManageTime } from '@/store/manageDate'
 import type Employee from '@/store/types/employee.type'
 import type User from '@/store/types/user.type'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import type { VForm } from 'vuetify/components'
+
 const url = import.meta.env.VITE_URL_PORT
 const employeeStore = useEmployeeStore()
 const manageTimeStore = useManageTime()
@@ -63,21 +64,21 @@ const date = (index: string) => {
                 </v-col>
               </v-row>
               <!-- <v-row style="height: 30%">
-                        <v-col>
-                          <v-card style="background-color: white">
-                            <v-card-text style="text-align: center">
+                          <v-col>
+                            <v-card style="background-color: white">
+                              <v-card-text style="text-align: center">
 
-                              <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
-                              <br />
-                              <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
-                              <br />
-                              <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
-                              <br />
-                              <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
-                            </v-card-text>
-                          </v-card>
-                        </v-col>
-                      </v-row> -->
+                                <p>👤 Name : {{ employeeStore.editEmployee.name }}</p>
+                                <br />
+                                <p>📩 Email : {{ employeeStore.editEmployee.email }}</p>
+                                <br />
+                                <p>🗃️ Position : {{ employeeStore.editEmployee.position }}</p>
+                                <br />
+                                <p>🕐 hourly : {{ employeeStore.editEmployee.hourly }} ฿</p>
+                              </v-card-text>
+                            </v-card>
+                          </v-col>
+                        </v-row> -->
               <v-row style="height: 30%">
                 <v-col>
                   <v-card>
@@ -136,7 +137,7 @@ const date = (index: string) => {
                   <v-col class="detail-emp">
                     <v-card height="100px" width="300px" style=" border-radius: 15px; background-color: #FFE3E1;">
                       <v-card-title class="text-left">
-                        <h7> {{ employeeStore.summary_salaries[0].hour }} hour </h7> <br />
+                        <h7>{{ employeeStore.summary_salaries[0].hour.toFixed(2) }} hours </h7> <br />
                         <h7 style="font-size: 15px; color: #FF9494">🕒 Total work </h7>
                       </v-card-title>
                     </v-card>
@@ -171,7 +172,7 @@ const date = (index: string) => {
                           <td>{{ new Date(item.time_out + '').getHours() + ':' + new Date(item.time_out + '').getMinutes()
                             + ':' + new
                               Date(item.time_out + '').getSeconds() }}</td>
-                          <td>{{ item.total_hour }}</td>
+                          <td>{{ Math.round(Number(parseInt(item.total_hour+''))).toFixed(2) }}</td>
                         </tr>
                       </tbody>
                     </v-table>
@@ -219,4 +220,5 @@ const date = (index: string) => {
 .scroll::-webkit-scrollbar-thumb {
   background-color: #ddd;
   border-radius: 999px;
-}</style>
+}
+</style>

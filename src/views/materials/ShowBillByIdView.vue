@@ -87,7 +87,7 @@ const opendialog = (data: BILL) => {
                         <td class="text-right"><strong>TOTAL</strong></td>
                       </tr>
                     </thead>
-                    <tbody v-for="(item, index) of billStore.bill_Detail.bill.bill_detail" :key="index">
+                    <tbody v-for="(item, index) of billStore.bill_Detail" :key="index">
                       <!-- foreach ($order->lineItems as $line) or some such thing here -->
                       <tr>
                         <td>{{ index+1 }}</td>

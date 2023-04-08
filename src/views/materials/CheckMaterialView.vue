@@ -51,8 +51,11 @@ const date = (index: string) => {
 }
 </script>
 <template>
+  <v-row class="ml-5" style="float:left">
+  <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="material" value="material" to="/material"></v-btn></v-row>
   <VContainer>
     <VCard>
+ 
       <VCardTitle>
 
 
@@ -61,30 +64,15 @@ const date = (index: string) => {
           <thead>
             <tr>
               <th>Check Material ID</th>
-              <!-- <th>Materail Name</th>
-                      <th>Last Quantity</th>
-                      <th>Remain Quantity</th>
-                      <th>Expire Quantity</th> -->
               <th>Material Date</th>
               <th>Material Detail</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(item, index) of checkMaterialStore.checkmeterialDetail" :key="index" class="text-center">
-              <!-- <td>{{ index+1 }}</td>
-                      <td>{{ item.name }}</td>
-                      <td>{{item.qty_last}}</td>
-                      <td>{{item.qty_remain}}</td>
-                      <td>{{item.qty_expire}}</td>
-                      <td>{{item.createdAt}}</td>
-                      <td>{{item.createdAt }}</td> -->
-              <td>{{ index + 1 }}</td>
-              <td>{{ date(item.checkmaterial.date + '').date + '/' + manageTimeStore.monthNum[new
-                Date(item.checkmaterial.date
-                  +
-                  '').getMonth()] + '/' +
-                new
-                  Date(item.checkmaterial.date + '').getFullYear() }}</td>
+              <td>{{ index + 1}}</td>
+              <!-- <td>{{ new Date(item.checkmaterial.date + '').getDate() + '/' + new Date(item.checkmaterial.date + '').getMonth() + '/' + new
+                Date(item.checkmaterial.date + '').getFullYear() }}</td> -->
               <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.checkmaterial)">Click</v-btn></td>
 
 
@@ -99,26 +87,26 @@ const date = (index: string) => {
         </VTable>
       </VCardTitle>
       <v-container width="100%" justify="center">
-
         <v-pagination justify="center" v-model="checkMaterialStore.page" :length="checkMaterialStore.lastPage"
           rounded="circle"></v-pagination>
-
       </v-container>
     </VCard>
   </VContainer>
+
   <v-dialog v-model="dialog">
     <v-container>
       <v-card rounded="xl" class="mx-auto" max-width="500" style="background-color: #4E342E; color: white;"><br>
         <h1 text-color="primary" class="text-center" style="font-size: large ;">Details</h1><br>
         <v-list lines="one" style="background-color: #EFEBE9">
-          <v-list-item rounded="xl" v-for="(item, index) of checkMaterialStore.checkmeterialDetail.checkmaterial.checkmaterialdetails" :key="index">
+
+          <v-list-item rounded="xl" v-for="(item, index) of checkMaterialStore.checkmeterialDetail.checkmaterial.checkmaterialdetails " :key="index">
             <v-list style="background-color: #EFEBE9"><li>Materail Name: {{ item.name }}</li></v-list> <br>
             <v-list style="background-color: #EFEBE9"><li>Last Quantity: {{ item.qty_last }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Expire Quantity: {{ item.qty_expire }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Remain Quantity: {{ item.qty_remain }} </li></v-list><br>
-            <v-list style="background-color: #EFEBE9"><li>Date: {{ new Date(item.checkmaterial.date + '').getDate() + '/' + new
+            <!-- <v-list style="background-color: #EFEBE9"><li>Date: {{ new Date(item.checkmaterial.date + '').getDate() + '/' + new
               Date(item.checkmaterial.date + '').getMonth() + '/' + new Date(item.checkmaterial.date + '').getFullYear()
-            }}</li></v-list> <br>
+            }}</li></v-list> <br> -->
          <div style="text-align: right; padding-right: 0px;">
   <VBtn style="background-color: #E53935; color: white;" variant="text" rounded="xl" @click="dialog = false">Close</VBtn>
 </div>
