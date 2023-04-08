@@ -64,13 +64,13 @@ export const useUserStore = defineStore('User', () => {
   }
   const saveUser = async () => {
     loadingStore.isLoading = true
-    console.log(editedUser.value);
     try {
       if (editedUser.value.id) {
         editedUser.value.name_employee = editedUser.value.username;
         editedUser.value.tel  = editedUser.value.telEmployee+'';
 
         editedUser.value.address = editedUser.value.addressEmployee+'';
+        console.log(editedUser.value)
         const res = await userService.updateUser(editedUser.value.id, editedUser.value)
       } else {
         editedUser.value.address = editedUser.value.addressEmployee+'';
