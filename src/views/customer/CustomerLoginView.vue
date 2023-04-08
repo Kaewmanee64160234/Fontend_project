@@ -1,8 +1,13 @@
 <script setup lang="ts">
+import CheckPromotionDialog from '@/components/promotion/CheckPromotionDialog.vue';
+import { usePointOfSale } from '@/store/pointOfSell.store'
+
+const pointOfSaleStore = usePointOfSale()
 </script>
 
 <template>
     <v-container>
+        <CheckPromotionDialog></CheckPromotionDialog>
         <v-row justify="center">
             <v-col>
                 <div class="mockup-phone">
@@ -15,7 +20,8 @@
                             </div>
                             <div>
                                 <v-btn justify-center class="mdi mr-2 mdi-checkbox-marked-circle text-center" style="float: right; color: white ;"
-                                color="#D5B4B4" width="90%">Check Promotion</v-btn>
+                                color="#D5B4B4" width="90%" @click="pointOfSaleStore.dialogCheckPromotion = true"> Check Promotion
+                                </v-btn>
                             </div>
                             
                         </div>

@@ -17,6 +17,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   const dialogPrompypay = ref(false)
   const customerStore = useCustomerStore()
   const dialogPromotion = ref(false)
+  const dialogCheckPromotion = ref(false)
   const realCode = ref('')
   const codePoint = ref()
   const orderItemList = ref<OrderItem[]>([])
@@ -289,6 +290,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     calMonAndDiscount,
     updatetmpProduct,
     temProduct,
+    dialogCheckPromotion,
     dialogCash,
     dialogTopping,
     dialogPayment,
