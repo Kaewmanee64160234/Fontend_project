@@ -14,6 +14,7 @@ const close2Dialog = () => {
             <v-card-subtitle> Please check the amount</v-card-subtitle>
 
             <v-card-actions>
+
               <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogPayment = false"> Cancle </v-btn>
               <v-spacer></v-spacer>
               <v-btn color="green" variant="text" @click="close2Dialog()"> Finish </v-btn>

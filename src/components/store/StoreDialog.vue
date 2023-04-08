@@ -7,10 +7,10 @@ const form = ref<VForm | null>(null);
 const storeStore = useStoreStore();
 const confirmDlg = ref();
 
-async function save() {
-  const { valid } = await form.value!.validate();
-  if (valid) {
-    await confirmDlg.value.openDialog("ยืนยันการแก้ไข", `คุณต้องการแก้ไขข้อมูลสาขานี้ใช่หรือไม่?`, 'Accept', 'Cancel');
+async function save(){
+  const {valid} = await form.value!.validate();
+  if(valid){
+    await confirmDlg.value.openDialog("Please Confirm", `Do you want to save this store?`,'Accept','Cancel');
     await storeStore.saveStore()
   }
 

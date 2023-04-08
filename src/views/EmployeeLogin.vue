@@ -192,7 +192,7 @@ const date = (index: string) => {
 </template>
 <style scoped>
 .title {
-  background-color: #FFF5E1;
+  background-color: #F9F5E7;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
   height: 100vh;
 }

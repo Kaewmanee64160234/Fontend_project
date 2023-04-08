@@ -17,8 +17,8 @@ onMounted(() => {
 })
 const deleteEmployee = async (id: string) => {
   await confirmDlg.value.openDialog(
-    'ยืนยันการลบ',
-    `คุณต้องการลบพนักงานคนนี้ใช่หรือไม่?`,
+    'Please Confirm',
+    `Do you want to delete this employee?`,
     'Accept',
     'Cancel'
   )

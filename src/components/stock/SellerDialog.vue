@@ -1,37 +1,49 @@
 <script lang='ts'>
 import { computed, defineComponent, ref } from "vue";
 // import {shuffle} from "lo"
-import { PieChart, usePieChart } from "vue-chart-3";
+import { DoughnutChart, useDoughnutChart } from "vue-chart-3";
 import { Chart, registerables, type ChartData, type ChartOptions } from "chart.js";
 
 Chart.register(...registerables);
 export default defineComponent({
   name: "App",
   // eslint-disable-next-line vue/no-unused-components
-  components: { PieChart },
+  components: { DoughnutChart },
   setup() {
     const dataValues = ref([17, 24, 10, 30,50]);
     const dataLabels = ref(["Paris", "Nîmes", "Toulon", "Perpignan", "Autre"]);
     const toggleLegend = ref(true);
-
-    const testData = computed<ChartData<"pie">>(() => ({
+    
+    const testData = computed<ChartData<"doughnut">>(() => ({
       labels: dataLabels.value,
-      datasets: [
-        {
-          data: dataValues.value,
-          backgroundColor: [
-            "#BBD6B8",
-            "#AEC2B6",
-            "#94AF9F",
-            "#DBE4C6",
-            "#CDE990"
+      // datasets: [
+      //   {
+      //     data: [50,60,70,180,190],
+      //     backgroundColor: [
+      //       "#BBD6B8",
+      //       "#AEC2B6",
+      //       "#94AF9F",
+      //       "#DBE4C6",
+      //       "#CDE990"
             
-          ],
-        },
-      ],
+      //     ],
+      //   },
+      // ],
+      datasets: [
+      {
+        data: [10, 20, 15, 5, 50],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+        ],
+      },
+    ],
     }));
 
-    const options = computed<ChartOptions<"pie">>(() => ({
+    const options = computed<ChartOptions<"doughnut">>(() => ({
       scales: {
         myScale: {
           type: "logarithmic",
@@ -44,12 +56,12 @@ export default defineComponent({
         },
         title: {
           display: true,
-          text: "Chart.js Pie Chart",
+          text: "Chart.js Doughnut Chart",
         },
       },
     }));
 
-    const { pieChartProps, pieChartRef } = usePieChart({
+    const { doughnutChartProps, doughnutChartRef } = useDoughnutChart({
       chartData: testData,
       options,
     });
@@ -61,7 +73,7 @@ export default defineComponent({
       dataValues.value.push(index.value);
       dataLabels.value.push("Other" + index.value);
       console.log(dataValues.value);
-      console.log(pieChartRef.value!.chartInstance);
+      console.log(doughnutChartRef.value!.chartInstance);
       index.value++;
     }
 
@@ -74,8 +86,8 @@ export default defineComponent({
       switchLegend,
       testData,
       options,
-      pieChartRef,
-      pieChartProps,
+      doughnutChartRef,
+      doughnutChartProps,
     };
   },
 });
@@ -87,7 +99,7 @@ export default defineComponent({
       <button type="button" @click="shuffleData">Add data</button>
       <button type="button" @click="switchLegend">Swicth legends</button>
     </div>
-    <PieChart v-bind="pieChartProps" />
+    <DoughnutChart v-bind="doughnutChartProps" />
   </div>
 </template>
 

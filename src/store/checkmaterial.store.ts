@@ -52,7 +52,7 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
 
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถดึงข้อมูลได้");
+      messageStore.showError("Oops!, cannot get check materials.");
 
     }
 
@@ -68,7 +68,7 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
       console.log(checkmeterialDetail.value)
     } catch (err) {
       console.log(err)
-      messageStore.showError("ไม่สามารถดึงข้อมูลได้");
+      messageStore.showError("Oops!, cannot get check meterials.");
 
     }
 

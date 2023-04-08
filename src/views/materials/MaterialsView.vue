@@ -41,8 +41,8 @@ onMounted(async () => {
 
 const deleteMaterial = async (id: string) => {
   await confirmDlg.value.openDialog(
-    'ยืนยันการลบ',
-    `คุณต้องการลบสินค้านี้ใช่หรือไม่?`,
+    'Please Confirm',
+    `Do you want to delete this material?`,
     'Accept',
     'Cancel'
   )
