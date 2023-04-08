@@ -21,7 +21,6 @@ export const useBillStore = defineStore("bill", () => {
   employeeId: 0,
   bill_detail: [{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]}]);
   const bill_Detail_List = ref<BILL_DETAIL[]>([{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]);
-  const bill_Detail = ref<BILL_DETAIL[]>([]);
   const bill_list = ref<BILL>({ 
     name: '', 
     date: new Date(), 
@@ -31,7 +30,9 @@ export const useBillStore = defineStore("bill", () => {
     employeeId: 0,
     bill_detail: bill_Detail_List.value
   });
-  const billItem = ref<{}>
+  const billItem = ref<{
+    id: number, name: string, amount: number, total: number, createdAt: Date ,bill: { id: number, name:string, date: '',bill_detail: BILL_DETAIL[] }
+  }[]>()
 
     // about pagination
     const page = ref(1)
@@ -114,8 +115,8 @@ export const useBillStore = defineStore("bill", () => {
       try {
         const res = await billServices.getOneBill(id);
         console.log(res.data)
-        bill_Detail.value = res.data
-        console.log( bill_Detail.value)
+        billItem.value = res.data
+        console.log( billItem.value)
         lastPage.value = res.data.lastPage
       } catch (err) {
         console.log(err)
@@ -126,5 +127,5 @@ export const useBillStore = defineStore("bill", () => {
       loadingStore.isLoading = false
     }
 
-    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill,page,keyword,take,order,orderBy,lastPage,bill_Detail};  
+    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill,page,keyword,take,order,orderBy,lastPage,billItem};  
   });

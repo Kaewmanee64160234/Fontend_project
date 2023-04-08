@@ -12,14 +12,14 @@ const route = useRoute()
 const id = route.params.id
 
 
-const showMat = ref<BILL>();
+const showMat = ref();
 const billStore = useBillStore();
 
 onMounted(async () => {
   billStore.getOneBill(id + '');
 });
 const dialog = ref(false);
-const opendialog = (data: BILL) => {
+const opendialog = (data: any) => {
   dialog.value = true;
   showMat.value = data;
 
@@ -43,15 +43,15 @@ const opendialog = (data: BILL) => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) of billStore.bill_Detail" :key="index" class="text-center">
+            <tr v-for="(item, index) of billStore.billItem" :key="index" class="text-center">
               <td>{{ index + 1 }}</td>
               <td>{{ item.bill.name }}</td>
-              <td>{{ new Date(item.bill.date + '').getDate() + '/' + new Date(item.bill.date + '').getMonth() + '/' + new
-                Date(item.bill.date + '').getFullYear() }}</td>
-              <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.bill)">Click</v-btn></td>
+              <td>{{ new Date(item.createdAt + '').getDate() + '/' + new Date(item.createdAt + '').getMonth() + '/' + new
+                Date(item.createdAt + '').getFullYear() }}</td>
+              <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.bill.bill_detail)">Click</v-btn></td>
             </tr>
           </tbody>
-          <tbody v-if="billStore.bill_Detail.length == 0">
+          <tbody v-if="billStore.billItem?.length == 0">
             <tr>
               <td colspan="7" class="text-center">No data</td>
             </tr>
@@ -87,7 +87,7 @@ const opendialog = (data: BILL) => {
                         <td class="text-right"><strong>TOTAL</strong></td>
                       </tr>
                     </thead>
-                    <tbody v-for="(item, index) of billStore.bill_Detail" :key="index">
+                    <tbody v-for="(item, index) of showMat" :key="index">
                       <!-- foreach ($order->lineItems as $line) or some such thing here -->
                       <tr>
                         <td>{{ index+1 }}</td>
