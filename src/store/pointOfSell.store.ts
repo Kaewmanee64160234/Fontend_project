@@ -25,6 +25,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
   const toggle2 = ref(null)
   const amenities = ref([])
   const loadingStore = useLoadingStore()
+  const dialogCash = ref(false)
   const temProduct = ref<Product>({
     name: '',
     catagoryId: 1,
@@ -288,6 +289,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
     calMonAndDiscount,
     updatetmpProduct,
     temProduct,
+    dialogCash,
     dialogTopping,
     dialogPayment,
     dialogPromotion,
