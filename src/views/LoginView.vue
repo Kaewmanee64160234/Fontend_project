@@ -97,7 +97,7 @@ const reset = () => {
 <style>
 .bg-img {
   /* The image used */
-  background-image: url("new new bg 2.png");
+  background-image: url("Good days 4.png");
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5.6px);
