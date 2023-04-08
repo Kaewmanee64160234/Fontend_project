@@ -37,12 +37,12 @@ export const usePointOfSale = defineStore('point of sale', () => {
     files: []
   })
   const order = ref<Order>({
-    customerId: 0,
+    customerId: '',
     discount: 10,
     total: 0,
     recieved: 0,
     change: 0,
-    payment: 'promptpay',
+    payment: '',
     orderItems: orderItemList.value
   })
   const promo = ref([
@@ -170,23 +170,30 @@ export const usePointOfSale = defineStore('point of sale', () => {
   async function openOrder() {
     loadingStore.isLoading = true
     try {
-      if (order.value.orderItems?.length === 0 && order.value.customerId === 0) {
-        messageStore.showError('Cannot save orders')
+      if (order.value.orderItems?.length === 0) {
+        messageStore.showError('You must select menu items')
         loadingStore.isLoading = false
         total_.value = 0
         total_discount.value = 0
         totalAndDicount.value = 0
         recive_mon.value = 0
         change_money.value = 0
-        return
+        messageStore.showInfo('Unable to save data due to incomplete data entry.')
+
+        return false
       }
-      if(order.value.change <0 && order.value.payment === '' && !order.value.orderItems){
-        messageStore.showInfo('Unable to save data due to incomplete data entry.');
-        return false;
+      if (order.value.change < 0 || order.value.payment === '' || !order.value.orderItems) {
+        messageStore.showInfo('Unable to save data due to incomplete data entry.')
+        return false
       }
+
       if (order.value.payment === 'promptpay') {
+        if (customerStore.customerId === '') {
+          customerStore.customerId = 0 + ''
+        }
+
         order.value = {
-          customerId: parseInt(customerStore.customerId),
+          customerId: customerStore.customerId,
           discount: total_discount.value,
           total: totalAndDicount.value,
           recieved: totalAndDicount.value,
@@ -194,12 +201,18 @@ export const usePointOfSale = defineStore('point of sale', () => {
           payment: 'promptpay',
           orderItems: orderItemList.value
         }
+
+        console.log(JSON.stringify(order.value))
       } else {
-        if(!customerStore.customerId){
-          customerStore.customerId = '0';
+        if (change_money.value < 0) {
+          messageStore.showInfo('Unable to save data due to incomplete data entry.')
+          return false
+        }
+        if (customerStore.customerId === '') {
+          customerStore.customerId = '0'
         }
         order.value = {
-          customerId: parseInt(customerStore.customerId),
+          customerId: customerStore.customerId,
           discount: total_discount.value,
           total: totalAndDicount.value,
           recieved: recive_mon.value,
@@ -207,6 +220,8 @@ export const usePointOfSale = defineStore('point of sale', () => {
           payment: 'cash',
           orderItems: orderItemList.value
         }
+
+        console.log(JSON.stringify(order.value))
       }
 
       const res = await orderService.saveOrder(order.value)
@@ -214,7 +229,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       dialogComplteOrder.value = true
 
       order.value = {
-        customerId: 0,
+        customerId: '',
         discount: 10,
         total: 0,
         recieved: 0,
@@ -258,7 +273,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
       } else if (cusPoint < codePoint.value) {
         messageStore.showError('Unable to save promotion data due to insufficient points.')
       }
-    } else{
+    } else {
       messageStore.showError('Cannot save promotion')
     }
   }

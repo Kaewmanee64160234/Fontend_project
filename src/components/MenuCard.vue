@@ -34,7 +34,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="a-tag">
+  <!-- <div class="a-tag">
   <div class="card item-card mt-2">
 
     <img class="rounded-bottom card-img-top item-img" :src="`${backendURL}/products/image/${props.img}`"
@@ -43,13 +43,13 @@ const props = defineProps({
     <div class="text-center">
       <h5 class="mt-4" style="font-size: 15;">{{ props.name }}</h5>
       <p class="mt-1 fontsm" style="color: peru;">฿{{ props.price }}</p>
-      <!-- <v-btn class="mt-2" rounded variant="tonal" width="130px">
+      <v-btn class="mt-2" rounded variant="tonal" width="130px">
               Add To Cart
-            </v-btn> -->
+            </v-btn>
     </div>
   </div>
-</div>
-<!-- <div class="ml-3" v-if="props.catagoryId === '2'">
+</div> -->
+ <div class="ml-3" v-if="props.catagoryId === '2'">
     <div class="a-tag">
       <div class="card item-card mt-2">
         <div class="mt-3 ml-3">
@@ -93,9 +93,9 @@ const props = defineProps({
           </div>
         </div>
       </div>
-    </div>
+    </div> 
 
-    /////
+    <!-- ///// -->
     <div class="ml-3" v-if="props.catagoryId === '1' || '3'">
       <div class="a-tag-fd">
         <div class="card item-card-fd mt-2">
@@ -116,7 +116,7 @@ const props = defineProps({
           </div>
         </div>
       </div>
-    </div> -->
+    </div> 
 </template>
 
 <style>
@@ -130,9 +130,9 @@ const props = defineProps({
 } */
 
 .item-card .item-img {
-  /* height: 100px !important;
-  width: 100px !important; */
-  height: 115px !important;
+  height: 100px !important;
+  width: 100px !important;
+  /* height: 115px !important; */
   object-fit: cover;
   border-radius: 15px;
 }
@@ -142,8 +142,8 @@ const props = defineProps({
   cursor: pointer;
   color: black !important;
   height: 200px;
-  /* height: 375px;
-  width: 300px !important; */
+  height: 375px;
+  width: 300px !important;
 }
 
 .a-tag:hover .item-card {
