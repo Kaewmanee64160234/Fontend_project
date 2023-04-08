@@ -22,7 +22,8 @@ const reset = () => {
 
 <template>
   <v-app>
-    <v-main class="bg-img">
+    <v-main class="bg-img"  >
+      
       <v-container class="pa-10" style="float: right;">
         <v-row style="float: right;">
           <v-col style="float: right;">
@@ -32,7 +33,7 @@ const reset = () => {
                 style="border-radius: 50px; background-color: #FCFAF7  ; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
                 <v-col>
                   <v-container class="text-center">
-                    <img src="./Good_days_start_with_coffee_and_you.png" style="width: 330px; margin-left: 16%;"><img>
+                    <v-img src="../../../public/img/Good_days_start_with_coffee_and_you.png" style="width: 330px; margin-left: 16%;"></v-img>
                     <v-card-title primary-title class="text-center "
                       style="font-size: 32px; font-family: serif;  font-weight: bold; letter-spacing: .2rem; margin-left: 3%; color: black;  ">
                       Sign in </v-card-title>
@@ -97,7 +98,7 @@ const reset = () => {
 <style>
 .bg-img {
   /* The image used */
-  background-image: url("Good days 4.png");
+  background-image: url("Good days start 4.png");
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5.6px);
