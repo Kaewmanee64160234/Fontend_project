@@ -81,8 +81,10 @@ export const useBillStore = defineStore("bill", () => {
           await getBills()
           await materialStore.getMaterials()
           console.log(res)
+          }else{
+            messageStore.showError('Unable to save bill due to invalid information.')
           }
-          messageStore.showError('Unable to save bill due to invalid information.')
+          
         } 
     }
     catch (e) {

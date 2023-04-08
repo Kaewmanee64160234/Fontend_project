@@ -10,6 +10,9 @@ import type CheckMaterialDetail from "./types/checkmaterialdetail";
 export const useCheckMaterialStore = defineStore("checkmaterail", () => {
   const checkmeterials = ref<CheckMaterial[]>([])
   const checkmeterialDetail = ref<CheckMaterialDetail[]>([])
+  const checkMatItem = ref<{
+    id: number, name: string, qty_last: number, qty_remain: number, qty_expire:number, createdAt: Date ,checkmaterial: { id: number, date: '',checkmaterialdetails: CheckMaterialDetail[] }
+  }[]>()
   const loadingStore = useLoadingStore()
   const messageStore = useMessageStore();
   const checkMaterial = ref<CheckMaterial>({
@@ -64,8 +67,8 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
       console.log(page.value)
       const response = await checkmaterialService.getOneCheckMaterail(id);
       console.log(response.data)
-      checkmeterialDetail.value = response.data
-      console.log(checkmeterialDetail.value)
+      checkMatItem.value = response.data
+      console.log(checkMatItem.value)
     } catch (err) {
       console.log(err)
       messageStore.showError("Oops!, cannot get check meterials.");
@@ -80,7 +83,7 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
     take,
     order,
     orderBy,
-    lastPage, checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial, checkmeterialDetail
+    lastPage, checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial, checkmeterialDetail,checkMatItem
   };
 
 });

@@ -3,6 +3,7 @@
 import { useCheckMaterialStore } from '@/store/checkmaterial.store';
 import { useManageTime } from '@/store/manageDate';
 import type BILL from '@/store/types/bill';
+import type BILL_DETAIL from '@/store/types/billdetail';
 
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
@@ -12,15 +13,15 @@ const manageTimeStore = useManageTime();
 
 const route = useRoute()
 const id = route.params.id
-const checkMat = ref<BILL>();
+const checkMatDe = ref();
+// const insert = 
 onMounted(() => {
   checkMaterialStore.getOneCheckMatrial(id + '')
-
 })
 const dialog = ref(false);
-const opendialog = (data: BILL) => {
+const opendialog = (data:any) => {
   dialog.value = true;
-  checkMat.value = data;
+  checkMatDe.value =   data;
 
 
 }
@@ -51,40 +52,32 @@ const date = (index: string) => {
 }
 </script>
 <template>
+  <v-row class="ml-5" style="float:left">
+  <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="material" value="material" to="/material"></v-btn></v-row>
   <VContainer>
-    <VCard>
-      <VCardTitle>
+ <p>{{ }}</p>
 
+    <VCard>
+
+      <VCardTitle>
         Check Material
         <VTable class="text-center mt-5">
           <thead>
             <tr>
               <th>Check Material ID</th>
-              <!-- <th>Materail Name</th>
-                      <th>Last Quantity</th>
-                      <th>Remain Quantity</th>
-                      <th>Expire Quantity</th> -->
               <th>Material Date</th>
               <th>Material Detail</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="(item, index) of checkMaterialStore.checkmeterialDetail" :key="index" class="text-center">
-              <!-- <td>{{ index+1 }}</td>
-                      <td>{{ item.name }}</td>
-                      <td>{{item.qty_last}}</td>
-                      <td>{{item.qty_remain}}</td>
-                      <td>{{item.qty_expire}}</td>
-                      <td>{{item.createdAt}}</td>
-                      <td>{{item.createdAt }}</td> -->
-              <td>{{ index + 1 }}</td>
-              <td>{{ date(item.checkmaterial.date + '').date + '/' + manageTimeStore.monthNum[new
-                Date(item.checkmaterial.date
-                  +
-                  '').getMonth()] + '/' +
-                new
-                  Date(item.checkmaterial.date + '').getFullYear() }}</td>
-              <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.checkmaterial)">Click</v-btn></td>
+         <!-- {{ checkMaterialStore.checkMatItem }} -->
+         
+         <tbody>
+            <tr v-for="(item, index) in  checkMaterialStore.checkMatItem" :key="index" class="text-center">
+           <td>{{ index+1}}</td> 
+              <td>{{ new Date(item.createdAt + '').getDate() + '/' + new Date(item.createdAt + '').getMonth() + '/' + new
+                Date(item.createdAt + '').getFullYear() }}</td>
+                <td>{{ item.name }}</td>  
+           <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.checkmaterial.checkmaterialdetails)">Click</v-btn></td> 
 
 
 
@@ -98,25 +91,25 @@ const date = (index: string) => {
         </VTable>
       </VCardTitle>
       <v-container width="100%" justify="center">
-
         <v-pagination justify="center" v-model="checkMaterialStore.page" :length="checkMaterialStore.lastPage"
           rounded="circle"></v-pagination>
-
       </v-container>
     </VCard>
   </VContainer>
+
   <v-dialog v-model="dialog">
     <v-container>
       <v-card rounded="xl" class="mx-auto" max-width="500" style="background-color: #4E342E; color: white;"><br>
         <h1 text-color="primary" class="text-center" style="font-size: large ;">Details</h1><br>
         <v-list lines="one" style="background-color: #EFEBE9">
-          <v-list-item rounded="xl" v-for="(item, index) of checkMaterialStore.checkmeterialDetail" :key="index">
+          <v-list-item rounded="xl" v-for="(item, index) of checkMatDe " :key="index">
             <v-list style="background-color: #EFEBE9"><li>Materail Name: {{ item.name }}</li></v-list> <br>
             <v-list style="background-color: #EFEBE9"><li>Last Quantity: {{ item.qty_last }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Expire Quantity: {{ item.qty_expire }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Remain Quantity: {{ item.qty_remain }} </li></v-list><br>
-            <v-list style="background-color: #EFEBE9"><li>Date: {{ new Date(item.checkmaterial.date + '').getDate() + '/' + new
-              Date(item.checkmaterial.date + '').getMonth() + '/' + new Date(item.checkmaterial.date + '').getFullYear()
+         -->
+            <v-list style="background-color: #EFEBE9"><li>Date: {{ new Date(item.createdAt + '').getDate() + '/' + new
+              Date(item.createdAt + '').getMonth() + '/' + new Date(item.createdAt + '').getFullYear()
             }}</li></v-list> <br>
          <div style="text-align: right; padding-right: 0px;">
   <VBtn style="background-color: #E53935; color: white;" variant="text" rounded="xl" @click="dialog = false">Close</VBtn>

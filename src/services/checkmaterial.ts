@@ -15,4 +15,7 @@ function getOneCheckMaterail( id:string ) {
 function deleteCheckMaterial(id: string) {
     return http.delete(`/check-material/${id}`);
 }
-export default {getCheckMaterail, saveCheckMaterail , deleteCheckMaterial, getOneCheckMaterail}
+const findCheckMaterialById = (id:string)=>{
+  return http.get(`/check-material/search/id/${id}`);
+}
+export default {getCheckMaterail, saveCheckMaterail , deleteCheckMaterial, getOneCheckMaterail, findCheckMaterialById}
