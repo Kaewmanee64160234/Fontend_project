@@ -104,6 +104,23 @@ const router = createRouter({
         requiresAuth: true
       }
     },
+    {
+      path: '/customerLogin',
+      name: 'customerLogin',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      components: {
+        default: () => import('../views/customer/CustomerLoginView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+
+      meta: {
+        layout: 'MainLayout',
+        requiresAuth: true
+      }
+    },
 
     {
       path: '/employee',
@@ -294,6 +311,7 @@ const router = createRouter({
         requiresAuth: true
       }
     },
+    
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
