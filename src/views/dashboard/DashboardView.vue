@@ -1,6 +1,5 @@
 
 <script lang="ts" setup>
-import LineChartDialog from "@/components/dashboards/LineChartDialog.vue";
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
 import SellerDialog from "../../components/stock/SellerDialog.vue"
 </script>

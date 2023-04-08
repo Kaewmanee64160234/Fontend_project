@@ -55,6 +55,9 @@ const date = (index: string) => {
 }
 </script>
 <template>
+          <v-row class="ml-5 mt-5" style="float:left">
+  <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" value="orders" to="/orders"></v-btn>
+</v-row>
   <table class="body-wrap">
     <tbody>
       <tr>
@@ -82,7 +85,7 @@ const date = (index: string) => {
                             <table class="invoice">
                               <tbody>
                                 <tr>
-                                  <td>Customer : {{ orderStore.tempOrder.customer?.name }}<br />
+                                  <td>Customer : {{ orderStore.tempOrder.customer?.name ? orderStore.tempOrder.customer?.name : 'anonymous'  }}<br />
                                     --------------------------------------------------------------------
                                     <br /> OrderID : {{
                                       orderStore.tempOrder.id }}

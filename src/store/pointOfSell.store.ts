@@ -178,12 +178,15 @@ export const usePointOfSale = defineStore('point of sale', () => {
         totalAndDicount.value = 0
         recive_mon.value = 0
         change_money.value = 0
-        messageStore.showInfo('Unable to save data due to incomplete data entry.')
+        messageStore.showError('Unable to save data due to incomplete data entry.')
+        loadingStore.isLoading = false
 
         return false
       }
       if (order.value.change < 0 || order.value.payment === '' || !order.value.orderItems) {
-        messageStore.showInfo('Unable to save data due to incomplete data entry.')
+        messageStore.showError('Unable to save data due to incomplete data entry.')
+        loadingStore.isLoading = false
+
         return false
       }
 
@@ -204,8 +207,10 @@ export const usePointOfSale = defineStore('point of sale', () => {
 
         console.log(JSON.stringify(order.value))
       } else {
-        if (change_money.value < 0) {
-          messageStore.showInfo('Unable to save data due to incomplete data entry.')
+        if (change_money.value < 0 || recive_mon.value <= 0) {
+          messageStore.showError('Unable to save data due to incomplete data entry.')
+          loadingStore.isLoading = false
+
           return false
         }
         if (customerStore.customerId === '') {

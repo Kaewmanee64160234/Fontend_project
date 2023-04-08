@@ -14,5 +14,6 @@ export interface Order{
     createdDate?: Date
     updatedDate?: Date
     deletedDate?: Date
+    storeId?:number
 
 }

@@ -23,29 +23,27 @@ const product_ = computed(() => {
 })
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
-  if(item.catagoryId !==1 && item.catagoryId !==3 ){
+  if (item.catagoryId !== 1 && item.catagoryId !== 3) {
     pointOfSaleStore.dialogTopping = true
-  }else{
+  } else {
     const product = pointOfSaleStore.orderItemList.findIndex((item_) => {
-    if (item_.productId === product_.value.id) {
-      item_.amount += 1
-      item_.total = item_.amount * item_.price
-      return item_
-    }
-  })
-  if (product < 0) {
-    let orderItem = ref<OrderItem>({
+      if (item_.productId === product_.value.id) {
+        item_.amount += 1
+        item_.total = item_.amount * item_.price
+        return item_
+      }
+    })
+    if (product < 0) {
+      let orderItem = ref<OrderItem>({
         name: product_.value.name,
-      amount: 1,
-      productId: product_.value.id!,
-      price: product_.value.price,
-      total: product_.value.price * 1,
-      image: product_.value.image
+        amount: 1,
+        productId: product_.value.id!,
+        price: product_.value.price,
+        total: product_.value.price * 1,
+        image: product_.value.image
       })
-    pointOfSaleStore.addToOrder(orderItem.value)
-  }
-  
-    
+      pointOfSaleStore.addToOrder(orderItem.value)
+    }
   }
 }
 const deleteOrderItem = (index: number) => {
@@ -70,19 +68,23 @@ const aboutCal = computed(() => {
 })
 onMounted(() => {
   productStore.getProductByCatagory('2')
-  pointOfSaleStore.total_discount;
+  pointOfSaleStore.total_discount
 })
 
 function Paycash() {
-  pointOfSaleStore.dialogPayment = false;
+  pointOfSaleStore.dialogPayment = false
   pointOfSaleStore.order.payment = 'Cash'
 }
+
+
 </script>
 
 <template>
-  <v-row class="ml-5" style="float:left">
-  <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="Home" value="home" to="/main">
-  </v-btn>
+  <v-row class="ml-5 mt-5" style="float:left">
+  <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="Home" value="home" to="/main"></v-btn>
+  <!-- <div class="ml-5 mb-5">
+  <v-btn color="#F1DEC9" class="mr-5 back-to-top" icon="mdi mdi-arrow-up"  ></v-btn>
+</div> -->
 </v-row>
 <div class="content-area">
   <DialogPayment></DialogPayment>
@@ -248,7 +250,6 @@ function Paycash() {
     </div>
   </div>
 </template>
-
 <style>
 .content-area {
   margin-left: 10px;
@@ -275,5 +276,35 @@ function Paycash() {
 .cart-table::-webkit-scrollbar-thumb {
   background-color: #ddd;
   border-radius: 999px;
+}
+
+/* go to top page */
+body {
+  display: grid;
+  grid-template-columns: auto 0px; 
+}
+
+.top {
+  --offset: 50px; 
+  
+  position: sticky;
+  bottom: 20px;      
+  margin-right:10px; 
+  place-self: end;
+  margin-top: calc(100vh + var(--offset));
+  
+  /* visual styling */
+  text-decoration: none;
+  padding: 10px;
+  font-family: sans-serif;
+  color: #fff;
+  background: #000;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+/* remove the below if you don't want smooth scrolling */
+html,
+body {
+  scroll-behavior: smooth;
 }
 </style>

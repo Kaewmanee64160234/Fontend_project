@@ -34,6 +34,7 @@ const data = ref({
       tension: 0.4,
       borderColor: props.color,
       pointStyle: 'circle',
+      pointBackgroundColor:  props.color,
       pointRadius: 5,
       pointHoverRadius: 8,
       
