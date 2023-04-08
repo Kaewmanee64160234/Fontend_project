@@ -13,6 +13,7 @@ import type { OrderItem } from '@/store/types/orderItem.type'
 import { computed } from 'vue'
 import DialogCompleteOrder from '@/components/pos/DialogCompleteOrder.vue'
 import AddCustomerDialog from '@/components/customer/AddCustomerDialog.vue'
+import CashDialog from '@/components/cash/CashDialog.vue'
 const customerStore = useCustomerStore()
 const productStore = useProductStore()
 const pointOfSaleStore = usePointOfSale()
@@ -86,6 +87,7 @@ function Paycash() {
 <div class="content-area">
   <DialogPayment></DialogPayment>
   <DialogCompleteOrder></DialogCompleteOrder>
+  <CashDialog></CashDialog>
   <div class="content">
     <FindMemberDialog></FindMemberDialog>
     <AddCustomerDialog></AddCustomerDialog>
@@ -225,7 +227,7 @@ function Paycash() {
                     </v-col>
                     <v-col class="mt-2" col="2.5">
                       <v-btn style="background-color: #C1F8CF; color: #1A374D;" height="130px" width="180"
-                        prepend-icon="mdi mdi-cash" stacked variant="outlined" @click="Paycash">Cash</v-btn>
+                        prepend-icon="mdi mdi-cash" stacked variant="outlined" @click="pointOfSaleStore.dialogCash = true">Cash</v-btn>
                     </v-col>
                     <v-row>
                     </v-row>
