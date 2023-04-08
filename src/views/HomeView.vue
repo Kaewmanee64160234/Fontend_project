@@ -23,29 +23,27 @@ const product_ = computed(() => {
 })
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
-  if(item.catagoryId !==1 && item.catagoryId !==3 ){
+  if (item.catagoryId !== 1 && item.catagoryId !== 3) {
     pointOfSaleStore.dialogTopping = true
-  }else{
+  } else {
     const product = pointOfSaleStore.orderItemList.findIndex((item_) => {
-    if (item_.productId === product_.value.id) {
-      item_.amount += 1
-      item_.total = item_.amount * item_.price
-      return item_
-    }
-  })
-  if (product < 0) {
-    let orderItem = ref<OrderItem>({
+      if (item_.productId === product_.value.id) {
+        item_.amount += 1
+        item_.total = item_.amount * item_.price
+        return item_
+      }
+    })
+    if (product < 0) {
+      let orderItem = ref<OrderItem>({
         name: product_.value.name,
-      amount: 1,
-      productId: product_.value.id!,
-      price: product_.value.price,
-      total: product_.value.price * 1,
-      image: product_.value.image
+        amount: 1,
+        productId: product_.value.id!,
+        price: product_.value.price,
+        total: product_.value.price * 1,
+        image: product_.value.image
       })
-    pointOfSaleStore.addToOrder(orderItem.value)
-  }
-  
-    
+      pointOfSaleStore.addToOrder(orderItem.value)
+    }
   }
 }
 const deleteOrderItem = (index: number) => {
@@ -70,11 +68,11 @@ const aboutCal = computed(() => {
 })
 onMounted(() => {
   productStore.getProductByCatagory('2')
-  pointOfSaleStore.total_discount;
+  pointOfSaleStore.total_discount
 })
 
 function Paycash() {
-  pointOfSaleStore.dialogPayment = false;
+  pointOfSaleStore.dialogPayment = false
   pointOfSaleStore.order.payment = 'Cash'
 }
 
@@ -252,7 +250,6 @@ function Paycash() {
     </div>
   </div>
 </template>
-
 <style>
 .content-area {
   margin-left: 10px;

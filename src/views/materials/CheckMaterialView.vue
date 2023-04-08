@@ -1,5 +1,5 @@
-
 <script setup lang="ts">
+import AddCheckMaterialDialog from '@/components/material/AddCheckMaterialDialog.vue';
 import { useCheckMaterialStore } from '@/store/checkmaterial.store';
 import { useManageTime } from '@/store/manageDate';
 import type BILL from '@/store/types/bill';
@@ -52,16 +52,18 @@ const date = (index: string) => {
 }
 </script>
 <template>
+  <AddCheckMaterialDialog></AddCheckMaterialDialog>
   <v-row class="ml-5" style="float:left">
   <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="material" value="material" to="/material"></v-btn></v-row>
   <VContainer>
- <p>{{ }}</p>
-
+    
     <VCard>
-
       <VCardTitle>
         Check Material
+              <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
+          @click="checkMaterialStore.dialog = true">Add New Check Material</v-btn>
         <VTable class="text-center mt-5">
+
           <thead>
             <tr>
               <th>Check Material ID</th>
@@ -76,7 +78,6 @@ const date = (index: string) => {
            <td>{{ index+1}}</td> 
               <td>{{ new Date(item.createdAt + '').getDate() + '/' + new Date(item.createdAt + '').getMonth() + '/' + new
                 Date(item.createdAt + '').getFullYear() }}</td>
-                <td>{{ item.name }}</td>  
            <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.checkmaterial.checkmaterialdetails)">Click</v-btn></td> 
 
 
@@ -107,7 +108,6 @@ const date = (index: string) => {
             <v-list style="background-color: #EFEBE9"><li>Last Quantity: {{ item.qty_last }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Expire Quantity: {{ item.qty_expire }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Remain Quantity: {{ item.qty_remain }} </li></v-list><br>
-         -->
             <v-list style="background-color: #EFEBE9"><li>Date: {{ new Date(item.createdAt + '').getDate() + '/' + new
               Date(item.createdAt + '').getMonth() + '/' + new Date(item.createdAt + '').getFullYear()
             }}</li></v-list> <br>
@@ -127,5 +127,3 @@ const date = (index: string) => {
     </v-container>
   </v-dialog>
 </template>
-
-    

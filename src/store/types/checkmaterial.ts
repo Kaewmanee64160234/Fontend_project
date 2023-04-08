@@ -8,5 +8,5 @@ export default interface CheckMaterial {
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
-    checkmaterialdetails?: CheckMaterialDetail[];
+    checkMaterialDetails?: CheckMaterialDetail[];
 }
