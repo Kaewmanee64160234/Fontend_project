@@ -56,6 +56,12 @@ const url = import.meta.env.VITE_URL_PORT
         value="customer"
         to="/customer"
       ></v-list-item>
+      <v-list-item
+        prepend-icon="mdi-book-account"
+        title="CustomerLogin"
+        value="customerLogin"
+        to="/customerLogin"
+      ></v-list-item>
 
       <v-list-item 
         prepend-icon="mdi-face-agent"

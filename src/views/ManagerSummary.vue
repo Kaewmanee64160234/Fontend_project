@@ -20,6 +20,9 @@ onMounted(async () => {
 </script>
 
 <template>
+        <v-row class="ml-5 mt-5" style="float:left">
+  <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" value="manager-employees" to="/manager/employees"></v-btn>
+</v-row>
   <v-container>
     <v-card>
       <v-card-text width="100vw" style="height: 90vh; background-color: #fefcf3">

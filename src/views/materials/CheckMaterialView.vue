@@ -55,7 +55,6 @@ const date = (index: string) => {
   <v-row class="ml-5" style="float:left">
   <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="material" value="material" to="/material"></v-btn></v-row>
   <VContainer>
- <p>{{ }}</p>
 
     <VCard>
 
