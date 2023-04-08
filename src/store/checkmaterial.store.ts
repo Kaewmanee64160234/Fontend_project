@@ -64,7 +64,7 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
       console.log(page.value)
       const response = await checkmaterialService.getOneCheckMaterail(id);
       console.log(response.data)
-      checkmeterialDetail.value = response.data
+      checkmeterialDetail.value = response.data[0]
       console.log(checkmeterialDetail.value)
     } catch (err) {
       console.log(err)
