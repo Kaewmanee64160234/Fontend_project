@@ -166,14 +166,11 @@ function Paycash() {
                 </ul>
               </div>
             </div>
-
-
           </div>
 
           <div class="summary mt-4" style="height: 20vh">
             <div class="row">
               <!-- {{ pointOfSaleStore.order }} -->
-
               <div class="col-md-5">
                 <span class="fw-bold mt-2">Enter the amount received</span>
                 <input class="form-control mt-3" id="amount" type="text" placeholder="Amount"
@@ -254,11 +251,11 @@ function Paycash() {
 .content-area {
   margin-left: 10px;
   margin-right: 10px;
-  margin-top: 10px;
+  margin-top: 40px;
 }
 
 .cart-table {
-  max-height: 300px;
+  max-height: 400px;
 }
 
 .item-side {
