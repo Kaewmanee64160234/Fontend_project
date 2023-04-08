@@ -101,7 +101,7 @@ function Paycash() {
           </v-tabs>
           </div>
           <div class="row">
-            <div class="col-md-3 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
+            <div class="col-md-6 mb-2 mt-4" v-for="item in productStore.products" :key="item.id">
               <MenuCard :name="item.name" :cost="item.price" :type="item.type + ''" :img="item.image!" :price="item.price"
                 :catagory-id="item.catagoryId + ''" @click="addToCart(item)">
               </MenuCard>
@@ -166,14 +166,11 @@ function Paycash() {
                 </ul>
               </div>
             </div>
-
-
           </div>
 
           <div class="summary mt-4" style="height: 20vh">
             <div class="row">
               <!-- {{ pointOfSaleStore.order }} -->
-
               <div class="col-md-5">
                 <span class="fw-bold mt-2">Enter the amount received</span>
                 <input class="form-control mt-3" id="amount" type="text" placeholder="Amount"
@@ -184,7 +181,7 @@ function Paycash() {
 
                 <v-btn block rounded="xl" style="background-color: #607EAA; color: white;" class="mt-7" width="300px"
                   @click="pointOfSaleStore.dialogPromotion = true"
-                  v-if="pointOfSaleStore.order.customerId !== 0">Promotion</v-btn>
+                  v-if="pointOfSaleStore.order.customerId !== ''">Promotion</v-btn>
                 <v-btn block rounded="xl" tyle="background-color: #607EAA; color: white;" class="mt-7" width="300px"
                   v-else :disabled="true">Promotion</v-btn>
 
@@ -254,11 +251,11 @@ function Paycash() {
 .content-area {
   margin-left: 10px;
   margin-right: 10px;
-  margin-top: 10px;
+  margin-top: 40px;
 }
 
 .cart-table {
-  max-height: 300px;
+  max-height: 400px;
 }
 
 .item-side {

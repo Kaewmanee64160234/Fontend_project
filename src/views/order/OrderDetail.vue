@@ -55,7 +55,7 @@ const date = (index: string) => {
 }
 </script>
 <template>
-  <table class="body-wrap scroll ">
+  <table class="body-wrap">
     <tbody>
       <tr>
         <td></td>
@@ -69,10 +69,12 @@ const date = (index: string) => {
                       <tbody>
                         <tr>
                           <td class="text-center">
-                            <div>Picture</div>
+                            <div class="ma-5">
+                            <v-img src="../../../public/img/logodecoffee.png" height="80px" width="100px" style="margin: auto;"></v-img>
+                          </div>
                             <h1 style="font-size: 15px;">D-COFFEE</h1>
                             <h1 style="font-size: 15px;"> WELCOME TO D-COFFEE </h1>
-                            <h1 style="font-size: 15px;"> ================================= </h1>
+                            <h1 style="font-size: 15px;"> ============================================================== </h1>
                           </td>
                         </tr>
                         <tr>
@@ -81,7 +83,7 @@ const date = (index: string) => {
                               <tbody>
                                 <tr>
                                   <td>Customer : {{ orderStore.tempOrder.customer?.name }}<br />
-                                    -----------------------------------------------------------------------------------------------
+                                    --------------------------------------------------------------------
                                     <br /> OrderID : {{
                                       orderStore.tempOrder.id }}
                                     <div style="float: right;">Date : {{
@@ -102,14 +104,16 @@ const date = (index: string) => {
                                       orderStore.tempOrder.payment }}
                                   </td>
                                 </tr>
-                                -----------------------------------------------------------------------------------------------
+                                --------------------------------------------------------------------
                                 <tr>
                                   <td>
                                     <table class="invoice-items" cellpadding="0" cellspacing="0">
                                       <tbody>
                                         <tr v-for="item in orderStore.tempOrder.orderItems" :key="item.name">
                                           <td>{{ item.name }}</td>
-                                          <td class="alignright">{{ item.total }} ฿</td>
+                                          <td class="alignright">{{ item.total }} ฿
+                                          <br>
+                                        x{{ item.amount }}</td>
                                         </tr>
                                         <tr class="finishOrder">
                                           <td>Discount</td>
@@ -138,9 +142,11 @@ const date = (index: string) => {
                           </td>
                         </tr>
 
-                        <tr>
-                          <td class="content-block text-center">
+                        <tr> 
+                          <td class="text-center">
+                            <div class="ma-5 ml-6" >
                             All For One Company Inc. Buu section 2 .
+                          </div>
                           </td>
                         </tr>
                       </tbody>
@@ -161,7 +167,8 @@ const date = (index: string) => {
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  font-family: 'Kanit';
+  /* font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; */
   box-sizing: border-box;
   font-size: 14px;
 }
@@ -220,26 +227,19 @@ body {
   border-radius: 3px;
 }
 
-.content-wrap {
+/* .content-wrap {
   padding: px;
-}
+} */
 
 .content-block {
-  padding: 0 0 20px;
+  padding: 0 0 0px;
 }
-
-.header {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
 /* -------------------------------------
     TYPOGRAPHY
 ------------------------------------- */
 h1,
 h2,
 h3 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   color: #000;
   margin: 10px 0 0;
   line-height: 1.2;
@@ -251,113 +251,11 @@ h1 {
   font-weight: 500;
 }
 
-h2 {
-  font-size: 24px;
-}
-
-h3 {
-  font-size: 18px;
-}
-
-h4 {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-p,
-ul,
-ol {
-  margin-bottom: 10px;
-  font-weight: normal;
-}
-
-p li,
-ul li,
-ol li {
-  margin-left: 5px;
-  list-style-position: inside;
-}
-
-/* -------------------------------------
-    LINKS & BUTTONS
-------------------------------------- */
-a {
-  color: #1ab394;
-  text-decoration: underline;
-}
-
-.btn-primary {
-  text-decoration: none;
-  color: #fff;
-  background-color: #1ab394;
-  border: solid #1ab394;
-  border-width: 5px 10px;
-  line-height: 2;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  display: inline-block;
-  border-radius: 5px;
-  text-transform: capitalize;
-}
-
 /* -------------------------------------
     OTHER STYLES THAT MIGHT BE USEFUL
 ------------------------------------- */
-.last {
-  margin-bottom: 0;
-}
-
-.first {
-  margin-top: 0;
-}
-
-.aligncenter {
-  text-align: center;
-}
-
 .alignright {
   text-align: right;
-}
-
-.alignleft {
-  text-align: left;
-}
-
-.clear {
-  clear: both;
-}
-
-/* -------------------------------------
-    ALERTS
-    Change the class depending on warning email, good email or bad email
-------------------------------------- */
-.alert {
-  font-size: 16px;
-  color: #fff;
-  font-weight: 500;
-  padding: 20px;
-  text-align: center;
-  border-radius: 3px 3px 0 0;
-}
-
-.alert a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
-}
-
-.alert.alert-warning {
-  background: #f8ac59;
-}
-
-.alert.alert-bad {
-  background: #ed5565;
-}
-
-.alert.alert-good {
-  background: #1ab394;
 }
 
 /* -------------------------------------
@@ -365,7 +263,7 @@ a {
     Styles for the billing table
 ------------------------------------- */
 .invoice {
-  margin: 40px auto;
+  margin: auto;
   text-align: left;
   width: 80%;
 }
@@ -408,15 +306,6 @@ a {
   h1 {
     font-size: 22px !important;
   }
-
-  h2 {
-    font-size: 18px !important;
-  }
-
-  h3 {
-    font-size: 16px !important;
-  }
-
   .container {
     width: 100% !important;
   }
@@ -430,18 +319,5 @@ a {
     width: 100% !important;
   }
 
-  .scroll {
-    overflow: scroll;
-  }
-
-  .scroll::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-  }
-
-  .scroll::-webkit-scrollbar-thumb {
-    background-color: #ddd;
-    border-radius: 999px;
-  }
 }
 </style>
