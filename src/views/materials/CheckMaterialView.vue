@@ -105,7 +105,7 @@ const date = (index: string) => {
 
         
           <v-list-item rounded="xl" v-for="(item, index) of checkMatDe " :key="index">
-            <v-list style="background-color: #EFEBE9"><li>Materail Name: {{ item.name }}</li></v-list> <br>
+            <v-list style="background-color: #EFEBE9"><li>Material Name: {{ item.name }}</li></v-list> <br>
             <v-list style="background-color: #EFEBE9"><li>Last Quantity: {{ item.qty_last }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Expire Quantity: {{ item.qty_expire }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Remain Quantity: {{ item.qty_remain }} </li></v-list><br>

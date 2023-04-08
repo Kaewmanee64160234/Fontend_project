@@ -32,18 +32,38 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
           </v-card>
       </v-container>
     </v-col>
-    <v-col>
+    <v-col style="margin-top: 130px;">
             <v-autocomplete
               label="Select"
               :items="['YEAR', 'MONTH', 'DAY']"
               density="compact"
               style="width: 400px;"
             >
-              <v-autocomplete>Drinks</v-autocomplete>
+              <v-autocomplete>Year</v-autocomplete>
+              <v-autocomplete>Month</v-autocomplete>
+              <v-autocomplete>Day</v-autocomplete>
+          </v-autocomplete>
+          <v-autocomplete
+              label="Select"
+              :items="['DRINK', 'FOODS', 'DESSERTS']"
+              density="compact"
+              style="width: 400px;"
+            >
               <v-autocomplete>Drinks</v-autocomplete>
               <v-autocomplete>Foods</v-autocomplete>
               <v-autocomplete>Desserts</v-autocomplete>
           </v-autocomplete>
+          <v-autocomplete
+              label="Select"
+              :items="['DRINK', 'FOODS', 'DESSERTS']"
+              density="compact"
+              style="width: 400px;"
+            >
+              <v-autocomplete>Drinks</v-autocomplete>
+              <v-autocomplete>Foods</v-autocomplete>
+              <v-autocomplete>Desserts</v-autocomplete>
+          </v-autocomplete>
+          <v-btn style="margin-right: 70px;width: 120px;background-color: #8ad879; color: white" >SUBMIT</v-btn>
         </v-col>
     </v-row>
     <v-row>

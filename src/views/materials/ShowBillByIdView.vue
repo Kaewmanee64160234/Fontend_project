@@ -48,7 +48,8 @@ const opendialog = (data: any) => {
               <td>{{ item.bill.name }}</td>
               <td>{{ new Date(item.createdAt + '').getDate() + '/' + new Date(item.createdAt + '').getMonth() + '/' + new
                 Date(item.createdAt + '').getFullYear() }}</td>
-              <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.bill.bill_detail)">Click</v-btn></td>
+              <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl"
+                  @click="opendialog(item.bill.bill_detail)">Click</v-btn></td>
             </tr>
           </tbody>
           <tbody v-if="billStore.billItem?.length == 0">
@@ -68,64 +69,36 @@ const opendialog = (data: any) => {
   </VContainer>
   <v-dialog v-model="dialog">
     <v-container>
-      <v-card class="mx-auto" max-width="500" max-height="500"><br>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title" style="text-align: center;"><strong>Bill Detail</strong></h3>
-              </div>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed">
-                    <thead>
-                      <tr>
-                        <td><strong>ID</strong></td>
-                        <td class="text-center"><strong>NAME</strong></td>
-                        <td class="text-center"><strong>AMOUNT</strong></td>
-                        <td class="text-center"><strong>PRICE</strong></td>
-                        <td class="text-right"><strong>TOTAL</strong></td>
-                      </tr>
-                    </thead>
-                    <tbody v-for="(item, index) of showMat" :key="index">
-                      <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                      <tr>
-                        <td>{{ index+1 }}</td>
-                        <td class="text-center">{{ item.name }}</td>
-                        <td class="text-center">{{ item.amount }}</td>
-                        <td class="text-center">{{ item.price }}</td>
-                        <td class="text-right">{{ item.total }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+      <v-card rounded="xl" class="mx-auto" max-width="500" style="background-color: #4E342E; color: white;"><br>
+        <h1 text-color="primary" class="text-center" style="font-size: large ;">Details</h1><br>
+        <v-list lines="one" style="background-color: #EFEBE9">
+
+          <v-list-item rounded="xl" v-for="(item, index) of showMat " :key="index">
+            <v-list style="background-color: #EFEBE9">
+              <li>Material Name: {{ item.name }}</li>
+            </v-list> <br>
+            <v-list style="background-color: #EFEBE9">
+              <li>Amount: {{ item.amount }} </li>
+            </v-list><br>
+            <v-list style="background-color: #EFEBE9">
+              <li>Price: {{ item.price }} </li>
+            </v-list><br>
+            <v-list style="background-color: #EFEBE9">
+              <li>Total: {{ item.total }} </li>
+            </v-list><br>
+            <v-list style="background-color: #EFEBE9">
+              <li>Date: {{ new Date(item.createdAt + '').getDate() + '/' + new
+                Date(item.createdAt + '').getMonth() + '/' + new Date(item.createdAt + '').getFullYear()
+              }}</li>
+            </v-list> <br>
+          </v-list-item>
+            <div style="text-align: right; padding-right: 0px;">
+              <VBtn style="background-color: #E53935; color: white;" variant="text" rounded="xl" @click="dialog = false">
+              Close</VBtn>
           </div>
-        </div>
+      </v-list>
 
-      </v-card>
-    </v-container>
-  </v-dialog>
-</template>
 
-<style scoped>
-.invoice-title h2,
-.invoice-title h3 {
-  display: inline-block;
-}
-
-.table>tbody>tr>.no-line {
-  border-top: none;
-}
-
-.table>thead>tr>.no-line {
-  border-bottom: none;
-}
-
-.table>tbody>tr>.thick-line {
-  border-top: 2px solid;
-}
-</style>
-
-    
+    </v-card>
+  </v-container>
+</v-dialog></template>
