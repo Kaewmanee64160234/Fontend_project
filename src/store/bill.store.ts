@@ -6,7 +6,6 @@ import { useMessageStore } from "./message";
 import { useMaterialStore } from '@/store/material.store.js';
 import billServices from "@/services/bill";
 import type BILL_DETAIL from "./types/billdetail";
-import billdetail from "@/services/billdetail";
 
 
 export const useBillStore = defineStore("bill", () => {
@@ -22,7 +21,7 @@ export const useBillStore = defineStore("bill", () => {
   employeeId: 0,
   bill_detail: [{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]}]);
   const bill_Detail_List = ref<BILL_DETAIL[]>([{ id:0,name: '', amount: 0, price: 0, total:0, materialId:0, billId:0}]);
-  const bill_detail = ref<BILL_DETAIL[]>([]);
+  const bill_Detail = ref<BILL_DETAIL[]>([]);
   const bill_list = ref<BILL>({ 
     name: '', 
     date: new Date(), 
@@ -80,10 +79,10 @@ export const useBillStore = defineStore("bill", () => {
           const res =  await billServices.updateBill(bill_list.value)
           await getBills()
           await materialStore.getMaterials()
-          console.log(res)
-          }
-          messageStore.showError('Unable to save bill due to invalid information.')
-        } 
+        } else {
+          messageStore.showError('Cannot save bill please try again')
+        }
+      }
     }
     catch (e) {
       console.log(e)
@@ -111,8 +110,8 @@ export const useBillStore = defineStore("bill", () => {
       try {
         const res = await billServices.getOneBill(id);
         console.log(res.data)
-        bill_detail.value = res.data
-        console.log( bill_detail.value)
+        bill_Detail.value = res.data
+        console.log( bill_Detail.value)
         lastPage.value = res.data.lastPage
       } catch (err) {
         console.log(err)
@@ -122,12 +121,6 @@ export const useBillStore = defineStore("bill", () => {
   
       loadingStore.isLoading = false
     }
-    const isDuplicateName = (name: string,index: number) => {
-      if (index > 0 && bill_detail.value[index].name === name) {
-        return true;
-      }
-      return false;
-    }
 
-    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill,page,keyword,take,order,orderBy,lastPage,bill_detail,isDuplicateName};  
+    return { bill,getBills,saveBill,bill_list,dialog,messageStore,loadingStore,addBillDetail,deleteBillDetail,bill_Detail_List,sumBill,getOneBill,page,keyword,take,order,orderBy,lastPage,bill_Detail};  
   });

@@ -55,6 +55,7 @@ const date = (index: string) => {
     <VCard>
       <VCardTitle>
 
+
         Check Material
         <VTable class="text-center mt-5">
           <thead>
@@ -110,7 +111,7 @@ const date = (index: string) => {
       <v-card rounded="xl" class="mx-auto" max-width="500" style="background-color: #4E342E; color: white;"><br>
         <h1 text-color="primary" class="text-center" style="font-size: large ;">Details</h1><br>
         <v-list lines="one" style="background-color: #EFEBE9">
-          <v-list-item rounded="xl" v-for="(item, index) of checkMaterialStore.checkmeterialDetail" :key="index">
+          <v-list-item rounded="xl" v-for="(item, index) of checkMaterialStore.checkmeterialDetail.checkmaterial.checkmaterialdetails" :key="index">
             <v-list style="background-color: #EFEBE9"><li>Materail Name: {{ item.name }}</li></v-list> <br>
             <v-list style="background-color: #EFEBE9"><li>Last Quantity: {{ item.qty_last }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Expire Quantity: {{ item.qty_expire }} </li></v-list><br>

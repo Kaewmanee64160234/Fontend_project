@@ -3,17 +3,19 @@ import { useBillStore } from '@/store/bill.store';
 import { ref } from 'vue';
 import type { VForm } from 'vuetify/components';
 import type Employee from '@/store/types/employee.type';
-import billdetail from '@/services/billdetail';
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
 const billStore = useBillStore();
 const form = ref<VForm | null>(null)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
+const confirmDlg = ref();
 
 async function save() {
   const { valid } = await form.value!.validate()
   if (valid) {
   billStore.bill_list.employeeId = employee.value.id;
   billStore.sumBill();
+  await confirmDlg.value.openDialog("Please Confirm", `Do you want to save this material?`,'Accept','Cancel');
   await billStore.saveBill();
   reCode()
   billStore.dialog = false
@@ -28,6 +30,7 @@ const reCode = () => {
 
 </script>
 <template>
+   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-dialog persistent width="1024" v-model="billStore.dialog">
     <v-card>
       <v-card-title>

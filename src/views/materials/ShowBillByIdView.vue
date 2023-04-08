@@ -43,15 +43,15 @@ const opendialog = (data: BILL) => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) of billStore.bill_detail" :key="index" class="text-center">
+            <tr v-for="(item, index) of billStore.bill_Detail" :key="index" class="text-center">
               <td>{{ index + 1 }}</td>
               <td>{{ item.bill.name }}</td>
               <td>{{ new Date(item.bill.date + '').getDate() + '/' + new Date(item.bill.date + '').getMonth() + '/' + new
                 Date(item.bill.date + '').getFullYear() }}</td>
-              <td><v-btn @click="opendialog(item.bill)">Click</v-btn></td>
+              <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.bill)">Click</v-btn></td>
             </tr>
           </tbody>
-          <tbody v-if="billStore.bill_detail.length == 0">
+          <tbody v-if="billStore.bill_Detail.length == 0">
             <tr>
               <td colspan="7" class="text-center">No data</td>
             </tr>
@@ -87,11 +87,11 @@ const opendialog = (data: BILL) => {
                         <td class="text-right"><strong>TOTAL</strong></td>
                       </tr>
                     </thead>
-                    <tbody v-for="(item, index) of billStore.bill_detail" :key="index">
+                    <tbody v-for="(item, index) of billStore.bill_Detail.bill.bill_detail" :key="index">
                       <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                      <tr v-if="billStore.isDuplicateName(item.name,index)">
-                        <td>{{ index-1+1 }}</td>
-                        <td class="text-center">{{ item.name}}</td>
+                      <tr>
+                        <td>{{ index+1 }}</td>
+                        <td class="text-center">{{ item.name }}</td>
                         <td class="text-center">{{ item.amount }}</td>
                         <td class="text-center">{{ item.price }}</td>
                         <td class="text-right">{{ item.total }}</td>
