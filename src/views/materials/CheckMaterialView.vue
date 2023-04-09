@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { useCheckMaterialStore } from '@/store/checkmaterial.store';
 import { useManageTime } from '@/store/manageDate';
 import type BILL from '@/store/types/bill';
@@ -51,23 +52,21 @@ const date = (index: string) => {
 }
 </script>
 <template>
-  <AddCheckMaterialDialog></AddCheckMaterialDialog>
+
   <v-row class="ml-5" style="float:left">
   <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="material" value="material" to="/material"></v-btn></v-row>
   <VContainer>
     
-    <VCard>
-      <VCardTitle>
-        Check Material
-              <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
-          @click="checkMaterialStore.dialog = true">Add New Check Material</v-btn>
-        <VTable class="text-center mt-5">
+    <VCard >
+      <VCardTitle style="text-align: center ; ">
+        CHECK MATERIAL
+        <VTable class="text-center mt-5" rounded="xl" >
 
           <thead>
             <tr>
-              <th>Check Material ID</th>
-              <th>Material Date</th>
-              <th>Material Detail</th>
+              <th  style="font-size: 70%;" >Check Material ID</th>
+              <th style="font-size: 70%;" >Material Date</th>
+              <th style="font-size: 70%;" >Material Detail</th>
             </tr>
           </thead>
          <!-- {{ checkMaterialStore.checkMatItem }} -->
@@ -78,29 +77,26 @@ const date = (index: string) => {
               <td>{{ new Date(item.createdAt + '').getDate() + '/' + new Date(item.createdAt + '').getMonth() + '/' + new
                 Date(item.createdAt + '').getFullYear() }}</td>
            <td><v-btn style="background-color: #8D6E63; color: white;" variant="text" rounded="xl" @click="opendialog(item.checkmaterial.checkmaterialdetails)">Click</v-btn></td> 
-
-
-
-            </tr>
+           </tr>
           </tbody>
-          <tbody v-if="checkMaterialStore.checkmeterialDetail.length == 0">
+          <tbody v-if=" checkMaterialStore.checkMatItem && checkMaterialStore.checkMatItem.length === 0">
             <tr>
               <td colspan="7" class="text-center">No data</td>
             </tr>
           </tbody>
         </VTable>
       </VCardTitle>
-      <v-container width="100%" justify="center">
+      <!-- <v-container width="100%" justify="center">
         <v-pagination justify="center" v-model="checkMaterialStore.page" :length="checkMaterialStore.lastPage"
           rounded="circle"></v-pagination>
-      </v-container>
+      </v-container> -->
     </VCard>
   </VContainer>
 
   <v-dialog v-model="dialog">
     <v-container>
       <v-card rounded="xl" class="mx-auto" max-width="500" style="background-color: #4E342E; color: white;"><br>
-        <h1 text-color="primary" class="text-center" style="font-size: large ;">Details</h1><br>
+        <h1 text-color="primary" class="text-center" style="font-size: larger;">Details</h1><br>
         <v-list lines="one" style="background-color: #EFEBE9">
 
         

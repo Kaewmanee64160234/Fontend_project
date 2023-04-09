@@ -8,34 +8,58 @@ const pointOfSaleStore = usePointOfSale()
 </script>
 
 <template>
-    <CheckPointDialog></CheckPointDialog>
-    <CheckPromotionDialog></CheckPromotionDialog>
-    <v-container>
-        <v-row justify="center">
-            <v-col>
+    <v-img src="https://i.pinimg.com/564x/d3/ee/3b/d3ee3b924cdd87c4c140b191e19df10f.jpg" style="scope" cover>
+        <v-container>
+            <CheckPointDialog></CheckPointDialog>
+            <CheckPromotionDialog></CheckPromotionDialog>
+            <v-row  class="pa-2 mb-6">
                 <v-col>
-                    <div class="mockup-phone">
-                        <div class="camera"></div>
-                        <div class="display">
-                            <div class="artboard artboard-demo phone-1">
-                                <div>
-                                    <v-btn justify-center class="mdi mr-2 mdi-checkbox-marked-circle ma-6 text-center "
-                                        style="float: right; color: white;" color="#D5B4B4" width="90%"
-                                        @click="customerStore.dialogCheckPoint = true">Check Point</v-btn>
-                                </div>
-                                <div>
-                                    <v-btn justify-center class="mdi mr-2 mdi-checkbox-marked-circle text-center"
-                                        style="float: right; color: white ;" color="#D5B4B4" width="90%" @click="pointOfSaleStore.dialogCheckPromotion = true">Check
-                                        Promotion</v-btn>
-                                </div>
+                    <v-col align="center" >
+                        <div class="mockup-phone" >
+                            <div class="camera"></div>
+                            <div class="display">
+                                <div class="artboard artboard-demo phone-1">
+                                <v-img src="https://i.pinimg.com/564x/bb/b9/52/bbb952ea3876d139a2c0234da2e251e8.jpg" cover height="588px" width="320px">
+                                    <v-container style="margin-top: 50%;">
+                                        <v-container>
+                                            <v-row>
+                                                <v-col>
+                                                    <div>
+                                                        <v-btn block rounded="xl" justify-center class="text-center "
+                                                            style="float: right; color: white;" color="#AA8B56" width="80px"
+                                                            height="40px"
+                                                            @click="customerStore.dialogCheckPoint = true">Check
+                                                            Point</v-btn>
+                                                    </div>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col>
+                                                    <div>
+                                                        <v-btn block rounded="xl" justify-center class="text-center"
+                                                            style="float: right; color: white ;" color="#AA8B56"
+                                                            width="80px" height="40px"
+                                                            @click="pointOfSaleStore.dialogCheckPromotion = true">Check
+                                                            Promotion</v-btn>
 
+                                                    </div>
+                                                </v-col>
+
+                                            </v-row>
+
+                                        </v-container>
+                                    </v-container>
+                                        
+                                    
+                                </v-img>
+                            </div>
                             </div>
                         </div>
-                    </div>
-
+                    </v-col>
                 </v-col>
-
-            </v-col>
-        </v-row>
-    </v-container>
+            </v-row>
+        </v-container>
+    </v-img>
 </template>
