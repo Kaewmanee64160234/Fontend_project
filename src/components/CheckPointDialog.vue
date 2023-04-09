@@ -33,12 +33,13 @@ const res = await customerStore.getCustomerByPhone(customerTel.value)
 <template>
     <PointDialog></PointDialog>
 <v-dialog v-model="customerStore.dialogCheckPoint" persistent width="500px">
-        <v-card class="scroll">
+        <v-card class="scroll" style="border-radius: 50px;">
             <v-container>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn icon="icon" color="brown" @click="customerStore.dialogCheckPoint = false">X</v-btn>
-                </v-card-actions>
+                <v-row class="mr-1 mt-2">
+                <v-col>
+                    <v-btn size="30px" color="#A9907E" icon="mdi mdi-close-thick" style="float: right; color: white;" @click="customerStore.dialogCheckPoint = false">X</v-btn>
+                </v-col>
+            </v-row>
                 <v-card-text>
                     <v-container style="text-align: center;">
                         <h1 style="font-size: 20px;">Please
@@ -154,8 +155,8 @@ const res = await customerStore.getCustomerByPhone(customerTel.value)
 }
 
 .scroll::-webkit-scrollbar {
-    width: 5px;
-    height: 4px;
+    width: 0px;
+    height: 0px;
 }
 
 .scroll::-webkit-scrollbar-thumb {

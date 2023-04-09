@@ -8,11 +8,11 @@ const close2Dialog = () => {
 </script>
 <template>
     
-    <v-dialog v-model="customerStore.dialogPoint" persistent width="39%" height="45vh">
-        <v-card style="cursor: pointer; border-radius: 50px; padding: 15px; ">
-            <v-row class="mr-3 mt-5">
+    <v-dialog style="border-radius: 20px;" v-model="customerStore.dialogPoint" persistent width="500px">
+        <v-card class="scroll" style="border-radius: 50px;">
+            <v-row class="mr-1 mt-2">
                 <v-col>
-                    <v-btn color="#A9907E" class="mr-5" icon="mdi mdi-close-thick" style="float: right; color: white;"  @click="customerStore.dialogPoint = false"></v-btn>
+                    <v-btn size="30px" color="#A9907E" class="mr-5" icon="mdi mdi-close-thick" style="float: right; color: white;"  @click="customerStore.dialogPoint = false"></v-btn>
                 </v-col>
             </v-row>
 
@@ -38,24 +38,26 @@ const close2Dialog = () => {
                                 </form>
 
                             </v-col>
-                            
-
                         </v-card-title>
-
-
                     </v-col>
                 </v-row>
-
             </v-container>
-
-
-
-
-
         </v-card>
-
-
-
-
     </v-dialog>
 </template>
+
+<style scoped>
+.scroll {
+    overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 999px;
+}
+</style>
