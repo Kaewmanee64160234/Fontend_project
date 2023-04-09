@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import CheckPointDialog from '@/components/CheckPointDialog.vue'
-import CheckPromotionDialog from '@/components/promotion/CheckPromotionDialog.vue';
 import { useCustomerStore } from '@/store/customer.store'
-import { usePointOfSale } from '@/store/pointOfSell.store'
+import { ref } from 'vue';
+const customerTel = ref('');
 const customerStore = useCustomerStore()
-const pointOfSaleStore = usePointOfSale()
+
+
 const close2Dialog = () => {
     customerStore.dialogCheckPoint = false;
 
@@ -12,25 +12,22 @@ const close2Dialog = () => {
 }
 </script>
 <template>
-    <PointDialog></PointDialog>
-    <v-dialog v-model="customerStore.dialogCheckPoint" persistent width="39%">
-        <v-card style="cursor: pointer; border-radius: 50px; padding: 15px;">
-            <v-row class="mr-3 mt-5">
-                <v-col>
-                    <v-btn color="#A9907E" class="mr-5" icon="mdi mdi-close-thick" style="float: right; color: white;"  @click="customerStore.dialogCheckPoint = false"></v-btn>
-                </v-col>
-            </v-row>
-
+<v-dialog v-model="customerStore.dialogCheckPoint" persistent width="500px">
+        <v-card class="scroll">
             <v-container>
-                <v-row>
-                    <v-col>
-                        <v-card-title class="pa-2"
-                            style="text-align: center; max-width: 800px; font-size: 22px;">Please
-                            enter the phone number <br /> to check the points
-
-                            <v-col class="pa-8">
-                                <form>
-
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn icon="icon" color="brown" @click="customerStore.dialogCheckPoint = false">X</v-btn>
+                </v-card-actions>
+                <v-card-text>
+                    <v-container style="text-align: center;">
+                        <h1 style="font-size: 20px;">Please
+                            enter the phone number <br /> to check the points</h1>
+                    </v-container>
+                    <v-container>
+                        <v-row class="card-promo">
+                            <v-row>
+                                <v-col>
                                     <div class="relative">
 
                                         <input type="search" id="default-search"
@@ -38,70 +35,78 @@ const close2Dialog = () => {
                                             placeholder="Phone number" style="font-size: 18px; text-align: center; ">
 
                                     </div>
-                                </form>
 
-                            </v-col>
-                            <v-col>
-                                <v-btn size="70px" color="#614124" class="ml-15"
-                                    style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-1"></v-btn>
-                                <v-btn size="70px" color="#614124" class="ml-15"
-                                    style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-2"></v-btn>
-                                <v-btn size="70px" color="#614124" class="ml-15"
-                                    style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-3"></v-btn>
-                            </v-col>
-
-                            <v-col style="margin-top: 13%;">
-                                <v-btn size="70px" color="#614124" class="ml-15"
-                                    style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-4"></v-btn>
-                                <v-btn size="70px" color="#614124" class="ml-15"
-                                    style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-5"></v-btn>
-                                <v-btn size="70px" color="#614124" class="ml-15"
-                                    style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-6"></v-btn>
-                            </v-col>
-
-                            <v-col style="margin-top: 13%;">
-                                <v-btn size="70px" color="#614124" class="ml-15"
-                                    style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-7"></v-btn>
-                                <v-btn size="70px" color="#614124" class="ml-15"
-                                    style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-8"></v-btn>
-                                <v-btn size="70px" color="#614124" class="ml-15"
-                                    style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-9"></v-btn>
-                            </v-col>
-                            <v-col style="margin-top: 13%;">
-                                <div style="margin-right: 15%;">
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col>
                                     <v-btn size="70px" color="#614124" class="ml-15"
-                                        style="float: right; font-size: 25px; color: white;"
-                                        icon="mdi mdi-arrow-left"></v-btn>
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-1"
+                                        @click="customerTel += '1'"></v-btn>
                                     <v-btn size="70px" color="#614124" class="ml-15"
-                                        style="float: right; font-size: 30px; color: white;"
-                                        icon="mdi mdi-numeric-0"></v-btn>
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-2"
+                                        @click="customerTel += '2'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-3"
+                                        @click="customerTel += '3'"></v-btn>
+                                </v-col>
+
+                            </v-row>
+                            <v-row>
+
+                                <v-col>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-4"
+                                        @click="customerTel += '4'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-5"
+                                        @click="customerTel += '5'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-6"
+                                        @click="customerTel += '6'"></v-btn>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-7"
+                                        @click="customerTel += '7'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-8"
+                                        @click="customerTel += '8'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-9"
+                                        @click="customerTel += '9'"></v-btn>
+                                </v-col>
+
+                            </v-row>
+                            <v-row>
+                                <div>
+                                    <v-col>
+                                        <v-btn size="70px" color="#614124" class="ml-15"
+                                            style="float: right; font-size: 25px; color: white; " icon="mdi mdi-arrow-left"
+                                            @click="customerTel = customerTel.slice(0, -1)"></v-btn>
+
+                                        <v-btn size="70px" color="#614124" class="ml-15"
+                                            style="float: right; font-size: 30px; color: white;" icon="mdi mdi-numeric-0"
+                                            @click="customerTel += '0'"></v-btn>
+
+                                            <v-btn size="70px" color="#A0937D" class="ml-15"
+                                            style="float: right; font-size: 25px; color: white; " icon="mdi mdi-arrow-left"
+                                            @click="customerStore.dialogPoint = true"> Ok</v-btn>
+
+                                    </v-col>
 
                                 </div>
-                            </v-col>
-                            <v-col style="margin-top: 15%;">
-                                <div style="margin-left: 8%;">
-                                    <v-btn color="#A0937D"
-                                        style="float: left; border-radius: 30px; width: 35%; color: white; font-size: 19px;">Skip</v-btn>
-                                </div>
-                                <div style="margin-right: 8%;">
-                                    <v-btn color="#A0937D"
-                                        style="float: right; border-radius: 30px; width: 35%; color: white; font-size: 19px;" @click="customerStore.dialogPoint = true">Ok</v-btn>
-                                </div>
+
+                            </v-row>
+                        </v-row>
 
 
-                            </v-col>
+                    </v-container>
 
-
-                        </v-card-title>
-
-
-                    </v-col>
-                </v-row>
-
+                </v-card-text>
             </v-container>
-
-
-
 
 
         </v-card>
@@ -123,53 +128,19 @@ const close2Dialog = () => {
     margin: 4px 2px;
     border-radius: 50%;
 }
+.scroll {
+    overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 5px;
+    height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 999px;
+}
 </style>
 
-                        <!-- <v-dialog v-model="pointOfSaleStore.dialogCheckPromotion" persistent width="30vw" >
-                            <v-card style="cursor: pointer; border-radius: 50px; padding: 15px;">
-                                <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn icon="icon" color="danger" @click="pointOfSaleStore.dialogCheckPromotion = false">X</v-btn>
-                                </v-card-actions>
-                                <v-container style="overflow-x: auto; " class="scroll">
-                                    <v-card-text>
-                                        <v-container style="text-align: center;">
-                                            <h1 style="font-size: 35px;">Promotion</h1>
-                                        </v-container>
-                                        <v-row class="card-promo">
-                                            <v-col cols="12" >
-                                                <v-row class="promotion" v-for="item in pointOfSaleStore.promo" :key="item.id">
-                                                    <v-col>
-                                                        <v-card variant="outlined" class="ma-2 pa-2 card">
-                                                            <v-row>
-                                                                <v-col cols="4">
-                                                                    <v-img :src="item.img" style="height: 100px;"></v-img></v-col>
-                                                                <v-col cols="6" style="text-align: left; margin-top: 20px;margin-left: 0px;">
-                                                                    <span style="font-size: 16px;font-weight: bold;">
-                                                                        {{ item.name }}
-                                                                    </span> <br>
-                                                                    <span style="font-weight: bold;"> discount: {{ item.price }} บาท</span><br>
-                                                                    <span> point: {{ item.point }} point</span>
-                                                                </v-col>
-                                                            </v-row>
-                    
-                                                        </v-card>
-                                                    </v-col>
-                    
-                    
-                                                </v-row>
-                    
-                    
-                    
-                    
-                                            </v-col>
-                    
-                                        </v-row>
-                                    </v-card-text>
-                                </v-container>
-                    
-                    
-                            </v-card>
-                    
-                    
-                        </v-dialog> -->
+                        
