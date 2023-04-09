@@ -220,6 +220,12 @@ const getCustomerByTel = async () => {
     }catch(err){console.log(err);}
   
 }
+
+const getCustomerByPhone = async (phone:string)=>{
+  const res = await  customerService.findCustomerBytel(phone);
+  return res.data;
+
+}
   return {
     page,
     keyword,
@@ -249,5 +255,6 @@ const getCustomerByTel = async () => {
     addCustomerDialog,
     dialogCheckPoint,
     dialogCheckPromotion,
+    getCustomerByPhone
   }
 })

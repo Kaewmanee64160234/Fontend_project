@@ -1,10 +1,26 @@
 <script setup lang="ts">
 import { useCustomerStore } from '@/store/customer.store'
+import { useMessageStore } from '@/store/message';
+// import Customer from '@/store/types/customer.type';
 import { ref } from 'vue'
 const customerStore = useCustomerStore()
 const customerTel = ref('')
+const customer = ref()
+const messageStore = useMessageStore()
 const close2Dialog = () => {
   customerStore.dialogCheckPoint = false
+}
+const findCus = async () => {
+  close2Dialog
+  const res = await customerStore.getCustomerByPhone(customerTel.value)
+  customer.value = res
+  if(!customer.value){
+    messageStore.showError('Not Found Customer')
+  customerStore.dialogCheckPoint = false
+
+    return false;
+  }
+  console.log(customer.value)
 }
 </script>
 <template>
@@ -138,7 +154,8 @@ const close2Dialog = () => {
                     </v-col>
                     <v-col style="margin-top: 13%">
                       <div style="margin-right: 18%">
-                        <v-btn @click="customerTel = customerTel.slice(0, -1)"
+                        <v-btn
+                          @click="customerTel = customerTel.slice(0, -1)"
                           size="70px"
                           color="#614124"
                           class="ml-10"
@@ -158,8 +175,7 @@ const close2Dialog = () => {
                     <v-col style="margin-top: 15%">
                       <div style="margin-left: 8%">
                         <v-btn
-                         
-                          @click=""
+                          
                           color="#A0937D"
                           style="
                             float: left;
@@ -181,6 +197,7 @@ const close2Dialog = () => {
                             color: white;
                             font-size: 19px;
                           "
+                          @click="findCus()"
                           >Ok</v-btn
                         >
                       </div>
