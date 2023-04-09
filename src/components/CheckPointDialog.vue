@@ -12,13 +12,13 @@ const close2Dialog = () => {
 }
 </script>
 <template>
-    <v-dialog v-model="customerStore.dialogCheckPoint" persistent width="39%">
-        <v-card style="cursor: pointer; border-radius: 50px; padding: 15px;">
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn icon="icon" color="brown"  @click="customerStore.dialogCheckPoint = false">X</v-btn>
-            </v-card-actions>
+<v-dialog v-model="customerStore.dialogCheckPoint" persistent width="500px">
+        <v-card class="scroll">
             <v-container>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn icon="icon" color="brown" @click="customerStore.dialogCheckPoint = false">X</v-btn>
+                </v-card-actions>
                 <v-card-text>
                     <v-container style="text-align: center;">
                         <h1 style="font-size: 20px;">Please
@@ -98,10 +98,10 @@ const close2Dialog = () => {
                             </v-row>
                             <v-row>
                                 <v-col>
-                                    <div style="margin-top: 70%;">
+                                    <div style="margin-top: 10%; margin-right: 33%;">
                                         <v-btn color="#A0937D"
-                                        style="float: right; border-radius: 30px; width: 50%; color: white; font-size: 19px;"
-                                        @click="customerStore.dialogPoint = true"> Ok</v-btn>
+                                            style="float: right; border-radius: 30px; width: 70%; color: white; font-size: 19px;"
+                                            @click="customerStore.dialogPoint = true"> Ok</v-btn>
                                     </div>
 
                                 </v-col>
@@ -136,6 +136,19 @@ const close2Dialog = () => {
     font-size: 16px;
     margin: 4px 2px;
     border-radius: 50%;
+}
+.scroll {
+    overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 5px;
+    height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 999px;
 }
 </style>
 
