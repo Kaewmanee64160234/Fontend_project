@@ -76,7 +76,7 @@ export const useBillStore = defineStore("bill", () => {
     loadingStore.isLoading = true
     try {
       for(let i = 0; i <= bill_Detail_List.value.length - 1; i++) {
-        if(bill_list.value.buy > bill_list.value.total) {
+        if(bill_list.value.buy >= bill_list.value.total) {
           await billServices.saveBill(bill_list.value)
           const res =  await billServices.updateBill(bill_list.value)
           await getBills()
