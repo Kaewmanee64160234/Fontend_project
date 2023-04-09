@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import AddCheckMaterialDialog from '@/components/material/AddCheckMaterialDialog.vue';
 import { useCheckMaterialStore } from '@/store/checkmaterial.store';
 import { useManageTime } from '@/store/manageDate';
 import type BILL from '@/store/types/bill';
@@ -103,8 +102,10 @@ const date = (index: string) => {
       <v-card rounded="xl" class="mx-auto" max-width="500" style="background-color: #4E342E; color: white;"><br>
         <h1 text-color="primary" class="text-center" style="font-size: large ;">Details</h1><br>
         <v-list lines="one" style="background-color: #EFEBE9">
+
+        
           <v-list-item rounded="xl" v-for="(item, index) of checkMatDe " :key="index">
-            <v-list style="background-color: #EFEBE9"><li>Materail Name: {{ item.name }}</li></v-list> <br>
+            <v-list style="background-color: #EFEBE9"><li>Material Name: {{ item.name }}</li></v-list> <br>
             <v-list style="background-color: #EFEBE9"><li>Last Quantity: {{ item.qty_last }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Expire Quantity: {{ item.qty_expire }} </li></v-list><br>
             <v-list style="background-color: #EFEBE9"><li>Remain Quantity: {{ item.qty_remain }} </li></v-list><br>

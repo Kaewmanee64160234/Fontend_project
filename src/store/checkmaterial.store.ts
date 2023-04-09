@@ -119,7 +119,9 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
     take,
     order,
     orderBy,
-    lastPage, checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial, checkmeterialDetail, checkMatItem, dialog, saveCheckMat, addCheckMatDetail, CheckMatDe
+    lastPage, checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial, checkmeterialDetail,checkMatItem, dialog,
+  saveCheckMat, addCheckMatDetail, CheckMatDe
+
   };
 
 });
