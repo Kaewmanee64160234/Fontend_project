@@ -33,7 +33,7 @@ onMounted(async () => {
                     <!-- .row -->
 
                     <hr class="row brc-default-l1 mx-n1 mb-4" />
-
+                    <v-card style="width: 1200px;text-align: center;margin-left: 50px;">
                     <div class="mt-4">
                         <div class="row text-600 text-white bgc-default-tp1 py-25">
                             <div class="d-none d-sm-block col-1">ID</div>
@@ -52,11 +52,13 @@ onMounted(async () => {
                                 <div class="col-2 text-secondary-d2">{{ item.total }}฿</div>
                             </div>
                         </div>
+                   
                         <hr />
-                        <div>
+                        <div style="margin-right: 30px;">
                             <a href="#" class="btn btn-warning btn-bold px-4 float-right">PRINT</a>
                         </div>
                     </div>
+                </v-card>
                 </div>
             </div>
         </div>
@@ -165,7 +167,7 @@ hr {
 }
 
 .w-2 {
-    width: 1rem;
+    width: 2rem;
 }
 
 .text-120 {

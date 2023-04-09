@@ -3,10 +3,13 @@ import { computed, onMounted, ref, watch } from 'vue';
 import { useMaterialStore } from '@/store/material.store.js';
 import MaterialsDialog from '@/components/material/MaterialsDialog.vue';
 import ConfirmDialog from '@/components/ConfirmDialog.vue';
+import AddCheckMaterialDialog from '@/components/material/AddCheckMaterialDialog.vue';
 import router from '@/router';
 import AddBillDialog from '@/components/material/AddBillDialog.vue';
 import { useBillStore } from '@/store/bill.store';
+import { useCheckMaterialStore } from '@/store/checkmaterial.store';
 const billStore = useBillStore();
+const checkMaterialStore = useCheckMaterialStore();
 const materialStore = useMaterialStore();
 const confirmDlg = ref();
 const paginate = ref(true);
@@ -34,8 +37,8 @@ onMounted(async() => {
 })
 
 onMounted(async () => {
-  await billStore.getBills();
   await materialStore.getMaterials();
+  await billStore.getBills();
 })
 
 
@@ -71,6 +74,7 @@ watch(paginate, async (newPage, oldPage) => {
     <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
     <MaterialsDialog></MaterialsDialog>
     <AddBillDialog></AddBillDialog>
+    <AddCheckMaterialDialog></AddCheckMaterialDialog>
     <v-container v-if="paginate">
     <v-card>
      <v-card-title>
@@ -84,8 +88,12 @@ watch(paginate, async (newPage, oldPage) => {
     </div>
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
-          <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
+          <v-btn class="mdi mdi-file-document-plus-outline mr-2" style="float: right; background-color: #2E7D32; color: white"
+          @click="checkMaterialStore.dialog = true">Add New Check Material</v-btn>
           <v-btn class="mdi mdi-clipboard-list-outline mr-2" color="#FFA559" style="float: right; color: white" to="/material/showBills" value="showBills">Show Bill</v-btn>
+          <v-btn class="mdi mdi-receipt-text-plus-outline mr-2" color="#AD7BE9" style="float: right; color: white" @click="billStore.dialog = true">Add Bill</v-btn>
+
+
           <v-spacer></v-spacer>
       <v-text-field style="width: 23%;"
         :loading="materialStore.loading"
@@ -111,7 +119,7 @@ watch(paginate, async (newPage, oldPage) => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item,index) in materialStore.materials" :key="index" style="text-align:center">
+            <tr style=" height: 65px; text-align:center;" v-for="(item,index) in materialStore.materials" :key="index" >
                 <td>{{ index+1 }}</td>
                 <td v-if="item.min_quantity <= 5" style="color: red;">{{ item.name }}</td>
                 <td v-if="item.min_quantity > 5">{{ item.name }}</td>

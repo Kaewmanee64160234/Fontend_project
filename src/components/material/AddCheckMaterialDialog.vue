@@ -50,12 +50,12 @@ async function save() {
                 (v) => v >= 0 || 'Min_quantity must more than 0']">
                 </VTextField>
               </VCol>
-              <VCol cols="12" sm="6" md="6">
+              <!-- <VCol cols="12" sm="6" md="6">
                 <VTextField label="Remain Quntity*" required v-model="item.qty_remain"
                 :rules="[(v) => !!v || 'Item is required',
                 (v) => v >= 0 || 'Min_quantity must more than 0']">
                 </VTextField>
-              </VCol>
+              </VCol> -->
             </VRow>
             </VContainer>
         </VForm>
