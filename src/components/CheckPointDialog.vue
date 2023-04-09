@@ -1,17 +1,37 @@
 <script setup lang="ts">
 import { useCustomerStore } from '@/store/customer.store'
+import { useMessageStore } from '@/store/message';
 import { ref } from 'vue';
+import PointDialog from './PointDialog.vue';
 const customerTel = ref('');
 const customerStore = useCustomerStore()
-
-
+const customer = ref();
+const messageStore = useMessageStore()
 const close2Dialog = () => {
     customerStore.dialogCheckPoint = false;
 
 
 }
+const findCus = async () => {
+  close2Dialog()
+  
+
+const res = await customerStore.getCustomerByPhone(customerTel.value)
+  customer.value = res
+  if (!customer.value) {
+    messageStore.showError('Not Found Customer')
+    customerStore.dialogCheckPoint = false
+
+    return false
+  }
+  console.log(customer.value)
+  customerStore.dialogPoint = true;
+}
+
+
 </script>
 <template>
+    <PointDialog></PointDialog>
 <v-dialog v-model="customerStore.dialogCheckPoint" persistent width="500px">
         <v-card class="scroll">
             <v-container>
@@ -30,7 +50,7 @@ const close2Dialog = () => {
                                 <v-col>
                                     <div class="relative">
 
-                                        <input type="search" id="default-search"
+                                        <input type="search" id="default-search" v-model="customerTel"
                                             class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-brown-500 dark:bg-brown-700 dark:border-gray-600 dark:placeholder-brown-400 dark:text-white dark:focus:ring-brown-500 dark:focus:border-brown-500"
                                             placeholder="Phone number" style="font-size: 18px; text-align: center; ">
 
@@ -93,7 +113,8 @@ const close2Dialog = () => {
 
                                             <v-btn size="70px" color="#A0937D" class="ml-15"
                                             style="float: right; font-size: 25px; color: white; " icon="mdi mdi-arrow-left"
-                                            @click="customerStore.dialogPoint = true"> Ok</v-btn>
+                                            @click="findCus()"> Ok</v-btn>
+
 
                                     </v-col>
 
@@ -142,5 +163,3 @@ const close2Dialog = () => {
     border-radius: 999px;
 }
 </style>
-
-                        

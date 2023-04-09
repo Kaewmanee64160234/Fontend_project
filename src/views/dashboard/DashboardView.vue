@@ -1,4 +1,3 @@
-
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"

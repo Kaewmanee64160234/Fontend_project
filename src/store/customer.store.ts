@@ -5,6 +5,7 @@ import type Customer from './types/customer.type'
 import { useLoadingStore } from './loading'
 import { useMessageStore } from './message'
 import { usePointOfSale } from './pointOfSell.store'
+import customer from '@/services/customer'
 export const useCustomerStore = defineStore('customer', () => {
   const pointofsellStore = usePointOfSale()
   const loadingStore = useLoadingStore()
@@ -16,6 +17,7 @@ export const useCustomerStore = defineStore('customer', () => {
   const dialog = ref(false)
   const allSelected = ref(false)
   const customers = ref<Customer[]>([])
+  const customer = ref<Customer>();
   const messageStore = useMessageStore()
   const customerId = ref('');
   const loading = ref(false)
@@ -193,7 +195,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       customers.value[customer].point += 5;
       await customerService.updateCustomer(id,{...customers.value[customer],files: []})
       customerId.value = customers.value[customer].id+''
-      pointofsellStore.order.customerId = customers.value[customer].id
+      pointofsellStore.order.customerId = customers.value[customer].id+'';
     } catch (e) {
       messageStore.showError("Unable to add customer point");
       console.log(e);
@@ -220,6 +222,13 @@ const getCustomerByTel = async () => {
   
     }catch(err){console.log(err);}
   
+}
+
+const getCustomerByPhone = async (phone:string)=>{
+  const res = await  customerService.findCustomerBytel(phone);
+  customer.value = res.data;
+  return res.data;
+
 }
   return {
     page,
@@ -250,6 +259,9 @@ const getCustomerByTel = async () => {
     addCustomerDialog,
     dialogCheckPoint,
     dialogCheckPromotion,
+    getCustomerByPhone,
+    customer,
     dialogPoint, 
+
   }
 })
