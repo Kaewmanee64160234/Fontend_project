@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import CheckPointDialog from '@/components/CheckPointDialog.vue'
+import CheckPromotionDialog from '@/components/promotion/CheckPromotionDialog.vue';
 import { useCustomerStore } from '@/store/customer.store'
 const customerStore = useCustomerStore()
 </script>
 
 <template>
     <CheckPointDialog></CheckPointDialog>
+    <CheckPromotionDialog></CheckPromotionDialog>
     <v-container>
         <v-row justify="center">
             <v-col>

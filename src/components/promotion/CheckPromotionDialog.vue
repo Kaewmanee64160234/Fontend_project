@@ -28,7 +28,7 @@ const showName = (namePromo: string) => {
                                         <v-row>
                                             <v-col cols="4">
                                                 <v-img :src="item.img" style="height: 100px;"></v-img></v-col>
-                                            <v-col cols="6" style="text-align: left; margin-top: 20px;margin-left: 40px;">
+                                            <v-col cols="6" style="text-align: left; margin-top: 20.5px;margin-left: 40px;">
                                                 <span style="font-size: 16px;font-weight: bold;">
                                                     {{ item.name }}
                                                 </span> <br>
