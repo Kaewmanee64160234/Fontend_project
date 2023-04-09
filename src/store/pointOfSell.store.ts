@@ -203,7 +203,8 @@ export const usePointOfSale = defineStore('point of sale', () => {
           recieved: totalAndDicount.value,
           change: 0,
           payment: 'promptpay',
-          orderItems: orderItemList.value
+          orderItems: orderItemList.value,
+          createdDate: new Date()
         }
 
         console.log(JSON.stringify(order.value))
@@ -224,15 +225,16 @@ export const usePointOfSale = defineStore('point of sale', () => {
           recieved: recive_mon.value,
           change: change_money.value,
           payment: 'cash',
-          orderItems: orderItemList.value
+          orderItems: orderItemList.value,
+          createdDate: new Date()
         }
 
         console.log(JSON.stringify(order.value))
       }
 
-      const res = await orderService.saveOrder(order.value)
-      orderStore.tempOrder = res.data
-      dialogComplteOrder.value = true
+      // const res = await orderService.saveOrder(order.value)
+      // orderStore.tempOrder = res.data
+      // dialogComplteOrder.value = true
 
       order.value = {
         customerId: '',

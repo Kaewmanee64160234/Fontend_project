@@ -76,24 +76,19 @@ const opendialog = (data: any) => {
           <v-list-item rounded="xl" v-for="(item, index) of showMat " :key="index">
             <v-list style="background-color: #EFEBE9">
               <li>Material Name: {{ item.name }}</li>
-            </v-list> <br>
-            <v-list style="background-color: #EFEBE9">
+            
               <li>Amount: {{ item.amount }} </li>
-            </v-list><br>
-            <v-list style="background-color: #EFEBE9">
+            
               <li>Price: {{ item.price }} </li>
-            </v-list><br>
-            <v-list style="background-color: #EFEBE9">
+            
               <li>Total: {{ item.total }} </li>
-            </v-list><br>
-            <v-list style="background-color: #EFEBE9">
               <li>Date: {{ new Date(item.createdAt + '').getDate() + '/' + new
                 Date(item.createdAt + '').getMonth() + '/' + new Date(item.createdAt + '').getFullYear()
               }}</li>
             </v-list> <br>
           </v-list-item>
             <div style="text-align: right; padding-right: 0px;">
-              <VBtn style="background-color: #E53935; color: white;" variant="text" rounded="xl" @click="dialog = false">
+              <VBtn style="background-color: #E53935; color: white;margin-right: 20px;margin-bottom: 10px" variant="text" rounded="xl" @click="dialog = false">
               Close</VBtn>
           </div>
       </v-list>
@@ -101,4 +96,7 @@ const opendialog = (data: any) => {
 
     </v-card>
   </v-container>
-</v-dialog></template>
+</v-dialog>
+</template>
+
+
