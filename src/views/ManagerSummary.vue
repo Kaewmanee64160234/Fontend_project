@@ -31,8 +31,8 @@ onMounted(async () => {
         >
           Summary Salary
         </v-card-text>
-
-        <v-row class="profile" style="height: 33%; text-align: right">
+        
+        <v-row class="profile" style="height: 35%; text-align: right">
           <v-col>
             <v-container style="text-align: right">
               <v-col>
@@ -66,11 +66,12 @@ onMounted(async () => {
             </v-card-text>
           </v-col>
         </v-row>
-        <div v-for="(item, index) in employeeStore.summary_salaries" :key="index">
+        <div class="scroll">
+        <div class="mt-3 ml-5 mr-5 text-center" v-for="(item, index) in employeeStore.summary_salaries" :key="index">
 
-        <v-row class="text-center" cols="12">
+        <v-row class="text-center" style="max-width: 1200px" cols="12">
           <v-row>
-            <v-col style="height: 40%">
+            <v-col>
               <v-container style="height: 70%">
                 <v-row style="height: 20%">
                   <v-row class="text-center" style="height: 10%">
@@ -83,7 +84,7 @@ onMounted(async () => {
                             rgba(0, 0, 0, 0.2) 0px 3px 5px;
                         "
                       >
-                        <div class="stat place-items-center">
+                        <div class="stat place-items-center mt-6">
                           <dl
                             class="grid max-w-screen-xl grid-cols-2 gap-20 p-4 sm:grid-cols-3 xl:grid-cols-5 dark:text-white sm:p-8"
                           >
@@ -161,6 +162,7 @@ onMounted(async () => {
           </v-row>
         </v-row>
         </div>
+      </div>
       </v-card-text>
     </v-card>
   </v-container>
@@ -169,16 +171,30 @@ onMounted(async () => {
 .title {
   background-color: #faf8f1;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .detail-emp {
-  width: 100%;
-  display: flex;
+  /* width: 100%; */
+  /* display: flex; */
   justify-content: center;
 }
 
 .detail {
   width: 70 vw;
+}
+
+.scroll {
+  overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 999px;
 }
 </style>
