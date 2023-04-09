@@ -1,6 +1,5 @@
 
 <script lang="ts" setup>
-import SellerDialog from "@/components/stock/SellerDialog.vue";
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
 import DonutDialog from "@/components/dashboards/DonutDialog.vue";
 </script>
@@ -12,11 +11,13 @@ import DonutDialog from "@/components/dashboards/DonutDialog.vue";
   </v-row>
   <v-card>
   <div class="page">
-    <a class="font">Dashboards</a>
+    <v-card-title class="text-center">
+    <a class="font" >Dashboards</a>
+  </v-card-title>
     <v-row>
       <v-col cols="6" md="8">
         <v-container>
-          <v-card width="900px" style="font-size:140%;">
+          <v-card class="text-center" width="900px" style="font-size:140%;">
             Daily Sales
             <ChartComponentDialog type="line" :color="`#62CDFF`" :dataValues="[30, 55, 25, 45, 50, 40, 32]"
               :dataLabels="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" label="Product"
@@ -128,9 +129,11 @@ import DonutDialog from "@/components/dashboards/DonutDialog.vue";
 <style>
 .font {
   font-size: 200%;
+  text-align: center;
 }
 
 .page {
+  margin-top: 5px;
   max-height: 90vh;
   overflow: scroll;
 }
