@@ -24,10 +24,10 @@ const reset = () => {
   <v-app>
     <v-main class="bg-img"  >
       
-      <v-container class="pa-10" style="float: right;">
+      <v-container class="pa-10 mt-10" style="float: right;">
         <v-row style="float: right;">
           <v-col style="float: right;">
-            <v-card width="550px" height="600px"
+            <v-card width="550px" height="620px"
               style="border-radius: 50px; background-color: white; box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;">
               <v-card width="550px" height="700px"
                 style="border-radius: 50px; background-color: #FCFAF7  ; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
