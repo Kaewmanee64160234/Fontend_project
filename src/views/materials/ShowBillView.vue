@@ -1,11 +1,40 @@
 <script lang="ts" setup>
 import { useBillStore } from '@/store/bill.store';
+import { useManageTime } from '@/store/manageDate';
 import { onMounted, ref } from 'vue';
 const billStore = useBillStore();
+
+const manageTimeStore = useManageTime()
 
 onMounted(async () => {
     await billStore.getBills();
 });
+const date = (index: string) => {
+    let dd = new Date(index);
+    let date = { date: '', mouth: '', year: '', hour: '', minute: '', second: '' }
+    date.year = dd.getFullYear() + ''
+    date.date = dd.getDate() + ''
+    date.mouth = dd.getMonth() + ''
+    date.minute = '' + dd.getMinutes()
+    date.hour = '' + dd.getHours()
+    date.second = '' + dd.getSeconds()
+    if (dd.getDate() < 10) {
+        date.date = '0' + dd.getDate()
+    } if (dd.getMonth() < 10) {
+        date.mouth = '0' + dd.getMonth()
+    }
+    if (dd.getHours() < 10) {
+        date.hour = '0' + dd.getHours()
+    }
+    if (dd.getMinutes() < 10) {
+        date.minute = '0' + dd.getHours()
+    }
+    if (dd.getSeconds() < 10) {
+        date.second = dd.getSeconds() + '0'
+    }
+    return date;
+
+}
 </script>
 <template>
     <div class="page-content container">
@@ -15,8 +44,8 @@ onMounted(async () => {
                     to="/material"></v-btn>
             </h1>
 
-            <div class="page-tools">
-            </div>
+        <div class="page-tools">
+        </div>
         </div>
 
         <div class="container px-0">
@@ -34,31 +63,37 @@ onMounted(async () => {
 
                     <hr class="row brc-default-l1 mx-n1 mb-4" />
                     <v-card style="width: 1200px;text-align: center;margin-left: 50px;">
-                    <div class="mt-4">
-                        <div class="row text-600 text-white bgc-default-tp1 py-25">
-                            <div class="d-none d-sm-block col-1">ID</div>
-                            <div class="col-9 col-sm-5">SHOP NAME</div>
-                            <div class="d-none d-sm-block col-4 col-sm-2">DATE</div>
-                            <div class="d-none d-sm-block col-sm-2">TIME</div>
-                            <div class="col-2">TOTAL</div>
-                        </div>
-                        <div class="text-95 text-secondary-d3" v-for="(item, index) of billStore.bill" :key="index">
-                            <div class="row mb-2 mb-sm-0 py-25">
-                                <div class="d-none d-sm-block col-1">{{ index + 1 }}</div>
-                                <div class="col-9 col-sm-5">{{ item.name }}</div>
-                                <div class="d-none d-sm-block col-2">{{ new Date(item.date + '').getDate() + '/' + new
-                                    Date(item.date + '').getMonth() + '/' + new Date(item.date + '').getFullYear() }}</div>
-                                <div class="d-none d-sm-block col-2 text-95">{{ item.time }}</div>
-                                <div class="col-2 text-secondary-d2">{{ item.total }}฿</div>
+                        <div class="mt-4">
+                            <div class="row text-600 text-white bgc-default-tp1 py-25">
+                                <div class="d-none d-sm-block col-1">ID</div>
+                                <div class="col-9 col-sm-5">SHOP NAME</div>
+                                <div class="d-none d-sm-block col-4 col-sm-2">DATE</div>
+                                <div class="d-none d-sm-block col-sm-2">TIME</div>
+                                <div class="col-2">TOTAL</div>
+                            </div>
+                            <div class="text-95 text-secondary-d3" v-for="(item, index) of billStore.bill" :key="index">
+                                <div class="row mb-2 mb-sm-0 py-25">
+                                    <div class="d-none d-sm-block col-1">{{ index + 1 }}</div>
+                                    <div class="col-9 col-sm-5">{{ item.name }}</div>
+                                    <div class="d-none d-sm-block col-2">{{ date(item.date + '').date + '/' +
+                                        manageTimeStore.monthNum[new Date(item.date
+                                            +
+                                            '').getMonth()] + '/' +
+                                        new
+                                            Date(item.date + '').getFullYear() }}</div>
+                                    <!-- <div class="d-none d-sm-block col-2">{{ new Date(item.date + '').getDate() + '/' + new
+                                        Date(item.date + '').getMonth() + '/' + new Date(item.date + '').getFullYear() }}</div>
+                                    <div class="d-none d-sm-block col-2 text-95">{{ item.time }}</div> -->
+                                    <div class="col-2 text-secondary-d2">{{ item.total }}฿</div>
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div style="margin-right: 30px;">
+                                <a href="#" class="btn btn-warning btn-bold px-4 float-right">PRINT</a>
                             </div>
                         </div>
-                   
-                        <hr />
-                        <div style="margin-right: 30px;">
-                            <a href="#" class="btn btn-warning btn-bold px-4 float-right">PRINT</a>
-                        </div>
-                    </div>
-                </v-card>
+                    </v-card>
                 </div>
             </div>
         </div>
@@ -201,4 +236,5 @@ hr {
 
 .align-bottom {
     vertical-align: bottom !important;
-}</style>
+}
+</style>
