@@ -8,9 +8,11 @@ const pointOfSaleStore = usePointOfSale()
 </script>
 
 <template>
-    <CheckPointDialog></CheckPointDialog>
-    <CheckPromotionDialog></CheckPromotionDialog>
+    
+    <v-img src="https://i.pinimg.com/564x/a7/16/15/a71615c8b29ec047c0f908bd3f80480d.jpg" style="scope">
     <v-container>
+        <CheckPointDialog></CheckPointDialog>
+        <CheckPromotionDialog></CheckPromotionDialog>
         <v-row justify="center">
             <v-col>
                 <v-col>
@@ -23,29 +25,32 @@ const pointOfSaleStore = usePointOfSale()
                                         <v-col>
                                             <div>
                                                 <v-btn block rounded="xl" justify-center class="text-center "
-                                                    style="float: right; color: white;" color="#AA8B56" width="80px" height="40px"
-                                                    @click="customerStore.dialogCheckPoint = true">Check Point</v-btn>
+                                                    style="float: right; color: white;" color="#AA8B56" width="80px"
+                                                    height="40px" @click="customerStore.dialogCheckPoint = true">Check
+                                                    Point</v-btn>
                                             </div>
                                         </v-col>
-                                        
+
                                     </v-row>
-                                    
+
                                 </v-container>
                                 <v-container>
                                     <v-row>
                                         <v-col>
                                             <div>
                                                 <v-btn block rounded="xl" justify-center class="text-center"
-                                                    style="float: right; color: white ;" color="#AA8B56" width="80px" height="40px" @click="pointOfSaleStore.dialogCheckPromotion = true">Check
+                                                    style="float: right; color: white ;" color="#AA8B56" width="80px"
+                                                    height="40px"
+                                                    @click="pointOfSaleStore.dialogCheckPromotion = true">Check
                                                     Promotion</v-btn>
-            
+
                                             </div>
                                         </v-col>
-                                        
+
                                     </v-row>
-                                    
+
                                 </v-container>
-                                
+
 
                             </div>
                         </div>
@@ -56,4 +61,5 @@ const pointOfSaleStore = usePointOfSale()
             </v-col>
         </v-row>
     </v-container>
+</v-img>
 </template>
