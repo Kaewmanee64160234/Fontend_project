@@ -5,16 +5,19 @@ import type Customer from './types/customer.type'
 import { useLoadingStore } from './loading'
 import { useMessageStore } from './message'
 import { usePointOfSale } from './pointOfSell.store'
+import customer from '@/services/customer'
 export const useCustomerStore = defineStore('customer', () => {
   const pointofsellStore = usePointOfSale()
   const loadingStore = useLoadingStore()
   const dialogCheckPoint= ref(false)
   const dialogCheckPromotion= ref(false)  
+  const dialogPoint = ref(false);
   const search = ref('');
   const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
   const allSelected = ref(false)
   const customers = ref<Customer[]>([])
+  const customer = ref<Customer>();
   const messageStore = useMessageStore()
   const customerId = ref('');
   const loading = ref(false)
@@ -223,6 +226,7 @@ const getCustomerByTel = async () => {
 
 const getCustomerByPhone = async (phone:string)=>{
   const res = await  customerService.findCustomerBytel(phone);
+  customer.value = res.data;
   return res.data;
 
 }
@@ -255,6 +259,9 @@ const getCustomerByPhone = async (phone:string)=>{
     addCustomerDialog,
     dialogCheckPoint,
     dialogCheckPromotion,
-    getCustomerByPhone
+    getCustomerByPhone,
+    customer,
+    dialogPoint, 
+
   }
 })

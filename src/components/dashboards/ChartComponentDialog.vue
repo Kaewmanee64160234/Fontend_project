@@ -9,10 +9,10 @@ const props = defineProps<{
   dataLabels: string[];
   label: String;
   color: String;
-  dataValues2: number[];
-  dataLabels2: string[];
-  label2: String;
-  color2: String;
+  // dataValues2: number[];
+  // dataLabels2: string[];
+  // label2: String;
+  // color2: String;
 
 }>();
 const options = {
@@ -35,16 +35,17 @@ const data = ref({
       pointRadius: 5,
       pointHoverRadius: 8,
       
-    },{
-      label: props.label2,
-      data: props.dataValues2,
-      tension: 0.4,
-      borderColor: props.color2,
-      pointBackgroundColor:  props.color2,
-      pointStyle: 'circle',
-      pointRadius: 5,
-      pointHoverRadius: 8,
     }
+    // ,{
+    //   label: props.label2,
+    //   data: props.dataValues2,
+    //   tension: 0.4,
+    //   borderColor: props.color2,
+    //   pointBackgroundColor:  props.color2,
+    //   pointStyle: 'circle',
+    //   pointRadius: 5,
+    //   pointHoverRadius: 8,
+    // }
   ],
   
  

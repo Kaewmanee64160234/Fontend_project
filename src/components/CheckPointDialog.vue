@@ -1,50 +1,56 @@
 <script setup lang="ts">
+import PointDialog from './PointDialog.vue'
+import CheckPointDialog from '@/components/CheckPointDialog.vue'
+import CheckPromotionDialog from '@/components/promotion/CheckPromotionDialog.vue'
 import { useCustomerStore } from '@/store/customer.store'
-import { useMessageStore } from '@/store/message';
+import { usePointOfSale } from '@/store/pointOfSell.store'
+import { useMessageStore } from '@/store/message'
 // import Customer from '@/store/types/customer.type';
 import { ref } from 'vue'
 const customerStore = useCustomerStore()
 const customerTel = ref('')
 const customer = ref()
 const messageStore = useMessageStore()
+
+const pointOfSaleStore = usePointOfSale()
 const close2Dialog = () => {
   customerStore.dialogCheckPoint = false
 }
 const findCus = async () => {
-  close2Dialog
+  close2Dialog()
+  
   const res = await customerStore.getCustomerByPhone(customerTel.value)
   customer.value = res
-  if(!customer.value){
+  if (!customer.value) {
     messageStore.showError('Not Found Customer')
-  customerStore.dialogCheckPoint = false
+    customerStore.dialogCheckPoint = false
 
-    return false;
+    return false
   }
   console.log(customer.value)
+  customerStore.dialogPoint = true;
 }
 </script>
 <template>
+    <PointDialog></PointDialog>
   <v-container>
     <v-row>
       <v-col>
         <v-container>
-          <v-dialog
-            v-model="customerStore.dialogCheckPoint"
-            persistent
-            width="500px"
-            style="background-color: #ad8e70"
-          >
-            <v-card style="border-radius: 8%; width: 35vw">
+          <v-dialog v-model="customerStore.dialogCheckPoint" persistent width="39%">
+            <v-card style="cursor: pointer; border-radius: 50px; padding: 15px">
               <v-row class="mr-3 mt-5">
                 <v-col>
                   <v-btn
                     color="#A9907E"
                     class="mr-5"
                     icon="mdi mdi-close-thick"
-                    style="float: right"
+                    style="float: right; color: white"
+                    @click="customerStore.dialogCheckPoint = false"
                   ></v-btn>
                 </v-col>
               </v-row>
+
               <v-row>
                 <v-col>
                   <v-card-title
@@ -175,7 +181,6 @@ const findCus = async () => {
                     <v-col style="margin-top: 15%">
                       <div style="margin-left: 8%">
                         <v-btn
-                          
                           color="#A0937D"
                           style="
                             float: left;
@@ -184,7 +189,8 @@ const findCus = async () => {
                             color: white;
                             font-size: 19px;
                           "
-                          >Skip</v-btn
+                          @click="customerTel = ''"
+                          >Clear</v-btn
                         >
                       </div>
                       <div style="margin-right: 8%">
@@ -197,7 +203,7 @@ const findCus = async () => {
                             color: white;
                             font-size: 19px;
                           "
-                          @click="findCus()"
+                          @click="findCus(),customerStore.dialogPoint = true"
                           >Ok</v-btn
                         >
                       </div>
@@ -225,7 +231,5 @@ const findCus = async () => {
   border-radius: 50%;
 }
 </style>
-<!-- <v-card style="width: 26vw ; height: 70vh;  border-radius: 60px;" >
-                           
 
-                        </v-card> -->
+
