@@ -84,7 +84,7 @@ const date = (index: string) => {
 
             </tr>
           </tbody>
-          <tbody v-if="checkMaterialStore.checkmeterialDetail.length == 0">
+          <tbody v-if=" checkMaterialStore.checkMatItem && checkMaterialStore.checkMatItem.length === 0">
             <tr>
               <td colspan="7" class="text-center">No data</td>
             </tr>
