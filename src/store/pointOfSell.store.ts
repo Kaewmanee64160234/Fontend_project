@@ -204,9 +204,11 @@ export const usePointOfSale = defineStore('point of sale', () => {
           change: 0,
           payment: 'promptpay',
           orderItems: orderItemList.value,
-          createdDate: new Date(),
-          storeId:27
+          storeId:27,
+          createdDate:new Date()
+
         }
+
         console.log(JSON.stringify(order.value))
       } else {
         if (change_money.value < 0 || recive_mon.value <= 0) {
@@ -228,6 +230,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
           orderItems: orderItemList.value,
           storeId:27,
           createdDate:new Date()
+
         }
 
         console.log(JSON.stringify(order.value))
@@ -322,6 +325,4 @@ export const usePointOfSale = defineStore('point of sale', () => {
   }
 })
 
-
 export { useCustomerStore }
-
