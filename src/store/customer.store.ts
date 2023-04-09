@@ -192,7 +192,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
       customers.value[customer].point += 5;
       await customerService.updateCustomer(id,{...customers.value[customer],files: []})
       customerId.value = customers.value[customer].id+''
-      pointofsellStore.order.customerId = customers.value[customer].id
+      pointofsellStore.order.customerId = customers.value[customer].id+'';
     } catch (e) {
       messageStore.showError("Unable to add customer point");
       console.log(e);
