@@ -1,7 +1,14 @@
 
 <script lang="ts" setup>
+import { onMounted } from "vue";
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
 import DonutDialog from "@/components/dashboards/DonutDialog.vue";
+import { useProductStore } from "@/store/product.store";
+const productStore = useProductStore()
+onMounted(()=>{
+  productStore.take = 41;
+  productStore.getProducts();
+})
 </script>
 
 <template>
@@ -20,10 +27,10 @@ import DonutDialog from "@/components/dashboards/DonutDialog.vue";
           <v-card class="text-center" width="900px" style="font-size:140%;">
             Daily Sales
             <ChartComponentDialog type="line" :color="`#62CDFF`" :dataValues="[30, 55, 25, 45, 50, 40, 32]"
-              :dataLabels="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" label="Product"
+              :dataLabels="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" label="Product 1"
               :dataLabels2="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" :dataValues2="[30, 30, 30, 30, 40, 50, 60]"
-              label2="Customer" :color2="`#FA9884`" :dataLabels3="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
-              :dataValues3="[60, 50, 40, 40, 40, 30, 20]" label3="year" :color3="`#B2A4FF`">
+              label2="Product 2" :color2="`#FA9884`" :dataLabels3="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
+              >
             </ChartComponentDialog>
           </v-card>
         </v-container>
@@ -37,19 +44,17 @@ import DonutDialog from "@/components/dashboards/DonutDialog.vue";
           <option value="FR">Day</option>
         </select>
         <div style="margin-top: 20px;">
-        <select :items="['DRINK', 'FOODS', 'DESSERTS']" style="width: 200px;"
+          <select :items="[productStore.products]" style="width: 200px;" 
         class="bg-gray-50 text-gray-900 text-sm rounded-lg dark:placeholder-gray-400 dark:text-white">
-        <option selected>Drink</option>
-        <option value="US">Foods</option>
-        <option value="CA">Desserts</option>
+        <option v-for="item in productStore.products" :key="item.id">{{ item.name }}</option>
+      
         </select>
       </div>
       <div style="margin-top: 20px;">
-        <select :items="['DRINK', 'FOODS', 'DESSERTS']" style="width: 200px;"
+        <select :items="[productStore.products]" style="width: 200px;"
         class="bg-gray-50 text-gray-900 text-sm rounded-lg dark:placeholder-gray-400 dark:text-white">
-        <option selected>Drink</option>
-        <option value="US">Foods</option>
-        <option value="CA">Desserts</option>
+        <option v-for="item in productStore.products" :key="item.id">{{ item.name }}</option>
+      
         </select>
       </div>
         <v-btn style="margin-top: 20px; ;width: 200px;background-color: #8ad879; color: white">SUBMIT</v-btn>

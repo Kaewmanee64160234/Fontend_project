@@ -48,4 +48,5 @@ const getAllProductNotPageinate = () => {
   return http.get(`/reports/products`);
 }
 
+
 export default { getAllProductNotPageinate,findProductByName,getProducts, saveProduct, updateProduct, deleteProduct, getProductByCatagory };
