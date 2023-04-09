@@ -11,83 +11,104 @@ const close2Dialog = () => {
     <v-container>
         <v-row>
             <v-col>
-                <v-dialog v-model="customerStore.dialogCheckPoint" persistent width="300px">
-                    <v-container>
-
-                        <v-card style="width: 26vw ; height: 70vh;  border-radius: 60px;" class="pa-10">
-                            <v-row>
-                                <v-card-title style="text-align: center; font-size: 21px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Please enter the phone number <br /> to check the points</v-card-title>
-                            </v-row>
-                            <v-row>
-                                <v-text-field class="pa-6" label="Phone number" variant="solo"></v-text-field>
-
-                            </v-row>
-                            <v-row>
+                <v-container>
+                    <v-dialog v-model="customerStore.dialogCheckPoint" persistent width="500px"
+                        style="background-color: #AD8E70; ">
+                        <v-card style="border-radius: 8%; width: 35vw;  ">
+                            <v-row class="mr-3 mt-5">
                                 <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px; border-radius: 60px">1 </v-btn>
+                                    <v-btn color="#A9907E" class="mr-5" icon="mdi mdi-close-thick"
+                                        style="float: right;"></v-btn>
                                 </v-col>
-                                <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px; border-radius: 60px">2 </v-btn>
-                                </v-col>
-                                <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px; border-radius: 60px">3 </v-btn>
-                                </v-col>
-
                             </v-row>
                             <v-row>
                                 <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px; border-radius: 60px">4 </v-btn>
-                                </v-col>
-                                <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px; border-radius: 60px">5 </v-btn>
-                                </v-col>
-                                <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px; border-radius: 60px">6 </v-btn>
-                                </v-col>
+                                    <v-card-title class="pa-2"
+                                        style="text-align: center; height: 80vh; font-size: 22px;  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Please
+                                        enter the phone number <br /> to check the points
 
-                            </v-row>
-                            <v-row>
-                                <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px; border-radius: 60px">7 </v-btn>
-                                </v-col>
-                                <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px;border-radius: 60px">8 </v-btn>
-                                </v-col>
-                                <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px; border-radius: 60px">9 </v-btn>
-                                </v-col>
+                                        <v-col class="pa-8">
+                                            <form>
 
-                            </v-row>
-                            <v-row>
-                                <v-col>
-                                    
-                                </v-col>
-                                <v-col>
-                                    <v-btn style="background-color: #665A48; color: white; font-size: 20px; border-radius: 60px">0 </v-btn>
-                                </v-col>
-                                <v-col>
-                                    <v-btn style="background-color:#665A48; color: white; font-size: 15px;border-radius: 60px"><v-icon>mdi-arrow-left</v-icon></v-btn>
-                                </v-col>
+                                                <div class="relative">
 
+                                                    <input type="search" id="default-search"
+                                                        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-brown-500 dark:bg-brown-700 dark:border-gray-600 dark:placeholder-brown-400 dark:text-white dark:focus:ring-brown-500 dark:focus:border-brown-500"
+                                                        placeholder="Phone number"
+                                                        style="font-size: 18px; text-align: center; ">
+
+                                                </div>
+                                            </form>
+
+                                        </v-col>
+                                        <v-col>
+                                            <v-btn size="70px" color="#614124" class="ml-20"
+                                                style="float: left; font-size: 30px; color: white;"
+                                                icon="mdi mdi-numeric-1"></v-btn>
+                                            <v-btn size="70px" color="#614124"  class="ml-10"
+                                                style="float: left; font-size: 30px; color: white;"
+                                                icon="mdi mdi-numeric-2"></v-btn>
+                                            <v-btn size="70px" color="#614124"  class="ml-10"
+                                                style="float: left; font-size: 30px; color: white;"
+                                                icon="mdi mdi-numeric-3"></v-btn>
+                                        </v-col>
+
+                                        <v-col style="margin-top: 13%;">
+                                            <v-btn size="70px" color="#614124"  class="ml-20"
+                                                style="float: left; font-size: 30px; color: white;"
+                                                icon="mdi mdi-numeric-4"></v-btn>
+                                            <v-btn size="70px" color="#614124"  class="ml-10"
+                                                style="float: left; font-size: 30px; color: white;"
+                                                icon="mdi mdi-numeric-5"></v-btn>
+                                            <v-btn size="70px" color="#614124"  class="ml-10"
+                                                style="float: left; font-size: 30px; color: white;"
+                                                icon="mdi mdi-numeric-6"></v-btn>
+                                        </v-col>
+
+                                        <v-col style="margin-top: 13%;">
+                                            <v-btn size="70px" color="#614124"  class="ml-20"
+                                                style="float: left; font-size: 30px; color: white;"
+                                                icon="mdi mdi-numeric-7"></v-btn>
+                                            <v-btn size="70px" color="#614124"  class="ml-10"
+                                                style="float: left; font-size: 30px; color: white;"
+                                                icon="mdi mdi-numeric-8"></v-btn>
+                                            <v-btn size="70px" color="#614124"  class="ml-10"
+                                                style="float: left; font-size: 30px; color: white;"
+                                                icon="mdi mdi-numeric-9"></v-btn>
+                                        </v-col>
+                                        <v-col style="margin-top: 13%;">
+                                            <div style="margin-right: 18%;">
+                                                <v-btn size="70px" color="#614124"  class="ml-10"
+                                                    style="float: right; font-size: 25px; color: white;"
+                                                    icon="mdi mdi-arrow-left"></v-btn>
+                                                <v-btn size="70px" color="#614124" class="ml-10"
+                                                    style="float: right; font-size: 30px; color: white;"
+                                                    icon="mdi mdi-numeric-0"></v-btn>
+
+                                            </div>
+                                        </v-col>
+                                        <v-col style="margin-top: 15%;">
+                                            <div style="margin-left: 8%;">
+                                                <v-btn color="#A0937D" style="float: left; border-radius: 30px; width: 35%; color: white; font-size: 19px;" >Skip</v-btn>
+                                            </div>
+                                            <div style="margin-right: 8%;">
+                                                <v-btn color="#A0937D" style="float: right; border-radius: 30px; width: 35%; color: white; font-size: 19px;" >Ok</v-btn>
+                                            </div>
+                                          
+                                          
+                                        </v-col>
+                                        
+
+                                    </v-card-title>
+
+
+                                </v-col>
                             </v-row>
-                            
-                           
-                           
-                            
-                            
-                          
+
 
                         </v-card>
-
-                    </v-container>
-
-
-
-
-
-
-
-                </v-dialog>
+                    </v-dialog>
+                </v-container>
 
             </v-col>
         </v-row>
@@ -96,14 +117,18 @@ const close2Dialog = () => {
 </template>
 <style>
 .button {
-  border: none;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 50%;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50%;
 }
 </style>
+  <!-- <v-card style="width: 26vw ; height: 70vh;  border-radius: 60px;" >
+                           
+
+                        </v-card> -->

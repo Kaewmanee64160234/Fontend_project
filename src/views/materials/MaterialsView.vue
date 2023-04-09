@@ -37,8 +37,8 @@ onMounted(async() => {
 })
 
 onMounted(async () => {
-  await billStore.getBills();
   await materialStore.getMaterials();
+  await billStore.getBills();
 })
 
 
