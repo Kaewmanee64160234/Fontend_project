@@ -115,6 +115,7 @@ const res = await customerStore.getCustomerByPhone(customerTel.value)
                                             style="float: right; font-size: 25px; color: white; " icon="mdi mdi-arrow-left"
                                             @click="findCus()"> Ok</v-btn>
 
+
                                     </v-col>
 
                                 </div>
