@@ -326,3 +326,4 @@ export const usePointOfSale = defineStore('point of sale', () => {
 })
 
 export { useCustomerStore }
+

@@ -202,7 +202,7 @@ export const useProductStore = defineStore('Product', () => {
   const checngeMat = (id:number) => {
     cat.value = id+''
   }
-  const getAllProductNotPageinate = async ()=>{
+const getAllProductNotPageinate = async ()=>{
     loadingStore.isLoading = true;
     try{
       const res = await productService.getAllProductNotPageinate()
@@ -244,6 +244,7 @@ export const useProductStore = defineStore('Product', () => {
     typeProduct,
     getProductByCatagory,
     cat,
-    getAllProductNotPageinate
+    getAllProductNotPageinate,
+    
   }
 })

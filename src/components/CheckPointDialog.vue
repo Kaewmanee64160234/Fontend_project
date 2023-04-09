@@ -1,24 +1,45 @@
 <script setup lang="ts">
 import { useCustomerStore } from '@/store/customer.store'
+import { useMessageStore } from '@/store/message';
 import { ref } from 'vue';
+import PointDialog from './PointDialog.vue';
 const customerTel = ref('');
 const customerStore = useCustomerStore()
-
-
+const customer = ref();
+const messageStore = useMessageStore()
 const close2Dialog = () => {
     customerStore.dialogCheckPoint = false;
 
 
 }
+const findCus = async () => {
+  close2Dialog()
+  
+
+const res = await customerStore.getCustomerByPhone(customerTel.value)
+  customer.value = res
+  if (!customer.value) {
+    messageStore.showError('Not Found Customer')
+    customerStore.dialogCheckPoint = false
+
+    return false
+  }
+  console.log(customer.value)
+  customerStore.dialogPoint = true;
+}
+
+
 </script>
 <template>
-    <v-dialog v-model="customerStore.dialogCheckPoint" persistent width="39%">
-        <v-card style="cursor: pointer; border-radius: 50px; padding: 15px;">
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn icon="icon" color="brown"  @click="customerStore.dialogCheckPoint = false">X</v-btn>
-            </v-card-actions>
+    <PointDialog></PointDialog>
+<v-dialog v-model="customerStore.dialogCheckPoint" persistent width="500px">
+        <v-card class="scroll" style="border-radius: 50px;">
             <v-container>
+                <v-row class="mr-1 mt-2">
+                <v-col>
+                    <v-btn size="30px" color="#A9907E" icon="mdi mdi-close-thick" style="float: right; color: white;" @click="customerStore.dialogCheckPoint = false">X</v-btn>
+                </v-col>
+            </v-row>
                 <v-card-text>
                     <v-container style="text-align: center;">
                         <h1 style="font-size: 20px;">Please
@@ -30,7 +51,7 @@ const close2Dialog = () => {
                                 <v-col>
                                     <div class="relative">
 
-                                        <input type="search" id="default-search"
+                                        <input type="search" id="default-search" v-model="customerTel"
                                             class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-brown-500 dark:bg-brown-700 dark:border-gray-600 dark:placeholder-brown-400 dark:text-white dark:focus:ring-brown-500 dark:focus:border-brown-500"
                                             placeholder="Phone number" style="font-size: 18px; text-align: center; ">
 
@@ -91,24 +112,16 @@ const close2Dialog = () => {
                                             style="float: right; font-size: 30px; color: white;" icon="mdi mdi-numeric-0"
                                             @click="customerTel += '0'"></v-btn>
 
+                                            <v-btn size="70px" color="#A0937D" class="ml-15"
+                                            style="float: right; font-size: 25px; color: white; " icon="mdi mdi-arrow-left"
+                                            @click="findCus()"> Ok</v-btn>
+
+
                                     </v-col>
 
                                 </div>
 
                             </v-row>
-                            <v-row>
-                                <v-col>
-                                    <div style="margin-top: 70%;">
-                                        <v-btn color="#A0937D"
-                                        style="float: right; border-radius: 30px; width: 50%; color: white; font-size: 19px;"
-                                        @click="customerStore.dialogPoint = true"> Ok</v-btn>
-                                    </div>
-
-                                </v-col>
-
-                            </v-row>
-
-
                         </v-row>
 
 
@@ -137,6 +150,17 @@ const close2Dialog = () => {
     margin: 4px 2px;
     border-radius: 50%;
 }
-</style>
+.scroll {
+    overflow: scroll;
+}
 
-                        
+.scroll::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 999px;
+}
+</style>

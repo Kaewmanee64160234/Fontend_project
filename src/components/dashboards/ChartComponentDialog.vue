@@ -13,10 +13,6 @@ const props = defineProps<{
   dataLabels2: string[];
   label2: String;
   color2: String;
-  dataValues3: number[];
-  dataLabels3: string[];
-  label3: String;
-  color3: String;
 }>();
 const options = {
   responsive: true,
@@ -44,15 +40,6 @@ const data = ref({
       tension: 0.4,
       borderColor: props.color2,
       pointBackgroundColor:  props.color2,
-      pointStyle: 'circle',
-      pointRadius: 5,
-      pointHoverRadius: 8,
-    },{
-      label: props.label3,
-      data: props.dataValues3,
-      tension: 0.4,
-      borderColor: props.color3,
-      pointBackgroundColor:  props.color3,
       pointStyle: 'circle',
       pointRadius: 5,
       pointHoverRadius: 8,
