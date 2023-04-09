@@ -34,7 +34,8 @@ const data = ref({
       pointRadius: 5,
       pointHoverRadius: 8,
       
-    },{
+    },
+    {
       label: props.label2,
       data: props.dataValues2,
       tension: 0.4,

@@ -3,11 +3,15 @@ import { onMounted, ref } from "vue";
 import ChartComponentDialog from "../../components/dashboards/ChartComponentDialog.vue"
 import DonutDialog from "@/components/dashboards/DonutDialog.vue";
 import { useProductStore } from '@/store/product.store'
+import { useReport } from "@/store/report.store";
 const productStore = useProductStore()
+const reportStore = useReport()
 const selectedItem = ref("");
 onMounted(() => {
   productStore.take = 41
   productStore.getProducts()
+  reportStore.getReport()
+  
 })
 </script>
 
@@ -20,16 +24,23 @@ onMounted(() => {
     <div class="page">
       <v-card-title class="text-center">
         <a class="font">Dashboards</a>
+        <!-- {{ reportStore.dataValueE }} -->
       </v-card-title>
       <v-row>
         <v-col cols="6" md="8">
           <v-container>
             <v-card class="text-center" width="900px" style="font-size:140%;">
               Daily Sales
-              <ChartComponentDialog type="line" :color="`#62CDFF`" :dataValues="[30, 55, 25, 45, 50, 40, 32]"
-                :dataLabels="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" label="Product"
-                :dataLabels2="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
-                :dataValues2="[30, 30, 30, 30, 40, 50, 60]" label2="Customer" :color2="`#FA9884`">
+              <ChartComponentDialog type="line" :color="`#62CDFF`" :dataValues="[ 262320, 550872, 262320, 209856, 262320, 209856, 157392]"
+                :dataLabels="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" label="Espresso"
+       :data-values2="[142320.000,
+298872.000,
+142320.000,
+113856.000,
+142320.000,
+113856.000,
+85392.000,]" label2="Shrimp Salad" color2="#E21818"  :data-labels2="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
+    >
               </ChartComponentDialog>
             </v-card>
           </v-container>
