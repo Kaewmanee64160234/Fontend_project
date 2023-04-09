@@ -236,9 +236,9 @@ export const usePointOfSale = defineStore('point of sale', () => {
         console.log(JSON.stringify(order.value))
       }
 
-      // const res = await orderService.saveOrder(order.value)
-      // orderStore.tempOrder = res.data
-      // dialogComplteOrder.value = true
+      const res = await orderService.saveOrder(order.value)
+      orderStore.tempOrder = res.data
+      dialogComplteOrder.value = true
 
       order.value = {
         customerId: '',

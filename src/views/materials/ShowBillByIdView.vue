@@ -26,7 +26,7 @@ const opendialog = (data: any) => {
 }
 </script>
 <template>
-  <v-row class="ml-5" style="float:left">
+  <v-row class="ml-5 mt-5" style="float:left">
     <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="material" value="material"
       to="/material"></v-btn></v-row>
   <VContainer>

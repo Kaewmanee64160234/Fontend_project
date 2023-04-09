@@ -53,14 +53,14 @@ const date = (index: string) => {
 </script>
 <template>
 
-  <v-row class="ml-5" style="float:left">
+  <v-row class="ml-5 mt-5" style="float:left">
   <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="material" value="material" to="/material"></v-btn></v-row>
   <VContainer>
     
     <VCard >
-      <VCardTitle style="text-align: center ; ">
-        CHECK MATERIAL
-        <VTable class="text-center mt-5" rounded="xl" >
+      <VCardTitle>
+        Check Material
+        <VTable class="text-center mt-5 " rounded="xl" >
 
           <thead>
             <tr>
