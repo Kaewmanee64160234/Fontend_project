@@ -133,52 +133,112 @@ onMounted(() => {
         </v-col>
 
         <v-col cols="12" md="4">
-          <v-container>
-            <v-card width="400px" max-height="424px" class="text-center">
-              The product is almost out of stock
-              <v-table style="margin-bottom: 2;">
-                <thead>
-                  <tr>
-                    <th scope="col" class="text-center">No.</th>
-                    <th scope="col" class="text-center">Name</th>
-                    <th scope="col" class="text-center">Quantity</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="text-align: center">1</td>
-                    <td style="text-align: center">Cookie </td>
-                    <td style="text-align: center">4 </td>
-                  </tr>
-                </tbody>
-              </v-table>
-            </v-card>
-          </v-container>
-        </v-col>
+        <v-container>
+          <v-card width="400px" max-height="430px" class="text-center" style="background-color: #5C8D89;">
+            The product is best seller of stock
+            <v-table style="margin-bottom: 2;">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center" style="background-color: #86ABA1;">No.</th>
+                  <th scope="col" class="text-center" style="background-color: #86ABA1;">Name</th>
+                  <th scope="col" class="text-center" style="background-color: #86ABA1;">Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: center; background-color: #DFF3E3; ">1</td>
+                  <td style="text-align: center; background-color: #DFF3E3;">Cocoa </td>
+                  <td style="text-align: center; background-color: #DFF3E3;">52 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #DFF3E3;">2</td>
+                  <td style="text-align: center; background-color: #DFF3E3;">American rice </td>
+                  <td style="text-align: center; background-color: #DFF3E3;">48 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #DFF3E3;">3</td>
+                  <td style="text-align: center; background-color: #DFF3E3;">Dumplings </td>
+                  <td style="text-align: center; background-color: #DFF3E3;">45 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #DFF3E3;">4</td>
+                  <td style="text-align: center; background-color: #DFF3E3;">Donut </td>
+                  <td style="text-align: center; background-color: #DFF3E3;">42 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #DFF3E3;">5</td>
+                  <td style="text-align: center; background-color: #DFF3E3;">Frenchfries </td>
+                  <td style="text-align: center; background-color: #DFF3E3;">41 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #DFF3E3;">6</td>
+                  <td style="text-align: center; background-color: #DFF3E3;">Steak </td>
+                  <td style="text-align: center; background-color: #DFF3E3;">40 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #DFF3E3;">7</td>
+                  <td style="text-align: center; background-color: #DFF3E3;">Cookies </td>
+                  <td style="text-align: center; background-color: #DFF3E3;">38 </td>
+                </tr>
+              </tbody>
+            </v-table>
+          </v-card>
+        </v-container>
+      </v-col>
 
-        <v-col cols="12" md="4">
-          <v-container>
-            <v-card width="400px" max-height="424px" class="text-center">
-              The product is almost out of stock
-              <v-table style="margin-bottom: 2;">
-                <thead>
-                  <tr>
-                    <th scope="col" class="text-center">No.</th>
-                    <th scope="col" class="text-center">Name</th>
-                    <th scope="col" class="text-center">Quantity</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="text-align: center">1</td>
-                    <td style="text-align: center">Cookie </td>
-                    <td style="text-align: center">4 </td>
-                  </tr>
-                </tbody>
-              </v-table>
-            </v-card>
-          </v-container>
-        </v-col>
+      <v-col cols="12" md="4">
+        <v-container>
+          <v-card width="400px" max-height="430px" class="text-center" style="background-color: #CC7351;">
+            The product is almost out of stock
+            <v-table style="margin-bottom: 2; " >
+              <thead >
+                <tr >
+                  <th scope="col" class="text-center" style="background-color: #E08F62;">No.</th>
+                  <th scope="col" class="text-center" style="background-color: #E08F62;">Name</th>
+                  <th scope="col" class="text-center" style="background-color: #E08F62;">Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: center; background-color: #F7D1BA;" >1</td>
+                  <td style="text-align: center; background-color: #F7D1BA;">Vegetables Smoothie  </td>
+                  <td style="text-align: center; background-color: #F7D1BA;">3 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #F7D1BA;">2</td>
+                  <td style="text-align: center; background-color: #F7D1BA;">Espresso</td>
+                  <td style="text-align: center; background-color: #F7D1BA;">8 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #F7D1BA;">3</td>
+                  <td style="text-align: center; background-color: #F7D1BA;">Kiwi Juice </td>
+                  <td style="text-align: center; background-color: #F7D1BA;">10 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #F7D1BA;">4</td>
+                  <td style="text-align: center; background-color: #F7D1BA;">Egg Soup </td>
+                  <td style="text-align: center; background-color: #F7D1BA;">11 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #F7D1BA;">5</td>
+                  <td style="text-align: center; background-color: #F7D1BA;">Shrimp Salad </td>
+                  <td style="text-align: center; background-color: #F7D1BA;">13 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #F7D1BA;">6</td>
+                  <td style="text-align: center; background-color: #F7D1BA;"> Peach Juice </td>
+                  <td style="text-align: center; background-color: #F7D1BA;">15 </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; background-color: #F7D1BA;">7</td>
+                  <td style="text-align: center; background-color: #F7D1BA;"> Chinese Braised Chicken Soup </td>
+                  <td style="text-align: center; background-color: #F7D1BA;">18 </td>
+                </tr>
+              </tbody>
+            </v-table>
+          </v-card>
+        </v-container>
+      </v-col>
       </v-row>
     </div>
   </v-card>

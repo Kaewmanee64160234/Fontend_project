@@ -113,7 +113,7 @@ const date = (index: string) => {
                   <v-btn v-if="employeeStore.checkIn === true" class="mdi mr-2 mdi-checkbox-marked-circle" width="310px"
                     height="50px" style="float: right; color: white" color="green"
                     @click="employeeStore.empCheckIn(employeeStore.editEmployee.id!)">Checkin </v-btn>
-                  <v-btn v-else class="mdi mr-2 mdi-close-circle" width="310px" height="50px"
+                  <v-btn v-if="employeeStore.checkIn === false" class="mdi mr-2 mdi-close-circle" width="310px" height="50px"
                     style="float: right; color: white" color="red" @click="employeeStore.empCheckOut(employee.id + '')">
                     Checkout</v-btn>
 

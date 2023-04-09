@@ -189,12 +189,12 @@ onMounted(async () => {
 }
 
 .scroll::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 0px;
+  height: 0px;
 }
 
 .scroll::-webkit-scrollbar-thumb {
-  background-color: #ddd;
+  background-color: #faf8f1;
   border-radius: 999px;
 }
 </style>

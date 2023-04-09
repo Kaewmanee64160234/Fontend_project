@@ -266,6 +266,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     loadingStore.isLoading = true
     try {
       checkInOut.value.employeeId = id
+      checkInOut.value.createdDate = new Date()
       const res = await employeeService.employeeCheckIn(checkInOut.value)
       console.log(res.data)
       await getOneEmployee(editEmployee.value.id + '')
@@ -280,13 +281,16 @@ export const useEmployeeStore = defineStore('employee', () => {
   const empCheckOut = async (id: string) => {
     loadingStore.isLoading = true
     try {
+
       console.log(id)
       const res = await employeeService.employeeCheckOut(id)
       console.log(res.data)
       await getOneEmployee(editEmployee.value.id + '')
       await getSummarySalaryEmp(editEmployee.value.id + '')
-
       checkIn.value = true
+
+
+
     } catch (err) {
       console.log(err)
     }
