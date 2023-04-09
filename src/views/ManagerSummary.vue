@@ -66,7 +66,7 @@ onMounted(async () => {
             </v-card-text>
           </v-col>
         </v-row>
-        <div class="scroll">
+        <div >
         <div class="mt-3 ml-5 mr-5 text-center" v-for="(item, index) in employeeStore.summary_salaries" :key="index">
 
         <v-row class="text-center" style="max-width: 1200px" cols="12">
