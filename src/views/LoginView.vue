@@ -27,13 +27,13 @@ const reset = () => {
       <v-container class="pa-10" style="float: right;">
         <v-row style="float: right;">
           <v-col style="float: right;">
-            <v-card width="550px" height="700px"
+            <v-card width="550px" height="600px"
               style="border-radius: 50px; background-color: white; box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;">
               <v-card width="550px" height="700px"
                 style="border-radius: 50px; background-color: #FCFAF7  ; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
                 <v-col>
                   <v-container class="text-center">
-                    <v-img src="../../../public/img/Good_days_start_with_coffee_and_you.png" style="width: 330px; margin-left: 16%;"></v-img>
+                    <v-img src="../../../public/img/logodecoffee.png" height="80px" width="100px" style="margin-left: 42%;"></v-img>
                     <v-card-title primary-title class="text-center "
                       style="font-size: 32px; font-family: serif;  font-weight: bold; letter-spacing: .2rem; margin-left: 3%; color: black;  ">
                       Sign in </v-card-title>
@@ -65,7 +65,7 @@ const reset = () => {
                 </v-card-text>
                 <v-card-actions>
                   <v-col>
-                    <v-btn color="white" style="background-color: #5D9C59; width:410px; height: 50px; margin-left: 10%; border-radius: 50px; "
+                    <v-btn color="white" style="background-color: #5D9C59; width:410px; height: 50px; margin-left: 10%; border-radius: 50px; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -5px;"
                       @click="login">Login</v-btn>
 
                   </v-col>
