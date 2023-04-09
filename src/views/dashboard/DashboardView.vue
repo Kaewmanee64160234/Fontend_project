@@ -124,7 +124,7 @@ onMounted(() => {
         <v-col cols="12" md="4">
         <v-container>
           <v-card width="400px" max-height="430px" class="text-center" style="background-color: #5C8D89;">
-            The product is almost out of stock
+            The product is best seller of stock
             <v-table style="margin-bottom: 2;">
               <thead>
                 <tr>
