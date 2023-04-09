@@ -91,24 +91,15 @@ const close2Dialog = () => {
                                             style="float: right; font-size: 30px; color: white;" icon="mdi mdi-numeric-0"
                                             @click="customerTel += '0'"></v-btn>
 
+                                            <v-btn size="70px" color="#A0937D" class="ml-15"
+                                            style="float: right; font-size: 25px; color: white; " icon="mdi mdi-arrow-left"
+                                            @click="customerStore.dialogPoint = true"> Ok</v-btn>
+
                                     </v-col>
 
                                 </div>
 
                             </v-row>
-                            <v-row>
-                                <v-col>
-                                    <div style="margin-top: 10%; margin-right: 33%;">
-                                        <v-btn color="#A0937D"
-                                            style="float: right; border-radius: 30px; width: 70%; color: white; font-size: 19px;"
-                                            @click="customerStore.dialogPoint = true"> Ok</v-btn>
-                                    </div>
-
-                                </v-col>
-
-                            </v-row>
-
-
                         </v-row>
 
 
