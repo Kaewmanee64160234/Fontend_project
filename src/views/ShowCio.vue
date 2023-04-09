@@ -49,6 +49,9 @@ const date = (index: string) => {
 </script>
 
 <template>
+          <v-row class="ml-5 mt-5" style="float:left">
+  <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" value="summary salary" to="/manager/employee/:idEmp"></v-btn>
+</v-row>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <v-container>
     <v-card>
