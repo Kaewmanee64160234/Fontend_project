@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BarChart,LineChart } from 'vue-chart-3'
+import { LineChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
 import { ref} from 'vue'
 Chart.register(...registerables)
@@ -9,7 +9,14 @@ const props = defineProps<{
   dataLabels: string[];
   label: String;
   color: String;
-  background: String;
+  dataValues2: number[];
+  dataLabels2: string[];
+  label2: String;
+  color2: String;
+  dataValues3: number[];
+  dataLabels3: string[];
+  label3: String;
+  color3: String;
 }>();
 const options = {
   responsive: true,
@@ -24,15 +31,31 @@ const data = ref({
     {
       label: props.label,
       data: props.dataValues,
-      // fill: true,
-      backgroundColor: props.background,
       tension: 0.4,
       borderColor: props.color,
+      pointStyle: 'circle',
       pointBackgroundColor:  props.color,
-      // pointStyle: 'circle',
       pointRadius: 5,
       pointHoverRadius: 8,
       
+    },{
+      label: props.label2,
+      data: props.dataValues2,
+      tension: 0.4,
+      borderColor: props.color2,
+      pointBackgroundColor:  props.color2,
+      pointStyle: 'circle',
+      pointRadius: 5,
+      pointHoverRadius: 8,
+    },{
+      label: props.label3,
+      data: props.dataValues3,
+      tension: 0.4,
+      borderColor: props.color3,
+      pointBackgroundColor:  props.color3,
+      pointStyle: 'circle',
+      pointRadius: 5,
+      pointHoverRadius: 8,
     }
   ],
   
@@ -48,4 +71,3 @@ const data = ref({
     <LineChart :chart-data="data" :options="options" ></LineChart>
   </div>
 </template>
-

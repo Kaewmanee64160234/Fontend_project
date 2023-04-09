@@ -8,6 +8,7 @@ import { usePointOfSale } from './pointOfSell.store'
 export const useCustomerStore = defineStore('customer', () => {
   const pointofsellStore = usePointOfSale()
   const loadingStore = useLoadingStore()
+  const dialogCheckPoint= ref(false) 
   const search = ref('');
   const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
@@ -245,5 +246,7 @@ const getCustomerByTel = async () => {
     loaded,
     loading,
     addCustomerDialog,
+    dialogCheckPoint,
+    
   }
 })

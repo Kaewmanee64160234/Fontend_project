@@ -31,14 +31,12 @@ const data = ref({
       label: 'Year',
       data: dataValues.value,
       fill: true,
-      backgroundColor: "rgb(237, 241, 214,0.5)",
       tension: 0.4,
       borderColor: '#609966',
       pointBackgroundColor: '#609966',
       pointStyle: 'circle',
       pointRadius: 5,
       pointHoverRadius: 8,
-      
     }
   ],
  

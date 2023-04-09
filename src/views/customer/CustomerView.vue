@@ -67,7 +67,7 @@ const deleteAllCustomers = async () => {
         density="compact"
         variant="solo"
         v-model="customerStore.keyword"
-        label="Search templates"
+        label="Search "
         append-inner-icon="mdi-magnify"
         hide-details
         @click:append-inner="customerStore.getCustomerByTel"

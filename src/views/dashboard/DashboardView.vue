@@ -5,66 +5,66 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
 </script>
 
 <template>
-
   <v-row class="ml-5" style="float:left">
     <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="Home" value="home" to="/home">
     </v-btn>
   </v-row>
   <div class="page">
-    <a class="font">Dashbords</a>
+    <a class="font">Dashboards</a>
     <v-row>
-      <v-col cols="12" md="4">
+      <v-col cols="6" md="8" >
         <v-container>
-          <v-card width="400px" style="font-size:140%;">
+          <v-card width="900px" style="font-size:140%;">
             Daily Sales
-            <ChartComponentDialog :background="`rgb(75,123,229)`" :color="`#62CDFF`" :dataValues="[30, 50, 40, 45, 50, 40, 32, 60, 40, 20, 30, 50]" :dataLabels="[
-              'Sun',
-              'Mon',
-              'Tue',
-              'Wed',
-              'Thu',
-              'Fri',
-              'Sat'
-            ]" label="Days"></ChartComponentDialog>
+            <ChartComponentDialog 
+              type="line" :color="`#62CDFF`"
+              :dataValues="[30, 55, 25, 45, 50, 40, 32]" 
+              :dataLabels="['Sun','Mon','Tue','Wed','Thu','Fri','Sat']" 
+              label="Product" 
+              :dataLabels2="['Sun','Mon','Tue','Wed','Thu','Fri','Sat']" 
+              :dataValues2="[30, 30, 30, 30, 40, 50, 60]" 
+              label2="Customer" :color2="`#FA9884`"
+              :dataLabels3="['Sun','Mon','Tue','Wed','Thu','Fri','Sat']" 
+              :dataValues3="[60, 50, 40, 40, 40, 30, 20]" 
+              label3="ya" :color3="`#B2A4FF`"
+              >
+            </ChartComponentDialog>
           </v-card>
-        </v-container>
-      </v-col>
-      <v-col cols="12" md="4">
-        <v-container>
-          <v-card width="400px" style="font-size:140%;">
-            Monthly Sales
-            <ChartComponentDialog :background="`rgb(235,176,45)`" :color="`#609966`" :dataValues ="[100, 200, 300, 400, 500, 450, 320, 600, 400, 200, 300, 500]" :dataLabels="[
-              'Jan',
-              'Feb',
-              'Mar',
-              'Apr',
-              'May',
-              'Jun',
-              'Jul',
-              'Aug',
-              'Sep',
-              'Oct',
-              'Nov',
-              'Dec'
-            ]" label="Months"></ChartComponentDialog>
-          </v-card>
-        </v-container>
-      </v-col>
-      <v-col cols="12" md="4">
-        <v-container>
-          <v-card width="400px" style="font-size:140%;">
-            Annual sales
-            <ChartComponentDialog :background="`rgb(246, 110, 110,1)`" :color="`#F16767`"  :dataValues="[200, 300, 400]" :dataLabels="[
-              '2020',
-              '2021',
-              '2023'
-            ]" label="Years" 
-            
-            ></ChartComponentDialog>
-          </v-card>
-        </v-container>
-      </v-col>
-
+      </v-container>
+    </v-col>
+    <v-col style="margin-top: 130px;">
+            <v-autocomplete
+              label="Select"
+              :items="['YEAR', 'MONTH', 'DAY']"
+              density="compact"
+              style="width: 400px;"
+            >
+              <v-autocomplete>Year</v-autocomplete>
+              <v-autocomplete>Month</v-autocomplete>
+              <v-autocomplete>Day</v-autocomplete>
+          </v-autocomplete>
+          <v-autocomplete
+              label="Select"
+              :items="['DRINK', 'FOODS', 'DESSERTS']"
+              density="compact"
+              style="width: 400px;"
+            >
+              <v-autocomplete>Drinks</v-autocomplete>
+              <v-autocomplete>Foods</v-autocomplete>
+              <v-autocomplete>Desserts</v-autocomplete>
+          </v-autocomplete>
+          <v-autocomplete
+              label="Select"
+              :items="['DRINK', 'FOODS', 'DESSERTS']"
+              density="compact"
+              style="width: 400px;"
+            >
+              <v-autocomplete>Drinks</v-autocomplete>
+              <v-autocomplete>Foods</v-autocomplete>
+              <v-autocomplete>Desserts</v-autocomplete>
+          </v-autocomplete>
+          <v-btn style="margin-right: 70px;width: 120px;background-color: #8ad879; color: white" >SUBMIT</v-btn>
+        </v-col>
     </v-row>
     <v-row>
       <v-col cols="12" md="4">
@@ -101,7 +101,7 @@ import SellerDialog from "../../components/stock/SellerDialog.vue"
       </v-col>
     </v-row>
   </div>
-</template>
+</template> 
 
 <style>
 .font {
