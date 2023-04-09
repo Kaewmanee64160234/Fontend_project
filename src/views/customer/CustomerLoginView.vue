@@ -8,14 +8,14 @@ const pointOfSaleStore = usePointOfSale()
 </script>
 
 <template>
-    <v-img src="https://i.pinimg.com/564x/dc/fe/3d/dcfe3d03c2ae0fa4d19a97497f267ccf.jpg" style="scope">
+    <v-img src="https://i.pinimg.com/564x/d3/ee/3b/d3ee3b924cdd87c4c140b191e19df10f.jpg" style="scope" cover>
         <v-container>
             <CheckPointDialog></CheckPointDialog>
             <CheckPromotionDialog></CheckPromotionDialog>
-            <v-row justify="center" class="pa-2 mb-6">
+            <v-row  class="pa-2 mb-6">
                 <v-col>
-                    <v-col>
-                        <div class="mockup-phone">
+                    <v-col align="center" >
+                        <div class="mockup-phone" >
                             <div class="camera"></div>
                             <div class="display">
                                 <div class="artboard artboard-demo phone-1">
