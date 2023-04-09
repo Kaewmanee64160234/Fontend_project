@@ -129,9 +129,10 @@ const date = (index: string) => {
                 </v-row>
               </v-row>
               <v-col class="detail">
-                <v-container style="height: 60%">
-                  <VTable fixed-header height="350px" class="text-center mt-5"
-                    style="justify-content: center; overflow-y: auto">
+                <v-container style="height: 60%" >
+                  <div style="height: 63vh; overflow-y: auto;" class="scroll ">
+                  <v-table fixed-header class="text-center mt-5 "
+                    style="justify-content: center; ">
                     <thead style="justify-content: center">
                       <tr>
                         <th>Date</th>
@@ -140,7 +141,7 @@ const date = (index: string) => {
                         <th>Total hour</th>
                       </tr>
                     </thead>
-                    <tbody style="overflow-y: auto">
+                    <tbody >
                       <tr class="text-center mr-5" style="justify-content: center  overflow-y: auto;"
                         v-for="(item, index) in employeeStore.summary_salary.checkInOut" :key="index">
                         <td>{{ date(item.time_in + '').date + '/' + manageTimeStore.monthNum[new Date(item.time_in
@@ -159,7 +160,8 @@ const date = (index: string) => {
                         <td>{{ item.total_hour }}</td>
                       </tr>
                     </tbody>
-                  </VTable>
+                  </v-table>
+                </div>
                 </v-container>
               </v-col>
 
@@ -176,7 +178,7 @@ const date = (index: string) => {
 </template>
 <style scoped>
 .title {
-  background-color: #FFF5E1;
+  background-color: #F9F5E7;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
   height: 100vh;
 }
@@ -189,5 +191,19 @@ const date = (index: string) => {
 
 .detail {
   width: 70 vw;
+}
+
+.scroll {
+  overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 999;
 }
 </style>
