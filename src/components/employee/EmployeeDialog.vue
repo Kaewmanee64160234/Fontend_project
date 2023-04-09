@@ -48,9 +48,9 @@ async function save() {
                                         :rules="[(v) => !!v || 'email is required']"></v-text-field>
                                 </v-col>
                                 <v-col cols="md-4">
-                                    <v-autocomplete label="position*" v-model="employeeStore.editEmployee.position"
+                                    <v-select label="position*" v-model="employeeStore.editEmployee.position"
                                         :items="['Barista', 'Cashier', 'Manager', 'Baker', 'Server', 'Cleaner']">
-                                    </v-autocomplete>
+                                    </v-select>
 
                                 </v-col>
                                 <v-col cols="md-4">

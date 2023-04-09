@@ -50,19 +50,19 @@ onMounted( async () => {
                 item-value="id" single-line></v-select>
             </v-col>
                   <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagoryId === 1">
-                    <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
+                    <v-select label="Type*" required v-model="productStore.editedProduct.type" :rules="[
                       (v) => !!v || 'Type is required',
-                    ]" :items="productStore.typeProduct.Foods"></v-autocomplete>
+                    ]" :items="productStore.typeProduct.Foods"></v-select>
                   </v-col>
                   <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagoryId === 2">
-                    <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
+                    <v-select label="Type*" required v-model="productStore.editedProduct.type" :rules="[
                       (v) => !!v || 'Type is required',
-                    ]" :items="productStore.typeProduct.Drinks"></v-autocomplete>
+                    ]" :items="productStore.typeProduct.Drinks"></v-select>
                   </v-col>
                   <v-col cols="12" sm="6" md="4" v-if="productStore.editedProduct.catagoryId === 3">
-                    <v-autocomplete label="Type*" required v-model="productStore.editedProduct.type" :rules="[
+                    <v-select label="Type*" required v-model="productStore.editedProduct.type" :rules="[
                       (v) => !!v || 'Type is required',
-                    ]" :items="productStore.typeProduct.Desserts"></v-autocomplete>
+                    ]" :items="productStore.typeProduct.Desserts"></v-select>
                   </v-col>
             </v-row>
             <v-row>

@@ -51,9 +51,10 @@ const deleteAllStores = async () => {
                 <v-row class="mt-2">
                     <v-col cols="3">
                         <VTextField variant="solo" color="deep-purple-accent-4" density="compact"
-                            append-inner-icon="mdi-magnify" label="Search" single-line hide-details
-                            v-model="storeStore.keyword">
-                        </VTextField>
+                                append-inner-icon="mdi-magnify" label="Search" single-line hide-details
+                                v-model="storeStore.keyword">
+                            </VTextField>
+    
                     </v-col>
                     <v-col>
                         <VBtn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"

@@ -60,54 +60,40 @@ watch(paginate, async (newPage, oldPage) => {
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <ProductDialog></ProductDialog>
-  
+
   <v-container v-if="paginate">
     <v-card>
       <v-card-title>
         <div class="row">
           <div class="col-md-9">
             Products
-      </div>
-      <div class="col-md-3">
-    <v-switch style="float: right;" v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show some Data': 'Show All Data'"></v-switch>
-  </div>    
-    <v-row>
+          </div>
+          <div class="col-md-3">
+            <v-switch style="float: right;" v-model="paginate" hide-details inset color="info"
+              :label="paginate ? 'Show some Data' : 'Show All Data'"></v-switch>
+          </div>
+          <v-row>
             <v-col cols="3">
-            <v-text-field 
-              :loading="productStore.loading"
-              density="compact"
-              variant="solo"
-              v-model="productStore.keyword"
-              label="Search"
-              append-inner-icon="mdi-magnify"
-              hide-details
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-btn
-              class="mdi mdi-plus"
-              style="float: right; background-color: #8ad879; color: white"
-              @click="productStore.dialog = true"
-              >Add New Product</v-btn
-            >
-          </v-col>
-          <v-col cols="3">
-            <v-autocomplete
-              v-model="productStore.cat"
-              label="Select"
-              :items="['', 'Foods', 'Drinks', 'Desserts']"
-              density="compact"
-            >
-              <v-autocomplete @click="productStore.cat = ''"> Drinks </v-autocomplete>
-              <v-autocomplete @click="productStore.cat = 1 + ''"> Drinks </v-autocomplete>
-              <v-autocomplete @click="productStore.cat = 2 + ''"> Foods </v-autocomplete>
-              <v-autocomplete @click="productStore.cat = 3 + ''"> Desserts </v-autocomplete>
-            </v-autocomplete>
-          </v-col>
-        </v-row>
+              <v-text-field :loading="productStore.loading" density="compact" variant="solo"
+                v-model="productStore.keyword" label="Search" append-inner-icon="mdi-magnify" hide-details></v-text-field>
+            </v-col>
+            <v-col>
+              <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
+                @click="productStore.dialog = true">Add New Product</v-btn>
+            </v-col>
+            <v-col cols="3">
+              <v-select v-model="productStore.cat" label="Select" :items="['', 'Foods', 'Drinks', 'Desserts']"
+                  density="compact">
+                  <v-select @click="productStore.cat = 1 + ''"> Drinks </v-select>
+                  <v-select @click="productStore.cat = 2 + ''"> Foods </v-select>
+                  <v-select @click="productStore.cat = 3 + ''"> Desserts </v-select>
+                </v-select>
 
-        <v-spacer> </v-spacer>
-      </div>
+            </v-col>
+          </v-row>
+
+          <v-spacer> </v-spacer>
+        </div>
       </v-card-title>
       <v-table class="text-center mt-5">
         <thead>
@@ -122,34 +108,18 @@ watch(paginate, async (newPage, oldPage) => {
           </tr>
         </thead>
         <tbody>
-          <tr
-            style="text-align: center"
-            v-for="(item, index) in productStore.products"
-            :key="index"
-          >
+          <tr style="text-align: center" v-for="(item, index) in productStore.products" :key="index">
             <td>{{ index + 1 }}</td>
             <td>
-              <v-avatar size="80"
-                ><v-img :src="`${url}/products/image/${item.image}`"></v-img
-              ></v-avatar>
+              <v-avatar size="80"><v-img :src="`${url}/products/image/${item.image}`"></v-img></v-avatar>
             </td>
             <td>{{ item.name }}</td>
             <td>{{ item.type }}</td>
             <td>{{ item.price }}</td>
             <td>{{ item.size }}</td>
             <td>
-              <v-btn
-                color="#FFDD83"
-                class="mr-5"
-                icon="mdi-pencil"
-                @click="productStore.editProduct(item)"
-              ></v-btn>
-              <v-btn
-                color="#F55050"
-                class="mr-5"
-                icon="mdi-delete"
-                @click="deleteProduct(item.id!)"
-              ></v-btn>
+              <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="productStore.editProduct(item)"></v-btn>
+              <v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteProduct(item.id!)"></v-btn>
             </td>
           </tr>
         </tbody>
@@ -161,62 +131,45 @@ watch(paginate, async (newPage, oldPage) => {
         </tbody>
       </v-table>
       <v-container width="100%" justify="center">
-        <v-pagination
-          justify="center"
-          v-model="productStore.page"
-          :length="productStore.lastPage"
-          rounded="circle"
-        ></v-pagination>
+        <v-pagination justify="center" v-model="productStore.page" :length="productStore.lastPage"
+          rounded="circle"></v-pagination>
       </v-container>
     </v-card>
   </v-container>
   <v-container v-else>
     <v-card>
       <v-card-title>
-      <div class="row">
+        <div class="row">
           <div class="col-md-9">
             Products
-      </div>
-      <div class="col-md-3">
-    <v-switch style="float: right;" v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show some Data': 'Show All Data'"></v-switch>
-  </div> 
-  <v-row>
+          </div>
+          <div class="col-md-3">
+            <v-switch style="float: right;" v-model="paginate" hide-details inset color="info"
+              :label="paginate ? 'Show some Data' : 'Show All Data'"></v-switch>
+          </div>
+          <v-row>
             <v-col cols="3">
-            <v-text-field 
-              :loading="productStore.loading"
-              density="compact"
-              variant="solo"
-              v-model="productStore.keyword"
-              label="Search "
-              append-inner-icon="mdi-magnify"
-              hide-details
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-btn
-              class="mdi mdi-plus"
-              style="float: right; background-color: #8ad879; color: white"
-              @click="productStore.dialog = true"
-              >Add New Product</v-btn
-            >
-          </v-col>
-          <v-col cols="3">
-            <v-autocomplete
-              v-model="productStore.cat"
-              label="Select"
-              :items="['', 'Foods', 'Drinks', 'Desserts']"
-              density="compact"
-            >
-              <v-autocomplete @click="productStore.cat = ''"> Drinks </v-autocomplete>
-              <v-autocomplete @click="productStore.cat = 1 + ''"> Drinks </v-autocomplete>
-              <v-autocomplete @click="productStore.cat = 2 + ''"> Foods </v-autocomplete>
-              <v-autocomplete @click="productStore.cat = 3 + ''"> Desserts </v-autocomplete>
-            </v-autocomplete>
-          </v-col>
-        </v-row>
+              <v-text-field :loading="productStore.loading" density="compact" variant="solo"
+                v-model="productStore.keyword" label="Search " append-inner-icon="mdi-magnify"
+                hide-details></v-text-field>
+            </v-col>
+            <v-col>
+              <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
+                @click="productStore.dialog = true">Add New Product</v-btn>
+            </v-col>
+            <v-col cols="3">
+              <v-autocomplete v-model="productStore.cat" label="Select" :items="['', 'Foods', 'Drinks', 'Desserts']"
+                density="compact">
+                <v-autocomplete @click="productStore.cat = ''"> Drinks </v-autocomplete>
+                <v-autocomplete @click="productStore.cat = 1 + ''"> Drinks </v-autocomplete>
+                <v-autocomplete @click="productStore.cat = 2 + ''"> Foods </v-autocomplete>
+                <v-autocomplete @click="productStore.cat = 3 + ''"> Desserts </v-autocomplete>
+              </v-autocomplete>
+            </v-col>
+          </v-row>
 
-        <v-spacer> </v-spacer>
-      </div>
+          <v-spacer> </v-spacer>
+        </div>
       </v-card-title>
 
       <v-table class="text-center mt-5">
@@ -232,34 +185,18 @@ watch(paginate, async (newPage, oldPage) => {
           </tr>
         </thead>
         <tbody>
-          <tr
-            style="text-align: center"
-            v-for="(item, index) in productStore.products"
-            :key="index"
-          >
+          <tr style="text-align: center" v-for="(item, index) in productStore.products" :key="index">
             <td>{{ index + 1 }}</td>
             <td>
-              <v-avatar size="80"
-                ><v-img :src="`${url}/products/image/${item.image}`"></v-img
-              ></v-avatar>
+              <v-avatar size="80"><v-img :src="`${url}/products/image/${item.image}`"></v-img></v-avatar>
             </td>
             <td>{{ item.name }}</td>
             <td>{{ item.type }}</td>
             <td>{{ item.price }}</td>
             <td>{{ item.size }}</td>
             <td>
-              <v-btn
-                color="#FFDD83"
-                class="mr-5"
-                icon="mdi-pencil"
-                @click="productStore.editProduct(item)"
-              ></v-btn>
-              <v-btn
-                color="#F55050"
-                class="mr-5"
-                icon="mdi-delete"
-                @click="deleteProduct(item.id!)"
-              ></v-btn>
+              <v-btn color="#FFDD83" class="mr-5" icon="mdi-pencil" @click="productStore.editProduct(item)"></v-btn>
+              <v-btn color="#F55050" class="mr-5" icon="mdi-delete" @click="deleteProduct(item.id!)"></v-btn>
             </td>
           </tr>
         </tbody>

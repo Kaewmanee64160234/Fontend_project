@@ -12,7 +12,7 @@ onMounted(()=>{
 </script>
 
 <template>
-  <v-row class="ml-5" style="float:left">
+  <v-row class="ml-5 mt-5" style="float:left">
     <v-btn color="#F1DEC9" class="mr-5" icon="mdi mdi-keyboard-backspace" title="Home" value="home" to="/home">
     </v-btn>
   </v-row>
@@ -39,9 +39,9 @@ onMounted(()=>{
         <select label="Select" :items="['YEAR', 'MONTH', 'DAY']" style="width: 200px;"
         class="bg-gray-50 text-gray-900 text-sm rounded-lg dark:placeholder-gray-400 dark:text-white">
         <option selected>Select</option>
-        <option value="US">Year</option>
-        <option value="CA">Month</option>
-          <option value="FR">Day</option>
+        <option >Year</option>
+        <option >Month</option>
+          <option >Day</option>
         </select>
         <div style="margin-top: 20px;">
           <select :items="[productStore.products]" style="width: 200px;" 
@@ -138,7 +138,7 @@ onMounted(()=>{
 }
 
 .page {
-  margin-top: 5px;
+  margin-top: 10px;
   max-height: 90vh;
   overflow: scroll;
 }

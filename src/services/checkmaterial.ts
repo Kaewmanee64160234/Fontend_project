@@ -11,7 +11,7 @@ function getCheckMaterail() {
 function getOneCheckMaterail( id:string ) {
     return http.get(`/check-material/mat/${id}`);
   }
-
+  
 function deleteCheckMaterial(id: string) {
     return http.delete(`/check-material/${id}`);
 }
