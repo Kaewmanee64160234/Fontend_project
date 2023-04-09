@@ -30,9 +30,7 @@ onMounted(() => {
               <ChartComponentDialog type="line" :color="`#62CDFF`" :dataValues="[30, 55, 25, 45, 50, 40, 32]"
                 :dataLabels="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" label="Product"
                 :dataLabels2="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
-                :dataValues2="[30, 30, 30, 30, 40, 50, 60]" label2="Customer" :color2="`#FA9884`"
-                :dataLabels3="['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
-                :dataValues3="[60, 50, 40, 40, 40, 30, 20]" label3="year" :color3="`#B2A4FF`">
+                :dataValues2="[30, 30, 30, 30, 40, 50, 60]" label2="Customer" :color2="`#FA9884`">
               </ChartComponentDialog>
             </v-card>
           </v-container>
