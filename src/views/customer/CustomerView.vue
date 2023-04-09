@@ -36,12 +36,6 @@ const deleteAllCustomers = async () => {
 </script>
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-
-
-  <v-container>
-
-  </v-container>
-
   <v-card>
     <v-row>
       <v-col>
@@ -55,17 +49,13 @@ const deleteAllCustomers = async () => {
       <v-card-title>
         <div class="row">
           <div class="col-md-9">
-            Customer
-          </div>
-          <div class="col-md-3">
-          </div>
-          </div>
- 
-              <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
-                @click="customerStore.dialog = true">Add New Customer</v-btn>
-             
-        <v-spacer> </v-spacer>
-        <v-text-field style="width: 30%;"
+        Customers
+      </div>
+        </div>
+
+        <v-row class="mt-2">
+        <v-col cols="3">
+          <v-text-field
         :loading="customerStore.loading"
         density="compact"
         variant="solo"
@@ -75,6 +65,17 @@ const deleteAllCustomers = async () => {
         hide-details
         @click:append-inner="customerStore.getCustomerByTel"
       ></v-text-field>
+    </v-col>
+      <v-col>
+        <v-btn
+          class="mdi mdi-plus"
+          style="float: right; color: white"
+          color="#8ad879"
+          @click="customerStore.dialog = true"
+          >Add new customer</v-btn>
+      </v-col>
+      </v-row>
+        <v-spacer> </v-spacer>
         <v-table class="text-center mt-5">
           <thead>
             <tr>

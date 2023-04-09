@@ -33,8 +33,6 @@ async function save() {
       <VCardText>
         <VForm ref="form">
           <VContainer>
-            <VRow justify="center">
-            </VRow>
             <VRow>
               <VCol cols="12" sm="6" md="6">
                 <VTextField label="Username*" required v-model="userStore.editedUser.username"
