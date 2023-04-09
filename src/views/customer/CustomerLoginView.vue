@@ -2,7 +2,9 @@
 import CheckPointDialog from '@/components/CheckPointDialog.vue'
 import CheckPromotionDialog from '@/components/promotion/CheckPromotionDialog.vue';
 import { useCustomerStore } from '@/store/customer.store'
+import { usePointOfSale } from '@/store/pointOfSell.store'
 const customerStore = useCustomerStore()
+const pointOfSaleStore = usePointOfSale()
 </script>
 
 <template>
@@ -23,7 +25,7 @@ const customerStore = useCustomerStore()
                                 </div>
                                 <div>
                                     <v-btn justify-center class="mdi mr-2 mdi-checkbox-marked-circle text-center"
-                                        style="float: right; color: white ;" color="#D5B4B4" width="90%">Check
+                                        style="float: right; color: white ;" color="#D5B4B4" width="90%" @click="pointOfSaleStore.dialogCheckPromotion = true">Check
                                         Promotion</v-btn>
                                 </div>
 

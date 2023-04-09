@@ -15,7 +15,8 @@ export const useOrderStore = defineStore('order', () => {
     total: 0,
     recieved: 0,
     change: 0,
-    payment: 'promptpay'
+    payment: 'promptpay',
+    storeId:27
   })
 
 // about pagination
