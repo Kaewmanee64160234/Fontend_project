@@ -22,8 +22,8 @@ const pointOfSaleStore = usePointOfSale()
                                     <v-row>
                                         <v-col>
                                             <div>
-                                                <v-btn block rounded="xl" justify-center class="mdi  mdi-checkbox-marked-circle text-center "
-                                                    style="float: right; color: white;" color="#D5B4B4" width="80px" height="40px"
+                                                <v-btn block rounded="xl" justify-center class="text-center "
+                                                    style="float: right; color: white;" color="#AA8B56" width="80px" height="40px"
                                                     @click="customerStore.dialogCheckPoint = true">Check Point</v-btn>
                                             </div>
                                         </v-col>
@@ -35,8 +35,8 @@ const pointOfSaleStore = usePointOfSale()
                                     <v-row>
                                         <v-col>
                                             <div>
-                                                <v-btn block rounded="xl" justify-center class="mdi  mdi-checkbox-marked-circle text-center"
-                                                    style="float: right; color: white ;" color="#D5B4B4" width="80px" height="40px" @click="pointOfSaleStore.dialogCheckPromotion = true">Check
+                                                <v-btn block rounded="xl" justify-center class="text-center"
+                                                    style="float: right; color: white ;" color="#AA8B56" width="80px" height="40px" @click="pointOfSaleStore.dialogCheckPromotion = true">Check
                                                     Promotion</v-btn>
             
                                             </div>
