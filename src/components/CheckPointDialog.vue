@@ -1,4 +1,5 @@
 <script setup lang="ts">
+<<<<<<< HEAD
 import PointDialog from './PointDialog.vue'
 import CheckPointDialog from '@/components/CheckPointDialog.vue'
 import CheckPromotionDialog from '@/components/promotion/CheckPromotionDialog.vue'
@@ -13,6 +14,14 @@ const customer = ref()
 const messageStore = useMessageStore()
 
 const pointOfSaleStore = usePointOfSale()
+=======
+import { useCustomerStore } from '@/store/customer.store'
+import { ref } from 'vue';
+const customerTel = ref('');
+const customerStore = useCustomerStore()
+
+
+>>>>>>> 50d212fb36ae1c8260b568bc0b6d37e90b6e13d3
 const close2Dialog = () => {
   customerStore.dialogCheckPoint = false
 }
@@ -32,6 +41,7 @@ const findCus = async () => {
 }
 </script>
 <template>
+<<<<<<< HEAD
     <PointDialog></PointDialog>
   <v-container>
     <v-row>
@@ -217,6 +227,120 @@ const findCus = async () => {
       </v-col>
     </v-row>
   </v-container>
+=======
+    <v-dialog v-model="customerStore.dialogCheckPoint" persistent width="39%">
+        <v-card style="cursor: pointer; border-radius: 50px; padding: 15px;">
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn icon="icon" color="brown"  @click="customerStore.dialogCheckPoint = false">X</v-btn>
+            </v-card-actions>
+            <v-container>
+                <v-card-text>
+                    <v-container style="text-align: center;">
+                        <h1 style="font-size: 20px;">Please
+                            enter the phone number <br /> to check the points</h1>
+                    </v-container>
+                    <v-container>
+                        <v-row class="card-promo">
+                            <v-row>
+                                <v-col>
+                                    <div class="relative">
+
+                                        <input type="search" id="default-search"
+                                            class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-brown-500 dark:bg-brown-700 dark:border-gray-600 dark:placeholder-brown-400 dark:text-white dark:focus:ring-brown-500 dark:focus:border-brown-500"
+                                            placeholder="Phone number" style="font-size: 18px; text-align: center; ">
+
+                                    </div>
+
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-1"
+                                        @click="customerTel += '1'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-2"
+                                        @click="customerTel += '2'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-3"
+                                        @click="customerTel += '3'"></v-btn>
+                                </v-col>
+
+                            </v-row>
+                            <v-row>
+
+                                <v-col>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-4"
+                                        @click="customerTel += '4'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-5"
+                                        @click="customerTel += '5'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-6"
+                                        @click="customerTel += '6'"></v-btn>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-7"
+                                        @click="customerTel += '7'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-8"
+                                        @click="customerTel += '8'"></v-btn>
+                                    <v-btn size="70px" color="#614124" class="ml-15"
+                                        style="float: left; font-size: 30px; color: white;" icon="mdi mdi-numeric-9"
+                                        @click="customerTel += '9'"></v-btn>
+                                </v-col>
+
+                            </v-row>
+                            <v-row>
+                                <div>
+                                    <v-col>
+                                        <v-btn size="70px" color="#614124" class="ml-15"
+                                            style="float: right; font-size: 25px; color: white; " icon="mdi mdi-arrow-left"
+                                            @click="customerTel = customerTel.slice(0, -1)"></v-btn>
+
+                                        <v-btn size="70px" color="#614124" class="ml-15"
+                                            style="float: right; font-size: 30px; color: white;" icon="mdi mdi-numeric-0"
+                                            @click="customerTel += '0'"></v-btn>
+
+                                    </v-col>
+
+                                </div>
+
+                            </v-row>
+                            <v-row>
+                                <v-col>
+                                    <div style="margin-top: 70%;">
+                                        <v-btn color="#A0937D"
+                                        style="float: right; border-radius: 30px; width: 50%; color: white; font-size: 19px;"
+                                        @click="customerStore.dialogPoint = true"> Ok</v-btn>
+                                    </div>
+
+                                </v-col>
+
+                            </v-row>
+
+
+                        </v-row>
+
+
+                    </v-container>
+
+                </v-card-text>
+            </v-container>
+
+
+        </v-card>
+
+
+
+
+    </v-dialog>
+>>>>>>> 50d212fb36ae1c8260b568bc0b6d37e90b6e13d3
 </template>
 <style>
 .button {
@@ -232,4 +356,8 @@ const findCus = async () => {
 }
 </style>
 
+<<<<<<< HEAD
 
+=======
+                        
+>>>>>>> 50d212fb36ae1c8260b568bc0b6d37e90b6e13d3
