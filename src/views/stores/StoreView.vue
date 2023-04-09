@@ -74,7 +74,7 @@ const deleteAllStores = async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item, index) of stores" :key="index" class="text-center">
+                        <tr style=" height: 65px"  v-for="(item, index) of stores" :key="index" class="text-center">
 
                             <td>{{ index + 1 }}</td>
                             <td>{{ item.name }}</td>

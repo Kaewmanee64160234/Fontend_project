@@ -26,7 +26,7 @@ async function save() {
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
   <VDialog v-model="userStore.dialog" persistent width="1024">
-    <VCard>
+    <VCard class="scroll">
       <VCardTitle>
         <span class="text-h5">User</span>
       </VCardTitle>
@@ -34,9 +34,6 @@ async function save() {
         <VForm ref="form">
           <VContainer>
             <VRow justify="center">
-              <VAvatar size="80">
-                <VImg :src="`${url}/employees/image/${userStore.editedUser.image}`"></VImg>
-              </VAvatar>
             </VRow>
             <VRow>
               <VCol cols="12" sm="6" md="6">
@@ -118,3 +115,19 @@ async function save() {
     </VCardActions>
   </VCard>
 </VDialog></template>
+<style>
+.scroll {
+  overflow: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #d5d4d4;
+  border-radius: 999px;
+}
+
+</style>

@@ -53,14 +53,17 @@ const deleteAllCustomers = async () => {
   <v-container>
     <v-card>
       <v-card-title>
-        Customers
-        <v-btn
-          class="mdi mdi-plus"
-          style="float: right; color: white"
-          color="#8ad879"
-          @click="customerStore.dialog = true"
-          >Add new customer</v-btn
-        >
+        <div class="row">
+          <div class="col-md-9">
+            Customer
+          </div>
+          <div class="col-md-3">
+          </div>
+          </div>
+ 
+              <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
+                @click="customerStore.dialog = true">Add New Customer</v-btn>
+             
         <v-spacer> </v-spacer>
         <v-text-field style="width: 30%;"
         :loading="customerStore.loading"
