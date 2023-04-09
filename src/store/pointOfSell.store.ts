@@ -202,7 +202,10 @@ export const usePointOfSale = defineStore('point of sale', () => {
           recieved: totalAndDicount.value,
           change: 0,
           payment: 'promptpay',
-          orderItems: orderItemList.value
+          orderItems: orderItemList.value,
+          storeId:27,
+          createdDate:new Date()
+
         }
 
         console.log(JSON.stringify(order.value))
@@ -223,7 +226,9 @@ export const usePointOfSale = defineStore('point of sale', () => {
           recieved: recive_mon.value,
           change: change_money.value,
           payment: 'cash',
-          orderItems: orderItemList.value
+          orderItems: orderItemList.value,
+          storeId:27
+
         }
 
         console.log(JSON.stringify(order.value))
@@ -240,7 +245,9 @@ export const usePointOfSale = defineStore('point of sale', () => {
         recieved: 0,
         change: 0,
         payment: 'promptpay',
-        orderItems: orderItemList.value
+        orderItems: orderItemList.value,
+        storeId:27
+
       }
       total_.value = 0
       total_discount.value = 0
