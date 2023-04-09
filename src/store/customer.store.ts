@@ -10,6 +10,7 @@ export const useCustomerStore = defineStore('customer', () => {
   const loadingStore = useLoadingStore()
   const dialogCheckPoint= ref(false)
   const dialogCheckPromotion= ref(false)  
+  const dialogPoint = ref(false);
   const search = ref('');
   const selected = ref<string[] | any[]>([])
   const dialog = ref(false)
@@ -249,5 +250,6 @@ const getCustomerByTel = async () => {
     addCustomerDialog,
     dialogCheckPoint,
     dialogCheckPromotion,
+    dialogPoint, 
   }
 })
