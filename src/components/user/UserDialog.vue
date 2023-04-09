@@ -33,11 +33,6 @@ async function save() {
       <VCardText>
         <VForm ref="form">
           <VContainer>
-            <VRow justify="center">
-              <VAvatar size="80">
-                <VImg :src="`${url}/employees/image/${userStore.editedUser.image}`"></VImg>
-              </VAvatar>
-            </VRow>
             <VRow>
               <VCol cols="12" sm="6" md="6">
                 <VTextField label="Username*" required v-model="userStore.editedUser.username"
