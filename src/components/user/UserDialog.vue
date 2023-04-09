@@ -1,12 +1,16 @@
 <script lang="ts" setup>
 import { useUserStore } from '@/store/user.store';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import type { VForm } from 'vuetify/components';
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
 const form = ref<VForm | null>(null);
 const url = import.meta.env.VITE_URL_PORT
 const userStore = useUserStore();
 const confirmDlg = ref();
+
+onMounted( async () => {
+  userStore.editedUser.position = 'Barista';
+});
 
 async function save() {
 
@@ -79,11 +83,12 @@ async function save() {
             </VRow>
             <VRow>
               <VCol cols="6" sm="6" md="6">
-                <VCheckbox label="FullTime Employee" v-model="userStore.editedUser.fullTime"></VCheckbox>
+                
+                <VCheckbox label="Full Time Employee" v-model="userStore.editedUser.fullTime"></VCheckbox>
               </VCol>
               <VCol cols="12" sm="6" md="6">
-                <VAutocomplete label="Role" required v-model="userStore.editedUser.role" :items="['Owner', 'Employee']">
-                </VAutocomplete>
+                <v-select label="Role" required v-model="userStore.editedUser.role" :items="['Owner', 'Employee']">
+                </v-select>
               </VCol>
             </Vrow>
             <v-row>
@@ -92,9 +97,8 @@ async function save() {
                   :rules="[(v) => !!v || 'Item is required', (v) => v >= 30 || 'Length must equle than 30',]"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="6">
-                <v-autocomplete label="position*" v-model="userStore.editedUser.position"
-                  :items="['Barista', 'Cashier', 'Manager', 'Baker', 'Server', 'Cleaner']">
-                </v-autocomplete>
+                <v-select label="Position*" required v-model="userStore.editedUser.position" :items="['Barista', 'Cashier', 'Manager', 'Baker', 'Server', 'Cleaner']">
+                </v-select>
               </v-col>
             </v-row>
             <VFileInput color="deep-purple-accent-4" counter multiple placeholder="Select your files"

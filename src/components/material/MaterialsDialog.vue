@@ -61,12 +61,12 @@ async function save() {
                 ></v-text-field>
               </v-col>
               <v-col cols="md-4">
-              <v-autocomplete
+              <v-select
                   label="Unit*"
                 v-model.number="materialStore.editedMaterial.unit"
                 :items="['Bag','Box','Gallon','Kilogram','Liter','Pack']"
               >
-              </v-autocomplete>
+              </v-select>
               </v-col>
               <v-col cols="md-4">
                 <v-text-field

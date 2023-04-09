@@ -39,23 +39,17 @@ const deleteAllUsers = async () => {
             User
           </div>
         </div>
-        
+
         <v-row class="mt-2">
           <v-col cols="3">
             <v-text-field :loading="userStore.loading" density="compact" variant="solo"
-              v-model="userStore.keyword" label="Search" append-inner-icon="mdi-magnify" hide-details
-              @click:append-inner="userStore.getUserByUsername"></v-text-field>
+                v-model="userStore.keyword" label="Search" append-inner-icon="mdi-magnify" hide-details
+                @click:append-inner="userStore.getUserByUsername"></v-text-field>
 
-            </v-col>
-            <v-col>
-              <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
-                @click="userStore.dialog = true">Add new user</v-btn>
           </v-col>
-          <v-col cols="3">
-            <v-autocomplete v-model="userStore.order" label="Select" :items="['A-Z', 'Z-A']" density="compact">
-              <v-autocomplete @click="userStore.order = 'A-Z'"> A-Z</v-autocomplete>
-              <v-autocomplete @click="userStore.order = 'Z-A'"> Z-A</v-autocomplete>
-            </v-autocomplete>
+          <v-col>
+            <v-btn class="mdi mdi-plus" style="float: right; color: white" color="#8ad879"
+              @click="userStore.dialog = true">Add new user</v-btn>
           </v-col>
         </v-row>
         <v-spacer> </v-spacer>
@@ -85,14 +79,13 @@ const deleteAllUsers = async () => {
           <tbody v-if="userStore.users.length == 0">
             <tr>
               <td colspan="7" class="text-center">No data</td>
-            </tr>
-          </tbody>
-        </VTable>
-        <v-container width="100%" justify="center">
-          <v-pagination justify="center" v-model="userStore.page" :length="userStore.lastPage"
-            rounded="circle"></v-pagination>
-        </v-container>
-      </v-card-title>
-    </v-card>
-  </v-container>
-</template>
+          </tr>
+        </tbody>
+      </VTable>
+      <v-container width="100%" justify="center">
+        <v-pagination justify="center" v-model="userStore.page" :length="userStore.lastPage"
+          rounded="circle"></v-pagination>
+      </v-container>
+    </v-card-title>
+  </v-card>
+</v-container></template>

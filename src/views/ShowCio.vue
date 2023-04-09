@@ -60,9 +60,11 @@ const date = (index: string) => {
               <v-row class="profile" style="height: 25%">
                 <v-col>
                   <v-container>
-                    <v-avatar size="100"><v-img :src="`${url}/employees/image/${employee.image}`"></v-img></v-avatar>
+                    <v-avatar size="100"><v-img :src="`${url}/employees/image/${   employeeStore.summary_salary.checkInOut[0].employee?.image}`"></v-img></v-avatar>
                     <div class="text-subtitle-2 mt-3">
-                      {{ employeeStore.summary_salary.employee?.name }}
+                      {{  employeeStore.summary_salary.checkInOut[0].employee?.name }}
+   
+
                     </div>
                   </v-container>
                 </v-col>

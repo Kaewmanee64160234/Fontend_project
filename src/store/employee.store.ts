@@ -115,7 +115,7 @@ export const useEmployeeStore = defineStore('employee', () => {
         address: '',
         tel: '',
         email: '',
-        position: '',
+        position: 'Barista',
         hourly: 0,
         image: 'no_image.jpg',
         files: [],

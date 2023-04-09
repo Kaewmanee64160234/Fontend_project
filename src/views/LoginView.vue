@@ -51,6 +51,7 @@ const reset = () => {
                       ]" required></v-text-field>
 
                     </v-col>
+                    
 
                     <v-col>
                       <v-text-field v-model="password" label="Password" type="password" :rules="[
