@@ -50,6 +50,15 @@ const close2Dialog = () => {
                             </div>
                             
                         </div>
+                       
+                        <v-row> 
+                            <v-card variant="outlined" justify="center" >
+
+                            </v-card>
+                        
+                         
+                        </v-row>
+                     
                         <v-card-actions>
                     <v-btn color="red" variant="text" @click="pointOfSaleStore.dialogCash = false"> Cancle </v-btn>
                     <v-spacer></v-spacer>
@@ -59,6 +68,7 @@ const close2Dialog = () => {
                 </v-card-actions>
                     </v-col>
                 </v-row>
+                
             </v-container>
         </v-card>
         

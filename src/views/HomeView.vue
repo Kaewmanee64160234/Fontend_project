@@ -229,7 +229,7 @@ function Paycash() {
                     </v-col>
                     <v-col class="mt-2" col="2.5">
                       <v-btn style="background-color: #C1F8CF; color: #1A374D;" height="130px" width="180"
-                        prepend-icon="mdi mdi-cash" stacked variant="outlined" @click="pointOfSaleStore.dialogCash = true">Cash</v-btn>
+                        prepend-icon="mdi mdi-cash" stacked variant="outlined" @click="pointOfSaleStore.order.payment = 'cash'">Cash</v-btn>
                     </v-col>
                     <v-row>
                     </v-row>
