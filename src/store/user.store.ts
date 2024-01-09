@@ -80,6 +80,7 @@ export const useUserStore = defineStore('User', () => {
 
         const res = await userService.saveUser(editedUser.value)
       }
+    console.log(editedUser.value.name_employee)
       dialog.value = false
       await getUsers()
     } catch (e) {

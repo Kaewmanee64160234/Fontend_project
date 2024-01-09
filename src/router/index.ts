@@ -75,7 +75,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
 
@@ -101,7 +101,7 @@ const router = createRouter({
 
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     {
@@ -118,7 +118,7 @@ const router = createRouter({
 
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
 
@@ -133,7 +133,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     {
@@ -147,7 +147,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     {
@@ -161,7 +161,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       },
       beforeEnter:[ ezAutorized]
       
@@ -177,7 +177,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     {
@@ -191,7 +191,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     {
@@ -205,7 +205,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     {
@@ -219,7 +219,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     {
@@ -233,7 +233,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       },
       beforeEnter: [ezAutorized]
     },
@@ -248,7 +248,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       },
       beforeEnter: [ezAutorized]
     },
@@ -263,7 +263,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     {
@@ -277,7 +277,7 @@ const router = createRouter({
       },
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       },
       beforeEnter: [ezAutorized]
     },
@@ -293,7 +293,7 @@ const router = createRouter({
       beforeEnter: [ezAutorized],
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     {
@@ -308,7 +308,7 @@ const router = createRouter({
       beforeEnter: [ezAutorized],
       meta: {
         layout: 'MainLayout',
-        requiresAuth: true
+        // requiresAuth: true
       }
     },
     
