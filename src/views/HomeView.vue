@@ -23,7 +23,7 @@ const product_ = computed(() => {
 })
 const addToCart = (item: Product) => {
   pointOfSaleStore.updatetmpProduct(item)
-  if (item.catagoryId !== 1 && item.catagoryId !== 3) {
+  if (item.catagoryId !== 1 && item.catagoryId !== 2) {
     pointOfSaleStore.dialogTopping = true
   } else {
     const product = pointOfSaleStore.orderItemList.findIndex((item_) => {
@@ -67,7 +67,7 @@ const aboutCal = computed(() => {
   return pointOfSaleStore.CaltotalPrice()
 })
 onMounted(() => {
-  productStore.getProductByCatagory('2')
+  productStore.getProductByCatagory('3')
   pointOfSaleStore.total_discount
 })
 
@@ -99,9 +99,9 @@ function Paycash() {
       <div class="col-md-6 item-side">
         <div class="row-md-6">
           <v-tabs fixed-tabs color="#9F8772" dark>
-            <v-tab @click="productStore.getProductByCatagory('2')"> Drinks </v-tab>
-            <v-tab @click="productStore.getProductByCatagory('1')"> Foods </v-tab>
-            <v-tab @click="productStore.getProductByCatagory('3')"> Desserts </v-tab>
+            <v-tab @click="productStore.getProductByCatagory('3')"> Drinks </v-tab>
+            <v-tab @click="productStore.getProductByCatagory('2')"> Foods </v-tab>
+            <v-tab @click="productStore.getProductByCatagory('1')"> Desserts </v-tab>
           </v-tabs>
           </div>
           <div class="row">

@@ -16,6 +16,10 @@ function getToppings(params: any) {
       const deleteTopping  = (id:number) => {
         return http.delete("/toppings/" + id)
       }
-      export default { getToppings ,saveTopping, updateTopping, deleteTopping};
+
+      const getToppingByCategoryId = (categoryId:number) => {
+        return http.get("/toppings/cat/" + categoryId);
+      }
+      export default { getToppings ,saveTopping, updateTopping, deleteTopping,getToppingByCategoryId};
 
     

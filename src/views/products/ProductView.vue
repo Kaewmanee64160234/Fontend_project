@@ -161,9 +161,9 @@ watch(paginate, async (newPage, oldPage) => {
               <v-autocomplete v-model="productStore.cat" label="Select" :items="['', 'Foods', 'Drinks', 'Desserts']"
                 density="compact">
                 <v-autocomplete @click="productStore.cat = ''"> Drinks </v-autocomplete>
-                <v-autocomplete @click="productStore.cat = 1 + ''"> Drinks </v-autocomplete>
+                <v-autocomplete @click="productStore.cat = 1 + ''"> Desserts </v-autocomplete>
                 <v-autocomplete @click="productStore.cat = 2 + ''"> Foods </v-autocomplete>
-                <v-autocomplete @click="productStore.cat = 3 + ''"> Desserts </v-autocomplete>
+                <v-autocomplete @click="productStore.cat = 3 + ''"> Drinks </v-autocomplete>
               </v-autocomplete>
             </v-col>
           </v-row>

@@ -120,6 +120,20 @@ export const useToppingStore = defineStore('Topping', () => {
     await getToppings()
   }
 
+  const getToppingByCategoryId = async (catId:number) => {
+    try{
+      console.log('getToppingByCategory')
+      const res = await useToppingService.getToppingByCategoryId(catId);
+      toppings.value = res.data
+      console.log("--------------------------------")
+      console.log(res.data)
+
+    }catch(e){
+      console.log(e)
+      messageStore.showError('Cannot delete store')
+    }
+  }
+
   return {
     page,
     keyword,
@@ -139,6 +153,7 @@ export const useToppingStore = defineStore('Topping', () => {
     selected,
     deleteAllTopping,
     search,
-    deleteTopping
+    deleteTopping,
+    getToppingByCategoryId
   }
 })

@@ -1,12 +1,20 @@
 <script lang="ts" setup>
 import { usePointOfSale } from '@/store/pointOfSell.store'
+import { useToppingStore } from '@/store/topping.store'
 import type { OrderItem } from '@/store/types/orderItem.type'
 import type Product from '@/store/types/product.type'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const pointOfSaleStore = usePointOfSale()
+const toppingStore = useToppingStore()
 const product_ = computed(() => {
   return pointOfSaleStore.temProduct
+})
+const toppings = computed(() => {
+  return toppingStore.getToppingByCategoryId(3)
+})
+onMounted(async () => {
+  await toppingStore.getToppingByCategoryId(3)
 })
 let orderItem = ref<OrderItem>({
   name: product_.value.name,
@@ -42,9 +50,9 @@ const save = () => {
   <v-dialog v-model="pointOfSaleStore.dialogTopping" width="40vw" min-width="700px">
     <v-card>
       <v-card-title>
-        {{ product_.name }}
+        {{ product_.name + " "+product_.catagoryId}}
       </v-card-title>
-      <v-card-text v-if="product_.catagoryId === 2">
+      <v-card-text v-if="product_.catagoryId === 3">
         <div class="d-flex align-left flex-column">
           <h5>Size</h5>
           <v-btn-toggle v-model="pointOfSaleStore.toggle" variant="outlined" divided rounded="xl">
@@ -61,17 +69,18 @@ const save = () => {
             <v-btn>sweet 0%</v-btn>
             <v-btn>sweet 25%</v-btn>
             <v-btn>sweet 50%</v-btn>
-            <v-btn>sweet 100% +10</v-btn>
-            <v-btn>sweet 125% +15</v-btn>
+            <v-btn>sweet 100%</v-btn>
+            <v-btn>sweet 125%</v-btn>
           </v-btn-toggle>
         </div>
         <div class="ml-3" v-if="product_.type === 'tea' || 'smoothies' || 'milkshakes' || 'hot chocolate'">
           <h5>Topping</h5>
           <v-chip-group v-model="pointOfSaleStore.amenities" column multiple>
-            <v-chip filter variant="outlined"> brown Sugar Bubble +10 </v-chip>
+           <v-chip filter variant="outlined" v-for="(topping,index) in  toppingStore.toppings" :key="index">{{ topping.name+"  +"+topping.price }}</v-chip>
+            <!-- <v-chip filter variant="outlined"> brown Sugar Bubble +10 </v-chip>
             <v-chip filter variant="outlined"> cocoa +10 </v-chip>
             <v-chip filter variant="outlined"> konjac jelly +10 </v-chip>
-            <v-chip filter variant="outlined"> whipped cream +10 </v-chip>
+            <v-chip filter variant="outlined"> whipped cream +10 </v-chip> -->
           </v-chip-group>
         </div>
       </v-card-text>
