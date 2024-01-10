@@ -75,6 +75,12 @@ const url = import.meta.env.VITE_URL_PORT
         value="store"
         to="/store"
       ></v-list-item>
+      <v-list-item
+        prepend-icon="mdi-store-marker"
+        title="Topping"
+        value="topping"
+        to="/topping"
+      ></v-list-item>
       <v-list-item 
         prepend-icon="mdi-account-group-outline"
         title="Checkin-Checkout"

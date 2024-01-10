@@ -1,3 +1,4 @@
+
 <script lang="ts" setup>
 import { usePointOfSale } from '@/store/pointOfSell.store';
 import { useProductStore } from '@/store/product.store'
