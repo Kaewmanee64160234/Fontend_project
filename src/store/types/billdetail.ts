@@ -1,3 +1,5 @@
+import type { Topping } from "./topping";
+
 export default interface BILL_DETAIL{
     id?: number;
     name: string;
@@ -6,6 +8,7 @@ export default interface BILL_DETAIL{
     total: number;
     materialId?: number;
     billId?: number;
+    toppings?:Topping[];
     createdDate?: Date;
     updatedDate?: Date; 
     deletedDate?: Date;
