@@ -115,6 +115,8 @@ import { computed, onMounted, ref, onBeforeUnmount } from 'vue'
 const pointOfSaleStore = usePointOfSale()
 const toppingStore = useToppingStore()
 const toppingAdded = ref<Topping[]>([])
+const sweet = ref('100');
+const size = ref('M');
 const product_ = computed(() => {
   return pointOfSaleStore.temProduct
 })
@@ -125,7 +127,6 @@ onMounted(async () => {
   await toppingStore.getToppingByCategoryId(3)
 })
 
-
 let orderItem = ref<OrderItem>({
   name: product_.value.name,
   amount: 1,
@@ -135,38 +136,56 @@ let orderItem = ref<OrderItem>({
   image: product_.value.image,
   toppings: toppingAdded.value,
   detail: ''
+})
+const arraysEqual = (arr1:Topping[], arr2:Topping[]) => {
+  return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
+};
+const save = () => {
+
+const existingProductIndex = pointOfSaleStore.orderItemList.findIndex((item) => {
+  
+if( item.productId === product_.value.id &&
+    item.size === size.value &&
+    item.sweet === sweet.value &&
+    arraysEqual(item.toppings, toppingAdded.value)){
+      console.log("=======================")
+      console.log(item)
+      return item
+    }
+ 
 });
 
-const save = () => {
-  // Update the orderItem with selected size, sweetness, and toppings
+  console.log("-----------------------------")
+  console.log(product_.value)
+  console.log('product Id '+ orderItem.value.productId)
+  console.log(existingProductIndex)
 
-  // Add additional details based on selected options
-  orderItem.value.detail = `Size: ${orderItem.value.size}, Sweetness: ${orderItem.value.sweet}`
 
-  // Check if the product with selected options already exists in the order
-  const existingProductIndex = pointOfSaleStore.orderItemList.findIndex((item) => {
-    return (
-      item.productId === product_.value.id &&
-      item.size === orderItem.value.size &&
-      item.sweet === orderItem.value.sweet &&
-      item.toppings === toppingAdded.value
-    )
-  })
+  if (existingProductIndex >-1) {
 
-  if (existingProductIndex >= 0) {
     // Product with selected options already exists, update quantity
     pointOfSaleStore.orderItemList[existingProductIndex].amount += 1
+    for(const topp of pointOfSaleStore.orderItemList[existingProductIndex].toppings){
+      pointOfSaleStore.orderItemList[existingProductIndex].price += topp.price
+    }
     pointOfSaleStore.orderItemList[existingProductIndex].total =
       pointOfSaleStore.orderItemList[existingProductIndex].amount *
       pointOfSaleStore.orderItemList[existingProductIndex].price
   } else {
+    let totalTopp = 0;
+    for(const topp of orderItem.value.toppings){
+      totalTopp += topp.price
+    }
     orderItem.value = {
       name: product_.value.name,
       amount: 1,
       productId: product_.value.id!,
       price: product_.value.price,
-      total: product_.value.price * 1,
+      total: product_.value.price ,
       image: product_.value.image,
+      sweet: sweet.value ,
+      size: size.value,
+      categoryId:product_.value.catagoryId,
       toppings: toppingAdded.value
     }
     pointOfSaleStore.addToOrder(orderItem.value)
@@ -181,33 +200,33 @@ const addtopping = (topping: Topping) => {
 
   if (index === -1) {
     // Topping not found, find the correct position based on id and insert the new topping
-    const insertionIndex = findInsertionIndex(topping.id!);
-    toppingAdded.value.splice(insertionIndex, 0, topping);
+    const insertionIndex = findInsertionIndex(topping.id!)
+    toppingAdded.value.splice(insertionIndex, 0, topping)
   } else {
     // Topping found, remove it from the toppingAdded array
-    toppingAdded.value.splice(index, 1);
+    toppingAdded.value.splice(index, 1)
   }
 }
 
 // Function to find the correct insertion index based on id
 const findInsertionIndex = (newToppingId: number) => {
-  let insertionIndex = 0;
+  let insertionIndex = 0
 
   for (let i = 0; i < toppingAdded.value.length; i++) {
     if (toppingAdded.value[i].id! < newToppingId) {
-      insertionIndex = i + 1;
+      insertionIndex = i + 1
     } else {
-      break;
+      break
     }
   }
 
-  return insertionIndex;
+  return insertionIndex
 }
 
-const closeDialog = ()=>{
-  pointOfSaleStore.toggle = null;
-  pointOfSaleStore.toggle2 = null;
-  toppingAdded.value = [];
+const closeDialog = () => {
+  pointOfSaleStore.toggle = null
+  pointOfSaleStore.toggle2 = null
+  toppingAdded.value = []
   pointOfSaleStore.dialogTopping = false
 }
 </script>
@@ -217,15 +236,15 @@ const closeDialog = ()=>{
     <v-card>
       {{ toppingAdded }}
       <v-card-title>
-        {{ product_.name + ' ' + product_.catagoryId }}
+        {{ product_.name  }}
       </v-card-title>
       <v-card-text v-if="product_.catagoryId === 3">
         <div class="d-flex align-left flex-column">
           <h5>Size</h5>
           <v-btn-toggle v-model="pointOfSaleStore.toggle" variant="outlined" divided rounded="xl">
-            <v-btn @click="orderItem.size = 'S'">S</v-btn>
-            <v-btn @click="orderItem.size = 'M'">M</v-btn>
-            <v-btn @click="orderItem.size = 'L'">L +10</v-btn>
+            <v-btn @click="size = 'S'">S</v-btn>
+            <v-btn @click="size = 'M'">M</v-btn>
+            <v-btn @click="size = 'L'">L +10</v-btn>
           </v-btn-toggle>
         </div>
         <div
@@ -237,11 +256,11 @@ const closeDialog = ()=>{
           <h5>Sweet</h5>
 
           <v-btn-toggle v-model="pointOfSaleStore.toggle2" variant="outlined" divided rounded="xl">
-            <v-btn @click="orderItem.sweet = '0'">sweet 0%</v-btn>
-            <v-btn @click="orderItem.sweet = '25'">sweet 25%</v-btn>
-            <v-btn @click="orderItem.sweet = '50'">sweet 50%</v-btn>
-            <v-btn @click="orderItem.sweet = '100'">sweet 100%</v-btn>
-            <v-btn @click="orderItem.sweet = '125'">sweet 125%</v-btn>
+            <v-btn @click="sweet = '0'">sweet 0%</v-btn>
+            <v-btn @click="sweet = '25'">sweet 25%</v-btn>
+            <v-btn @click="sweet = '50'">sweet 50%</v-btn>
+            <v-btn @click="sweet = '100'">sweet 100%</v-btn>
+            <v-btn @click="sweet = '125'">sweet 125%</v-btn>
           </v-btn-toggle>
         </div>
         <div
@@ -250,21 +269,18 @@ const closeDialog = ()=>{
         >
           <h5>Topping</h5>
           <v-chip-group v-model="toppingAdded" column multiple>
-  <v-checkbox
-    v-for="(topping, index) in toppingStore.toppings"
-    :key="index"
-    :label="topping.name + '  +' + topping.price"
-    @change="addtopping(topping)"
-  ></v-checkbox>
-</v-chip-group>
-
+            <v-checkbox
+              v-for="(topping, index) in toppingStore.toppings"
+              :key="index"
+              :label="topping.name + '  +' + topping.price"
+              @change="addtopping(topping)"
+            ></v-checkbox>
+          </v-chip-group>
         </div>
       </v-card-text>
       <v-card-text v-else> Add to cart 🛒 </v-card-text>
       <v-card-actions>
-        <v-btn color="red" variant="text" @click="closeDialog()"
-          >Close</v-btn
-        >
+        <v-btn color="red" variant="text" @click="closeDialog()">Close</v-btn>
         <v-spacer></v-spacer>
         <v-btn color="green" variant="text" @click="save()"> Save </v-btn>
       </v-card-actions>

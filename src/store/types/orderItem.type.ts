@@ -12,6 +12,7 @@ export interface OrderItem {
   toppings:Topping[]
   sweet?:string,
   size?:string,
+  categoryId?:number,
   createdDate?: Date
   updatedDate?: Date
   deletedDate?: Date
