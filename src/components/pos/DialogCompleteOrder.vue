@@ -109,6 +109,9 @@ const date = (index: string) => {
                                       <tbody>
                                         <tr v-for="item in orderStore.tempOrder.orderItems" :key="item.name">
                                           <td>{{ item.name }}</td>
+                                          <td v-for="topp in item.toppings" :key="topp.id">  - {{ topp.name }}</td>
+                                          <!-- <td class="alignright">{{ item.total }} ฿ -->
+
                                           <td class="alignright">{{ item.total }} ฿
                                           <br>
                                         x{{ item.amount }}</td>

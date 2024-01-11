@@ -12,12 +12,9 @@ const confirmDlg = ref()
 const url = import.meta.env.VITE_URL_PORT
 const paginate = ref(true)
 onMounted(async () => {
-  if (paginate.value) {
-    productStore.cat = ''
+    // productStore.cat = ''
     await productStore.getProducts()
-  } else {
-    await productStore.getAllProductNotPageinate()
-  }
+
 })
 const deleteProduct = async (id: number) => {
   await confirmDlg.value.openDialog(
@@ -45,7 +42,7 @@ const addToCart = (item: Product) => {
 }
 
 onMounted(() => {
-  productStore.getProductByCatagory('2')
+  productStore.getProducts()
   pointOfSaleStore.total_discount
 })
 watch(paginate, async (newPage, oldPage) => {
@@ -68,10 +65,10 @@ watch(paginate, async (newPage, oldPage) => {
           <div class="col-md-9">
             Products
           </div>
-          <div class="col-md-3">
+          <!-- <div class="col-md-3">
             <v-switch style="float: right;" v-model="paginate" hide-details inset color="info"
               :label="paginate ? 'Show some Data' : 'Show All Data'"></v-switch>
-          </div>
+          </div> -->
           <v-row>
             <v-col cols="3">
               <v-text-field :loading="productStore.loading" density="compact" variant="solo"

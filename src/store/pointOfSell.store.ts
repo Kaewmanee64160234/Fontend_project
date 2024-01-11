@@ -209,7 +209,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
 
         }
 
-        console.log(JSON.stringify(order.value))
+        console.log(JSON.stringify(order.value.total))
       } else {
         if (change_money.value < 0 || recive_mon.value <= 0) {
           messageStore.showError('Unable to save data due to incomplete data entry.')
@@ -233,8 +233,9 @@ export const usePointOfSale = defineStore('point of sale', () => {
 
         }
 
-        console.log(JSON.stringify(order.value))
+        // console.log(JSON.stringify(order.value))
       }
+      console.log(JSON.stringify(order.value))
 
       const res = await orderService.saveOrder(order.value)
       orderStore.tempOrder = res.data

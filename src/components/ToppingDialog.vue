@@ -237,7 +237,10 @@ const save = () => {
       categoryId: product_.value.catagoryId,
       toppings: toppingAdded.value,
     };
-    pointOfSaleStore.addToOrder(orderItem.value);
+    console.log('Saved product to ')
+    console.log(orderItem.value)
+  pointOfSaleStore.addToOrder(orderItem.value);
+
   }
 
   // Close the dialog
@@ -282,7 +285,7 @@ const closeDialog = () => {
 <template>
   <v-dialog v-model="pointOfSaleStore.dialogTopping" width="40vw" min-width="700px">
     <v-card>
-      {{ toppingAdded }}
+      <!-- {{ toppingAdded }} -->
       <v-card-title>
         {{ product_.name  }}
       </v-card-title>

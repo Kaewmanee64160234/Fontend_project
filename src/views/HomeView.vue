@@ -42,8 +42,7 @@ const addToCart = (item: Product) => {
         total: product_.value.price * 1,
         image: product_.value.image,
         categoryId: product_.value.catagoryId,
-        toppings: [],
- 
+        toppings: []
       })
       pointOfSaleStore.addToOrder(orderItem.value)
     }
@@ -138,17 +137,22 @@ function Paycash() {
                 <h4 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Order</h4>
               </div>
               <div class="flow-root">
-                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                  <li class="py-3 sm:py-4">
+                <!-- Check if the order item list is empty -->
+                <div v-if="pointOfSaleStore.orderItemList.length === 0">
+                  <p style="text-align: center">No Order 🥲</p>
+                </div>
+                <ul v-else role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                  <li
+                    v-for="(item, index) in pointOfSaleStore.orderItemList"
+                    :key="index"
+                    class="py-3 sm:py-4"
+                  >
+                
                     <div v-if="pointOfSaleStore.orderItemList.length === 0">
                       <p style="text-align: center">No data</p>
+           
                     </div>
-                    <div
-                      v-else
-                      v-for="(item, index) of pointOfSaleStore.orderItemList"
-                      :key="index"
-                      class="flex items-center space-x-4 mt-2"
-                    >
+                    <div v-else class="flex items-center space-x-4 mt-2">
                       <div class="flex-shrink-0">
                         <img
                           class="rounded-full w-20 h-20"
@@ -156,9 +160,11 @@ function Paycash() {
                         />
                       </div>
                       <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          {{ item.name }}
-                        </p>
+                        <v-row>
+                          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                            {{ item.name }}
+                          </p>
+                        </v-row>
 
                         <v-row>
                           <v-col>
@@ -213,56 +219,20 @@ function Paycash() {
                             ></v-btn>
                           </v-col>
                         </v-row>
-                        <v-col v-if="item.categoryId === 3" class="topping">
-                          <p class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400">
-                            sweet: {{ item.sweet }}
-                          </p>
-
-                          <p class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400">
-                            size: {{ item.size }}
-                          </p>
-
-                          <div v-if="item.toppings.length >= 1">
-                            <p class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400">
-                              toppings:
-                            </p>
-                            <p
-                              class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400"
-                              v-for="(topp, index) in item.toppings"
-                              :key="index"
-                            >
-                              - {{ topp.name }}
-                            </p>
+                        <v-row>
+                          <div v-if="item.categoryId === 3" class="topping">
+                            <span class="text-sm text-gray-500 mr-2 py-0.5 dark:text-gray-400">
+                              size: {{ item.size }}, sweet: {{ item.sweet }}%, Topping:
+                            </span>
+                            <span v-if="item.toppings.length >= 1">
+                              <template v-for="(topp, index) in item.toppings" :key="index">
+                                <span class="text-sm text-gray-500 dark:text-gray-400">
+                                  {{ topp.name }},
+                                </span>
+                              </template>
+                            </span>
                           </div>
-                        </v-col>
-
-                        <!-- <v-col v-if=" productStore.products.find((item_) => {
-                              if (item_.id === item.productId) {
-                                return item
-                              }
-                            })?.catagoryId === 3" class="topping">
-                        
-                          <p class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400">
-                            sweet: {{ item.sweet }}
-                          </p>
-
-                          <p class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400">
-                            size: {{ item.size }}
-                          </p>
-
-                          <div v-if="item.toppings.length >= 1">
-                            <p class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400">
-                              toppings:
-                            </p>
-                            <p
-                              class="text-sm text-gray-500 mr-2 px-2.5 py-0.5 dark:text-gray-400"
-                              v-for="(topp, index) in item.toppings"
-                              :key="index"
-                            >
-                              - {{ topp.name }}
-                            </p>
-                          </div>
-                        </v-col> -->
+                        </v-row>
 
                         <v-divider></v-divider>
                       </div>
