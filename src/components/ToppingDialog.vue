@@ -140,61 +140,109 @@ let orderItem = ref<OrderItem>({
 const arraysEqual = (arr1:Topping[], arr2:Topping[]) => {
   return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
 };
-const save = () => {
+// const save = () => {
 
-const existingProductIndex = pointOfSaleStore.orderItemList.findIndex((item) => {
+// const existingProductIndex = pointOfSaleStore.orderItemList.findIndex((item) => {
   
-if( item.productId === product_.value.id &&
-    item.size === size.value &&
-    item.sweet === sweet.value &&
-    arraysEqual(item.toppings, toppingAdded.value)){
-      console.log("=======================")
-      console.log(item)
-      return item
-    }
+// if( item.productId === product_.value.id &&
+//     item.size === size.value &&
+//     item.sweet === sweet.value &&
+//     arraysEqual(item.toppings, toppingAdded.value)){
+//       console.log("=======================")
+//       console.log(item)
+//       return item
+//     }
  
-});
+// });
 
-  console.log("-----------------------------")
-  console.log(product_.value)
-  console.log('product Id '+ orderItem.value.productId)
-  console.log(existingProductIndex)
+//   console.log("-----------------------------")
+//   console.log(product_.value)
+//   console.log('product Id '+ orderItem.value.productId)
+//   console.log(existingProductIndex)
 
 
-  if (existingProductIndex >-1) {
+//   if (existingProductIndex >-1) {
 
-    // Product with selected options already exists, update quantity
-    pointOfSaleStore.orderItemList[existingProductIndex].amount += 1
-    for(const topp of pointOfSaleStore.orderItemList[existingProductIndex].toppings){
-      pointOfSaleStore.orderItemList[existingProductIndex].price += topp.price
+//     // Product with selected options already exists, update quantity
+//     pointOfSaleStore.orderItemList[existingProductIndex].amount += 1
+//     for(const topp of pointOfSaleStore.orderItemList[existingProductIndex].toppings){
+//       pointOfSaleStore.orderItemList[existingProductIndex].price += topp.price
+//     }
+//     pointOfSaleStore.orderItemList[existingProductIndex].total =
+//       pointOfSaleStore.orderItemList[existingProductIndex].amount *
+//       pointOfSaleStore.orderItemList[existingProductIndex].price
+//   } else {
+//     let totalTopp = 0;
+//     for(const topp of orderItem.value.toppings){
+//       totalTopp += topp.price
+//     }
+//     orderItem.value = {
+//       name: product_.value.name,
+//       amount: 1,
+//       productId: product_.value.id!,
+//       price: product_.value.price,
+//       total: product_.value.price ,
+//       image: product_.value.image,
+//       sweet: sweet.value ,
+//       size: size.value,
+//       categoryId:product_.value.catagoryId,
+//       toppings: toppingAdded.value
+//     }
+//     pointOfSaleStore.addToOrder(orderItem.value)
+//   }
+
+//   // Close the dialog
+//   closeDialog()
+//   // pointOfSaleStore.dialogTopping = false
+// }
+const save = () => {
+  const existingProductIndex = pointOfSaleStore.orderItemList.findIndex((item) => {
+    if (
+      item.productId === product_.value.id &&
+      item.size === size.value &&
+      item.sweet === sweet.value &&
+      arraysEqual(item.toppings, toppingAdded.value)
+    ) {
+      return item;
+    }
+  });
+
+  if (existingProductIndex > -1) {
+    // Product with selected options already exists, update quantity and total price
+    pointOfSaleStore.orderItemList[existingProductIndex].amount += 1;
+    for (const topp of pointOfSaleStore.orderItemList[existingProductIndex].toppings) {
+      pointOfSaleStore.orderItemList[existingProductIndex].price += topp.price;
     }
     pointOfSaleStore.orderItemList[existingProductIndex].total =
       pointOfSaleStore.orderItemList[existingProductIndex].amount *
-      pointOfSaleStore.orderItemList[existingProductIndex].price
+      pointOfSaleStore.orderItemList[existingProductIndex].price;
   } else {
-    let totalTopp = 0;
-    for(const topp of orderItem.value.toppings){
-      totalTopp += topp.price
+    // Calculate total price with toppings
+    let totalPriceWithToppings = product_.value.price;
+
+    for (const topp of toppingAdded.value) {
+      totalPriceWithToppings += topp.price;
     }
+
+    // Add the product to the orderItemList with selected options
     orderItem.value = {
       name: product_.value.name,
       amount: 1,
       productId: product_.value.id!,
-      price: product_.value.price,
-      total: product_.value.price ,
+      price: totalPriceWithToppings, // Update the price with toppings
+      total: totalPriceWithToppings, // Update the total with toppings
       image: product_.value.image,
-      sweet: sweet.value ,
+      sweet: sweet.value,
       size: size.value,
-      categoryId:product_.value.catagoryId,
-      toppings: toppingAdded.value
-    }
-    pointOfSaleStore.addToOrder(orderItem.value)
+      categoryId: product_.value.catagoryId,
+      toppings: toppingAdded.value,
+    };
+    pointOfSaleStore.addToOrder(orderItem.value);
   }
 
   // Close the dialog
-  closeDialog()
-  // pointOfSaleStore.dialogTopping = false
-}
+  closeDialog();
+};
 const addtopping = (topping: Topping) => {
   const index = toppingAdded.value.findIndex((selectedTopping) => selectedTopping.id === topping.id)
 
