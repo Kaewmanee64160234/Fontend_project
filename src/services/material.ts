@@ -22,4 +22,9 @@ const findMatByName = (name: string) => {
 const viewMaterial = () => {
   return http.get(`/reports/material/view`);
 }
-export default {findMatByName,getMaterials, saveMaterial , updateMaterial , deleteMaterial,viewMaterial}
+
+const getAllMaterial = () => {
+  return http.get(`/materials/all`);
+
+}
+export default {findMatByName,getMaterials, saveMaterial , updateMaterial , deleteMaterial,viewMaterial,getAllMaterial}

@@ -17,6 +17,7 @@ export const useMaterialStore = defineStore('material', () => {
   const loaded = ref(false)
   const BillDialog = ref(true)
   const loading = ref(false);
+  const materialList = ref<Material[]>([])
   const editedMaterial = ref<Material>({
     name: "",
     min_quantity: 0,
@@ -167,6 +168,21 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
    
     // console.log(res.data)
   }
+
+  const getAllMaterial = async ()=>{
+    loadingStore.isLoading = true;
+    try{
+      const res = await materialService.getAllMaterial()
+      materialList.value = res.data
+      console.log(res.data)
+    }catch (err) {
+      console.log(err)
+
+    }
+    loadingStore.isLoading = false;
+   
+    // console.log(res.data)
+  }
   return {
     page,
     keyword,
@@ -195,6 +211,8 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     materialService,
     getViewMaterial,
     cat,
-    checngeMat
+    checngeMat,
+    getAllMaterial,
+    materialList
   }
 })

@@ -283,7 +283,7 @@ export const usePointOfSale = defineStore('point of sale', () => {
         customerStore.customers[customer].point = cusPoint
         customerStore.customerService.updateCustomer(order.value.customerId + '', {
           ...customerStore.customers[customer],
-          files: []
+          // files: []
         })
       } else if (cusPoint < codePoint.value) {
         messageStore.showError('Unable to save promotion data due to insufficient points.')

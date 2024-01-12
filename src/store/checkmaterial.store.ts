@@ -97,6 +97,7 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
       checkMaterial.value.employeeId = employee.value.id;
       console.log(JSON.stringify(checkMaterial.value))
       const res = await checkmaterialService.saveCheckMaterail(checkMaterial.value);
+      console.log(res.data)
       dialog.value = false;
       await getCheckMaterail();
 

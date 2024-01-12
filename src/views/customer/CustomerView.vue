@@ -79,7 +79,7 @@ const deleteAllCustomers = async () => {
         <v-table class="text-center mt-5">
           <thead>
             <tr>
-              <th></th>
+             
               <th>ID</th>
               <th>Name</th>
               <th>tel</th>
@@ -90,9 +90,6 @@ const deleteAllCustomers = async () => {
           <tbody>
             <tr v-for="(item,index) of customerStore.customers" :key="index" class="text-center">
 
-              <td>
-                <v-avatar size="80"><v-img :src="`${url}/customers/image/${item.image}`"></v-img></v-avatar>
-              </td>
               <td>{{ index+1 }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.tel }}</td>

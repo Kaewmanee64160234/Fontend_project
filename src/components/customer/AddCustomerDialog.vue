@@ -57,21 +57,7 @@ async function save() {
                     :rules="[(v) => !!v || 'Item is required']"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12">
-                  <v-file-input
-                    color="deep-purple-accent-4"
-                    counter
-                    multiple
-                    placeholder="Select your files"
-                    prepend-icon="mdi-paperclip"
-                    variant="outlined"
-                    :show-size="1000"
-                    label="File input"
-                    accept="image/png, image/jpeg, image/bmp"
-                    v-model="customerStore.editCustomer.files"
-                    
-                  ></v-file-input>
-                </v-col>
+               
               </v-row>
             </v-container>
           </v-form>

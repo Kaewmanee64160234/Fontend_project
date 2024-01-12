@@ -27,7 +27,7 @@ export const useCustomerStore = defineStore('customer', () => {
     name: '',
     tel: '',
     point: 0,
-    image: 'no_image.jpg',
+    // image: 'no_image.jpg',
     files: []
   })
   watch(dialog, (newDialog, oldDialog) => {
@@ -36,7 +36,7 @@ export const useCustomerStore = defineStore('customer', () => {
         name: '',
         tel: '',
         point: 0,
-        image: 'no_image.jpg',
+        // image: 'no_image.jpg',
         files: []
       };
     }
@@ -68,7 +68,7 @@ watch(dialog, (newDialog, oldDialog) => {
       name: '',
       tel: '',
       point: 0,
-      image: 'no_image.jpg',
+      // image: 'no_image.jpg',
       files: []
     }
   }
@@ -81,7 +81,7 @@ watch(addCustomerDialog, (newDialog, oldDialog) => {
       name: '',
       tel: '',
       point: 0,
-      image: 'no_image.jpg',
+      // image: 'no_image.jpg',
       files: []
     }
   }
@@ -193,7 +193,7 @@ watch(lastPage, async (newlastPage, oldlastPage) => {
     try {
       const customer = customers.value.findIndex((customer) => customer.id+'' === id);
       customers.value[customer].point += 5;
-      await customerService.updateCustomer(id,{...customers.value[customer],files: []})
+      await customerService.updateCustomer(id,{...customers.value[customer]})
       customerId.value = customers.value[customer].id+''
       pointofsellStore.order.customerId = customers.value[customer].id+'';
     } catch (e) {
