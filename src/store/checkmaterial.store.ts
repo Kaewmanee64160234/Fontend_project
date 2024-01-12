@@ -1,30 +1,47 @@
-import { defineStore } from "pinia";
-import { ref, watch } from "vue";
-import type CheckMaterial from "./types/checkmaterial";
+import { defineStore } from 'pinia'
+import { ref, watch } from 'vue'
+import type CheckMaterial from './types/checkmaterial'
 import checkmaterialService from '@/services/checkmaterial'
-import { useMessageStore } from "./message";
-import { useLoadingStore } from "./loading";
-import type CheckMaterialDetail from "./types/checkmaterialdetail";
-import checkmaterial from "@/services/checkmaterial";
-import type Employee from "./types/employee.type";
-import checkmaterialdetail from "@/services/checkmaterialdetail";
+import { useMessageStore } from './message'
+import { useLoadingStore } from './loading'
+import type CheckMaterialDetail from './types/checkmaterialdetail'
+import checkmaterial from '@/services/checkmaterial'
+import type Employee from './types/employee.type'
+import checkmaterialdetail from '@/services/checkmaterialdetail'
+import material from '@/services/material'
+import MaterialsDialogVue from '@/components/material/MaterialsDialog.vue'
+import { useMaterialStore } from './material.store'
 
-
-export const useCheckMaterialStore = defineStore("checkmaterail", () => {
+export const useCheckMaterialStore = defineStore('checkmaterail', () => {
   const dialog = ref(false)
-  const CheckMatDe = ref<CheckMaterialDetail[]>([{ id: 0, name: '', qty_expire: 0, qty_last: 0, qty_remain: 0, materialId: 0, checkmaterialID: 0 }]);
-  const checkmeterials = ref<CheckMaterial[]>([{
-    employeeId: 0,
-    date: new Date(),
-    time: new Date(),
-    checkMaterialDetails: [{ id: 0, name: '', qty_expire: 0, qty_last: 0, qty_remain: 0, materialId: 0, checkmaterialID: 0 }]
-  }])
-  const checkmeterialDetail = ref<CheckMaterialDetail[]>([])
-  const checkMatItem = ref<{
-    id: number, name: string, qty_last: number, qty_remain: number, qty_expire: number, createdAt: Date, checkmaterial: { id: number, date: '', checkmaterialdetails: CheckMaterialDetail[] }
-  }[]>()
+  const CheckMatDe = ref<CheckMaterialDetail[]>([
+    { id: 0, name: '', qty_last: 0, qty_remain: 0, materialId: 0, checkmaterialID: 0 }
+  ])
+  const checkmeterials = ref<CheckMaterial[]>([
+    {
+      employeeId: 0,
+      date: new Date(),
+      time: new Date(),
+      checkMaterialDetails: [
+        { id: 0, name: '', qty_last: 0, qty_remain: 0, materialId: 0, checkmaterialID: 0 }
+      ]
+    }
+  ])
+  const checkmeterialDetails = ref<CheckMaterialDetail[]>([])
+  const checkMatItem = ref<
+    {
+      id: number
+      name: string
+      qty_last: number
+      qty_remain: number
+      qty_expire: number
+      createdAt: Date
+      checkmaterial: { id: number; date: ''; checkmaterialdetails: CheckMaterialDetail[] }
+    }[]
+  >()
   const loadingStore = useLoadingStore()
-  const messageStore = useMessageStore();
+  const messageStore = useMessageStore()
+  const materialStore = useMaterialStore()
   const checkMaterial = ref<CheckMaterial>({
     employeeId: 0,
     date: new Date(),
@@ -49,9 +66,9 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
   watch(keyword, async (newKey, oldKey) => {
     if (keyword.value.length >= 3) {
       await getOneCheckMatrial(keyword.value)
-    } if (keyword.value.length === 0) {
+    }
+    if (keyword.value.length === 0) {
       await getOneCheckMatrial(keyword.value)
-
     }
   })
   watch(lastPage, async (newlastPage, oldlastPage) => {
@@ -65,11 +82,9 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
     try {
       const response = await checkmaterialService.getCheckMaterail()
       checkmeterials.value = response.data.data
-
     } catch (err) {
       console.log(err)
-      messageStore.showError("Oops!, cannot get check materials.");
-
+      messageStore.showError('Oops!, cannot get check materials.')
     }
 
     loadingStore.isLoading = false
@@ -78,41 +93,57 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
     loadingStore.isLoading = true
     try {
       console.log(page.value)
-      const response = await checkmaterialService.getOneCheckMaterail(id);
+      const response = await checkmaterialService.getOneCheckMaterail(id)
       console.log(response.data)
       checkMatItem.value = response.data
       console.log(checkMatItem.value)
     } catch (err) {
       console.log(err)
-      messageStore.showError("Oops!, cannot get check meterials.");
-
+      messageStore.showError('Oops!, cannot get check meterials.')
     }
 
     loadingStore.isLoading = false
   }
   const saveCheckMat = async () => {
-    loadingStore.isLoading = true;
+    loadingStore.isLoading = true
     try {
-      
-      checkMaterial.value.employeeId = employee.value.id;
+      checkMaterial.value.employeeId = 1;
+      checkMaterial.value.checkMaterialDetails = checkmeterialDetails.value
+     materialStore.materials.forEach((item) => {
+        checkMaterial.value.checkMaterialDetails!.forEach((item2) => {
+          if (item.id === item2.materialId) {
+            item2.name = item.name
+            item2.qty_last = item.quantity
+            item2.checkmaterialID = 0
+            item2.materialId = item.id
+          }
+        })
+     });
+      console.log("----------------------------")
       console.log(JSON.stringify(checkMaterial.value))
-      const res = await checkmaterialService.saveCheckMaterail(checkMaterial.value);
-      console.log(res.data)
-      dialog.value = false;
-      await getCheckMaterail();
 
+      const res = await checkmaterialService.saveCheckMaterail(checkMaterial.value)
+      console.log(res.data)
+      dialog.value = false
+      await getCheckMaterail()
+      await materialStore.getMaterials()
     } catch (e) {
-      console.log(e);
-      messageStore.showError("Cannot save check material");
+      console.log(e)
+      messageStore.showError('Cannot save check material')
     }
-    loadingStore.isLoading = false;
+    loadingStore.isLoading = false
   }
   const addCheckMatDetail = () => {
-    const newdetail = ref<CheckMaterialDetail>({ id: 0, name: '', qty_expire: 0, qty_last: 0, qty_remain: 0, materialId: 0, checkmaterialID: 0 });
-    CheckMatDe.value.push(newdetail.value);
-
+    const newdetail = ref<CheckMaterialDetail>({
+      id: 0,
+      name: '',
+      qty_last: 0,
+      qty_remain: 0,
+      materialId: 0,
+      checkmaterialID: 0
+    })
+    CheckMatDe.value.push(newdetail.value)
   }
-
 
   return {
     page,
@@ -120,9 +151,16 @@ export const useCheckMaterialStore = defineStore("checkmaterail", () => {
     take,
     order,
     orderBy,
-    lastPage, checkMaterial, getCheckMaterail, checkmeterials, getOneCheckMatrial, checkmeterialDetail,checkMatItem, dialog,
-  saveCheckMat, addCheckMatDetail, CheckMatDe
-
-  };
-
-});
+    lastPage,
+    checkMaterial,
+    getCheckMaterail,
+    checkmeterials,
+    getOneCheckMatrial,
+    checkmeterialDetails,
+    checkMatItem,
+    dialog,
+    saveCheckMat,
+    addCheckMatDetail,
+    CheckMatDe
+  }
+})

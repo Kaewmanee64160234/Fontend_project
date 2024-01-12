@@ -28,12 +28,9 @@ const ToShowBill = (index:string) => {
 
 
 onMounted(async() => {
-  if(paginate.value) {
-    materialStore.cat = ''
+
     await billStore.getBills();
-  } else {
-    await materialStore.getViewMaterial();
-  }
+
 })
 
 onMounted(async () => {
@@ -82,9 +79,7 @@ watch(paginate, async (newPage, oldPage) => {
           <div class="col-md-9">
             Material
       </div>
-      <div class="col-md-3">
-        <v-switch style="float: right;" v-model="paginate" hide-details inset color="info" :label="paginate ? 'Show Data': 'Show View'"></v-switch>
-      </div>
+    
     </div>
       <v-btn class="mdi mdi-plus" style="float: right; background-color: #8ad879; color: white"
           @click="materialStore.dialog = true">Add New Material</v-btn>
