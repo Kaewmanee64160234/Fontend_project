@@ -1,9 +1,8 @@
-<script setup lang="ts"></script>
 <template>
-  <v-layout background-color="#ECCCB2">
+  <v-layout>
     <RouterView name="header"></RouterView>
     <RouterView name="menu"></RouterView>
 
-    <v-main><RouterView></RouterView></v-main>
+    <v-main class="white"><RouterView></RouterView></v-main>
   </v-layout>
 </template>

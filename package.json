@@ -20,7 +20,7 @@
     "daisy": "^0.2.0",
     "daisyui": "^2.51.5",
     "emailjs-com": "^3.2.0",
-    "flowbite": "^1.6.4",
+  
     "mysql": "^2.18.1",
     "pinia": "^2.0.32",
     "sweetalert": "^2.1.2",

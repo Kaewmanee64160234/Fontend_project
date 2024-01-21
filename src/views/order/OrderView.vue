@@ -61,7 +61,7 @@ const date = (index: string) => {
 </script>
 <template>
   <ConfirmDialog ref="confirmDlg"></ConfirmDialog>
-  <v-container>
+  <v-container class="main white-background">
    
     <v-card>
       <v-card-title>
@@ -156,3 +156,16 @@ const date = (index: string) => {
     </v-card>
   </v-container>
 </template>
+<style scoped>
+.white-background {
+  background-color: white; /* Set the background color to white */
+}
+
+/* Additional styles for responsiveness, if needed */
+@media (max-width: 600px) {
+  .white-background {
+    /* Styles for mobile or smaller screens */
+  }
+}
+</style>
+

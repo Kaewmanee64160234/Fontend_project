@@ -134,7 +134,7 @@ function Paycash() {
           >
             <div class="w-100 md p-8">
               <div class="flex justify-between mb-4">
-                <h4 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Order</h4>
+                <h4 class="text-xl font-bold leading-none text-gray-900 ">Order</h4>
               </div>
               <div class="flow-root">
                 <!-- Check if the order item list is empty -->
@@ -161,7 +161,7 @@ function Paycash() {
                       </div>
                       <div class="flex-1 min-w-0">
                         <v-row>
-                          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                          <p class="text-sm font-medium text-gray-900 truncate">
                             {{ item.name }}
                           </p>
                         </v-row>
@@ -170,7 +170,7 @@ function Paycash() {
                           <v-col>
                             <div class="flex items-center justify-between">
                               <div
-                                class="flex items-center mb-5 items-center text-base font-semibold text-gray-900 dark:text-white"
+                                class="flex items-center mb-5 items-center text-base font-semibold text-gray-900 "
                               >
                                 ฿{{ item.price }}
 
@@ -202,7 +202,7 @@ function Paycash() {
                           </v-col>
                           <v-col style="text-align: center">
                             <div
-                              class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+                              class="inline-flex items-center text-base font-semibold text-gray-900 "
                               style="text-align: right; margin-left: 15%"
                             >
                               {{ item.total }}

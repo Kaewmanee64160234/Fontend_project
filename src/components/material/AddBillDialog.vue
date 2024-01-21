@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import { useBillStore } from '@/store/bill.store';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import type { VForm } from 'vuetify/components';
 import type Employee from '@/store/types/employee.type';
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
+import { useMaterialStore } from '@/store/material.store';
 const billStore = useBillStore();
 const form = ref<VForm | null>(null)
 const data = ref(JSON.parse(JSON.stringify(localStorage.getItem('employee'))))
 const employee = ref<Employee>(JSON.parse(data.value))
 const confirmDlg = ref();
+const materialStore = useMaterialStore();
+
+onMounted(async () => {
+  await materialStore.getMaterials();
+});
 
 async function save() {
   const { valid } = await form.value!.validate()
@@ -46,7 +52,7 @@ const reCode = () => {
                 md="3"
               >
                 <v-text-field
-                  label="Name*"
+                  label="ชื่อร้านค้า*"
                   class="mr-10"
                   required
                   variant="underlined"
@@ -99,12 +105,17 @@ const reCode = () => {
                 <p>Bill detail {{ index + 1 }}</p>
               </v-card-title>
               <v-card hidden>{{ item.id }}</v-card>
-              <v-text-field v-model="item.name" label="Name" 
-              :rules="[
-                    (v) => !!v || 'Item is required',
-                    (v) => v.length >= 3 || 'Length must more than 3',
-                  ]">
-              </v-text-field>
+              <v-select
+                  v-model="item.name"
+                  :items="materialStore.materials"
+                  item-text="name"
+              item-title="name"
+     
+                  label="Material*"
+                  required
+                  :rules="[(v) => !!v || 'Item is required']"
+          
+                ></v-select>
               <v-text-field v-model="item.price" label="price"
               :rules="[(v) => !!v || 'Item is required',
                 (v) => v >= 0 || 'Min_quantity must more than 0']"

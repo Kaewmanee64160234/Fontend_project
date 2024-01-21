@@ -327,6 +327,21 @@ const router = createRouter({
     },
     
     {
+      path: '/addbill',
+      name: 'add bill',
+
+      components: {
+        default: () => import('../views/materials/AddBillView.vue'),
+        menu: () => import('@/components/menus/MainMenu.vue'),
+        header: () => import('@/components/headers/MainHeader.vue')
+      },
+      meta: {
+        layout: 'MainLayout',
+        // requiresAuth: true
+      }
+    },
+    
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('@/views/NotFound.vue')
